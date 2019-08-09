@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>北新桥街道监测评估</title>
+	<link rel="stylesheet" type="text/css" href="./css/base.css">
+	<link rel="stylesheet" type="text/css" href="./css/beixinqiao_subdistrict.css">
+</head>
+<body>
+	<section id="beixinqiao_subdistrict" class="w100 h100">
+		<header id="header" class="header clearfix">
+			<section class="fl logo"><img src="" alt=""></section>
+			<div class="fl title_box">
+				<h1 class="title">北新桥街道体验平台</h1>
+			</div>
+			<nav id="nav" class="fl nav">
+				<a href="javascript:void(0)">平台简介</a>
+				<a href="javascript:void(0)">平台规划目标</a>
+				<a href="javascript:void(0)">历史发展</a>
+			</nav>
+			<div class="fr home"></div>
+		</header>
+		<section id="content" class="content clearfix">
+	        <section class="fl box_size_bd h100 subNavBox">
+	        	<div class="subNav" data_type="population">人口信息</div>
+	        	<!-- <div class="subNav" data_type="history">历史发展</div> -->
+	        	<div class="subNav subNavChild">公共服务设施评估<span class="drop_down_icon"></span></div>
+	            <ul class="navContent">
+                	<li><a href="javascript:void(0)" data_type="overview">概览</a></li>
+                	<li><a href="javascript:void(0)" data_type="convenience">便民设施</a></li>
+                	<li><a href="javascript:void(0)" data_type="education">教育设施</a></li>
+                	<li><a href="javascript:void(0)" data_type="medical">医疗设施</a></li>
+                	<li><a href="javascript:void(0)" data_type="recreation_sports">文体设施</a></li>
+                	<li><a href="javascript:void(0)" data_type="traffic">交通设施</a></li>
+                	<li><a href="javascript:void(0)" data_type="provide">养老设施</a></li>
+                	<li><a href="javascript:void(0)" data_type="street_management">街道管理设施</a></li>
+	            </ul>
+	        	<div class="subNav subNavChild">产业结构</div>
+	            <ul class="navContent">
+                	<li><a href="javascript:void(0)" data_type="industry_concentration">产业聚集度</a></li>
+                	<li><a href="javascript:void(0)" data_type="industry_development">产业发展</a></li>
+	            </ul>
+	        	<div class="subNav subNavChild">街区活力监测</div>
+	            <ul class="navContent">
+                	<li><a href="#">业态发育</a></li>
+                	<li><a href="#">企业分析</a></li>
+                	<li><a href="javascript:void(0)" data_type="visitors_flow_rate">人流量监测</a></li>
+	            </ul>
+	        	<div class="subNav subNavChild">公共空间评估</div>
+	            <ul class="navContent">
+                	<li><a href="#">绿地资源</a></li>
+                	<li><a href="#">公共空间共享</a></li>
+                	<li><a href="#">可利用空间资源</a></li>
+	            </ul>
+	        	<div class="subNav subNavChild">文化资源评估</div>
+	            <ul class="navContent">
+                	<li><a href="#">概览</a></li>
+                	<li><a href="#">物质文化遗产</a></li>
+                	<li><a href="#">文物保护单位</a></li>
+                	<li><a href="#">历史建筑</a></li>
+	            </ul>
+	        	<div class="subNav">社区舆情</div>
+	        </section>
+	        <section class="fr h100 po_re data_views">
+	        	<div id="map" class="w100 h100 map">
+	        		<!-- 地图部分 -->
+	        	</div>
+	        	<div id="visualization_content" class="po_ab h100 visualization_content">
+	        		<div class="coverage_control">
+	        			<h3>图层控制</h3>
+	        			<div id="map-features">
+	        				<div class="input-item">
+        						<input type='checkbox' name='mapStyle' value='land'>
+        						<span class="input-text">现状用地</span>
+	        				</div>
+	        				<div class="input-item">
+        						<input type='checkbox' name='mapStyle' value='boundary'>
+        						<span class="input-text">社区边界</span>
+	        				</div>
+	        				<div class="input-item">
+        						<input type='checkbox' name='mapStyle' value='real_time_traffic'>
+        						<span class="input-text">路网</span>
+	        				</div>
+	        				<div class="input-item">
+        						<input type='checkbox' name='mapStyle' value='control_unit'>
+        						<span class="input-text">社区管控单元</span>
+	        				</div>
+	        				<div class="input-item">
+        						<input type='checkbox' name='mapStyle' value='road'>
+        						<span class="input-text">社区道路</span>
+	        				</div>
+	        			</div>
+	        		</div>
+	        		<div id = "visualization_echarts_content" class="w100 h100">
+	        			
+	        		</div>
+	        		<!-- 数据可视化图表部分 -->
+	        	</div>
+	        </section>
+		</section>
+	</section>
+	<!-- 遮罩层 -->
+	<section id="shade_modal" class="shade_modal">
+		<!-- <div id="brief_introduction" class=" shade_item brief_introduction">简短介绍文字描述</div>
+		<div id="planning_goal" class=" shade_item planning_goal">规划目标文字描述</div>
+		<div id="historical_development" class=" shade_item h100 historical_development">
+			<h2>历史发展</h2>
+			<div class="clearfix dynasty_introduction">
+				<div><img src="./images/1.png" alt=""></div>
+				<div><img src="./images/2.png" alt=""></div>
+				<div><img src="./images/3.png" alt=""></div>
+				<div><img src="./images/4.png" alt=""></div>
+				<div><img src="./images/5.png" alt=""></div>
+				<div><img src="./images/6.png" alt=""></div>
+				<div><img src="./images/7.png" alt=""></div>
+				<div><img src="./images/8.png" alt=""></div>
+				<div><img src="./images/9.png" alt=""></div>
+				<div><img src="./images/10.png" alt=""></div>
+			</div>
+		</div> -->
+	</section>
+	<section id="data"></section>
+    <!-- 公共库、方法引入 -->
+	<script src="./js/base.js"></script>
+	<script src="./js/beixinqiao_data_file.js"></script><!-- 北新桥数据加载文件 -->
+	<script src="./js/map.js"></script><!-- 地图图层控制 -->
+	<script src="./js/beixinqiao_subdistrict.js"></script><!-- 北新桥页面联动总入口 -->
+	<script src="./js/main.js"></script>
+</body>
+</html>
+<!-- 简介、规划目标 -->
+<script id="introduction_tmp" type="text/html">
+		<div class="shade_item brief_introduction">
+			<div class="ft_20 tc title">{{ title }}</div>
+			<div class="ft_16 verbal_content">
+				{{ content }}
+			</div>
+			<img class="img" src="{{ img_url }}">
+		</div>
+</script>
+<!-- 历史发展 -->
+<script id="historical_development_tmp" type="text/html">
+	<div class="shade_item h100 historical_development">
+		<h2>历史发展</h2>
+		<div class="clearfix dynasty_introduction">
+			<div><img src="./images/1.png" alt=""></div>
+			<div><img src="./images/2.png" alt=""></div>
+			<div><img src="./images/3.png" alt=""></div>
+			<div><img src="./images/4.png" alt=""></div>
+			<div><img src="./images/5.png" alt=""></div>
+			<div><img src="./images/6.png" alt=""></div>
+			<div><img src="./images/7.png" alt=""></div>
+			<div><img src="./images/8.png" alt=""></div>
+			<div><img src="./images/9.png" alt=""></div>
+			<div><img src="./images/10.png" alt=""></div>
+		</div>
+	</div>
+</script>
