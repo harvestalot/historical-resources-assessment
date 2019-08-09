@@ -1,4 +1,4 @@
-# Echarts和高德地图数据可视化项目--historical-resources-assessment
+# Echarts和高德地图数据可视化项目
 
 
 ### 一、 高德地图图层数据可视化
@@ -39,3 +39,4 @@ git push -u origin master
 
 #### git status  查看文件状态
 #### git remote -v  查看连接的github仓库
+#### git pull --rebase origin master【注：pull=fetch+merge]代码合并会先更新github上代码
