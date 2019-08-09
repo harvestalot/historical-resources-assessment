@@ -25,19 +25,19 @@
 ### 三、 上传github仓库流程
 
 #### 1、创建README.md
-echo "# sss" >> README.md 
+&nbsp;&nbsp;echo "# sss" >> README.md 
 #### 2、建立git仓库
-git init
+&nbsp;&nbsp;git init
 #### 3、add文件名
-git add *****/--all所有文件
+&nbsp;&nbsp;git add *****/--all所有文件
 #### 4、提交文件 
-git commit -m "备注信息"
+&nbsp;&nbsp;git commit -m "备注信息"
 #### 5、链接github仓库 
-git remote add origin https://github.com/*****.git
+&nbsp;&nbsp;git remote add origin https://github.com/*****.git
 #### 6、推送到github仓库 
-git push -u origin master
+&nbsp;&nbsp;git push -u origin master
 
-#### git status  查看文件状态
-#### git remote -v  查看连接的github仓库
-#### git pull --rebase origin master【注：pull=fetch+merge]代码合并会先更新github上代码
-#### git clone  https://github.com/******.git
+#### &nbsp;&nbsp;git status  查看文件状态
+#### &nbsp;&nbsp;git remote -v  查看连接的github仓库
+#### &nbsp;&nbsp;git pull --rebase origin master【注：pull=fetch+merge]代码合并会先更新github上代码
+#### &nbsp;&nbsp;git clone  https://github.com/******.git
