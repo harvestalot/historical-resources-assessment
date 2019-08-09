@@ -33,10 +33,11 @@ git add *****/--all所有文件
 #### 4、提交文件 
 git commit -m "备注信息"
 #### 5、链接github仓库 
-git remote add origin https://github.com/harvestalot/******.git
+git remote add origin https://github.com/*****.git
 #### 6、推送到github仓库 
 git push -u origin master
 
 #### git status  查看文件状态
 #### git remote -v  查看连接的github仓库
 #### git pull --rebase origin master【注：pull=fetch+merge]代码合并会先更新github上代码
+#### git clone  https://github.com/******.git
