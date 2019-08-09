@@ -46,8 +46,7 @@
 	//根据导航触发加载对应模块数据
 	VisualScreen.prototype.init_module = function(current_type){
 		this.current_type = current_type;
-		$("#visualization_echarts_content").html("");
-		point_layer? map.remove(point_layer):"";//清除icon点图层
+		this.reset();
 		switch (this.current_type) {
 			case "population": //人口信息
 	    		population();
@@ -81,10 +80,19 @@
 	    		break;
 			case "visitors_flow_rate": //截取活力监测--人流量监测
 				start_visitors_flow_rate_rendering.init();
+				map.setZoomAndCenter(13,[116.397737, 39.907573]);
 	    		break;
         	default:
 				this.map();
 		}
+	}
+	//重置
+	VisualScreen.prototype.reset = function(){
+		$("#visualization_echarts_content").html("");
+		point_layer? map.remove(point_layer):"";//清除icon点图层
+		heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
+		reachabilityLayer? map.remove(reachabilityLayer):"";//清除可达性覆盖范围图层
+		map.setZoomAndCenter(15,[116.425768,39.940966]);
 	}
 	//初始化
 	var	start_init = new VisualScreen();

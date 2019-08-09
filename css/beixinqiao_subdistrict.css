@@ -348,3 +348,18 @@
 	font-size: 20px;
 	color: #fff;
 }
+
+.year_switcher a{
+	float: left;
+	width: 25%;
+	height:36px;
+	line-height: 36px;
+	margin: 10px 10px;
+	text-align: center;
+	font-size: 14px;
+	background-color: #3A8281;
+	border-radius: 18px;
+}
+.year_switcher a.checked_active{
+	background-color: #00FCFF;
+}
