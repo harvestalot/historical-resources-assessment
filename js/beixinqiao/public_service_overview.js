@@ -9,57 +9,47 @@ function PublicServiceOverview() {
 		{ type:"养老", name:"门楼", value: 95 },
 		{ type:"街管", name:"北宫厅", value: 95 },
 	]
-	this.lenged_data = ["社区机构养老设施", "社区助残养老设施"];
+	this.lenged_data = ["便民设施", "教育设施", "医疗设施", "养老设施", "文体设施", "街道管理设施"];
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
 	this.comprehensive_data = {
-        "社区机构养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "社区助残养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-    }
+        "便民设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "教育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "医疗设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道管理设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+    };
+    this.current_series_data = [];
 }
 PublicServiceOverview.prototype.init = function(){
 	this.reset_data();
 	this.load_dom();
-	const _this = this;
-	//教育设施请求
-	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "" },function(result){
-		_this.get_view_data(result.data.resultKey);
-		// for(var i = 0; i < _this.provide_data.length; i++){
-		// 	var item = _this.provide_data[i];
-		// 	_this.radar_chart_indicator_data.push({
-		// 		name: item.name,
-		// 		max: 100,
-		// 	});
-		// }
-		_this.load_radar_chart();
-	});
-	this.load_chart();
-	this.load_ranking_list(this.ranking_list);
 	this.click_dom();
+	const _this = this;
+	serveRequest("get", server_url+ "/Coverage/getCoverageOverview",{ },function(result){
+		_this.get_view_data(result.data.resultKey);
+		_this.load_chart("全部");
+	});
+	this.load_ranking_list(this.ranking_list);
 }
-// PublicServiceOverview.prototype.render_point_layer = function(){
-//     point_layer = new Loca.IconLayer({
-//         map: map,
-// 	    // zIndex: 100
-//     });
-//     point_layer.setData(educational_facilities_point_data, {
-//         lnglat: 'lnglat'
-//     });
-
-//     point_layer.setOptions({
-//         source: function(res) {
-//             var value = res.value;
-//             var typecode = value.typecode;
-//             // 这里需要写上 http 协议，不能忽略
-//             var src = 'http://webapi.amap.com/theme/v1.3/markers/n/mid.png';
-//             return src;
-//         },
-//         style: {
-//             size: 15
-//         }
-//     });
-//     point_layer.render();
-// }
+//分类拆分数据
+PublicServiceOverview.prototype.get_view_data = function(result_data){
+	for(var i = 0; i < result_data.length; i++){
+	    for(var key in result_data[i]){
+	        this.community_name.push(key);
+	        this.radar_chart_indicator_data.push({
+	            name: key,
+	            max: 1500,
+	        })
+	        if(result_data[i][key].length > 0){
+	            for(var j = 0; j < result_data[i][key].length; j++){
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].TOTAL_COVERAGE;
+	            }
+	        }
+	    }
+	}
+}
 //生产dom元素
 PublicServiceOverview.prototype.load_dom = function(){
 	//雷达统计图
@@ -88,32 +78,131 @@ PublicServiceOverview.prototype.click_dom = function(){
 	var _this = this;
 	$("#public_service_type a").click(function(){
 		$(this).addClass("active_checked").siblings("a").removeClass("active_checked");
-		_this.load_radar_chart($(this).html());
+		_this.load_chart($(this).html());
 	});
 }
 //加载图表数据
-PublicServiceOverview.prototype.load_chart = function(){
-	this.load_radar_chart("全部");
+PublicServiceOverview.prototype.load_chart = function(type){
+	this.current_series_data = [];
+	switch (type){
+		case "便民" :
+			this.current_series_data.push({...rader_color[0], ...{
+		        "name": this.lenged_data[0],
+		        "type": "radar",
+		        "symbol": "circle",
+		        "symbolSize": 3,
+		        "data": [
+					this.comprehensive_data[this.lenged_data[0]]
+		        ]
+		    }});
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 1500;
+		    }
+			break;
+		case "教育" :
+			this.current_series_data.push({...rader_color[1], ...{
+		        "name": this.lenged_data[1],
+		        "type": "radar",
+		        "symbol": "circle",
+		        "symbolSize": 3,
+		        "data": [
+					this.comprehensive_data[this.lenged_data[1]]
+		        ]
+		    }}
+			);
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 500;
+		    }
+			break;
+		case "医疗" :
+			this.current_series_data.push({...rader_color[2], ...{
+		        "name": this.lenged_data[2],
+		        "type": "radar",
+		        "symbol": "circle",
+		        "symbolSize": 3,
+		        "data": [
+					this.comprehensive_data[this.lenged_data[2]]
+		        ]
+		    }}
+			);
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 600;
+		    }
+			break;
+		case "养老" :
+			this.current_series_data.push({...rader_color[3], ...{
+		        "name": this.lenged_data[3],
+		        "type": "radar",
+		        "symbol": "circle",
+		        "symbolSize": 3,
+		        "data": [
+					this.comprehensive_data[this.lenged_data[3]]
+		        ]
+		    }}
+			);
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 1000;
+		    }
+			break;
+		case "文体" :
+			this.current_series_data.push({...rader_color[4], ...{
+		        "name": this.lenged_data[4],
+		        "type": "radar",
+		        "symbol": "circle",
+		        "symbolSize": 3,
+		        "data": [
+					this.comprehensive_data[this.lenged_data[4]]
+		        ]
+		    }}
+			);
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 500;
+		    }
+			break;
+		case "交通" :
+			this.current_series_data.push(
+			);
+			break;
+		case "街道管理" :
+			this.current_series_data.push({...rader_color[5], ...{
+		        "name": this.lenged_data[5],
+		        "type": "radar",
+		        "symbol": "circle",
+		        "symbolSize": 3,
+		        "data": [
+					this.comprehensive_data[this.lenged_data[5]]
+		        ]
+		    }}
+			);
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 600;
+		    }
+			break;
+		case "全部" :
+			for(var i = 0; i < this.lenged_data.length; i++){
+				this.current_series_data.push({...rader_color[i], ...{
+			        "name": this.lenged_data[i],
+			        "type": "radar",
+			        "symbol": "circle",
+			        "symbolSize": 3,
+			        "data": [
+						this.comprehensive_data[this.lenged_data[i]]
+			        ]
+			    }}
+				);
+			}
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 1500;
+		    }
+			break;
+	}
+	this.load_radar_chart();
 }
 //加载雷达图表数据
 PublicServiceOverview.prototype.load_radar_chart = function(type_name){
-
 	var radarChart = echarts.init(document.getElementById("public_service_radar_content"));
-	var indicator_data = [
-		{ name: "北宫厅", max:100 },
-		{ name: "北新仓", max:100 },
-		{ name: "藏经馆", max:100 },
-		{ name: "草园", max:100 },
-		{ name: "海运仓", max:100 },
-		{ name: "九道湾", max:100 },
-		{ name: "门楼", max:100 },
-		{ name: "民安", max:100 },
-		{ name: "前永康", max:100 },
-		{ name: "青龙", max:100 },
-		{ name: "十三条", max:100 },
-		{ name: "小菊", max:100 },
-	];
 	var radar_option = {
+		color: echarts_color,
 	    "tooltip": {
 	        "show": true,
 	        "trigger": "item"
@@ -148,37 +237,9 @@ PublicServiceOverview.prototype.load_radar_chart = function(type_name){
 	                "color": "grey"//
 	            }
 	        },
-	        "indicator": indicator_data
+	        "indicator": this.radar_chart_indicator_data
 	    },
-	    "series": [
-	    {
-	        "name": type_name,
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(19, 173, 255, 1)',
-	                "borderColor": "rgba(19, 173, 255, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(19, 173, 255, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(19, 173, 255, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-	            [60, 60, 65, 60, 70, 40, 80, 63, 68, 60, 77, 60]
-	        ]
-	    }]
+	    "series": this.current_series_data
 	};
     radarChart.setOption(radar_option, true);
 }
@@ -187,9 +248,14 @@ PublicServiceOverview.prototype.reset_data = function(){
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
 	this.comprehensive_data = {
-        "社区机构养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "社区助残养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-    }
+        "便民设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "教育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "医疗设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道管理设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+    };
+    this.current_series_data = [];
 }
 //加载排行榜统计
 PublicServiceOverview.prototype.load_ranking_list = function(data){

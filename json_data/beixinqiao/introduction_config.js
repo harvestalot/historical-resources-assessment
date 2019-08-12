@@ -12,4 +12,124 @@ const brief_introduction = {
 		"雍大、炮局、南小街、北新仓、海运仓、西颂年、南顺、北弓、东内东、北门仓、南颂年、九道湾、板桥、小菊、新太仓、十四条、东内中、东内西、"+
 		"东西北、罗车、十二条、十四东、十三条、十一条、门楼、大楼、北中街、北小街、民安、东羊管、东手帕、北顺、针线、侨办、勘察院、中研、东直门、"+
 		"住宅合作社、民政局等50个居（家）委会。"
-} 
+}
+
+// echarts颜色配置
+const echarts_color = ["#00FFFF","#3ba0f3",'#ff9921','#E0F319',"#00FF59","#DE61FA"];
+// 雷达图各类型颜色配置
+const rader_color = [
+	{
+        areaStyle: {
+            normal: {
+                color: "rgba(0,255,255, 0.4)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(0,255,255, 1)',
+            borderColor:'rgba(0,255,255, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(0,255,255, 1)",
+                width: 1
+            }
+        },
+	},
+	{
+        areaStyle: {
+            normal: {
+                color: "rgba(59,160,243, 1)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(59,160,243, 1)',
+            borderColor:'rgba(59,160,243, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(59,160,243, 1)",
+                width: 1
+            }
+        },
+	},
+	{
+        areaStyle: {
+            normal: {
+                color: "rgba(255,153,33, 0.4)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(255,153,33, 1)',
+            borderColor:'rgba(255,153,33, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(255,153,33, 1)",
+                width: 1
+            }
+        },
+	},
+	{
+        areaStyle: {
+            normal: {
+                color: "rgba(224,243,25, 0.4)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(224,243,25, 1)',
+            borderColor:'rgba(224,243,25, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(224,243,25, 1)",
+                width: 1
+            }
+        },
+	},
+	{
+        areaStyle: {
+            normal: {
+                color: "rgba(0,255,89, 0.4)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(0,255,89, 1)',
+            borderColor:'rgba(0,255,89, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(0,255,89, 1)",
+                width: 1
+            }
+        },
+	},
+	{
+        areaStyle: {
+            normal: {
+                color: "rgba(222,97,250, 0.4)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(222,97,250, 1)',
+            borderColor:'rgba(222,97,250, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(222,97,250, 1)",
+                width: 1
+            }
+        },
+	},
+]

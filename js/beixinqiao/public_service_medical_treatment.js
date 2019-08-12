@@ -14,14 +14,18 @@ PublicServiceMedicalTreatment.prototype.init = function(){
 	this.render_point_layer();
 	this.load_dom();
 	const _this = this;
-	//教育设施请求
+	//医疗设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "medical_care",},function(result){
 		_this.get_view_data(result.data.resultKey);
 		_this.load_radar_chart();
 	});
-	$("#spectaculars_content p").click(function(){
-		$(this).addClass("active_checked").siblings("p").removeClass("active_checked");
-		_this.click_dom("116.42437454,39.93425622", 15);
+	//看板请求
+	serveRequest("get", server_url+ "/MedicalFacility/getMedicalFacility",{ },function(result){
+		_this.render_spectaculars_list(result.data.resultKey);
+		$("#spectaculars_content p").click(function(){
+			$(this).addClass("active_checked").siblings("p").removeClass("active_checked");
+			_this.click_dom($(this).attr("data_lnglat"), 15);
+		});
 	});
 }
 //分类拆分数据
@@ -82,8 +86,6 @@ PublicServiceMedicalTreatment.prototype.load_dom = function(){
 		'<div class="chart_view" style="width: 100%; height: 40%;">'+
 		'<p style="padding:10px 0 10px 21%;font-size:16px;color:#1E78B2;font-weight:700;">医疗设施看板</p>'+
 		'<div id="spectaculars_content" class="chart_view spectaculars_content" style="width: 100%; height: 40%;">'+
-		'<p><span>炮局胡同养老驿站</span><span>海运仓</span><span>50%</span></p>'+
-		'<p><span>海运仓社区养老服务驿站</span><span>民安</span><span>87%</span></p>'+
 		'</div>'+
 		'</div>';
 	$("#visualization_echarts_content").append(public_service_dom_str);
@@ -236,6 +238,14 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	    }]
 	};
     radarChart.setOption(radar_option, true);
+}
+//渲染看板列表DOM元素
+PublicServiceMedicalTreatment.prototype.render_spectaculars_list = function(data){
+	for(var i = 0; i < data.length; i++){
+		var item = data[i];
+		$("#spectaculars_content").append('<p data_lnglat='+item.LONGITUDE+","+item.LATITUDE+'><span>'+item.NAME+
+			'</span><span>'+item.COMMUNITY_NAME+'</span><span>'+item.COVERAGE.toFixed(0)+'%</span></p>')
+	}
 }
 //重置数据
 PublicServiceMedicalTreatment.prototype.reset_data = function(){

@@ -1,16 +1,5 @@
 //公共服务设施--养老设置
 function PublicServiceProvide() {
-	// this.provide_data = [
-	// 	{ name: "民安", A: 85, B: 68 },
-	// 	{ name: "民安1", A: 90, B: 88 },
-	// 	{ name: "民安2", A: 70, B: 78 },
-	// 	{ name: "民安3", A: 35, B: 50 },
-	// 	{ name: "民安4", A: 55, B: 28 },
-	// 	{ name: "民安5", A: 78, B: 98 },
-	// 	{ name: "民安6", A: 30, B: 50 },
-	// 	{ name: "民安7", A: 80, B: 40 },
-	// ];
-	// this.radar_chart_indicator_data = [];
 	this.lenged_data = ["社区机构养老设施", "社区助残养老设施"];
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
@@ -25,21 +14,22 @@ PublicServiceProvide.prototype.init = function(){
 	this.render_point_layer();
 	this.load_dom();
 	const _this = this;
+	// //总覆盖率
+	// serveRequest("get", server_url+ "/Coverage/getCoverageOverview",{ categoryCode: "pension",},function(result){
+		
+	// });
 	//教育设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "pension",},function(result){
 		_this.get_view_data(result.data.resultKey);
-		// for(var i = 0; i < _this.provide_data.length; i++){
-		// 	var item = _this.provide_data[i];
-		// 	_this.radar_chart_indicator_data.push({
-		// 		name: item.name,
-		// 		max: 100,
-		// 	});
-		// }
 		_this.load_radar_chart();
 	});
-	$("#spectaculars_content p").click(function(){
-		$(this).addClass("active_checked").siblings("p").removeClass("active_checked");
-		_this.click_dom("116.42437454,39.93425622", 15);
+	//看板请求
+	serveRequest("get", server_url+ "/PensionFacility/getPensionFacility",{ },function(result){
+		_this.render_spectaculars_list(result.data.resultKey);
+		$("#spectaculars_content p").click(function(){
+			$(this).addClass("active_checked").siblings("p").removeClass("active_checked");
+			_this.click_dom($(this).attr("data_lnglat"), 15);
+		});
 	});
 }
 //分类拆分数据
@@ -100,8 +90,6 @@ PublicServiceProvide.prototype.load_dom = function(){
 		'<div class="chart_view" style="width: 100%; height: 40%;">'+
 		'<p style="padding:10px 0 10px 21%;font-size:16px;color:#1E78B2;font-weight:700;">养老设施看板</p>'+
 		'<div id="spectaculars_content" class="chart_view spectaculars_content" style="width: 100%; height: 40%;">'+
-		'<p><span>炮局胡同养老驿站</span><span>海运仓</span><span>50%</span></p>'+
-		'<p><span>海运仓社区养老服务驿站</span><span>民安</span><span>87%</span></p>'+
 		'</div>'+
 		'</div>';
 	$("#visualization_echarts_content").append(public_service_dom_str);
@@ -254,6 +242,14 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	    }]
 	};
     radarChart.setOption(radar_option, true);
+}
+//渲染看板列表DOM元素
+PublicServiceProvide.prototype.render_spectaculars_list = function(data){
+	for(var i = 0; i < data.length; i++){
+		var item = data[i];
+		$("#spectaculars_content").append('<p data_lnglat='+item.LONGITUDE+","+item.LATITUDE+'><span>'+item.NAME+
+			'</span><span>'+item.COMMUNITY_NAME+'</span><span>'+item.COVERAGE.toFixed(0)+'%</span></p>')
+	}
 }
 //重置数据
 PublicServiceProvide.prototype.reset_data = function(){
