@@ -1,16 +1,14 @@
 //公共服务设施--便民设施
 function PublicServiceConveniencePeople() {
-	this.provide_data = [
-		{ name: "民安", A: 85, B: 68 },
-		{ name: "民安1", A: 90, B: 88 },
-		{ name: "民安2", A: 70, B: 78 },
-		{ name: "民安3", A: 35, B: 50 },
-		{ name: "民安4", A: 55, B: 28 },
-		{ name: "民安5", A: 78, B: 98 },
-		{ name: "民安6", A: 30, B: 50 },
-		{ name: "民安7", A: 80, B: 40 },
-	];
+	this.lenged_data = ["超市", "便利店", "菜站", "综合服务站"];
+	this.community_name = [];
 	this.radar_chart_indicator_data = [];
+	this.comprehensive_data = {
+        "超市":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "便利店":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "菜站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合服务站":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 
 }
 PublicServiceConveniencePeople.prototype.init = function(){
@@ -19,17 +17,29 @@ PublicServiceConveniencePeople.prototype.init = function(){
 	this.load_dom();
 	const _this = this;
 	//教育设施请求
-	serveRequest("get", server_url+ "/FacilityEducation/getFacilityEducation",{},function(result){
-		for(var i = 0; i < _this.provide_data.length; i++){
-			var item = _this.provide_data[i];
-			_this.radar_chart_indicator_data.push({
-				name: item.name,
-				max: 100,
-			});
-		}
+	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "convenient"},function(result){
+		_this.get_view_data(result.data.resultKey);
 		_this.load_radar_chart();
 		_this.load_bar_chart();
 	});
+}
+//分类拆分数据
+PublicServiceConveniencePeople.prototype.get_view_data = function(result_data){
+	for(var i = 0; i < result_data.length; i++){
+	    for(var key in result_data[i]){
+	        this.community_name.push(key);
+	        this.radar_chart_indicator_data.push({
+	            name: key,
+	            max:4000,
+	        })
+	        if(result_data[i][key].length > 0){
+	            for(var j = 0; j < result_data[i][key].length; j++){
+	            	// this.lenged_data.indexOf(result_data[i][key][j].CATEGORY_NAME) === -1? this.lenged_data.push(result_data[i][key][j].CATEGORY_NAME):"";
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE;
+	            }
+	        }
+	    }
+	}
 }
 //添加设施点标识图层
 PublicServiceConveniencePeople.prototype.render_point_layer = function(){
@@ -111,7 +121,8 @@ PublicServiceConveniencePeople.prototype.load_reachability_layer = function(reac
 PublicServiceConveniencePeople.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
-		color:["#4748FF", "#D18930"],
+		// color:["#4748FF", "#D18930"],
+	    color: ["#00FFFF","#3ba0f3",'#ff9921', '#E0F319'],
 		title:{
 			text:"各社区便民设施覆盖率对比图",
 			left:'20%',
@@ -128,7 +139,7 @@ PublicServiceConveniencePeople.prototype.load_radar_chart = function(){
 	            "fontSize": 14,
 	            "color": "#fff"
 	        },
-	        "data": ["数据1", "数据2"]
+	        "data": this.lenged_data
 	    },
 	    tooltip: {
 	        show: true,
@@ -167,56 +178,110 @@ PublicServiceConveniencePeople.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [{
-	        "name": "数据1",
+	        "name": this.lenged_data[0],
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "areaStyle": {
 	            "normal": {
-	                "color": "rgba(245, 166, 35, 0.4)"
+	                "color": "rgba(0,255,255, 0.4)"
 	            }
 	        },
 	        itemStyle:{
-	            color:'rgba(245, 166, 35, 1)',
-	            borderColor:'rgba(245, 166, 35, 0.3)',
-	            borderWidth:10,
+	            color:'rgba(0,255,255, 1)',
+	            borderColor:'rgba(0,255,255, 0.3)',
+	            borderWidth:5,
 	        },
 	        "lineStyle": {
 	            "normal": {
 	                "type": "dashed",
-	                "color": "rgba(245, 166, 35, 1)",
-	                "width": 2
+	                "color": "rgba(0,255,255, 1)",
+	                "width": 1
 	            }
 	        },
 	        "data": [
-	            [80, 50, 55, 80, 50, 80, 48, 43, 60, 78, 60, 40, 42, 44, 65]
+				this.comprehensive_data[this.lenged_data[0]]
 	        ]
 	    }, {
-	        "name": "数据2",
+	        "name": this.lenged_data[1],
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "itemStyle": {
 	            "normal": {
-	                color:'rgba(19, 173, 255, 1)',
-	                "borderColor": "rgba(19, 173, 255, 0.4)",
-	                "borderWidth": 10
+	                color:'rgba(59,160,243, 1)',
+	                "borderColor": "rgba(59,160,243, 0.4)",
+	                "borderWidth": 5
 	            }
 	        },
 	        "areaStyle": {
 	            "normal": {
-	                "color": "rgba(19, 173, 255, 0.5)"
+	                "color": "rgba(59,160,243, 0.5)"
 	            }
 	        },
 	        "lineStyle": {
 	            "normal": {
-	                "color": "rgba(19, 173, 255, 1)",
-	                "width": 2,
+	                "color": "rgba(59,160,243, 1)",
+	                "width": 1,
 	                "type": "dashed"
 	            }
 	        },
 	        "data": [
-	            [60, 60, 65, 60, 70, 40, 80, 63, 68, 60, 77, 60, 80, 62, 80]
+				this.comprehensive_data[this.lenged_data[1]]
+	        ]
+	    },{
+	        "name": this.lenged_data[2],
+	        "type": "radar",
+	        "symbol": "circle",
+	        "symbolSize": 3,
+	        "itemStyle": {
+	            "normal": {
+	                color:'rgba(255,153,33, 1)',
+	                "borderColor": "rgba(255,153,33, 0.4)",
+	                "borderWidth": 5
+	            }
+	        },
+	        "areaStyle": {
+	            "normal": {
+	                "color": "rgba(255,153,33, 0.5)"
+	            }
+	        },
+	        "lineStyle": {
+	            "normal": {
+	                "color": "rgba(255,153,33, 1)",
+	                "width": 1,
+	                "type": "dashed"
+	            }
+	        },
+	        "data": [
+				this.comprehensive_data[this.lenged_data[2]]
+	        ]
+	    },{
+	        "name": this.lenged_data[3],
+	        "type": "radar",
+	        "symbol": "circle",
+	        "symbolSize": 3,
+	        "itemStyle": {
+	            "normal": {
+	                color:'rgba(224,243,25, 1)',
+	                "borderColor": "rgba(224,243,25, 0.4)",
+	                "borderWidth": 5
+	            }
+	        },
+	        "areaStyle": {
+	            "normal": {
+	                "color": "rgba(224,243,25, 0.5)"
+	            }
+	        },
+	        "lineStyle": {
+	            "normal": {
+	                "color": "rgba(224,243,25, 1)",
+	                "width": 1,
+	                "type": "dashed"
+	            }
+	        },
+	        "data": [
+				this.comprehensive_data[this.lenged_data[3]]
 	        ]
 	    }]
 	};
@@ -227,7 +292,7 @@ PublicServiceConveniencePeople.prototype.load_bar_chart = function(){
 	const _this = this;
 	var myChart = echarts.init(document.getElementById("facilities_statistics_content"));
 	var option = {
-	    color: ["#00FFFF","#3ba0f3",'#ff9921','#f36119'],
+	    color: ["#00FFFF","#3ba0f3",'#ff9921', '#E0F319'],
 	    legend: {
 	    	show:false,
 	    },
@@ -255,32 +320,32 @@ PublicServiceConveniencePeople.prototype.load_bar_chart = function(){
 	    },
 	    series: [
 	        {
-	        name: '菜站',
+	        name: this.lenged_data[0],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['200', '300', '300', '200', '200', '300', '180','300', '200','200', '300', '300']
+	        data: this.comprehensive_data[this.lenged_data[0]]
 	        },
 	        {
-	        name: '超市',
+	        name: this.lenged_data[1],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['300', '400', '300', '200', '300', '300', '280','300', '200','200', '300', '300',]
+	        data: this.comprehensive_data[this.lenged_data[1]]
 	        },
 	        {
-	        name: '综合服务站',
+	        name: this.lenged_data[2],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['300', '200', '300', '200', '200', '300', '260','300', '200','200', '300', '300',]
+	        data: this.comprehensive_data[this.lenged_data[2]]
 	        },
 	        {
-	        name: '便利店',
+	        name: this.lenged_data[3],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['400', '460', '420', '430', '420', '460', '520','300', '200','200', '300', '300',]
+	        data: this.comprehensive_data[this.lenged_data[3]]
 	        }
         ]
 	};
@@ -288,7 +353,13 @@ PublicServiceConveniencePeople.prototype.load_bar_chart = function(){
 }
 //重置数据
 PublicServiceConveniencePeople.prototype.reset_data = function(){
-	// this.provide_data = [];
+	this.community_name = [];
 	this.radar_chart_indicator_data = [];
+	this.comprehensive_data = {
+        "超市":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "便利店":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "菜站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合服务站":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 }
 var start_convenience_people_rendering = new PublicServiceConveniencePeople();

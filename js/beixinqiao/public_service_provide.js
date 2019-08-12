@@ -1,16 +1,23 @@
 //公共服务设施--养老设置
 function PublicServiceProvide() {
-	this.provide_data = [
-		{ name: "民安", A: 85, B: 68 },
-		{ name: "民安1", A: 90, B: 88 },
-		{ name: "民安2", A: 70, B: 78 },
-		{ name: "民安3", A: 35, B: 50 },
-		{ name: "民安4", A: 55, B: 28 },
-		{ name: "民安5", A: 78, B: 98 },
-		{ name: "民安6", A: 30, B: 50 },
-		{ name: "民安7", A: 80, B: 40 },
-	];
+	// this.provide_data = [
+	// 	{ name: "民安", A: 85, B: 68 },
+	// 	{ name: "民安1", A: 90, B: 88 },
+	// 	{ name: "民安2", A: 70, B: 78 },
+	// 	{ name: "民安3", A: 35, B: 50 },
+	// 	{ name: "民安4", A: 55, B: 28 },
+	// 	{ name: "民安5", A: 78, B: 98 },
+	// 	{ name: "民安6", A: 30, B: 50 },
+	// 	{ name: "民安7", A: 80, B: 40 },
+	// ];
+	// this.radar_chart_indicator_data = [];
+	this.lenged_data = ["社区机构养老设施", "社区助残养老设施"];
+	this.community_name = [];
 	this.radar_chart_indicator_data = [];
+	this.comprehensive_data = {
+        "社区机构养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "社区助残养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 
 }
 PublicServiceProvide.prototype.init = function(){
@@ -19,20 +26,38 @@ PublicServiceProvide.prototype.init = function(){
 	this.load_dom();
 	const _this = this;
 	//教育设施请求
-	serveRequest("get", server_url+ "/FacilityEducation/getFacilityEducation",{},function(result){
-		for(var i = 0; i < _this.provide_data.length; i++){
-			var item = _this.provide_data[i];
-			_this.radar_chart_indicator_data.push({
-				name: item.name,
-				max: 100,
-			});
-		}
+	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "pension",},function(result){
+		_this.get_view_data(result.data.resultKey);
+		// for(var i = 0; i < _this.provide_data.length; i++){
+		// 	var item = _this.provide_data[i];
+		// 	_this.radar_chart_indicator_data.push({
+		// 		name: item.name,
+		// 		max: 100,
+		// 	});
+		// }
 		_this.load_radar_chart();
 	});
 	$("#spectaculars_content p").click(function(){
 		$(this).addClass("active_checked").siblings("p").removeClass("active_checked");
 		_this.click_dom("116.42437454,39.93425622", 15);
 	});
+}
+//分类拆分数据
+PublicServiceProvide.prototype.get_view_data = function(result_data){
+	for(var i = 0; i < result_data.length; i++){
+	    for(var key in result_data[i]){
+	        this.community_name.push(key);
+	        this.radar_chart_indicator_data.push({
+	            name: key,
+	            max:1000,
+	        })
+	        if(result_data[i][key].length > 0){
+	            for(var j = 0; j < result_data[i][key].length; j++){
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE;
+	            }
+	        }
+	    }
+	}
 }
 //添加养老设施点标识图层
 PublicServiceProvide.prototype.render_point_layer = function(){
@@ -136,7 +161,7 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	            "fontSize": 14,
 	            "color": "#fff"
 	        },
-	        "data": ["数据1", "数据2"]
+	        "data": this.lenged_data
 	    },
 	    tooltip: {
 	        show: true,
@@ -175,10 +200,10 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [{
-	        "name": "数据1",
+	        "name": this.lenged_data[0],
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "areaStyle": {
 	            "normal": {
 	                "color": "rgba(245, 166, 35, 0.4)"
@@ -187,28 +212,28 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	        itemStyle:{
 	            color:'rgba(245, 166, 35, 1)',
 	            borderColor:'rgba(245, 166, 35, 0.3)',
-	            borderWidth:10,
+	            borderWidth:5,
 	        },
 	        "lineStyle": {
 	            "normal": {
 	                "type": "dashed",
 	                "color": "rgba(245, 166, 35, 1)",
-	                "width": 2
+	                "width": 1
 	            }
 	        },
 	        "data": [
-	            [80, 50, 55, 80, 50, 80, 48, 43, 60, 78, 60, 40, 42, 44, 65]
+	            this.comprehensive_data[this.lenged_data[0]]
 	        ]
 	    }, {
-	        "name": "数据2",
+	        "name": this.lenged_data[1],
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "itemStyle": {
 	            "normal": {
 	                color:'rgba(19, 173, 255, 1)',
 	                "borderColor": "rgba(19, 173, 255, 0.4)",
-	                "borderWidth": 10
+	                "borderWidth": 5
 	            }
 	        },
 	        "areaStyle": {
@@ -224,7 +249,7 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	            }
 	        },
 	        "data": [
-	            [60, 60, 65, 60, 70, 40, 80, 63, 68, 60, 77, 60, 80, 62, 80]
+	            this.comprehensive_data[this.lenged_data[1]]
 	        ]
 	    }]
 	};

@@ -9,10 +9,30 @@ function PublicServiceOverview() {
 		{ type:"养老", name:"门楼", value: 95 },
 		{ type:"街管", name:"北宫厅", value: 95 },
 	]
+	this.lenged_data = ["社区机构养老设施", "社区助残养老设施"];
+	this.community_name = [];
+	this.radar_chart_indicator_data = [];
+	this.comprehensive_data = {
+        "社区机构养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "社区助残养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 }
 PublicServiceOverview.prototype.init = function(){
-	// this.render_point_layer();
+	this.reset_data();
 	this.load_dom();
+	const _this = this;
+	//教育设施请求
+	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "" },function(result){
+		_this.get_view_data(result.data.resultKey);
+		// for(var i = 0; i < _this.provide_data.length; i++){
+		// 	var item = _this.provide_data[i];
+		// 	_this.radar_chart_indicator_data.push({
+		// 		name: item.name,
+		// 		max: 100,
+		// 	});
+		// }
+		_this.load_radar_chart();
+	});
 	this.load_chart();
 	this.load_ranking_list(this.ranking_list);
 	this.click_dom();
@@ -161,6 +181,15 @@ PublicServiceOverview.prototype.load_radar_chart = function(type_name){
 	    }]
 	};
     radarChart.setOption(radar_option, true);
+}
+//重置数据
+PublicServiceOverview.prototype.reset_data = function(){
+	this.community_name = [];
+	this.radar_chart_indicator_data = [];
+	this.comprehensive_data = {
+        "社区机构养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "社区助残养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 }
 //加载排行榜统计
 PublicServiceOverview.prototype.load_ranking_list = function(data){

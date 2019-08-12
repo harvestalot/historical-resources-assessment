@@ -1,8 +1,12 @@
 //公共服务设施--医疗设置
 function PublicServiceMedicalTreatment() {
-	this.hospital_data = [];//医院
-	this.health_service_station_data = [];//卫生服务站
+	this.lenged_data = ["医院", "社区卫生服务站"];
+	this.community_name = [];
 	this.radar_chart_indicator_data = [];
+	this.comprehensive_data = {
+        "医院":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "社区卫生服务站":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 
 }
 PublicServiceMedicalTreatment.prototype.init = function(){
@@ -12,51 +16,30 @@ PublicServiceMedicalTreatment.prototype.init = function(){
 	const _this = this;
 	//教育设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "medical_care",},function(result){
-		const data_1 = [], data_2 = [];
-		for(var i = 0; i < result.data.resultKey.length; i++){
-			var item = result.data.resultKey[i];
-			if(_this.radar_chart_indicator_data.length > 0){
-				for(var j = 0; j < _this.radar_chart_indicator_data.length; j++){
-					if(_this.radar_chart_indicator_data[j].name !== item.COMMUNITY_NAME){
-						_this.radar_chart_indicator_data.push({
-							name: item.COMMUNITY_NAME,
-							max:1000,
-						})
-						if(item.CATEGORY === "医院"){
-							_this.hospital_data.push(item.COVERAGE);
-							_this.health_service_station_data.push(0);
-						}else{
-							_this.health_service_station_data.push(item.COVERAGE);
-							_this.hospital_data.push(0);
-						}
-						break;
-					}
-				}
-			}else{
-				_this.radar_chart_indicator_data.push({
-					name: item.COMMUNITY_NAME,
-					max:1000,
-				})
-				if(item.CATEGORY === "医院"){
-					_this.hospital_data.push(item.COVERAGE);
-					_this.health_service_station_data.push(0);
-				}else{
-					_this.health_service_station_data.push(item.COVERAGE);
-					_this.hospital_data.push(0);
-				}
-			}
-			// if(item.CATEGORY === "医院"){
-			// 	_this.hospital_data.push(item.COVERAGE);
-			// }else{
-			// 	_this.health_service_station_data.push(item.COVERAGE);
-			// }
-		}
+		_this.get_view_data(result.data.resultKey);
 		_this.load_radar_chart();
 	});
 	$("#spectaculars_content p").click(function(){
 		$(this).addClass("active_checked").siblings("p").removeClass("active_checked");
 		_this.click_dom("116.42437454,39.93425622", 15);
 	});
+}
+//分类拆分数据
+PublicServiceMedicalTreatment.prototype.get_view_data = function(result_data){
+	for(var i = 0; i < result_data.length; i++){
+	    for(var key in result_data[i]){
+	        this.community_name.push(key);
+	        this.radar_chart_indicator_data.push({
+	            name: key,
+	            max:1000,
+	        })
+	        if(result_data[i][key].length > 0){
+	            for(var j = 0; j < result_data[i][key].length; j++){
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE;
+	            }
+	        }
+	    }
+	}
 }
 //添加养老设施点标识图层
 PublicServiceMedicalTreatment.prototype.render_point_layer = function(){
@@ -160,7 +143,7 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	            "fontSize": 14,
 	            "color": "#fff"
 	        },
-	        "data": ["医院", "社区卫生服务站"]
+	        "data": this.lenged_data
 	    },
 	    tooltip: {
 	        show: true,
@@ -199,7 +182,7 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [{
-	        "name": "医院",
+	        "name": this.lenged_data[0],
 	        "type": "radar",
 	        "symbol": "circle",
 	        "symbolSize": 3,
@@ -221,10 +204,10 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	            }
 	        },
 	        "data": [
-	            this.hospital_data
+	            this.comprehensive_data[this.lenged_data[0]]
 	        ]
 	    }, {
-	        "name": "社区卫生服务站",
+	        "name": this.lenged_data[1],
 	        "type": "radar",
 	        "symbol": "circle",
 	        "symbolSize": 3,
@@ -248,7 +231,7 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	            }
 	        },
 	        "data": [
-	           	this.health_service_station_data
+	            this.comprehensive_data[this.lenged_data[1]]
 	        ]
 	    }]
 	};
@@ -256,8 +239,11 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 }
 //重置数据
 PublicServiceMedicalTreatment.prototype.reset_data = function(){
-	this.hospital_data = [];//医院
-	this.health_service_station_data = [];//卫生服务站
+	this.community_name = [];
 	this.radar_chart_indicator_data = [];
+	this.comprehensive_data = {
+        "医院":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "社区卫生服务站":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 }
 var start_medical_treatment_rendering = new PublicServiceMedicalTreatment();
