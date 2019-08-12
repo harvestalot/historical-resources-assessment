@@ -10,7 +10,21 @@ function PublicServiceRecreationSports() {
 		{ name: "民安6", A: 30, B: 50 },
 		{ name: "民安7", A: 80, B: 40 },
 	];
+	this.lenged_data = [];
+	this.community_name = [];
 	this.radar_chart_indicator_data = [];
+	this.bodybuilding_data = [];//健身
+	this.culture_data = [];//文化
+	this.indoor_activities_data = [];//室内活动
+	this.outdoor_activities_data = [];//室外活动
+	this.comprehensive_data = [];//综合文体
+	// this.comprehensive_data = {
+	// 	"健身设施":[],
+	// 	"街道文化服务中心":[],
+	// 	"室内体育设施":[],
+	// 	"室外活动场地":[],
+	// 	"综合文体设施":[],
+	// };
 
 }
 PublicServiceRecreationSports.prototype.init = function(){
@@ -19,17 +33,77 @@ PublicServiceRecreationSports.prototype.init = function(){
 	this.load_dom();
 	const _this = this;
 	//教育设施请求
-	serveRequest("get", server_url+ "/FacilityEducation/getFacilityEducation",{},function(result){
-		for(var i = 0; i < _this.provide_data.length; i++){
-			var item = _this.provide_data[i];
-			_this.radar_chart_indicator_data.push({
-				name: item.name,
-				max: 100,
-			});
+	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "stylistic" },function(result){
+		var data = result.data.resultKey;
+		for(var i = 0; i < data.length; i++){
+			var item = data[i];
+			if(_this.lenged_data.indexOf(item.CATEGORY) === -1){
+				_this.lenged_data.push(item.CATEGORY);
+			}
+			if(_this.community_name.indexOf(item.COMMUNITY_NAME) === -1){
+				_this.community_name.push(item.COMMUNITY_NAME);
+			}
 		}
+		for(var i = 0; i < _this.community_name.length; i++){
+			_this.radar_chart_indicator_data.push({
+				name: _this.community_name[i],
+				max:1000,
+			});
+			for(var j = 0; j < data.length; j++){
+				var item = data[j];
+				if(_this.community_name[i] === item.COMMUNITY_NAME){
+					_this.get_view_data(i,item);
+				}
+			}
+		}
+		console.log(_this.bodybuilding_data)
+		console.log(_this.culture_data)
+		console.log(_this.indoor_activities_data)
+		console.log(_this.outdoor_activities_data)
+		console.log(_this.comprehensive_data)
 		_this.load_radar_chart();
 		_this.load_bar_chart();
 	});
+}
+//分类拆分数据
+PublicServiceRecreationSports.prototype.get_view_data = function(idnex,item){
+	switch (item.CATEGORY){
+		case "健身设施" :
+			this.bodybuilding_data[idnex] = item.COVERAGE;
+			this.culture_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+			this.indoor_activities_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+			this.outdoor_activities_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+			this.comprehensive_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+        	break;
+		case "室内体育设施" :
+			this.bodybuilding_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+			this.culture_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+			this.indoor_activities_data[idnex] = item.COVERAGE;
+			this.outdoor_activities_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+			this.comprehensive_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
+        	break;
+		case "室外活动场地" :
+			this.bodybuilding_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.culture_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.indoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.outdoor_activities_data[idnex] = item.COVERAGE;
+			this.comprehensive_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+        	break;
+		case "综合文体设施" :
+			this.bodybuilding_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.culture_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.indoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.outdoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.comprehensive_data[idnex] = item.COVERAGE;
+        	break;
+		case "街道文化服务中心" :
+			this.bodybuilding_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.culture_data[idnex] = item.COVERAGE;
+			this.indoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.outdoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+			this.comprehensive_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
+        	break;
+	}
 }
 //添加设施点标识图层
 PublicServiceRecreationSports.prototype.render_point_layer = function(){
@@ -111,7 +185,7 @@ PublicServiceRecreationSports.prototype.load_reachability_layer = function(reach
 PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
-		color:["#4748FF", "#D18930"],
+	    color: ["#00FFFF","#3ba0f3",'#ff9921','#E0F319',"#00FF59"],
 		title:{
 			text:"各社区文体设施覆盖率对比图",
 			left:'20%',
@@ -128,7 +202,7 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	            "fontSize": 14,
 	            "color": "#fff"
 	        },
-	        "data": ["数据1", "数据2"]
+	        "data": this.lenged_data
 	    },
 	    tooltip: {
 	        show: true,
@@ -167,56 +241,137 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [{
-	        "name": "数据1",
+	        "name": this.lenged_data[0],
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "areaStyle": {
 	            "normal": {
-	                "color": "rgba(245, 166, 35, 0.4)"
+	                "color": "rgba(0,255,255, 0.4)"
 	            }
 	        },
 	        itemStyle:{
-	            color:'rgba(245, 166, 35, 1)',
-	            borderColor:'rgba(245, 166, 35, 0.3)',
-	            borderWidth:10,
+	            color:'rgba(0,255,255, 1)',
+	            borderColor:'rgba(0,255,255, 0.3)',
+	            borderWidth:5,
 	        },
 	        "lineStyle": {
 	            "normal": {
 	                "type": "dashed",
-	                "color": "rgba(245, 166, 35, 1)",
-	                "width": 2
+	                "color": "rgba(0,255,255, 1)",
+	                "width": 1
 	            }
 	        },
 	        "data": [
-	            [80, 50, 55, 80, 50, 80, 48, 43, 60, 78, 60, 40, 42, 44, 65]
+				this.bodybuilding_data
 	        ]
 	    }, {
-	        "name": "数据2",
+	        "name": this.lenged_data[1],
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "itemStyle": {
 	            "normal": {
-	                color:'rgba(19, 173, 255, 1)',
-	                "borderColor": "rgba(19, 173, 255, 0.4)",
-	                "borderWidth": 10
+	                color:'rgba(59,160,243, 1)',
+	                "borderColor": "rgba(59,160,243, 0.4)",
+	                "borderWidth": 5
 	            }
 	        },
 	        "areaStyle": {
 	            "normal": {
-	                "color": "rgba(19, 173, 255, 0.5)"
+	                "color": "rgba(59,160,243, 0.5)"
 	            }
 	        },
 	        "lineStyle": {
 	            "normal": {
-	                "color": "rgba(19, 173, 255, 1)",
-	                "width": 2,
+	                "color": "rgba(59,160,243, 1)",
+	                "width": 1,
 	                "type": "dashed"
 	            }
 	        },
 	        "data": [
-	            [60, 60, 65, 60, 70, 40, 80, 63, 68, 60, 77, 60, 80, 62, 80]
+				this.culture_data
+	        ]
+	    },{
+	        "name": this.lenged_data[2],
+	        "type": "radar",
+	        "symbol": "circle",
+	        "symbolSize": 3,
+	        "itemStyle": {
+	            "normal": {
+	                color:'rgba(255,153,33, 1)',
+	                "borderColor": "rgba(255,153,33, 0.4)",
+	                "borderWidth": 5
+	            }
+	        },
+	        "areaStyle": {
+	            "normal": {
+	                "color": "rgba(255,153,33, 0.5)"
+	            }
+	        },
+	        "lineStyle": {
+	            "normal": {
+	                "color": "rgba(255,153,33, 1)",
+	                "width": 1,
+	                "type": "dashed"
+	            }
+	        },
+	        "data": [
+				this.indoor_activities_data
+	        ]
+	    },{
+	        "name": this.lenged_data[3],
+	        "type": "radar",
+	        "symbol": "circle",
+	        "symbolSize": 3,
+	        "itemStyle": {
+	            "normal": {
+	                color:'rgba(224,243,25, 1)',
+	                "borderColor": "rgba(224,243,25, 0.4)",
+	                "borderWidth": 5
+	            }
+	        },
+	        "areaStyle": {
+	            "normal": {
+	                "color": "rgba(224,243,25, 0.5)"
+	            }
+	        },
+	        "lineStyle": {
+	            "normal": {
+	                "color": "rgba(224,243,25, 1)",
+	                "width": 1,
+	                "type": "dashed"
+	            }
+	        },
+	        "data": [
+				this.outdoor_activities_data
+	        ]
+	    },{
+	        "name": this.lenged_data[4],
+	        "type": "radar",
+	        "symbol": "circle",
+	        "symbolSize": 3,
+	        "itemStyle": {
+	            "normal": {
+	                color:'rgba(0,255,89, 1)',
+	                "borderColor": "rgba(0,255,89, 0.4)",
+	                "borderWidth": 5
+	            }
+	        },
+	        "areaStyle": {
+	            "normal": {
+	                "color": "rgba(0,255,89, 0.5)"
+	            }
+	        },
+	        "lineStyle": {
+	            "normal": {
+	                "color": "rgba(0,255,89, 1)",
+	                "width": 1,
+	                "type": "dashed"
+	            }
+	        },
+	        "data": [
+				this.comprehensive_data
 	        ]
 	    }]
 	};
@@ -227,7 +382,7 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
 	const _this = this;
 	var myChart = echarts.init(document.getElementById("facilities_statistics_content"));
 	var option = {
-	    color: ["#00FFFF","#3ba0f3",'#ff9921','#f36119'],
+	    color: ["#00FFFF","#3ba0f3",'#ff9921','#E0F319',"#00FF59"],
 	    legend: {
 	    	show:false,
 	    },
@@ -245,7 +400,7 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
     		}},
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
-	        data: community_name
+	        data: this.community_name
 	    },
 	    yAxis: {
 	        type: "value",
@@ -255,32 +410,39 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
 	    },
 	    series: [
 	        {
-	        name: '菜站',
+	        name: this.lenged_data[0],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['200', '300', '300', '200', '200', '300', '180','300', '200','200', '300', '300']
+	        data: this.bodybuilding_data
 	        },
 	        {
-	        name: '超市',
+	        name: this.lenged_data[1],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['300', '400', '300', '200', '300', '300', '280','300', '200','200', '300', '300',]
+	        data: this.culture_data
 	        },
 	        {
-	        name: '综合服务站',
+	        name: this.lenged_data[2],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['300', '200', '300', '200', '200', '300', '260','300', '200','200', '300', '300',]
+	        data: this.indoor_activities_data
 	        },
 	        {
-	        name: '便利店',
+	        name: this.lenged_data[3],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: ['400', '460', '420', '430', '420', '460', '520','300', '200','200', '300', '300',]
+	        data: this.outdoor_activities_data
+	        },
+	        {
+	        name: this.lenged_data[4],
+	        type: 'bar',
+	        stack: 'a',
+	        barWidth: 15,
+	        data: this.comprehensive_data
 	        }
         ]
 	};
@@ -288,6 +450,13 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
 }
 //重置数据
 PublicServiceRecreationSports.prototype.reset_data = function(){
+	this.lenged_data = [];
+	this.community_name = [];
 	this.radar_chart_indicator_data = [];
+	this.bodybuilding_data = [];//健身
+	this.culture_data = [];//文化
+	this.indoor_activities_data = [];//室内活动
+	this.outdoor_activities_data = [];//室外活动
+	this.comprehensive_data = [];//综合文体
 }
 var start_recreation_sports_rendering = new PublicServiceRecreationSports();

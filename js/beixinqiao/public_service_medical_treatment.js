@@ -1,15 +1,7 @@
 //公共服务设施--医疗设置
 function PublicServiceMedicalTreatment() {
-	this.provide_data = [
-		{ name: "民安", A: 85, B: 68 },
-		{ name: "民安1", A: 90, B: 88 },
-		{ name: "民安2", A: 70, B: 78 },
-		{ name: "民安3", A: 35, B: 50 },
-		{ name: "民安4", A: 55, B: 28 },
-		{ name: "民安5", A: 78, B: 98 },
-		{ name: "民安6", A: 30, B: 50 },
-		{ name: "民安7", A: 80, B: 40 },
-	];
+	this.hospital_data = [];//医院
+	this.health_service_station_data = [];//卫生服务站
 	this.radar_chart_indicator_data = [];
 
 }
@@ -19,13 +11,45 @@ PublicServiceMedicalTreatment.prototype.init = function(){
 	this.load_dom();
 	const _this = this;
 	//教育设施请求
-	serveRequest("get", server_url+ "/FacilityEducation/getFacilityEducation",{},function(result){
-		for(var i = 0; i < _this.provide_data.length; i++){
-			var item = _this.provide_data[i];
-			_this.radar_chart_indicator_data.push({
-				name: item.name,
-				max: 100,
-			});
+	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "medical_care",},function(result){
+		const data_1 = [], data_2 = [];
+		for(var i = 0; i < result.data.resultKey.length; i++){
+			var item = result.data.resultKey[i];
+			if(_this.radar_chart_indicator_data.length > 0){
+				for(var j = 0; j < _this.radar_chart_indicator_data.length; j++){
+					if(_this.radar_chart_indicator_data[j].name !== item.COMMUNITY_NAME){
+						_this.radar_chart_indicator_data.push({
+							name: item.COMMUNITY_NAME,
+							max:1000,
+						})
+						if(item.CATEGORY === "医院"){
+							_this.hospital_data.push(item.COVERAGE);
+							_this.health_service_station_data.push(0);
+						}else{
+							_this.health_service_station_data.push(item.COVERAGE);
+							_this.hospital_data.push(0);
+						}
+						break;
+					}
+				}
+			}else{
+				_this.radar_chart_indicator_data.push({
+					name: item.COMMUNITY_NAME,
+					max:1000,
+				})
+				if(item.CATEGORY === "医院"){
+					_this.hospital_data.push(item.COVERAGE);
+					_this.health_service_station_data.push(0);
+				}else{
+					_this.health_service_station_data.push(item.COVERAGE);
+					_this.hospital_data.push(0);
+				}
+			}
+			// if(item.CATEGORY === "医院"){
+			// 	_this.hospital_data.push(item.COVERAGE);
+			// }else{
+			// 	_this.health_service_station_data.push(item.COVERAGE);
+			// }
 		}
 		_this.load_radar_chart();
 	});
@@ -136,7 +160,7 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	            "fontSize": 14,
 	            "color": "#fff"
 	        },
-	        "data": ["数据1", "数据2"]
+	        "data": ["医院", "社区卫生服务站"]
 	    },
 	    tooltip: {
 	        show: true,
@@ -175,10 +199,10 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [{
-	        "name": "数据1",
+	        "name": "医院",
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "areaStyle": {
 	            "normal": {
 	                "color": "rgba(245, 166, 35, 0.4)"
@@ -187,28 +211,28 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	        itemStyle:{
 	            color:'rgba(245, 166, 35, 1)',
 	            borderColor:'rgba(245, 166, 35, 0.3)',
-	            borderWidth:10,
+	            borderWidth:5,
 	        },
 	        "lineStyle": {
 	            "normal": {
 	                "type": "dashed",
 	                "color": "rgba(245, 166, 35, 1)",
-	                "width": 2
+	                "width": 1
 	            }
 	        },
 	        "data": [
-	            [80, 50, 55, 80, 50, 80, 48, 43, 60, 78, 60, 40, 42, 44, 65]
+	            this.hospital_data
 	        ]
 	    }, {
-	        "name": "数据2",
+	        "name": "社区卫生服务站",
 	        "type": "radar",
 	        "symbol": "circle",
-	        "symbolSize": 10,
+	        "symbolSize": 3,
 	        "itemStyle": {
 	            "normal": {
 	                color:'rgba(19, 173, 255, 1)',
 	                "borderColor": "rgba(19, 173, 255, 0.4)",
-	                "borderWidth": 10
+	                "borderWidth": 5
 	            }
 	        },
 	        "areaStyle": {
@@ -219,12 +243,12 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	        "lineStyle": {
 	            "normal": {
 	                "color": "rgba(19, 173, 255, 1)",
-	                "width": 2,
+	                "width": 1,
 	                "type": "dashed"
 	            }
 	        },
 	        "data": [
-	            [60, 60, 65, 60, 70, 40, 80, 63, 68, 60, 77, 60, 80, 62, 80]
+	           	this.health_service_station_data
 	        ]
 	    }]
 	};
@@ -232,6 +256,8 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 }
 //重置数据
 PublicServiceMedicalTreatment.prototype.reset_data = function(){
+	this.hospital_data = [];//医院
+	this.health_service_station_data = [];//卫生服务站
 	this.radar_chart_indicator_data = [];
 }
 var start_medical_treatment_rendering = new PublicServiceMedicalTreatment();

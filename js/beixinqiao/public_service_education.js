@@ -1,3 +1,4 @@
+// 公共设施--便民设施
 function PublicServiceEducation() {
 	this.communityName = [];
 	this.seriesData = [];//玫瑰饼状图图表加载的数据
