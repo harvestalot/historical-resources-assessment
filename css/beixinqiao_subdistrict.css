@@ -270,11 +270,13 @@
 	font-size: 16px;
 }
 .ranking_list{
-	width: 240px;
+	width: 70%;
 	margin: 0 auto;
 	line-height: 42px;
 }
 .ranking_list .type_name{
+    display: inline-block;
+    width: 130px;
 	font-size: 16px;
 	color: #1E5692;
 }

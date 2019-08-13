@@ -1,14 +1,5 @@
 // 公共服务设施--概览
 function PublicServiceOverview() {
-	this.ranking_list = [
-		{ type:"便民", name:"北新仓", value: 95 },
-		{ type:"教育", name:"海运仓", value: 95 },
-		{ type:"医疗", name:"十二条", value: 95 },
-		{ type:"文体", name:"青龙", value: 95 },
-		{ type:"交通", name:"十三条", value: 95 },
-		{ type:"养老", name:"门楼", value: 95 },
-		{ type:"街管", name:"北宫厅", value: 95 },
-	]
 	this.lenged_data = ["便民设施", "教育设施", "医疗设施", "养老设施", "文体设施", "交通设施", "街道管理设施"];
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
@@ -22,6 +13,15 @@ function PublicServiceOverview() {
         "街道管理设施":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
     this.current_series_data = [];
+	this.ranking_list = [
+		{ type:"便民", name:"北新仓", value: 95 },
+		{ type:"教育", name:"海运仓", value: 95 },
+		{ type:"医疗", name:"十二条", value: 95 },
+		{ type:"文体", name:"青龙", value: 95 },
+		{ type:"交通", name:"十三条", value: 95 },
+		{ type:"养老", name:"门楼", value: 95 },
+		{ type:"街管", name:"北宫厅", value: 95 },
+	]
 }
 PublicServiceOverview.prototype.init = function(){
 	this.reset_data();
@@ -32,7 +32,17 @@ PublicServiceOverview.prototype.init = function(){
 		_this.get_view_data(result.data.resultKey);
 		_this.load_chart("全部");
 	});
-	this.load_ranking_list(this.ranking_list);
+	//设施排行榜no.1
+	serveRequest("get", server_url+ "/Coverage/getCoverageOrder",{ },function(result){
+		var ranking_list = result.data.resultKey;
+		for(var i = 0; i < ranking_list.length; i++){
+			var item = ranking_list[i];
+			_this.ranking_list.push(
+				{ type: item.CATEGORY_NAME, name: item["MIN(COMMUNITY_NAME)"], value: item.TOTAL_COVERAGE.toFixed(0) }
+			);
+		}
+		_this.load_ranking_list(_this.ranking_list);
+	});
 }
 //分类拆分数据
 PublicServiceOverview.prototype.get_view_data = function(result_data){
@@ -245,6 +255,7 @@ PublicServiceOverview.prototype.reset_data = function(){
         "街道管理设施":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
     this.current_series_data = [];
+    this.ranking_list = [];
 }
 //加载排行榜统计
 PublicServiceOverview.prototype.load_ranking_list = function(data){
