@@ -363,3 +363,10 @@
 .year_switcher a.checked_active{
 	background-color: #00FCFF;
 }
+/*信息窗体*/
+.info_window{
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	color: #000;
+}

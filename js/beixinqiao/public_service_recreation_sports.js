@@ -16,7 +16,11 @@ PublicServiceRecreationSports.prototype.init = function(){
 	this.render_point_layer();
 	this.load_dom();
 	const _this = this;
-	//教育设施请求
+	//文体设施总覆盖率
+	serveRequest("get", server_url+ "/Coverage/getCoverageTotal",{ categoryCode: "stylistic" },function(result){
+		$("#total_coverage").html(result.data.resultKey+" %");
+	});
+	//文体设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "stylistic" },function(result){
 		_this.get_view_data(result.data.resultKey);
 		_this.load_radar_chart();
@@ -67,7 +71,9 @@ PublicServiceRecreationSports.prototype.render_point_layer = function(){
     point_layer.render();
     point_layer.on('click', function (ev) {
     	$("#spectaculars_content p").removeClass("active_checked");
-    	// ev.rawData.properties.
+        var properties = ev.rawData.properties;
+        //渲染信息窗体
+        openInfo(properties["¶þ¼¶²Ëµ¥"], properties["Î»ÖÃ"], ev.lnglat);
 		_this.click_dom(ev.lnglat.join(), 15);
     });
 }
@@ -75,7 +81,7 @@ PublicServiceRecreationSports.prototype.render_point_layer = function(){
 PublicServiceRecreationSports.prototype.load_dom = function(){
 	const public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div style="width: 100%; height: 13%;padding-top:20px;box-sizing: border-box;">'+
-		'<p style="padding-left:21%;box-sizing: border-box;">街道文体设施覆盖率：<span style="font-size:36px;color:#F7C370;">81%</span></p>'+
+		'<p style="padding-left:21%;box-sizing: border-box;">街道文体设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div id="facilities_statistics_content" class="chart_view" style="width: 100%; height: 40%;">'+

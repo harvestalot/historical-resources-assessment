@@ -85,34 +85,28 @@
 
 		var current_situation_land_data = [];
 
-		// for(var i = 0; i < data.features.length; i++){
-		// 	var items = data.features[i];
-		// 		current_situation_land_data.push({
-		// 			properties:items.properties,
-		// 			lnglat: items.geometry.coordinates,
-		// 		})
-		// }
-		// console.log(current_situation_land_data)
+		for(var i = 0; i < data.features.length; i++){
+			var items = data.features[i];
+				current_situation_land_data.push({
+					properties:items.properties,
+					lnglat: items.geometry.coordinates,
+				})
+		}
 
 		const new_beixinqiao_subdistict_data = [];
-		// for(var i = 0; i < current_situation_land_data.length; i++){
-		// 	var lnglat = current_situation_land_data[i].lnglat;
-		// 	const coordinates = [];
-		// 		coordinates.push(wgs84togcj02(lnglat[0],lnglat[1]));
-		// 	new_beixinqiao_subdistict_data.push({
-		// 		properties: current_situation_land_data[i].properties,
-		// 		// center: control_unit_data[i].center,
-		// 		lnglat: wgs84togcj02(lnglat[0],lnglat[1]),
-		// 	})
-		// }
-        for(var i = 0; i < data.length; i++){
-            new_beixinqiao_subdistict_data.push({
-                count_2016:data[i].count_2016,
-                count_2017:data[i].count_2017,
-                count_2018:data[i].count_2018,
-                lnglat:wgs84togcj02(data[i].lng,data[i].lat)
-            })
-        }
+		for(var i = 0; i < current_situation_land_data.length; i++){
+			var lnglat = current_situation_land_data[i].lnglat;
+			const coordinates = [];
+				coordinates.push(wgs84togcj02(lnglat[0],lnglat[1]));
+			new_beixinqiao_subdistict_data.push({
+				properties: {
+                    address: current_situation_land_data[i].properties["Ãû³Æ"],
+                    facility_type: current_situation_land_data[i].properties["¶þ¼¶²Ëµ¥"],
+                },
+				// center: control_unit_data[i].center,
+				lnglat: wgs84togcj02(lnglat[0],lnglat[1]),
+			})
+		}
 		console.log(new_beixinqiao_subdistict_data)
 		$("#coordinate_transformation").html(JSON.stringify(new_beixinqiao_subdistict_data))
 

@@ -27,7 +27,7 @@ function PublicServiceEducation() {
         "中学":[0,0,0,0,0,0,0,0,0,0,0,0],
         "小学":[0,0,0,0,0,0,0,0,0,0,0,0],
         "幼儿园":[0,0,0,0,0,0,0,0,0,0,0,0],
-    }
+    };
 }
 PublicServiceEducation.prototype.init = function(){
 	this.reset_data();
@@ -93,6 +93,9 @@ PublicServiceEducation.prototype.render_point_layer = function(){
     });
     point_layer.render();
     point_layer.on('click', function (ev) {
+        var properties = ev.rawData.properties;
+        //渲染信息窗体
+        openInfo(properties["Ãû³Æ"], properties["µØÖ·"], ev.lnglat);
 		$.get(reachability_url+"?centerpoint="+ev.lnglat.join()+"&time="+15,function(result){
 			var reachability_data = [];
 			for(var i = 0; i < JSON.parse(result).result.split(";").length; i++){

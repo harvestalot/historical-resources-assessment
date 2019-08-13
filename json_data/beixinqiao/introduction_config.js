@@ -172,4 +172,5 @@ const rader_color = [
             }
         },
 	},
-]
+];
+

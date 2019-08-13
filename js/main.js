@@ -66,6 +66,9 @@
 			case "recreation_sports": //公共服务设施--文体
 				start_recreation_sports_rendering.init();
 	    		break;
+			case "traffic": //公共服务设施--交通
+				start_traffic_facilities_rendering.init();
+	    		break;
 			case "provide": //公共服务设施--养老
 				start_provide_rendering.init();
 	    		break;
@@ -92,6 +95,7 @@
 		point_layer? map.remove(point_layer):"";//清除icon点图层
 		heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
 		reachabilityLayer? map.remove(reachabilityLayer):"";//清除可达性覆盖范围图层
+		infoWindow? map.remove(infoWindow):"";//清除信息窗体
 		map.setZoomAndCenter(15,[116.425768,39.940966]);
 	}
 	//初始化

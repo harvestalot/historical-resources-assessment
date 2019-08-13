@@ -11,6 +11,7 @@ document.write('<script src="//a.amap.com/Loca/static/manual/example/script/demo
 var point_layer;//社区服务设施Icon标记图层
 var reachabilityLayer;//可达性覆盖范围图层
 var heatmapLayer;//街区活力热力图图层
+var infoWindow;//信息窗体标示
 // icon点标记图片地址
 const point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
 const reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
@@ -37,4 +38,14 @@ function serveRequest(type,url,arguments,callBack){
         	}
         },
     });
+};
+//信息窗体
+function openInfo(facility_type, address, center) {
+    var info = [];
+    info.push('<div class="info_window">'+facility_type+'</div>');
+    // info.push('<div class="info_window">地址：'+address+'</div>');
+    infoWindow = new AMap.InfoWindow({
+        content: info.join(""),  //使用默认信息窗体框样式，显示信息内容
+    });
+    infoWindow.open(map, center);
 }
