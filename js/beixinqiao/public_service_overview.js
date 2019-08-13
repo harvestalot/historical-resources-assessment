@@ -9,7 +9,7 @@ function PublicServiceOverview() {
 		{ type:"养老", name:"门楼", value: 95 },
 		{ type:"街管", name:"北宫厅", value: 95 },
 	]
-	this.lenged_data = ["便民设施", "教育设施", "医疗设施", "养老设施", "文体设施", "街道管理设施"];
+	this.lenged_data = ["便民设施", "教育设施", "医疗设施", "养老设施", "文体设施", "交通设施", "街道管理设施"];
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
 	this.comprehensive_data = {
@@ -18,6 +18,7 @@ function PublicServiceOverview() {
         "医疗设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "交通设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "街道管理设施":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
     this.current_series_data = [];
@@ -88,23 +89,17 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		case "便民" :
 			this.current_series_data.push({...rader_color[0], ...{
 		        "name": this.lenged_data[0],
-		        "type": "radar",
-		        "symbol": "circle",
-		        "symbolSize": 3,
 		        "data": [
 					this.comprehensive_data[this.lenged_data[0]]
 		        ]
 		    }});
 		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 1500;
+		    	this.radar_chart_indicator_data[i].max = 1700;
 		    }
 			break;
 		case "教育" :
 			this.current_series_data.push({...rader_color[1], ...{
 		        "name": this.lenged_data[1],
-		        "type": "radar",
-		        "symbol": "circle",
-		        "symbolSize": 3,
 		        "data": [
 					this.comprehensive_data[this.lenged_data[1]]
 		        ]
@@ -117,9 +112,6 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		case "医疗" :
 			this.current_series_data.push({...rader_color[2], ...{
 		        "name": this.lenged_data[2],
-		        "type": "radar",
-		        "symbol": "circle",
-		        "symbolSize": 3,
 		        "data": [
 					this.comprehensive_data[this.lenged_data[2]]
 		        ]
@@ -132,9 +124,6 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		case "养老" :
 			this.current_series_data.push({...rader_color[3], ...{
 		        "name": this.lenged_data[3],
-		        "type": "radar",
-		        "symbol": "circle",
-		        "symbolSize": 3,
 		        "data": [
 					this.comprehensive_data[this.lenged_data[3]]
 		        ]
@@ -147,9 +136,6 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		case "文体" :
 			this.current_series_data.push({...rader_color[4], ...{
 		        "name": this.lenged_data[4],
-		        "type": "radar",
-		        "symbol": "circle",
-		        "symbolSize": 3,
 		        "data": [
 					this.comprehensive_data[this.lenged_data[4]]
 		        ]
@@ -160,17 +146,22 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		    }
 			break;
 		case "交通" :
-			this.current_series_data.push(
-			);
-			break;
-		case "街道管理" :
 			this.current_series_data.push({...rader_color[5], ...{
 		        "name": this.lenged_data[5],
-		        "type": "radar",
-		        "symbol": "circle",
-		        "symbolSize": 3,
 		        "data": [
 					this.comprehensive_data[this.lenged_data[5]]
+		        ]
+		    }}
+			);
+		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    	this.radar_chart_indicator_data[i].max = 1700;
+		    }
+			break;
+		case "街道管理" :
+			this.current_series_data.push({...rader_color[6], ...{
+		        "name": this.lenged_data[6],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[6]]
 		        ]
 		    }}
 			);
@@ -182,9 +173,6 @@ PublicServiceOverview.prototype.load_chart = function(type){
 			for(var i = 0; i < this.lenged_data.length; i++){
 				this.current_series_data.push({...rader_color[i], ...{
 			        "name": this.lenged_data[i],
-			        "type": "radar",
-			        "symbol": "circle",
-			        "symbolSize": 3,
 			        "data": [
 						this.comprehensive_data[this.lenged_data[i]]
 			        ]
@@ -192,7 +180,7 @@ PublicServiceOverview.prototype.load_chart = function(type){
 				);
 			}
 		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 1500;
+		    	this.radar_chart_indicator_data[i].max = 1700;
 		    }
 			break;
 	}
@@ -253,6 +241,7 @@ PublicServiceOverview.prototype.reset_data = function(){
         "医疗设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "养老设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "交通设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "街道管理设施":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
     this.current_series_data = [];

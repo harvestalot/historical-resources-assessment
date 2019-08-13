@@ -4,13 +4,13 @@
 	// 点击主导航
 	$("#nav a").click(function(){
 		document.getElementById("visualization_content").classList.remove("animated","fadeInRight");//移除数据图表层
-		document.getElementById("shade_modal").classList.remove("animated","zoomIn","zoomOut","fadeInDown","bounceInRight");//移除所有动画
+		document.getElementById("shade_modal").classList.remove("animated","fadeInLeft","zoomOut","fadeInDown","bounceInRight");//移除所有动画
 		$("#shade_modal .shade_item").css('display',"none");
 		if($(this).index() === 0){
 			// $("#brief_introduction").show();
 			var html = template("introduction_tmp",brief_introduction);
 			document.getElementById('shade_modal').innerHTML = html;
-			document.getElementById("shade_modal").classList.add("animated","zoomIn");
+			document.getElementById("shade_modal").classList.add("animated","fadeInLeft");
 		}else if($(this).index() === 1){
 			// $("#planning_goal").show();
 			var html = template("introduction_tmp",brief_introduction);
@@ -25,7 +25,7 @@
 	});
 	//点击内容区关闭遮罩
 	$("#content").click(function(){
-		document.getElementById("shade_modal").classList.remove("animated","zoomIn","fadeInDown","bounceInRight");
+		document.getElementById("shade_modal").classList.remove("animated","fadeInLeft","fadeInDown","bounceInRight");
 	});
     //侧边导航控制器
  	$(".subNav").next(".navContent").length === 0? $(".subNav").css({"background":"none"}):"";

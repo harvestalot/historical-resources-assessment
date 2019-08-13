@@ -132,7 +132,7 @@ PublicServiceProvide.prototype.load_reachability_layer = function(reachability_d
 PublicServiceProvide.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
-		color:["#4748FF", "#D18930"],
+		color: echarts_color,
 		title:{
 			text:"各社区养老设施对比图",
 			left:'20%',
@@ -187,59 +187,20 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	        },
 	        indicator: this.radar_chart_indicator_data
 	    },
-	    "series": [{
-	        "name": this.lenged_data[0],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(245, 166, 35, 0.4)"
-	            }
-	        },
-	        itemStyle:{
-	            color:'rgba(245, 166, 35, 1)',
-	            borderColor:'rgba(245, 166, 35, 0.3)',
-	            borderWidth:5,
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "type": "dashed",
-	                "color": "rgba(245, 166, 35, 1)",
-	                "width": 1
-	            }
-	        },
-	        "data": [
-	            this.comprehensive_data[this.lenged_data[0]]
-	        ]
-	    }, {
-	        "name": this.lenged_data[1],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(19, 173, 255, 1)',
-	                "borderColor": "rgba(19, 173, 255, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(19, 173, 255, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(19, 173, 255, 1)",
-	                "width": 2,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-	            this.comprehensive_data[this.lenged_data[1]]
-	        ]
-	    }]
+	    "series": [
+	    	{...rader_color[0], ...{
+		        "name": this.lenged_data[0],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[0]]
+		        ]
+		    }},
+	    	{...rader_color[1], ...{
+		        "name": this.lenged_data[1],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[1]]
+		        ]
+		    }}
+		]
 	};
     radarChart.setOption(radar_option, true);
 }

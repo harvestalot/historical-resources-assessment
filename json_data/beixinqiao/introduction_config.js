@@ -15,29 +15,13 @@ const brief_introduction = {
 }
 
 // echarts颜色配置
-const echarts_color = ["#00FFFF","#3ba0f3",'#ff9921','#E0F319',"#00FF59","#DE61FA"];
+const echarts_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#3A8281"];
 // 雷达图各类型颜色配置
 const rader_color = [
 	{
-        areaStyle: {
-            normal: {
-                color: "rgba(0,255,255, 0.4)"
-            }
-        },
-        itemStyle:{
-            color:'rgba(0,255,255, 1)',
-            borderColor:'rgba(0,255,255, 0.3)',
-            borderWidth:5,
-        },
-        lineStyle: {
-            normal: {
-                type: "dashed",
-                color: "rgba(0,255,255, 1)",
-                width: 1
-            }
-        },
-	},
-	{
+        type: "radar",
+        symbol: "circle",
+        symbolSize: 3,
         areaStyle: {
             normal: {
                 color: "rgba(59,160,243, 1)"
@@ -57,6 +41,9 @@ const rader_color = [
         },
 	},
 	{
+        type: "radar",
+        symbol: "circle",
+        symbolSize: 3,
         areaStyle: {
             normal: {
                 color: "rgba(255,153,33, 0.4)"
@@ -76,6 +63,31 @@ const rader_color = [
         },
 	},
 	{
+        type: "radar",
+        symbol: "circle",
+        symbolSize: 3,
+        areaStyle: {
+            normal: {
+                color: "rgba(0,255,255, 0.4)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(0,255,255, 1)',
+            borderColor:'rgba(0,255,255, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(0,255,255, 1)",
+                width: 1
+            }
+        },
+	},
+	{
+        type: "radar",
+        symbol: "circle",
+        symbolSize: 3,
         areaStyle: {
             normal: {
                 color: "rgba(224,243,25, 0.4)"
@@ -95,6 +107,9 @@ const rader_color = [
         },
 	},
 	{
+        type: "radar",
+        symbol: "circle",
+        symbolSize: 3,
         areaStyle: {
             normal: {
                 color: "rgba(0,255,89, 0.4)"
@@ -114,6 +129,9 @@ const rader_color = [
         },
 	},
 	{
+        type: "radar",
+        symbol: "circle",
+        symbolSize: 3,
         areaStyle: {
             normal: {
                 color: "rgba(222,97,250, 0.4)"
@@ -128,6 +146,28 @@ const rader_color = [
             normal: {
                 type: "dashed",
                 color: "rgba(222,97,250, 1)",
+                width: 1
+            }
+        },
+	},
+	{
+        type: "radar",
+        symbol: "circle",
+        symbolSize: 3,
+        areaStyle: {
+            normal: {
+                color: "rgba(58,130,129, 0.4)"
+            }
+        },
+        itemStyle:{
+            color:'rgba(58,130,129, 1)',
+            borderColor:'rgba(58,130,129, 0.3)',
+            borderWidth:5,
+        },
+        lineStyle: {
+            normal: {
+                type: "dashed",
+                color: "rgba(58,130,129, 1)",
                 width: 1
             }
         },

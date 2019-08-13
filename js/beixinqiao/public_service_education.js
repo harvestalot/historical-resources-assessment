@@ -158,25 +158,6 @@ PublicServiceEducation.prototype.load_chart = function(type){
 	const seriesData = [];
 	switch (type){
 		case "1" :
-			// seriesData.push({
-		 //        type: 'bar',
-		 //        data: this.bar_comprehensive_data["幼儿园"],
-		 //        coordinateSystem: 'polar',
-		 //        name: "幼儿园",
-		 //        stack: 'a',
-		 //        itemStyle: {
-		 //            normal: {
-		 //                borderWidth: 3,
-		 //                borderColor: '#ffffff',
-		 //            },
-		 //            emphasis: {
-		 //                borderWidth: 3,
-		 //                shadowBlur: 10,
-		 //                shadowOffsetX: 0,
-		 //                shadowColor: 'rgba(0, 0, 0, 0.5)'
-		 //            }
-		 //        }
-		 //    })
 			seriesData.push({
 		        stack: 'a',
 		        name:"幼儿园",
@@ -196,25 +177,6 @@ PublicServiceEducation.prototype.load_chart = function(type){
 			});
 			break;
 		case "2" :
-			// seriesData.push({
-		 //        type: 'bar',
-		 //        data: this.bar_comprehensive_data["小学"],
-		 //        coordinateSystem: 'polar',
-		 //        name: "小学",
-		 //        stack: 'a',
-		 //        itemStyle: {
-		 //            normal: {
-		 //                borderWidth: 3,
-		 //                borderColor: '#ffffff',
-		 //            },
-		 //            emphasis: {
-		 //                borderWidth: 3,
-		 //                shadowBlur: 10,
-		 //                shadowOffsetX: 0,
-		 //                shadowColor: 'rgba(0, 0, 0, 0.5)'
-		 //            }
-		 //        }
-		 //    })
 			seriesData.push({
 		        stack: 'a',
 		        name:"小学",
@@ -234,25 +196,6 @@ PublicServiceEducation.prototype.load_chart = function(type){
 			});
 			break;
 		case "3" :
-			// seriesData.push({
-		 //        type: 'bar',
-		 //        data: this.bar_comprehensive_data["中学"],
-		 //        coordinateSystem: 'polar',
-		 //        name: "中学",
-		 //        stack: 'a',
-		 //        itemStyle: {
-		 //            normal: {
-		 //                borderWidth: 3,
-		 //                borderColor: '#ffffff',
-		 //            },
-		 //            emphasis: {
-		 //                borderWidth: 3,
-		 //                shadowBlur: 10,
-		 //                shadowOffsetX: 0,
-		 //                shadowColor: 'rgba(0, 0, 0, 0.5)'
-		 //            }
-		 //        }
-		 //    })
 			seriesData.push({
 		        stack: 'a',
 		        name:"中学",
@@ -272,25 +215,6 @@ PublicServiceEducation.prototype.load_chart = function(type){
 			});
 			break;
 		case "4" :
-			// seriesData.push({
-		 //        type: 'bar',
-		 //        data: this.bar_comprehensive_data["九年一贯制"],
-		 //        coordinateSystem: 'polar',
-		 //        name: "九年一贯制",
-		 //        stack: 'a',
-		 //        itemStyle: {
-		 //            normal: {
-		 //                borderWidth: 3,
-		 //                borderColor: '#ffffff',
-		 //            },
-		 //            emphasis: {
-		 //                borderWidth: 3,
-		 //                shadowBlur: 10,
-		 //                shadowOffsetX: 0,
-		 //                shadowColor: 'rgba(0, 0, 0, 0.5)'
-		 //            }
-		 //        }
-		 //    })
 			seriesData.push({
 		        stack: 'a',
 		        name:"九年一贯制",
@@ -311,25 +235,6 @@ PublicServiceEducation.prototype.load_chart = function(type){
 			break;
 		default:
 			for(var i = 0; i< this.legendData.length; i++){
-				// seriesData.push({
-			 //        type: 'bar',
-			 //        data: this.bar_comprehensive_data[this.legendData[i]],
-			 //        coordinateSystem: 'polar',
-			 //        name: this.legendData[i],
-			 //        stack: 'a',
-			 //        itemStyle: {
-			 //            normal: {
-			 //                borderWidth: 3,
-			 //                borderColor: '#ffffff',
-			 //            },
-			 //            emphasis: {
-			 //                borderWidth: 3,
-			 //                shadowBlur: 10,
-			 //                shadowOffsetX: 0,
-			 //                shadowColor: 'rgba(0, 0, 0, 0.5)'
-			 //            }
-			 //        }
-			 //    })
 				seriesData.push({
 			        stack: 'a',
 			        type: 'pie',
@@ -344,12 +249,6 @@ PublicServiceEducation.prototype.load_chart = function(type){
 			                show: false
 			            }
 			        },
-			        // itemStyle: { //图形样式
-			        //     normal: {
-			        //         borderColor: '#ffffff',
-			        //         borderWidth:5,
-			        //     },
-			        // },
 			        data:this.pie_comprehensive_data[this.legendData[i]]
 				});
 			}

@@ -119,7 +119,7 @@ PublicServiceStreetManagement.prototype.load_reachability_layer = function(reach
 PublicServiceStreetManagement.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
-	    color: ["#00FFFF","#3ba0f3",'#ff9921'],
+	    color: echarts_color,
 		title:{
 			text:"各社区街道管理设施数量对比图",
 			left:'20%',
@@ -174,86 +174,26 @@ PublicServiceStreetManagement.prototype.load_radar_chart = function(){
 	        },
 	        indicator: this.radar_chart_indicator_data
 	    },
-	    "series": [{
-	        "name": this.lenged_data[0],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(0,255,255, 0.4)"
-	            }
-	        },
-	        itemStyle:{
-	            color:'rgba(0,255,255, 1)',
-	            borderColor:'rgba(0,255,255, 0.3)',
-	            borderWidth:5,
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "type": "dashed",
-	                "color": "rgba(0,255,255, 1)",
-	                "width": 1
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[0]]
-	        ]
-	    }, {
-	        "name": this.lenged_data[1],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(59,160,243, 1)',
-	                "borderColor": "rgba(59,160,243, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(59,160,243, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(59,160,243, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[1]]
-	        ]
-	    },{
-	        "name": this.lenged_data[2],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(255,153,33, 1)',
-	                "borderColor": "rgba(255,153,33, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(255,153,33, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(255,153,33, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[2]]
-	        ]
-	    }]
+	    "series": [
+	    	{...rader_color[0], ...{
+		        "name": this.lenged_data[0],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[0]]
+		        ]
+		    }},
+	    	{...rader_color[1], ...{
+		        "name": this.lenged_data[1],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[1]]
+		        ]
+		    }},
+	    	{...rader_color[2], ...{
+		        "name": this.lenged_data[2],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[2]]
+		        ]
+		    }}
+		]
 	};
     radarChart.setOption(radar_option, true);
 }
@@ -262,7 +202,7 @@ PublicServiceStreetManagement.prototype.load_bar_chart = function(){
 	const _this = this;
 	var myChart = echarts.init(document.getElementById("facilities_statistics_content"));
 	var option = {
-	    color: ["#00FFFF","#3ba0f3",'#ff9921','#f36119'],
+	    color: echarts_color,
 	    legend: {
 	    	show:false,
 	    },

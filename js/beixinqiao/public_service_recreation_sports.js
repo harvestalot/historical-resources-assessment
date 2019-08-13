@@ -19,28 +19,6 @@ PublicServiceRecreationSports.prototype.init = function(){
 	//教育设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "stylistic" },function(result){
 		_this.get_view_data(result.data.resultKey);
-		// var data = result.data.resultKey;
-		// for(var i = 0; i < data.length; i++){
-		// 	var item = data[i];
-		// 	if(_this.lenged_data.indexOf(item.CATEGORY) === -1){
-		// 		_this.lenged_data.push(item.CATEGORY);
-		// 	}
-		// 	if(_this.community_name.indexOf(item.COMMUNITY_NAME) === -1){
-		// 		_this.community_name.push(item.COMMUNITY_NAME);
-		// 	}
-		// }
-		// for(var i = 0; i < _this.community_name.length; i++){
-		// 	_this.radar_chart_indicator_data.push({
-		// 		name: _this.community_name[i],
-		// 		max:1000,
-		// 	});
-		// 	for(var j = 0; j < data.length; j++){
-		// 		var item = data[j];
-		// 		if(_this.community_name[i] === item.COMMUNITY_NAME){
-		// 			_this.get_view_data(i,item);
-		// 		}
-		// 	}
-		// }
 		_this.load_radar_chart();
 		_this.load_bar_chart();
 	});
@@ -61,43 +39,6 @@ PublicServiceRecreationSports.prototype.get_view_data = function(result_data){
 	        }
 	    }
 	}
-	// switch (item.CATEGORY){
-	// 	case "健身设施" :
-	// 		this.bodybuilding_data[idnex] = item.COVERAGE;
-	// 		this.culture_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
-	// 		this.indoor_activities_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
-	// 		this.outdoor_activities_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
-	// 		this.comprehensive_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
- //        	break;
-	// 	case "室内体育设施" :
-	// 		this.bodybuilding_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
-	// 		this.culture_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
-	// 		this.indoor_activities_data[idnex] = item.COVERAGE;
-	// 		this.outdoor_activities_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
-	// 		this.comprehensive_data[idnex] = this.culture_data[idnex]?this.culture_data[idnex]:0;
- //        	break;
-	// 	case "室外活动场地" :
-	// 		this.bodybuilding_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.culture_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.indoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.outdoor_activities_data[idnex] = item.COVERAGE;
-	// 		this.comprehensive_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
- //        	break;
-	// 	case "综合文体设施" :
-	// 		this.bodybuilding_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.culture_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.indoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.outdoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.comprehensive_data[idnex] = item.COVERAGE;
- //        	break;
-	// 	case "街道文化服务中心" :
-	// 		this.bodybuilding_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.culture_data[idnex] = item.COVERAGE;
-	// 		this.indoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.outdoor_activities_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
-	// 		this.comprehensive_data[idnex] = this.culture_data[idnex] ?this.culture_data[idnex]:0;
- //        	break;
-	// }
 }
 //添加设施点标识图层
 PublicServiceRecreationSports.prototype.render_point_layer = function(){
@@ -179,7 +120,7 @@ PublicServiceRecreationSports.prototype.load_reachability_layer = function(reach
 PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
-	    color: ["#00FFFF","#3ba0f3",'#ff9921','#E0F319',"#00FF59"],
+	    color: echarts_color,
 		title:{
 			text:"各社区文体设施覆盖率对比图",
 			left:'20%',
@@ -234,140 +175,38 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	        },
 	        indicator: this.radar_chart_indicator_data
 	    },
-	    "series": [{
-	        "name": this.lenged_data[0],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(0,255,255, 0.4)"
-	            }
-	        },
-	        itemStyle:{
-	            color:'rgba(0,255,255, 1)',
-	            borderColor:'rgba(0,255,255, 0.3)',
-	            borderWidth:5,
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "type": "dashed",
-	                "color": "rgba(0,255,255, 1)",
-	                "width": 1
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[0]]
-	        ]
-	    }, {
-	        "name": this.lenged_data[1],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(59,160,243, 1)',
-	                "borderColor": "rgba(59,160,243, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(59,160,243, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(59,160,243, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[1]]
-	        ]
-	    },{
-	        "name": this.lenged_data[2],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(255,153,33, 1)',
-	                "borderColor": "rgba(255,153,33, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(255,153,33, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(255,153,33, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[2]]
-	        ]
-	    },{
-	        "name": this.lenged_data[3],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(224,243,25, 1)',
-	                "borderColor": "rgba(224,243,25, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(224,243,25, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(224,243,25, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[3]]
-	        ]
-	    },{
-	        "name": this.lenged_data[4],
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(0,255,89, 1)',
-	                "borderColor": "rgba(0,255,89, 0.4)",
-	                "borderWidth": 5
-	            }
-	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(0,255,89, 0.5)"
-	            }
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(0,255,89, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data": [
-				this.comprehensive_data[this.lenged_data[4]]
-	        ]
-	    }]
+	    "series": [
+	    	{...rader_color[0], ...{
+		        "name": this.lenged_data[0],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[0]]
+		        ]
+		    }},
+	    	{...rader_color[1], ...{
+		        "name": this.lenged_data[1],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[1]]
+		        ]
+		    }},
+	    	{...rader_color[2], ...{
+		        "name": this.lenged_data[2],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[2]]
+		        ]
+		    }},
+	    	{...rader_color[3], ...{
+		        "name": this.lenged_data[3],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[3]]
+		        ]
+		    }},
+	    	{...rader_color[4], ...{
+		        "name": this.lenged_data[4],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[4]]
+		        ]
+		    }}
+		]
 	};
     radarChart.setOption(radar_option, true);
 }
@@ -376,7 +215,7 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
 	const _this = this;
 	var myChart = echarts.init(document.getElementById("facilities_statistics_content"));
 	var option = {
-	    color: ["#00FFFF","#3ba0f3",'#ff9921','#E0F319',"#00FF59"],
+	    color: echarts_color,
 	    legend: {
 	    	show:false,
 	    },
