@@ -14,6 +14,29 @@ const brief_introduction = {
 		"住宅合作社、民政局等50个居（家）委会。"
 }
 
+//片区历史发展图片
+const district_history_img_data = {
+    img_list:[
+        './images/beixinqiao/h1.jpg',
+        './images/beixinqiao/h2.jpg',
+        './images/beixinqiao/h3.jpg',
+        './images/beixinqiao/h4.jpg',
+        './images/beixinqiao/h5.jpg',
+        './images/beixinqiao/h6.jpg',
+    ]
+}
+//历史资源发展图片
+const resource_history_img_data = {
+    img_list:[
+        './images/beixinqiao/h6.jpg',
+        './images/beixinqiao/h5.jpg',
+        './images/beixinqiao/h4.jpg',
+        './images/beixinqiao/h3.jpg',
+        './images/beixinqiao/h2.jpg',
+        './images/beixinqiao/h1.jpg',
+    ]
+}
+
 // echarts颜色配置
 const echarts_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#3A8281"];
 // 雷达图各类型颜色配置

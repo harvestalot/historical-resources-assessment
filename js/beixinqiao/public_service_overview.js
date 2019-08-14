@@ -13,15 +13,7 @@ function PublicServiceOverview() {
         "街道管理设施":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
     this.current_series_data = [];
-	this.ranking_list = [
-		{ type:"便民", name:"北新仓", value: 95 },
-		{ type:"教育", name:"海运仓", value: 95 },
-		{ type:"医疗", name:"十二条", value: 95 },
-		{ type:"文体", name:"青龙", value: 95 },
-		{ type:"交通", name:"十三条", value: 95 },
-		{ type:"养老", name:"门楼", value: 95 },
-		{ type:"街管", name:"北宫厅", value: 95 },
-	]
+	this.ranking_list = [];
 }
 PublicServiceOverview.prototype.init = function(){
 	this.reset_data();

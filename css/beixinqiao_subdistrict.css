@@ -168,37 +168,50 @@
 	margin: 30px auto;
 }
 /*朝代介绍*/
+.history_tab span{
+	display: inline-block;
+	width: 50%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+.history_tab span.active_history_tab{
+	background-color: #00FFFF;
+}
 .dynasty_introduction{
-	width: 80%;
-	height: 80%; 
-	margin:5% auto;
+	width: 100%;
+	/*height: 720px; */
+	height: 85%;
+	margin:0 auto;
 	overflow: hidden;
+	display: flex;
+    flex-direction: row;  /* 子元素横向排列 */
+    justify-content: center; /* 相对父元素水平居中 */
+    align-items: center; /*  子元素相对父元素垂直居中 */
 }
 .dynasty_introduction>div{
-	float: left;
-	position: relative;
-	width: 10%;
-	height: 100%;
-	transition: all 1s;
+	flex-grow:1;/* 属性用于设置或检索弹性盒的扩展比率。 */
+	width: 240px;
+	height: 427px;
+	margin-right: 15px;
+	transition: all 0.7s;
 }
-/*.dynasty_name{
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,.3);
-}*/
 .dynasty_introduction>div img{
-	width: 400%;
+	width: 100%;
 	height: 100%;
 	cursor: pointer;
 }
 .dynasty_introduction:hover div{ 
-	width: 7%; 
+	/*transform: scale(0.5); */
+	width: 240px;
+	height: 427px;
 }
 .dynasty_introduction div:hover{ 
-	width: 37%; 
+	/*transform: scale(1.5); */
+	width: 360px;
+	height: 640.5px;
 }
 
 .zoomIn {

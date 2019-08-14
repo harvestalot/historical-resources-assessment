@@ -5,7 +5,7 @@ document.write('<script type="text/javascript" src="./lib/template.js"></script>
 document.write('<script type="text/javascript" src="./lib/echarts.min.js"></script>');
 document.write('<script src="//webapi.amap.com/maps?v=1.4.15&key=ecde469412ea3b8c4b8a640687c68c2b"></script>');
 document.write('<script src="//webapi.amap.com/loca?v=1.3.0&key=ecde469412ea3b8c4b8a640687c68c2b"></script>');
-document.write('<script src="//a.amap.com/Loca/static/manual/example/script/demo.js"></script>');//openInfoWin封装
+// document.write('<script src="//a.amap.com/Loca/static/manual/example/script/demo.js"></script>');//openInfoWin封装
 
 
 var point_layer;//社区服务设施Icon标记图层
@@ -15,8 +15,8 @@ var infoWindow;//信息窗体标示
 // icon点标记图片地址
 const point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
 const reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
-// const server_url = "http://116.62.222.106:8081";
-const server_url = "http://192.168.1.43:8081";
+const server_url = "http://116.62.222.106:8081";
+// const server_url = "http://192.168.1.43:8081";
 /**
  *ajax请求通用方法
  *

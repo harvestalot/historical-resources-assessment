@@ -143,18 +143,33 @@
 <!-- 历史发展 -->
 <script id="historical_development_tmp" type="text/html">
 	<div class="shade_item h100 historical_development">
-		<h2>历史发展</h2>
-		<div class="clearfix dynasty_introduction">
-			<div><img src="./images/1.png" alt=""></div>
-			<div><img src="./images/2.png" alt=""></div>
-			<div><img src="./images/3.png" alt=""></div>
-			<div><img src="./images/4.png" alt=""></div>
-			<div><img src="./images/5.png" alt=""></div>
-			<div><img src="./images/6.png" alt=""></div>
-			<div><img src="./images/7.png" alt=""></div>
-			<div><img src="./images/8.png" alt=""></div>
-			<div><img src="./images/9.png" alt=""></div>
-			<div><img src="./images/10.png" alt=""></div>
+		<div id="history_tab" class="history_tab"><span class="active_history_tab" data_type="1">片区历史发展史</span><span data_type="2">历史资源发展史</span></div>
+		<div id="dynasty_introduction" class="clearfix dynasty_introduction">
+		    {{each img_list as value i}}
+		    	<div><img src="{{value}}" alt=""></div>
+		    {{/each}}
 		</div>
 	</div>
 </script>
+
+<!-- <div class="shade_item h100 historical_development">
+		<div id="history_tab" class="history_tab"><span class="active_history_tab" data_type="1">片区历史发展史</span><span data_type="2">历史资源发展史</span></div>
+		<div class="clearfix dynasty_introduction">
+			<div id="district_history" class="history_item">
+				<div><img src="./images/beixinqiao/h1.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h2.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h3.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h4.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h5.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h6.jpg" alt=""></div>
+			</div>
+			<div id="resource_history"  class="history_item">
+				<div><img src="./images/beixinqiao/h1.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h2.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h3.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h4.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h5.jpg" alt=""></div>
+				<div><img src="./images/beixinqiao/h6.jpg" alt=""></div>
+			</div>
+		</div>
+	</div> -->

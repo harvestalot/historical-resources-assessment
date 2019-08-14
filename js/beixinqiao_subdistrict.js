@@ -3,6 +3,11 @@
 	start_init.init("overview");
 	// 点击主导航
 	$("#nav a").click(function(){
+		point_layer? map.remove(point_layer):"";//清除icon点图层
+		heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
+		reachabilityLayer? map.remove(reachabilityLayer):"";//清除可达性覆盖范围图层
+		infoWindow? map.remove(infoWindow):"";//清除信息窗体
+		map.setZoomAndCenter(15,[116.425768,39.940966]);
 		document.getElementById("visualization_content").classList.remove("animated","fadeInRight");//移除数据图表层
 		document.getElementById("shade_modal").classList.remove("animated","fadeInLeft","zoomOut","fadeInDown","bounceInRight");//移除所有动画
 		$("#shade_modal .shade_item").css('display',"none");
@@ -18,9 +23,23 @@
 			document.getElementById("shade_modal").classList.add("animated", "fadeInDown");
 		}else if($(this).index() === 2){
 			// $("#historical_development").show();
-			var html = template("historical_development_tmp",brief_introduction);
+			var html = template("historical_development_tmp",district_history_img_data);
 			document.getElementById('shade_modal').innerHTML = html;
 			document.getElementById("shade_modal").classList.add("animated","bounceInRight");
+			$("#history_tab span").on("click",function(){
+				$(this).addClass("active_history_tab").siblings("span").removeClass("active_history_tab");
+				var district_history_img_str = "";
+				if($(this).attr("data_type") === "1"){
+					for(var i = 0; i < district_history_img_data.img_list.length; i++){
+						district_history_img_str += '<div><img src='+district_history_img_data.img_list[i]+' alt=""></div>';
+					}
+				}else if($(this).attr("data_type") === "2"){
+					for(var i = 0; i < resource_history_img_data.img_list.length; i++){
+						district_history_img_str += '<div><img src='+resource_history_img_data.img_list[i]+' alt=""></div>';
+					}
+				}
+				$("#dynasty_introduction").html(district_history_img_str);
+			});
 		}
 	});
 	//点击内容区关闭遮罩
