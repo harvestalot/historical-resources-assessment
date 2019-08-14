@@ -84,31 +84,51 @@
 
 
 		var current_situation_land_data = [];
+        //面积转化
+        for(var i = 0; i < data.features.length; i++){
+            var items = data.features[i];
+            var new_lnglat = [];
+            if(items.geometry.type === "Polygon"){
+                for(var j = 0; j < items.geometry.coordinates[0].length; j++){
+                    var item_lnglat = items.geometry.coordinates[0][j];
+                    new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
+                }
+            }else{
+                for(var j = 0; j < items.geometry.coordinates[0][0].length; j++){
+                    var item_lnglat = items.geometry.coordinates[0][0][j];
+                    new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
+                }
+            }
+            current_situation_land_data.push({
+                community_name:items.properties["ÉçÇøÃû³Æ"],
+                lnglat: new_lnglat,
+            })
+        }
 
-		for(var i = 0; i < data.features.length; i++){
-			var items = data.features[i];
-				current_situation_land_data.push({
-					properties:items.properties,
-					lnglat: items.geometry.coordinates,
-				})
-		}
+		// for(var i = 0; i < data.features.length; i++){
+		// 	var items = data.features[i];
+		// 		current_situation_land_data.push({
+		// 			properties:items.properties,
+		// 			lnglat: items.geometry.coordinates,
+		// 		})
+		// }
 
-		const new_beixinqiao_subdistict_data = [];
-		for(var i = 0; i < current_situation_land_data.length; i++){
-			var lnglat = current_situation_land_data[i].lnglat;
-			const coordinates = [];
-				coordinates.push(wgs84togcj02(lnglat[0],lnglat[1]));
-			new_beixinqiao_subdistict_data.push({
-				properties: {
-                    address: current_situation_land_data[i].properties["Ãû³Æ"],
-                    facility_type: current_situation_land_data[i].properties["¶þ¼¶²Ëµ¥"],
-                },
-				// center: control_unit_data[i].center,
-				lnglat: wgs84togcj02(lnglat[0],lnglat[1]),
-			})
-		}
-		console.log(new_beixinqiao_subdistict_data)
-		$("#coordinate_transformation").html(JSON.stringify(new_beixinqiao_subdistict_data))
+		// const new_beixinqiao_subdistict_data = [];
+		// for(var i = 0; i < current_situation_land_data.length; i++){
+		// 	var lnglat = current_situation_land_data[i].lnglat;
+		// 	const coordinates = [];
+		// 		coordinates.push(wgs84togcj02(lnglat[0],lnglat[1]));
+		// 	new_beixinqiao_subdistict_data.push({
+		// 		properties: {
+  //                   address: current_situation_land_data[i].properties["Ãû³Æ"],
+  //                   facility_type: current_situation_land_data[i].properties["¶þ¼¶²Ëµ¥"],
+  //               },
+		// 		// center: control_unit_data[i].center,
+		// 		lnglat: wgs84togcj02(lnglat[0],lnglat[1]),
+		// 	})
+		// }
+		console.log(current_situation_land_data)
+		$("#coordinate_transformation").html(JSON.stringify(current_situation_land_data))
 
 	</script>
 </body>

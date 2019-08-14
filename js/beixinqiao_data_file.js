@@ -16,6 +16,7 @@ document.write('<script src="./json_data/beixinqiao/traffic_facilities.js?V2019.
 document.write('<script src="./json_data/beixinqiao/endowment_facilities.js?V2019.08.14"></script>');//养老设施点数据
 document.write('<script src="./json_data/beixinqiao/street_management_facilities.js?V2019.08.14"></script>');//街道管理设施点数据
 document.write('<script src="./json_data/beixinqiao/visitors_flow_rate.js?V2019.08.14"></script>');//街区活力--2016-2018年人流量点数据
+document.write('<script src="./json_data/beixinqiao/public_space_greenbelt.js?V2019.08.14"></script>');//公共空间评估--绿地资源
 
 
 //图表数据可视化文件
@@ -31,3 +32,4 @@ document.write('<script src="./js/beixinqiao/public_service_street_management.js
 document.write('<script src="./js/beixinqiao/industrial_structure_concentration.js?V2019.08.14"></script>');//产业结构（产业聚集度）
 document.write('<script src="./js/beixinqiao/industrial_structure_development.js?V2019.08.14"></script>');//产业结构（产业发展）
 document.write('<script src="./js/beixinqiao/block_energy_visitors_flow_rate.js?V2019.08.14"></script>');//街区活力--人流量监测
+document.write('<script src="./js/beixinqiao/public_space_greenbelt.js?V2019.08.14"></script>');//公共空间评估--绿地资源

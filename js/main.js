@@ -85,6 +85,15 @@
 				start_visitors_flow_rate_rendering.init();
 				map.setZoomAndCenter(13,[116.397737, 39.907573]);
 	    		break;
+			case "greenbelt": //公共空间评估--绿地资源
+				start_greenbelt_rendering.init();
+	    		break;
+			case "public_space": //公共空间评估--公共空间共享
+				start_visitors_flow_rate_rendering.init();
+	    		break;
+			case "available_space": //公共空间评估--可利用空间资源
+				start_visitors_flow_rate_rendering.init();
+	    		break;
         	default:
 				this.map();
 		}

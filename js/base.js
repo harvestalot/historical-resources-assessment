@@ -12,6 +12,7 @@ var point_layer;//社区服务设施Icon标记图层
 var reachabilityLayer;//可达性覆盖范围图层
 var heatmapLayer;//街区活力热力图图层
 var infoWindow;//信息窗体标示
+var sidebar_polygonLayer;//侧边导航触发的图层
 // icon点标记图片地址
 const point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
 const reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
