@@ -1,3 +1,4 @@
+//公共空间绿地资源
 const actuality_greenbelt_data = [{
 	"community_name": "北宫厅",
 	"lnglat": [

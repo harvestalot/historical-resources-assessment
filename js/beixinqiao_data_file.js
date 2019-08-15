@@ -17,7 +17,11 @@ document.write('<script src="./json_data/beixinqiao/endowment_facilities.js?V201
 document.write('<script src="./json_data/beixinqiao/street_management_facilities.js?V2019.08.14"></script>');//街道管理设施点数据
 document.write('<script src="./json_data/beixinqiao/visitors_flow_rate.js?V2019.08.14"></script>');//街区活力--2016-2018年人流量点数据
 document.write('<script src="./json_data/beixinqiao/public_space_greenbelt.js?V2019.08.14"></script>');//公共空间评估--绿地资源
-
+document.write('<script src="./json_data/beixinqiao/public_space_share.js?V2019.08.14"></script>');//公共空间评估--公共空间共享
+document.write('<script src="./json_data/beixinqiao/public_space_available_space.js?V2019.08.14"></script>');//公共空间评估--可利用空间资源
+document.write('<script src="./json_data/beixinqiao/material_cultural_heritage.js?V2019.08.14"></script>');//文化资源评估--物质文化遗产
+document.write('<script src="./json_data/beixinqiao/cultural_relic_protection.js?V2019.08.14"></script>');//文化资源评估--文物保护单位
+document.write('<script src="./json_data/beixinqiao/historical_building.js?V2019.08.14"></script>');//文化资源评估--历史建筑
 
 //图表数据可视化文件
 document.write('<script src="./js/beixinqiao/population.js?V2019.08.14"></script>');//人口信息
@@ -33,3 +37,8 @@ document.write('<script src="./js/beixinqiao/industrial_structure_concentration.
 document.write('<script src="./js/beixinqiao/industrial_structure_development.js?V2019.08.14"></script>');//产业结构（产业发展）
 document.write('<script src="./js/beixinqiao/block_energy_visitors_flow_rate.js?V2019.08.14"></script>');//街区活力--人流量监测
 document.write('<script src="./js/beixinqiao/public_space_greenbelt.js?V2019.08.14"></script>');//公共空间评估--绿地资源
+document.write('<script src="./js/beixinqiao/public_space_share.js?V2019.08.14"></script>');//公共空间评估--公共空间共享
+document.write('<script src="./js/beixinqiao/public_space_available_space.js?V2019.08.14"></script>');//公共空间评估--可利用空间资源
+document.write('<script src="./js/beixinqiao/material_cultural_heritage.js?V2019.08.14"></script>');//文化资源评估--物质文化遗产
+document.write('<script src="./js/beixinqiao/cultural_relic_protection.js?V2019.08.14"></script>');//文化资源评估--文物保护单位
+document.write('<script src="./js/beixinqiao/historical_building.js?V2019.08.14"></script>');//文化资源评估--历史建筑

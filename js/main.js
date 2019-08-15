@@ -89,10 +89,19 @@
 				start_greenbelt_rendering.init();
 	    		break;
 			case "public_space": //公共空间评估--公共空间共享
-				start_visitors_flow_rate_rendering.init();
+				start_public_space_share_rendering.init();
 	    		break;
 			case "available_space": //公共空间评估--可利用空间资源
-				start_visitors_flow_rate_rendering.init();
+				start_available_space_rendering.init();
+	    		break;
+			case "material_cultural_heritage": //文化资源评估--物质文化遗产
+				start_material_cultural_heritage_rendering.init();
+	    		break;
+			case "cultural_relic_protection": //文化资源评估--文物保护单位
+				start_cultural_relic_protection_rendering.init();
+	    		break;
+			case "historical_building": //文化资源评估--历史建筑
+				start_historical_building_rendering.init();
 	    		break;
         	default:
 				this.map();
