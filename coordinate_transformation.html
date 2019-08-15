@@ -88,19 +88,19 @@
         for(var i = 0; i < data.features.length; i++){
             var items = data.features[i];
             var new_lnglat = [];
-            if(items.geometry.type === "Polygon"){
-                for(var j = 0; j < items.geometry.coordinates[0].length; j++){
-                    var item_lnglat = items.geometry.coordinates[0][j];
+            // if(items.geometry.type === "Polygon"){
+                // for(var j = 0; j < items.geometry.coordinates[0].length; j++){
+                    var item_lnglat = items.geometry.coordinates;
                     new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
-                }
-            }else{
-                for(var j = 0; j < items.geometry.coordinates[0][0].length; j++){
-                    var item_lnglat = items.geometry.coordinates[0][0][j];
-                    new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
-                }
-            }
+                // }
+            // }else{
+            //     for(var j = 0; j < items.geometry.coordinates[0][0].length; j++){
+            //         var item_lnglat = items.geometry.coordinates[0][0][j];
+            //         new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
+            //     }
+            // }
             current_situation_land_data.push({
-                community_name:items.properties["ÉçÇøÃû³Æ"],
+                properties:items.properties,
                 lnglat: new_lnglat,
             })
         }
