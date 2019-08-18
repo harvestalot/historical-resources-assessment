@@ -1,4 +1,5 @@
 // 公共服务设施--概览
+var radarChart;
 function PublicServiceOverview() {
 	this.lenged_data = ["便民设施", "教育设施", "医疗设施", "养老设施", "文体设施", "交通设施", "街道管理设施"];
 	this.community_name = [];
@@ -30,7 +31,7 @@ PublicServiceOverview.prototype.init = function(){
 		for(var i = 0; i < ranking_list.length; i++){
 			var item = ranking_list[i];
 			_this.ranking_list.push(
-				{ type: item.CATEGORY_NAME, name: item["MIN(COMMUNITY_NAME)"], value: item.TOTAL_COVERAGE.toFixed(0) }
+				{ type: item.CATEGORY_NAME, name: item["MIN(COMMUNITY_NAME)"], value: item.TOTAL_COVERAGE.toFixed(2) }
 			);
 		}
 		_this.load_ranking_list(_this.ranking_list);
@@ -47,7 +48,7 @@ PublicServiceOverview.prototype.get_view_data = function(result_data){
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
-	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].TOTAL_COVERAGE;
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].TOTAL_COVERAGE.toFixed(2);
 	            }
 	        }
 	    }
@@ -190,7 +191,7 @@ PublicServiceOverview.prototype.load_chart = function(type){
 }
 //加载雷达图表数据
 PublicServiceOverview.prototype.load_radar_chart = function(type_name){
-	var radarChart = echarts.init(document.getElementById("public_service_radar_content"));
+	radarChart = echarts.init(document.getElementById("public_service_radar_content"));
 	var radar_option = {
 		color: echarts_color,
 	    "tooltip": {

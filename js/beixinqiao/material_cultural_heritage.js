@@ -9,7 +9,7 @@ MaterialCulturalHeritage.prototype.sidebar_polygonLayer = function(){
 	var _this = this;
 	sidebar_polygonLayer = new Loca.PolygonLayer({
         map: map,
-        // zIndex: 15,
+        zIndex: 20,
         fitView: true,
         // eventSupport:true,
     });
@@ -20,7 +20,7 @@ MaterialCulturalHeritage.prototype.sidebar_polygonLayer = function(){
     sidebar_polygonLayer.setOptions({
         style: {
             // opacity: 0.5,
-            color: "#FF7F7F",
+            color: "#F70707",
             height: function () {
                 return Math.random() * 500 + 100;
             }

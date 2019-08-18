@@ -8,7 +8,6 @@ html,body{
     height: 100%;
     box-sizing: border-box;
     background-color:#fff;
-    color: #fff;
     overflow-x: hidden;
 }
 /*清除浏览器默认样式�*/
@@ -65,7 +64,6 @@ a:hover {
 ins,
 a {
     text-decoration: none;
-    color: #fff;
 }
 /* 清除浮动 */
 

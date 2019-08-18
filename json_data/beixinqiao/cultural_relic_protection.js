@@ -1743,9 +1743,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|雍和宫#yhg.jpg"
 	},
-	"lnglat": [
-		[116.41734286147263, 39.9470604283568]
-	]
+	"lnglat":[116.41734286147263, 39.9470604283568]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000036",
@@ -1790,9 +1788,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|柏林寺#bls.jpg"
 	},
-	"lnglat": [
-		[116.4197811543406, 39.94621858959952]
-	]
+	"lnglat":[116.4197811543406, 39.94621858959952]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000047",
@@ -1837,9 +1833,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|北新仓#bxc1.jpg*#bxc2.jpg"
 	},
-	"lnglat": [
-		[116.43006871535177, 39.93851032026561]
-	]
+	"lnglat": [116.43006871535177, 39.93851032026561]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000074",
@@ -1884,9 +1878,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|前永康胡同7号#qykht7h.jpg"
 	},
-	"lnglat": [
-		[116.42111517875256, 39.94432547773762]
-	]
+	"lnglat": [116.42111517875256, 39.94432547773762]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000075",
@@ -1931,9 +1923,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|通教寺#tjs1.jpg*#tjs2.jpg*#tjs3.jpg"
 	},
-	"lnglat": [
-		[116.42633932596776, 39.94411801463367]
-	]
+	"lnglat": [116.42633932596776, 39.94411801463367]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000087",
@@ -1978,9 +1968,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|梁启超故居#lqcgj1.jpg*#lqcgj2.jpg*#lqcgj3.jpg*#lqcgj4.jpg"
 	},
-	"lnglat": [
-		[116.42357229735681, 39.93810497631157]
-	]
+	"lnglat": [116.42357229735681, 39.93810497631157]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000088",
@@ -2025,9 +2013,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|门楼当铺#mldp.jpg"
 	},
-	"lnglat": [
-		[116.42521760952945, 39.935959934107444]
-	]
+	"lnglat": [116.42521760952945, 39.935959934107444]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000089",
@@ -2072,9 +2058,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|慧照寺碑#hzssb.jpg"
 	},
-	"lnglat": [
-		[116.42467150443802, 39.93669690756529]
-	]
+	"lnglat": [116.42467150443802, 39.93669690756529]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000127",
@@ -2119,9 +2103,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|喇嘛庙祠堂#lmmct.jpg"
 	},
-	"lnglat": [
-		[116.41965696976463, 39.94833655819999]
-	]
+	"lnglat": [116.41965696976463, 39.94833655819999]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000141",
@@ -2166,9 +2148,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|广和成粮店旧址#ghcldjz.jpg"
 	},
-	"lnglat": [
-		[116.42261240467631, 39.93443724563741]
-	]
+	"lnglat": [116.42261240467631, 39.93443724563741]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000142",
@@ -2213,9 +2193,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|东四十一条93号#dssyt93h.jpg"
 	},
-	"lnglat": [
-		[116.41827239528818, 39.93452971349671]
-	]
+	"lnglat": [116.41827239528818, 39.93452971349671]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000143",
@@ -2260,9 +2238,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|东四十二条39号#dsset39h.jpg"
 	},
-	"lnglat": [
-		[116.41992378949814, 39.93529102464128]
-	]
+	"lnglat": [116.41992378949814, 39.93529102464128]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000145",
@@ -2307,9 +2283,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|永宁寺#yns.jpg"
 	},
-	"lnglat": [
-		[116.41827330307193, 39.93963094962655]
-	]
+	"lnglat": [116.41827330307193, 39.93963094962655]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000148",
@@ -2354,9 +2328,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|北新桥头条57号#bxqtt57h.jpg"
 	},
-	"lnglat": [
-		[116.41825206576183, 39.94206630005024]
-	]
+	"lnglat": [116.41825206576183, 39.94206630005024]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000177",
@@ -2401,9 +2373,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|东四十三条77号#dssst77h1.jpg*#dssst77h2.jpg"
 	},
-	"lnglat": [
-		[116.42058386957639, 39.936741985023446]
-	]
+	"lnglat": [116.42058386957639, 39.936741985023446]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000178",
@@ -2448,9 +2418,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|东四十三条79和81号#dssst79h1.jpg*#dssst79h2.jpg"
 	},
-	"lnglat": [
-		[116.42010956839131, 39.936743526943864]
-	]
+	"lnglat": [116.42010956839131, 39.936743526943864]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000253",
@@ -2495,9 +2463,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|东直门药王庙#dzmywm.jpg"
 	},
-	"lnglat": [
-		[116.42898752216328, 39.94126162704422]
-	]
+	"lnglat": [116.42898752216328, 39.94126162704422]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000249",
@@ -2542,9 +2508,7 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|理郡王府#ljwf1.jpg*#ljwf2.jpg"
 	},
-	"lnglat": [
-		[116.42516526349368, 39.94412023883953]
-	]
+	"lnglat": [116.42516526349368, 39.94412023883953]
 }, {
 	"properties": {
 		"OBJCODE": "1101010698000257",
@@ -2589,7 +2553,5 @@ const cultural_relic_protection_point_data = [{
 		"ËÄÖÁ·¶Î§": "",
 		"IMAGEURL": "照片|清炮局#qpj1.jpg*#qpj2.jpg"
 	},
-	"lnglat": [
-		[116.4222178169747, 39.946451160232456]
-	]
+	"lnglat": [116.4222178169747, 39.946451160232456]
 }]

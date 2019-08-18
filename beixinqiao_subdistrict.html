@@ -7,6 +7,20 @@
 	<title>北新桥街道监测评估</title>
 	<link rel="stylesheet" type="text/css" href="./css/base.css?V2019.08.14">
 	<link rel="stylesheet" type="text/css" href="./css/beixinqiao_subdistrict.css?V2019.08.14">
+	<style type="text/css">
+        #pio_point_list {
+            margin: 0;
+            padding: 0;
+            z-index: 999;
+            position: absolute;
+            background-color: white;
+            max-height: 100%;
+            overflow-y: auto;
+            top: 8%;
+            left: 15%;
+            width: 280px;
+        }
+	</style>
 </head>
 <body>
 	<section id="beixinqiao_subdistrict" class="w100 h100">
@@ -44,6 +58,7 @@
 	            </ul>
 	        	<div class="subNav subNavChild">街区活力监测</div>
 	            <ul class="navContent">
+                	<li><a href="javascript:void(0)" data_type="real_time_traffic">交通路况监测</a></li>
                 	<li><a href="javascript:void(0)" data_type="visitors_flow_rate">人流量监测</a></li>
 	            </ul>
 	        	<div class="subNav subNavChild">公共空间评估</div>
@@ -69,25 +84,25 @@
 	        			<h3>图层控制</h3>
 	        			<div id="map-features">
 	        				<div class="input-item">
-        						<input type='checkbox' name='mapStyle' value='land'>
+        						<input type='checkbox' name='mapStyle' value='land' class="toggle">
         						<span class="input-text">现状用地</span>
 	        				</div>
 	        				<div class="input-item">
-        						<input type='checkbox' name='mapStyle' value='boundary'>
+        						<input type='checkbox' name='mapStyle' value='boundary'  class="toggle" checked>
         						<span class="input-text">社区边界</span>
 	        				</div>
 	        				<div class="input-item">
-        						<input type='checkbox' name='mapStyle' value='real_time_traffic'>
+        						<input type='checkbox' name='mapStyle' value='road'  class="toggle">
         						<span class="input-text">路网</span>
 	        				</div>
 	        				<div class="input-item">
-        						<input type='checkbox' name='mapStyle' value='control_unit'>
+        						<input type='checkbox' name='mapStyle' value='control_unit'  class="toggle">
         						<span class="input-text">社区管控单元</span>
 	        				</div>
-	        				<div class="input-item">
-        						<input type='checkbox' name='mapStyle' value='road'>
-        						<span class="input-text">社区道路</span>
-	        				</div>
+	        				<!-- <div class="input-item">
+        						<input type='checkbox' name='mapStyle' value='real_time_traffic'>
+        						<span class="input-text">实时路况</span>
+	        				</div> -->
 	        			</div>
 	        		</div>
 	        		<div id = "visualization_echarts_content" class="w100 h100">
@@ -95,12 +110,22 @@
 	        		</div>
 	        		<!-- 数据可视化图表部分 -->
 	        	</div>
+	        	<!-- //图例部分 -->
+	        	<div id="map_legend" class="legend_content"></div>
 	        </section>
 		</section>
 	</section>
 	<!-- 遮罩层 -->
-	<section id="shade_modal" class="shade_modal">
-	</section>
+	<section id="shade_modal" class="shade_modal"></section>
+	<!-- PIO点列表 -->
+	<div id="pio_point_list"></div>
+	<!-- 人流量监测年份切换 -->
+	<div id="year_switcher" class="clearfix year_switcher">
+        <a href="javascript:void(0)" class="checked_active" data_year="2016">2016年</a>
+        <a href="javascript:void(0)" data_year="2017">2017年</a>
+        <a href="javascript:void(0)" data_year="2018">2018年</a>
+        <!-- <a href="javascript:void(0)" data_year="traffic">交通路况</a> -->
+    </div>
 	<section id="data"></section>
     <!-- 公共库、方法引入 -->
 	<script src="./js/base.js?V2019.08.14"></script>
@@ -129,6 +154,21 @@
 		    	<div><img src="{{value}}" alt=""></div>
 		    {{/each}}
 		</div>
+	</div>
+</script>
+<!-- 地图图例 -->
+<script id="map_legend_tmp" type="text/html">
+	<div class="clearfix">
+	    {{each list as item i}}
+	    	<div class="fl legend_item">
+	    		<span style="background-color: {{item.legend_color}}"></span>
+        		{{if item.name.length>4}}
+	    		<span title="{{item.name}}">{{item.name.slice(0,4)}}...</span>
+        		{{else}}
+	    		<span title="{{item.name}}">{{item.name}}</span>
+        		{{/if}}
+	    	</div>
+	    {{/each}}
 	</div>
 </script>
 

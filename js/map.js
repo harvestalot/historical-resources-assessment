@@ -1,3 +1,11 @@
+
+var streetLayer;
+var streetCommunityLayer;
+var streetCommunityAreaLayer;
+var streetControlUnitLayer;
+var streetCurrentSituationLandLayer;
+var streetRoadLandLayer;
+var layerLabels;
 function load_map(mapId){
     map.on('mapload', function () {
         map.getMap().plugin(['AMap.ControlBar'], function () {
@@ -5,74 +13,92 @@ function load_map(mapId){
             map.getMap().addControl(controlBar);
         });
     });
-    //实时路况图层
-    var trafficLayer = new AMap.TileLayer.Traffic({
-        zIndex: 11
-    });
+    // //实时路况图层
+    // trafficLayer = new AMap.TileLayer.Traffic({
+    //     zIndex: 11
+    // });
     //街道区域边界图层
-    var streetLayer = new Loca.PolygonLayer({
+    streetLayer = new Loca.PolygonLayer({
         map: map,
         zIndex: 12,
         // fitView: true,
         eventSupport:false,
     });
-    //加载街道范围边界图层
-    street_boundary(map,streetLayer);
-
     //街道各个社区边界图层
-    var streetCommunityLayer = new Loca.PolygonLayer({
+    streetCommunityLayer = new Loca.LineLayer({
         map: map,
         zIndex: 13,
         fitView: true,
         eventSupport:true,
     });
+    //街道各个社区区域面图层
+    streetCommunityAreaLayer = new Loca.PolygonLayer({
+        map: map,
+        zIndex: 14,
+        fitView: true,
+        eventSupport:true,
+    });
     //街道管控单元边界图层
-    var streetControlUnitLayer = new Loca.PolygonLayer({
+    streetControlUnitLayer = new Loca.PolygonLayer({
         map: map,
         zIndex: 14,
         fitView: true,
         eventSupport:true,
     });
     //街道现状用地图层
-    var streetCurrentSituationLandLayer = new Loca.PolygonLayer({
+    streetCurrentSituationLandLayer = new Loca.PolygonLayer({
         map: map,
         zIndex: 15,
         fitView: true,
         eventSupport:true,
     });
     //街道道路图层
-    var streetRoadLandLayer = new Loca.LineLayer({
+    streetRoadLandLayer = new Loca.LineLayer({
         map: map,
         zIndex: 16,
         fitView: true,
         eventSupport:true,
     });
+    //社区名字文字图层
+    layerLabels = new Loca.LabelsLayer({
+        fitView: true,
+        map: map,
+        collision: true
+    });
 
+    //默认加载街道范围边界、社区边界图层
+    street_boundary(map,streetLayer);
+    street_community_boundary(map,streetCommunityLayer,streetCommunityAreaLayer,layerLabels);
 
     $("#map-features input").each(function(i){
         $(this).click(function(){
             if(this.checked){
                 if($(this).val() === "boundary"){
-                    street_community_boundary(map,streetCommunityLayer);
+                    street_community_boundary(map, streetCommunityLayer,streetCommunityAreaLayer, layerLabels);
                 }else if($(this).val() === "real_time_traffic"){
-                    trafficLayer.setMap(map);
-                    trafficLayer.show();
+                    // trafficLayer.setMap(map);
+                    // trafficLayer.show();
                 }else if($(this).val() === "land"){
                     street_current_situation_land(map,streetCurrentSituationLandLayer)
+                    map_legend(current_land_legend_data);
                 }else if($(this).val() === "control_unit"){
-                    street_control_unit_boundary (map,streetControlUnitLayer)
+                    street_control_unit_boundary (map,streetControlUnitLayer,layerLabels)
                 }else if($(this).val() === "road"){
                     street_road (map,streetRoadLandLayer)
                 }
             }else{
                 if($(this).val() === "boundary"){
                     streetCommunityLayer.hide();
+                    streetCommunityAreaLayer.hide();
+                    layerLabels.hide();
                 }else if($(this).val() === "real_time_traffic"){
-                    trafficLayer.hide();
+                    // trafficLayer.hide();
                 }else if($(this).val() === "land"){
                     streetCurrentSituationLandLayer.hide()
+                    $("#map_legend").fadeOut(300);
                 }else if($(this).val() === "control_unit"){
                     streetControlUnitLayer.hide();
+                    layerLabels.hide();
                 }else if($(this).val() === "road"){
                     streetRoadLandLayer.hide();
                 }
@@ -121,22 +147,60 @@ function street_boundary (map,layer){
     }); 
 }
 // 街道各个社区边界图层
-function street_community_boundary (map,layer){
-    var colors = ['#13EFDC', '#73D9E3', '#0FF5E1', '#C7EEE3'];
+function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLabels){//
+    var colors = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#DE61FA",
+        "#3A8281","#00FF59","#EA376F","#BFEA37","#EAB437","#EA6F37","#37EA37"];
     $.get('https://a.amap.com/Loca/static/mock/bj_district_wkt.json', function (data) {
-        layer.on('click', function (ev) {
-            // 事件类型
-            var type = ev.type;
-            // 当前元素的原始数据
-            var rawData = ev.rawData;
-            // 原始鼠标事件
-            var originalEvent = ev.originalEvent;
-
-            openInfoWin(map, originalEvent, {
-                '名称': rawData.name+"社区",
-                // '位置': rawData.center
-            });
-        });
+        var datas = [
+            {
+                name:"北宫厅",
+                lnglat:[116.426256, 39.949192]
+            },
+            {
+                name:"民安",
+                lnglat:[116.428959, 39.944617]
+            },
+            {
+                name:"北新仓",
+                lnglat:[116.428552, 39.939576]
+            },
+            {
+                name:"海运仓",
+                lnglat:[116.427655, 39.935208]
+            },
+            {
+                name:"青龙",
+                lnglat:[116.423004, 39.947672]
+            },
+            {
+                name:"藏经馆",
+                lnglat:[116.417152, 39.94789]
+            },
+            {
+                name:"前永康",
+                lnglat:[116.417825, 39.943566]
+            },
+            {
+                name:"九道湾",
+                lnglat:[116.417643, 39.940019]
+            },
+            {
+                name:"草园",
+                lnglat:[116.418024, 39.941818]
+            },
+            {
+                name:"门楼",
+                lnglat:[116.419486, 39.935441]
+            },
+            {
+                name:"十三条",
+                lnglat:[116.419456, 39.93689]
+            },
+            {
+                name:"小菊",
+                lnglat:[116.4234, 39.940235]
+            },
+        ] 
         layer.setData(beixinqiao_community_data, {
             lnglat: 'coordinates'
         });
@@ -148,35 +212,96 @@ function street_community_boundary (map,layer){
                     return Math.random() * 20000;
                 },
                 opacity: 0.8,
-                color: function () {
-                    return colors[idx++ % colors.length];
-                }
+                color:"#044608",
+                // color: function () {
+                //     return colors[idx++];
+                // }
             },
             selectStyle:{
-                color:"#3ba0f3",
+                color:"#3A8281",
             }
         });
         layer.render();
-        layer.show()
+        layer.show();
+        //社区区域面图层
+        streetCommunityAreaLayer.setData(beixinqiao_community_data, {
+            lnglat: 'coordinates'
+        });
+        streetCommunityAreaLayer.setOptions({
+            style: {
+                opacity: 0,
+                color:"#3ba0f3",
+            },
+            selectStyle:{
+                opacity: 1,
+                color:"#00FFFF",
+            }
+        });
+        streetCommunityAreaLayer.render();
+        streetCommunityAreaLayer.show();
+        streetCommunityAreaLayer.on('click', function (ev) {
+            // console.log(ev)
+            // console.log(population_bar_chart)
+            // console.log(radarChart.getOption().radar)
+            if(population_bar_chart){
+                var population_bar_yAxis_data = population_bar_chart.getOption().yAxis[0].data;
+                var dataIndex = 0;
+                for(var i = 0; i < population_bar_yAxis_data.length; i++){
+                    population_bar_yAxis_data[i] === ev.rawData.name? (dataIndex = i):"";
+                }
+                population_bar_chart.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex:0,
+                    dataIndex: dataIndex
+                }); 
+            }
+        });
+        //添加文字标记图层
+        layerLabels.setData(datas, {
+            lnglat: 'lnglat'
+        }).setOptions({
+            style: {
+                direction: 'center',
+                offset: [0, 0],
+                text: function (item) {
+                    return item.value.name;
+                },
+                fillColor: "#F319A0",
+                fontSize: 18,
+                strokeWidth: 0
+            }
+        }).render();
+        layerLabels.setzIndex(100);
+        layerLabels.show();
+        
     }); 
 }
 // 街道管控单元边界图层
-function street_control_unit_boundary (map,layer){
-    var colors = ['#13EFDC', '#73D9E3', '#0FF5E1', '#C7EEE3'];
+function street_control_unit_boundary (map,layer,layerLabels){
+    var colors = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#DE61FA"];
     $.get('https://a.amap.com/Loca/static/mock/bj_district_wkt.json', function (data) {
-        layer.on('click', function (ev) {
-            // 事件类型
-            var type = ev.type;
-            // 当前元素的原始数据
-            var rawData = ev.rawData;
-            // 原始鼠标事件
-            var originalEvent = ev.originalEvent;
-
-            openInfoWin(map, originalEvent, {
-                '名称': rawData.name+"社区",
-                // '位置': rawData.center
-            });
-        });
+        var datas = [
+            {
+                name:"簋街单元",
+                lnglat:[116.419431, 39.941022]
+            },
+            {
+                name:"雍和宫单元",
+                lnglat:[116.421246, 39.945955]
+            },
+            {
+                name:"民安单元",
+                lnglat:[116.427701, 39.944497]
+            },
+            {
+                name:"北新仓单元",
+                lnglat:[116.428552, 39.939576]
+            },
+            {
+                name:"新太仓单元",
+                lnglat:[116.418891, 39.937131]
+            },
+        ] 
         layer.setData(control_unit_data, {
             lnglat: 'coordinates'
         });
@@ -189,7 +314,7 @@ function street_control_unit_boundary (map,layer){
                 },
                 opacity: 0.8,
                 color: function () {
-                    return colors[idx++ % colors.length];
+                    return colors[idx++];
                 }
             },
             selectStyle:{
@@ -198,12 +323,30 @@ function street_control_unit_boundary (map,layer){
         });
         layer.render();
         layer.show()
+        //添加文字标记图层
+        layerLabels.setData(datas, {
+            lnglat: 'lnglat'
+        }).setOptions({
+            style: {
+                direction: 'center',
+                offset: [0, 0],
+                text: function (item) {
+                    return item.value.name;
+                },
+                fillColor: "#1a9850",
+                fontSize: 18,
+                strokeWidth: 0
+            }
+        }).render();
+        layerLabels.setzIndex(100);
+        layerLabels.show();
     }); 
 }
 //街道现状用地图层
 function street_current_situation_land(map,layer){
     var colors = ["#A900E6", "#FF0000", "#0084A8", "#FFFF00", "#730000", "#9C9C9C","#FFAA00", 
-        "#FF73DF", "#FF7F7F", "#004C73", '#00FFFF', "#00A884", "#4E4E4E", "#005CE6", "#73DFFF","#4C0073", "#fff"];
+        "#FF73DF", "#FF7F7F", "#004C73", '#00FFFF', "#00A884", "#4E4E4E", "#005CE6", "#73DFFF",
+        "#4C0073", "#fff"];
     layer.setData(current_situation_land_data, {
         lnglat: 'lnglat'
     });

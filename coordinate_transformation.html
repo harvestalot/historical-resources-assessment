@@ -89,10 +89,10 @@
             var items = data.features[i];
             var new_lnglat = [];
             // if(items.geometry.type === "Polygon"){
-                // for(var j = 0; j < items.geometry.coordinates[0].length; j++){
-                    var item_lnglat = items.geometry.coordinates;
+                for(var j = 0; j < items.geometry.coordinates[0].length; j++){
+                    var item_lnglat = items.geometry.coordinates[0][j];
                     new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
-                // }
+                }
             // }else{
             //     for(var j = 0; j < items.geometry.coordinates[0][0].length; j++){
             //         var item_lnglat = items.geometry.coordinates[0][0][j];

@@ -34,12 +34,12 @@ PublicServiceConveniencePeople.prototype.get_view_data = function(result_data){
 	        this.community_name.push(key);
 	        this.radar_chart_indicator_data.push({
 	            name: key,
-	            max:4000,
+	            max:100,
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
 	            	// this.lenged_data.indexOf(result_data[i][key][j].CATEGORY_NAME) === -1? this.lenged_data.push(result_data[i][key][j].CATEGORY_NAME):"";
-	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE;
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE.toFixed(2);
 	            }
 	        }
 	    }

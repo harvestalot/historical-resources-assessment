@@ -21,6 +21,7 @@
 	display: table-cell;
 	text-align: center;
 	font-size: 28px;
+	color: #fff;
 }
 .nav{
 	display: table;
@@ -33,6 +34,7 @@
 	padding: 0 30px;
 	vertical-align: middle;
 	font-size: 18px;
+	color: #fff;
 }
 .nav a:hover{
 	color: #3A8281;
@@ -141,8 +143,30 @@
 	left: -150px;
 	top: 0;
 	width: 150px;
-	height: 300px;
+	padding: 15px 15px;
 	background-color: rgba(0,0,0,.5);
+	color: #fff;
+}
+.coverage_control h3{
+	font-size: 16px;
+	margin-bottom: 15px;
+	color: #00FFFF;
+}
+.toggle{
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    appearance: none;/*关键代码*/
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+.toggle::after{
+   content: url('../images/beixinqiao/no_checked.png');
+}
+
+.toggle:checked::after{
+    content: url('../images/beixinqiao/checked.png');
 }
 /*遮罩层*/
 .shade_modal{
@@ -162,6 +186,7 @@
 .verbal_content{
 	line-height: 30px;
 	margin-top: 20px;
+	color: #fff;
 }
 .shade_item .img{
 	display: block;
@@ -176,6 +201,7 @@
 	font-size: 30px;
 	text-align: center;
 	cursor: pointer;
+	color: #fff;
 }
 .history_tab span.active_history_tab{
 	background-color: #00FFFF;
@@ -311,6 +337,7 @@
 	border-radius: 20px;
 	font-size: 12px;
 	text-align: center;
+	color: #fff;
 }
 .statistics_type a.active_checked{
 	background-color: #00FFFF;
@@ -363,10 +390,18 @@
 	font-size: 20px;
 	color: #fff;
 }
-
+/*人流量监测年份切换*/
+.year_switcher{
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	width: 400px;
+	background-color:rgba(0,0,0,.0);
+	display: none;
+}
 .year_switcher a{
 	float: left;
-	width: 25%;
+	width: 20%;
 	height:36px;
 	line-height: 36px;
 	margin: 10px 10px;
@@ -374,6 +409,7 @@
 	font-size: 14px;
 	background-color: #3A8281;
 	border-radius: 18px;
+	color: #fff;
 }
 .year_switcher a.checked_active{
 	background-color: #00FCFF;
@@ -384,4 +420,29 @@
 	margin-left: 5px;
 	margin-right: 5px;
 	color: #000;
+}
+/*地图图例*/
+.legend_content{
+	position: fixed;
+	left: 15%;
+	bottom: 0;
+	width: 260px;
+	padding: 10px 10px;
+	box-sizing: border-box;
+	background-color:rgba(0,0,0,.4);
+	display: none;
+}
+.legend_item{
+	width: 50%;
+}
+.legend_item span{
+	display: inline-block;
+	line-height: 30px;
+	color:#fff;
+}
+.legend_item span:nth-child(1){
+	width: 12px;
+	height: 12px;
+	margin-right: 10px;
+	border-radius: 12px;
 }

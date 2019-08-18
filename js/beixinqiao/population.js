@@ -1,12 +1,9 @@
 //人口
+var population_bar_chart;
 function population(){
 	const population_statistics_dom_str = '<div class="chart_view clearfix" style="width: 100%; height: 70%; ">'+
 		'<div id="population_statistics_content" class="fl" style="width: 70%; height: 100%;"></div>'+
 		'<div id="population_graphic_content" class="fl" style="width: 30%; height: 100%;padding:50px 0;box-sizing: border-box;">'+
-		// '<div id="population_graphic_content_1" style="width: 100%; height: 8.3%;"></div>'+
-		// '<div id="population_graphic_content_2" style="width: 100%; height: 8.3%;"></div>'+
-		// '<div id="population_graphic_content_3" style="width: 100%; height: 8.3%;"></div>'+
-		// '<div id="population_graphic_content_4" style="width: 100%; height: 8.3%;"></div>'+
 		'</div>'+
 		'</div>';
 	const population_size_dom_str = '<div class="chart_view" style="width: 100%; height: 30%;">'+
@@ -40,7 +37,7 @@ function population(){
 
 //各区人口统计情况
 function load_population_statistics(eleId, population_data){
-	var barChart = echarts.init(document.getElementById(eleId));
+	population_bar_chart = echarts.init(document.getElementById(eleId));
 	var seriesLabel = {
 	    normal: {
 	        show: true,
@@ -108,7 +105,7 @@ function load_population_statistics(eleId, population_data){
 		bar_option.series[1].data.push(item.RESIDENT); 
 		bar_option.series[2].data.push(item.FLOATING); 
 	}
-    barChart.setOption(bar_option, true);
+    population_bar_chart.setOption(bar_option, true);
 };
 //各区人口统计情况(特殊图形展示)
 function load_graphic_statistics(eleId, male, female, total){

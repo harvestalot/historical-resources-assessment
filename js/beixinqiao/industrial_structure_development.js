@@ -1,33 +1,59 @@
 // 产业结构--产业发展
 function IndustrialDevelopmentConcentration() {
-	this.provide_data = [
-		{ name: "民安", A: 85, B: 68 },
-		{ name: "民安1", A: 90, B: 88 },
-		{ name: "民安2", A: 70, B: 78 },
-		{ name: "民安3", A: 35, B: 50 },
-		{ name: "民安4", A: 55, B: 28 },
-		{ name: "民安5", A: 78, B: 98 },
-		{ name: "民安6", A: 30, B: 50 },
-		{ name: "民安7", A: 80, B: 40 },
-	];
+	this.round_point_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59",
+		"#DE61FA","#3A8281","#F51B04","#630B7C","#C2B6F2","#05534F","#055317","#51C46C",
+		"#BFDC3F","#C88A78","#F702A4"];
+	this.community_name = [];
+	this.pie_chart_data = [];
 	this.radar_chart_indicator_data = [];
+	this.series_data = [0,0,0,0,0,0,0,0,0,0,0,0];
+	this.current_enterprise_type = "";
 
 }
 IndustrialDevelopmentConcentration.prototype.init = function(){
 	var _this = this;
 	_this.reset_data();
 	_this.load_dom();
-	serveRequest("get", server_url+ "/FacilityEducation/getFacilityEducation",{},function(result){
-		for(var i = 0; i < _this.provide_data.length; i++){
-			var item = _this.provide_data[i];
-			_this.radar_chart_indicator_data.push({
-				name: item.name,
-				max: 100,
+	_this.render_point_layer();
+	serveRequest("get", server_url+ "/Enterprise/getNumberByType",{},function(result){
+		var data = result.data.resultKey;
+		for(var i = 0; i < data.length; i++){
+			var item = data[i];
+			_this.pie_chart_data.push({
+				name: item.TYPE,
+				value: item.TOTAL_NYUMBER,
 			});
 		}
+		_this.current_enterprise_type = _this.pie_chart_data[0].name;
 		_this.load_pie_chart();
-		_this.load_radar_chart([80, 50, 55, 80, 50, 80, 48, 43]);
+	    _this.get_community_enterprise();
 	});
+}
+//分类拆分数据
+IndustrialDevelopmentConcentration.prototype.get_view_data = function(result_data){
+	var new_data = [];
+	for(var key in result_data){
+		new_data.push({
+			[key]:result_data[key]
+		})
+	}
+	for(var i = 0; i < new_data.length; i++){
+	    for(var key in new_data[i]){
+	        this.community_name.push(key);
+			this.radar_chart_indicator_data.push({
+				name: key,
+				max:60,
+			});
+	        if(new_data[i][key].length > 0){
+	            for(var j = 0; j < new_data[i][key].length; j++){
+	            	if(new_data[i][key][j].COMMUNITY_NAME === key){
+						this.series_data[i] = new_data[i][key][j].TOTAL_NUMBER;
+						break;
+	            	}
+	            }
+	        }
+	    }
+	}
 }
 //生产dom元素
 IndustrialDevelopmentConcentration.prototype.load_dom = function(){
@@ -35,25 +61,91 @@ IndustrialDevelopmentConcentration.prototype.load_dom = function(){
 		'<div id="industrial_development_radar_content" style="width: 100%; height:50%;"></div>';
 	$("#visualization_echarts_content").append(industrial_structure_dom_str);
 };
+//添加产业发展点标识图层
+IndustrialDevelopmentConcentration.prototype.render_point_layer = function(){
+	var round_point_color = this.round_point_color;
+	round_point_layer = new Loca.RoundPointLayer({
+	    map: map,
+	    zIndex: 100,
+        eventSupport:true,
+	});
+    round_point_layer.setData(industrial_structure_development_data, {
+        lnglat: 'lnglat'
+    });
+    round_point_layer.setOptions({
+        style: {
+            radius: 6,
+            color: function (data) {
+            	// console.log(data.value.properties)
+                var type = data.value.properties["ÀàÐÍ"];
+                var color = round_point_color[0];
+                switch (type){
+                	case "L 租赁和商务服务业" :
+                		color = round_point_color[0];
+                		break;
+                	case "C 制造业" :
+                		color = round_point_color[1];
+                		break;
+                	case "↵S 公共管理、社会保障和社会组织" :
+                		color = round_point_color[2];
+                		break;
+                	case "R 文化、体育和娱乐业" :
+                		color = round_point_color[3];
+                		break;
+                	case "J 金融业" :
+                		color = round_point_color[4];
+                		break;
+                	case "Q 卫生和社会工作" :
+                		color = round_point_color[5];
+                		break;
+                	case "P 教育" :
+                		color = round_point_color[6];
+                		break;
+                	case "O 居民服务、修理和其他服务业" :
+                		color = round_point_color[7];
+                		break;
+                	case "M 科学研究和技术服务业" :
+                		color = round_point_color[8];
+                		break;
+                	case "N 水利、环境和公共设施管理业" :
+                		color = round_point_color[10];
+                		break;
+                	case "G 交通运输、仓储和邮政业 " :
+                		color = round_point_color[11];
+                		break;
+                	case "I 信息传输、软件和信息技术服务业" :
+                		color = round_point_color[12];
+                		break;
+                	case "E 建筑业" :
+                		color = round_point_color[13];
+                		break;
+                	case "S 公共管理、社会保障和社会组织" :
+                		color = round_point_color[14];
+                		break;
+                	case "H 住宿和餐饮业" :
+                		color = round_point_color[15];
+                		break;
+                }
+                return color;
+            },
+            // opacity: 0.6,
+            borderWidth: 0,
+            // borderColor: '#eee'
+        }
+    });
+    round_point_layer.render();
+    round_point_layer.on('click', function (ev) {
+        var properties = ev.rawData.properties;
+        //渲染信息窗体
+        openInfo(properties["ÀàÐÍ"].split(" ")[1], properties["µ¥Î»µØÖ·"], ev.lnglat);
+    });
+}
 //加载饼状圆环图表
 IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	var _this = this;
 	var pieChart = echarts.init(document.getElementById("industrial_development_pie_content"));
-	var m2R2Data= [
-       {value:335, legendname:'种类01',name:"种类01  335",itemStyle:{color:"#8d7fec"}},
-       {value:310, legendname:'种类02',name:"种类02  310",itemStyle:{color:"#5085f2"}},
-       {value:234, legendname:'种类03',name:"种类03  234",itemStyle:{color:"#e75fc3"}},
-       {value:154, legendname:'种类04',name:"种类04  154",itemStyle:{color:"#f87be2"}},
-       {value:335, legendname:'种类05',name:"种类05  335",itemStyle:{color:"#f2719a"}},
-       {value:335, legendname:'种类06',name:"种类06  335",itemStyle:{color:"#fca4bb"}},
-       {value:335, legendname:'种类07',name:"种类07  335",itemStyle:{color:"#f59a8f"}},
-       {value:335, legendname:'种类08',name:"种类08  335",itemStyle:{color:"#fdb301"}},
-       {value:335, legendname:'种类09',name:"种类09  335",itemStyle:{color:"#57e7ec"}},
-       {value:335, legendname:'种类10',name:"种类10  335",itemStyle:{color:"#cf9ef1"}},   
-       {value:335, legendname:'种类09',name:"种类11  335",itemStyle:{color:"#57e7ec"}},
-       {value:335, legendname:'种类10',name:"种类12  335",itemStyle:{color:"#cf9ef1"}}, 
-    ];
 	var pie_option =  {
+		color:this.round_point_color,
 	    title: [
 	    {
 	        text: '街道各类企业占比数',
@@ -83,7 +175,7 @@ IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	        trigger: 'item',
 	        formatter:function (parms){
 	          var str=  parms.seriesName+"</br>"+
-	            parms.marker+""+parms.data.legendname+"</br>"+
+	            parms.marker+""+parms.data.name+"</br>"+
 	            "数量："+ parms.data.value+"</br>"+
 	            "占比："+ parms.percent+"%";
 	            return  str ;
@@ -98,7 +190,10 @@ IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	        textStyle: {
 	            color:'#8C8C8C'
 	        },
-	        height:200
+	        height:200,
+			formatter: function (name) {
+			    return name.split(" ")[1].slice(0, 3)+"...";
+			}
 	    },
 	    series: [
 	        {
@@ -113,32 +208,65 @@ IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	                    show: true,
 	                    position: 'outter',
 	                     formatter:function (parms){
-	                         return parms.data.legendname
+	                         return parms.data.name.split(" ")[1].slice(0, 3)+"..."
 	                     }
 	                }
 	            },
 	            labelLine: {
 	                normal: {
+	                  show: true,
 	                  length:5,
 	                  length2:3,
 	                  smooth:true,
 	                }
 	            },
-	            data:m2R2Data
+	            data:this.pie_chart_data
 	        }
 	    ]
 	};
     pieChart.setOption(pie_option, true);
+    pieChart.dispatchAction({
+        type: 'pieSelect',
+        seriesIndex:0,
+        dataIndex:0
+    }); 
+    pieChart.dispatchAction({
+        type: 'showTip',
+        seriesIndex:0,
+        dataIndex:0
+    }); 
     pieChart.on("click",function(event){
-    	console.log(event)
-    	_this.load_radar_chart([60, 78, 60, 40, 42, 44, 65,80]);
+	    pieChart.dispatchAction({
+	        type: 'pieUnSelect',
+	        seriesIndex:0,
+	        dataIndex:0
+	    }); 
+	    pieChart.dispatchAction({
+	        type: 'hideTip',
+	        seriesIndex:0,
+	        dataIndex:0
+	    }); 
+		_this.community_name = [];
+		_this.radar_chart_indicator_data = [];
+		_this.series_data = [0,0,0,0,0,0,0,0,0,0,0,0];
+	    _this.current_enterprise_type = event.name;
+	    _this.get_community_enterprise();
     })
 }
+//根据点击的企业类型获取各社区的数量
+IndustrialDevelopmentConcentration.prototype.get_community_enterprise = function(){
+	var _this = this;
+	serveRequest("get", server_url+ "/Enterprise/getCommunityNumberByType",
+		{ type: _this.current_enterprise_type },function(result){
+		_this.get_view_data(result.data.resultKey);
+		_this.load_radar_chart();
+	});
+}
 //加载设施覆盖率雷达图图表数据
-IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(series_data){
+IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("industrial_development_radar_content"));
 	var radar_option = {
-		color:["#4748FF", "#D18930"],
+	    color: echarts_color,
 		title:{
 			text:"各社区中对应该类型的企业占比图",
 			left:'5%',
@@ -147,16 +275,6 @@ IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(series_
 				fontSize: 18
 			}
 		},
-	    // legend: {
-	    //     show: true,
-	    //     right:"10%",
-	    //     bottom:"1%",
-	    //     textStyle: {
-	    //         "fontSize": 14,
-	    //         "color": "#fff"
-	    //     },
-	    //     "data": ["数据1", "数据2"]
-	    // },
 	    tooltip: {
 	        show: true,
 	        trigger: "item"
@@ -193,35 +311,22 @@ IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(series_
 	        },
 	        indicator: this.radar_chart_indicator_data
 	    },
-	    "series": [{
-	        // "name": "数据1",
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 10,
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(245, 166, 35, 0.4)"
-	            }
-	        },
-	        itemStyle:{
-	            color:'rgba(245, 166, 35, 1)',
-	            borderColor:'rgba(245, 166, 35, 0.3)',
-	            borderWidth:10,
-	        },
-	        "lineStyle": {
-	            "normal": {
-	                "type": "dashed",
-	                "color": "rgba(245, 166, 35, 1)",
-	                "width": 2
-	            }
-	        },
-	        "data": [series_data]
-	    }]
+	    "series": [
+	    	{...rader_color[0], ...{
+		        "name": this.current_enterprise_type,
+		        "data": [
+					this.series_data
+		        ]
+		    }}]
 	};
     radarChart.setOption(radar_option, true);
 }
 //重置数据
 IndustrialDevelopmentConcentration.prototype.reset_data = function(){
+	this.community_name = [];
+	this.pie_chart_data = [];
 	this.radar_chart_indicator_data = [];
+	this.series_data = [0,0,0,0,0,0,0,0,0,0,0,0];
+	this.current_enterprise_type = "";
 }
 var start_industry_development_rendering = new IndustrialDevelopmentConcentration();

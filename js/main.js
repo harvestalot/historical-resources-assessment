@@ -45,8 +45,14 @@
 	}
 	//根据导航触发加载对应模块数据
 	VisualScreen.prototype.init_module = function(current_type){
+		$("#year_switcher").hide();
+		$("#pio_point_list").fadeOut(300);
+		this.reset_main_layer();
 		this.current_type = current_type;
 		this.reset();
+		this.default_community_layer();
+		map.clearMap();
+		// map.setZoomAndCenter(15,[116.433969, 39.94105]);
 		switch (this.current_type) {
 			case "population": //人口信息
 	    		population();
@@ -76,32 +82,56 @@
 				start_street_management_rendering.init();
 	    		break;
 			case "industry_concentration": //产业结构--产业聚集度
+				this.reset_community_layer();
 				start_industry_concentration_rendering.init();
+				$("#pio_point_list").fadeIn(300);
 	    		break;
 			case "industry_development": //产业结构--产业发展
+				this.reset_community_layer();
 				start_industry_development_rendering.init();
+                map_legend(industry_legend_data);
+	    		break;
+			case "real_time_traffic": //截取活力监测--实时交通路况监测
+				this.reset_community_layer();
+				start_real_time_traffic_rendering.init();
+				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "visitors_flow_rate": //截取活力监测--人流量监测
+				this.reset_community_layer();
+				$("#year_switcher").show();
 				start_visitors_flow_rate_rendering.init();
 				map.setZoomAndCenter(13,[116.397737, 39.907573]);
+				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "greenbelt": //公共空间评估--绿地资源
+				this.reset_community_layer();
 				start_greenbelt_rendering.init();
+				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "public_space": //公共空间评估--公共空间共享
+				this.reset_community_layer();
 				start_public_space_share_rendering.init();
+				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "available_space": //公共空间评估--可利用空间资源
+				this.reset_community_layer();
 				start_available_space_rendering.init();
+				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "material_cultural_heritage": //文化资源评估--物质文化遗产
+				this.reset_community_layer();
 				start_material_cultural_heritage_rendering.init();
+				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "cultural_relic_protection": //文化资源评估--文物保护单位
+				this.reset_community_layer();
 				start_cultural_relic_protection_rendering.init();
+				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "historical_building": //文化资源评估--历史建筑
+				this.reset_community_layer();
 				start_historical_building_rendering.init();
+				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
         	default:
 				this.map();
@@ -110,11 +140,49 @@
 	//重置
 	VisualScreen.prototype.reset = function(){
 		$("#visualization_echarts_content").html("");
+		trafficLayer?map.remove(trafficLayer):"";//清除实时路况图层
 		point_layer? map.remove(point_layer):"";//清除icon点图层
 		heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
 		reachabilityLayer? map.remove(reachabilityLayer):"";//清除可达性覆盖范围图层
 		infoWindow? map.remove(infoWindow):"";//清除信息窗体
+		round_point_layer? map.remove(round_point_layer):"";//清除圆点图层v
+		line_layer? map.remove(line_layer):"";//清除线图层
+		sidebar_polygonLayer? map.remove(sidebar_polygonLayer):"";//清除区域面图层
 		map.setZoomAndCenter(15,[116.425768,39.940966]);
+	}
+	//重置地图主图层
+	VisualScreen.prototype.reset_main_layer = function(){
+
+	    $("#map-features input").each(function(i){
+			$(this).val() !== "boundary"? $(this).prop("checked",false):"";
+	    })
+        // streetCommunityLayer.hide();
+        // streetCommunityAreaLayer.hide();
+        // layerLabels.hide();
+        $("#map_legend").fadeOut(300);
+        trafficLayer? trafficLayer.hide():"";
+        streetCurrentSituationLandLayer? streetCurrentSituationLandLayer.hide():"",
+        streetControlUnitLayer? streetControlUnitLayer.hide():"";
+        layerLabels?layerLabels.hide():"";
+        streetRoadLandLayer?streetRoadLandLayer.hide():"";
+	}
+	//重置社区边界、社区区域面、社区名字图层
+	VisualScreen.prototype.reset_community_layer = function(){
+	    $("#map-features input").each(function(i){
+			$(this).val() === "boundary"? $(this).prop("checked",false):"";
+	    })
+        streetCommunityLayer?streetCommunityLayer.hide():"";
+        streetCommunityAreaLayer?streetCommunityAreaLayer.hide():"";
+        layerLabels?layerLabels.hide():"";
+	}
+	//默认选中社区边界、社区区域面、社区名字图层
+	VisualScreen.prototype.default_community_layer = function(){
+	    $("#map-features input").each(function(i){
+			$(this).val() === "boundary"? $(this).prop("checked",true):"";
+	    })
+        streetCommunityLayer?streetCommunityLayer.show():"";
+        streetCommunityAreaLayer?streetCommunityAreaLayer.show():"";
+        layerLabels?layerLabels.show():"";
 	}
 	//初始化
 	var	start_init = new VisualScreen();
