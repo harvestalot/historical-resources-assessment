@@ -42,11 +42,11 @@ PublicServiceMedicalTreatment.prototype.get_view_data = function(result_data){
 	        this.community_name.push(key);
 	        this.radar_chart_indicator_data.push({
 	            name: key,
-	            max:1000,
+	            max:1300,
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
-	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE;
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE.toFixed(2);
 	            }
 	        }
 	    }
