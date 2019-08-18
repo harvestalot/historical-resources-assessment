@@ -217,9 +217,10 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
                 //     return colors[idx++];
                 // }
             },
-            selectStyle:{
-                color:"#3A8281",
-            }
+            // selectStyle:{
+            //     opacity:1,
+            //     color:"#3A8281",
+            // }
         });
         layer.render();
         layer.show();
@@ -233,8 +234,8 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
                 color:"#3ba0f3",
             },
             selectStyle:{
-                opacity: 1,
-                color:"#00FFFF",
+                opacity:1,
+                color:"#3A8281",
             }
         });
         streetCommunityAreaLayer.render();
