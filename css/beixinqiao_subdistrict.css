@@ -46,7 +46,7 @@
 }
 /*主内容区*/
 .content{
-	height: 92%;
+	height: 100%;
 }
 	/*侧边导航*/
 .subNavBox{
@@ -115,11 +115,12 @@
 	/*街道地图区域*/
 .data_views{
 	width: 85%;
+	height: 100%;
 }
-/*.map{
-	float: left;
-	width: 60%;
-}*/
+.map{
+	width: 100%;
+	height: 92%;
+}
 /*可视化模块*/
 /*.right_content{
 	width: 30%;
@@ -128,8 +129,9 @@
 }*/
 .visualization_content{
 	width: 30%;
+	height: 92%;
 	right: 0;
-	top:0;
+	top:56px;
 	/*background-color: rgba(0,0,0,.5);*/
 	background-color:#0e2f41;
 	/*display: none;*/
