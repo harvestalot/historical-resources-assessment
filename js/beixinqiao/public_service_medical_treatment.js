@@ -43,6 +43,7 @@ PublicServiceMedicalTreatment.prototype.get_view_data = function(result_data){
 	        this.radar_chart_indicator_data.push({
 	            name: key,
 	            max:1300,
+	            color:'#fff'
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
@@ -214,7 +215,7 @@ PublicServiceMedicalTreatment.prototype.render_spectaculars_list = function(data
 	for(var i = 0; i < data.length; i++){
 		var item = data[i];
 		$("#spectaculars_content").append('<p data_name='+item.NAME+' data_lnglat='+item.LONGITUDE+","+item.LATITUDE+'><span>'+item.NAME+
-			'</span><span>'+item.COMMUNITY_NAME+'</span><span>'+item.COVERAGE.toFixed(0)+'%</span></p>')
+			'</span><span>'+item.COMMUNITY_NAME+'</span><span class="second_level_color">'+item.COVERAGE.toFixed(0)+'%</span></p>')
 	}
 }
 //重置数据

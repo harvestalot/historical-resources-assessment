@@ -32,7 +32,8 @@ PublicServiceTrafficFacilities.prototype.get_view_data = function(result_data){
 	        this.community_name.push(key);
 	        this.radar_chart_indicator_data.push({
 	            name: key,
-	            max:6000,
+	            max:100,
+	            color:'#fff'
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){

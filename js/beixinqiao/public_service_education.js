@@ -51,6 +51,7 @@ PublicServiceEducation.prototype.get_view_data = function(result_data){
 	        this.radar_chart_indicator_data.push({
 	            name: key,
 	            max:1000,
+	            color:'#fff'
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
@@ -262,10 +263,10 @@ PublicServiceEducation.prototype.load_chart = function(type){
 PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData){
 	var radarChart = echarts.init(document.getElementById("public_service_radar_content"));
 	var option = {
-    	color: type_name === "1"?["#00FFFF"]:
-				(type_name === "2"?["#3ba0f3"]:
-				(type_name === "3"?['#ff9921']:
-				((type_name === "4"?['#f36119']: ["#00FFFF","#3ba0f3",'#ff9921','#f36119'])))),
+    	color: type_name === "1"?echarts_color[3]:
+				(type_name === "2"?echarts_color[2]:
+				(type_name === "3"?echarts_color[1]:
+				((type_name === "4"?echarts_color[0]: echarts_color)))),
 	    polar: {
 	    	center:["50%","54%"]
 	    },
@@ -276,7 +277,7 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	        },
 	        axisLabel: {
 	            // fontSize: 15,
-	            color:'#999',
+	            color:'#fff',
 		        formatter:function(val){
 		            return val.split("").join("\n");
 		        }
@@ -300,7 +301,7 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	        y: 'top',
 	        top:10,
 	        textStyle:{
-	        	color:"#999",
+	        	color:"#fff",
 	        },
 	        data: ['幼儿园', '小学', '中学', '九年一贯制']
 	    },
@@ -314,7 +315,7 @@ PublicServiceEducation.prototype.load_bar_chart = function(){
 	const _this = this;
 	var myChart = echarts.init(document.getElementById("education_bar_content"));
 	var option = {
-	    color: ["#00FFFF","#3ba0f3",'#ff9921','#f36119'],
+	    color: echarts_color,
 	    legend: {
 	    	show:false,
 	    },

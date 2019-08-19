@@ -35,6 +35,7 @@ PublicServiceConveniencePeople.prototype.get_view_data = function(result_data){
 	        this.radar_chart_indicator_data.push({
 	            name: key,
 	            max:100,
+	            color:"#fff"
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
@@ -161,13 +162,6 @@ PublicServiceConveniencePeople.prototype.load_radar_chart = function(){
 	            "areaStyle": {
 	                "color": ["transparent"]
 	            }
-	        },
-	        axisLabel: {
-	            "show": false,
-	            "fontSize": 18,
-	            "color": "#fff",
-	            "fontStyle": "normal",
-	            "fontWeight": "normal"
 	        },
 	        axisLine: {
 	            "show": true,
