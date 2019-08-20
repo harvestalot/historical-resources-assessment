@@ -10,7 +10,7 @@
 	    axisLabel: {
 	        show: true,
 	        textStyle: {
-	            color: "#999",
+	            color: "#fff",
 	        },
 	    },
 	    splitLine: {

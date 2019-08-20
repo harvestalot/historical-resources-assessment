@@ -46,7 +46,7 @@
 }
 /*主内容区*/
 .content{
-	height: 92%;
+	height: 100%;
 }
 	/*侧边导航*/
 .subNavBox{
@@ -115,11 +115,12 @@
 	/*街道地图区域*/
 .data_views{
 	width: 85%;
+	height: 100%;
 }
-/*.map{
-	float: left;
-	width: 60%;
-}*/
+.map{
+	width: 100%;
+	height: 92%;
+}
 /*可视化模块*/
 /*.right_content{
 	width: 30%;
@@ -128,10 +129,11 @@
 }*/
 .visualization_content{
 	width: 30%;
+	height: 92%;
 	right: 0;
-	top:0;
+	top:56px;
 	/*background-color: rgba(0,0,0,.5);*/
-	background-color:#000000;
+	background-color:#0e2f41;
 	/*display: none;*/
 	transform:translate3d(100%,0,0);
 	-ms-transform:translate3d(100%,0,0); 	/* IE 9 */
@@ -356,8 +358,11 @@
 	margin-bottom: 5px;
 	box-sizing: border-box;
 	background-color: #1A5574;
-	color: #A5A5A5;
+	color: #fff;
 	cursor: pointer;
+} 
+.spectaculars_content p .second_level_color{
+	color: #e3583d;
 }
 .spectaculars_content p.active_checked{
 	background-color: #946402;
