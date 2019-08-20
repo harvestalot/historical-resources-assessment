@@ -50,13 +50,13 @@ PublicServiceEducation.prototype.get_view_data = function(result_data){
 	        this.communityName.push(key);
 	        this.radar_chart_indicator_data.push({
 	            name: key,
-	            max:1000,
+	            max:100,
 	            color:'#fff'
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
-	                this.pie_comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i].value = result_data[i][key][j].COVERAGE;
-	                this.bar_comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE;
+	                this.pie_comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i].value = result_data[i][key][j].COVERAGE.toFixed(2);
+	                this.bar_comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE.toFixed(2);
 	            }
 	        }
 	    }
