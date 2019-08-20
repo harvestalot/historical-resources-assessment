@@ -7,6 +7,7 @@ VisitorsFlowRate.prototype.init = function(){
 	this.load_heatmap_layer("2016");
     var _this = this;
     $("#year_switcher a").on("click",function(){
+        heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
         $(this).addClass("checked_active").siblings("a").removeClass("checked_active");
         _this.load_heatmap_layer($(this).attr("data_year"));
     });
@@ -47,6 +48,7 @@ VisitorsFlowRate.prototype.load_heatmap_layer = function(current_year){
         });
 
         heatmapLayer.render();
+        heatmapLayer.show();
 }
 
 var start_visitors_flow_rate_rendering = new VisitorsFlowRate();

@@ -190,7 +190,7 @@ PublicSpaceGreenbelt.prototype.load_radar_chart = function(){
         color: echarts_color,
         title:{
             text:"各社区绿地覆盖率",
-            // left:'20%',
+            top:10,
             textStyle:{
                 color: '#FFF',
                 fontSize: 16
@@ -255,7 +255,7 @@ PublicSpaceGreenbelt.prototype.load_radar_chart = function(){
         },
         polar: {
             center: ['50%', '50%'],
-            radius: ['20%', '80%'],
+            // radius: ['20%', '80%'],
         },
         radiusAxis: {},
         "series": [{
