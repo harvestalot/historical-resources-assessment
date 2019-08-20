@@ -131,7 +131,7 @@
 	width: 30%;
 	height: 92%;
 	right: 0;
-	top:56px;
+	top:8%;
 	/*background-color: rgba(0,0,0,.5);*/
 	background-color:#0e2f41;
 	/*display: none;*/
@@ -146,6 +146,7 @@
 	top: 0;
 	width: 150px;
 	padding: 15px 15px;
+	box-sizing: border-box;
 	background-color: rgba(0,0,0,.5);
 	color: #fff;
 }
