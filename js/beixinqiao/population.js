@@ -46,6 +46,7 @@ function load_population_statistics(eleId, population_data){
 	    }
 	}
 	var bar_option = {
+        color: echarts_color,
 	    tooltip: {
 	        trigger: 'axis',
 	        axisPointer: {
@@ -305,6 +306,7 @@ function load_graphic_statistics(eleId, male, female, total){
 function load_population_radar(eleId, type_name, population_data){
 	var radarChart = echarts.init(document.getElementById(eleId));
 	var radar_option = {
+        color: echarts_color,
 	    "tooltip": {
 	        "show": true,
 	        "trigger": "item"
@@ -343,30 +345,28 @@ function load_population_radar(eleId, type_name, population_data){
 	    },
 	    "series": [
 	    {
-	        "name": type_name,
-	        "type": "radar",
-	        "symbol": "circle",
-	        "symbolSize": 3,
-	        "itemStyle": {
-	            "normal": {
-	                color:'rgba(19, 173, 255, 1)',
-	                "borderColor": "rgba(19, 173, 255, 0.4)",
-	                "borderWidth": 5
+	        name: type_name,
+	        type: "radar",
+	        symbol: "circle",
+	        symbolSize: 3,
+	        areaStyle: {
+	            normal: {
+	                color: "rgba(214,99,73, 1)"
 	            }
 	        },
-	        "areaStyle": {
-	            "normal": {
-	                "color": "rgba(19, 173, 255, 0.5)"
+	        itemStyle:{
+	            color:'rgba(214,99,73, 1)',
+	            borderColor:'rgba(214,99,73, 0.3)',
+	            borderWidth:5,
+	        },
+	        lineStyle: {
+	            normal: {
+	                type: "dashed",
+	                color: "rgba(214,99,73, 1)",
+	                width: 1
 	            }
 	        },
-	        "lineStyle": {
-	            "normal": {
-	                "color": "rgba(19, 173, 255, 1)",
-	                "width": 1,
-	                "type": "dashed"
-	            }
-	        },
-	        "data":[[]]
+	        data:[[]]
 	    }]
 	};
 	for(var i = 0; i < population_data.length; i++){

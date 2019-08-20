@@ -89,10 +89,10 @@
             var items = data.features[i];
             var new_lnglat = [];
             // if(items.geometry.type === "Polygon"){
-                for(var j = 0; j < items.geometry.coordinates[0].length; j++){
-                    var item_lnglat = items.geometry.coordinates[0][j];
-                    new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
-                }
+                // for(var j = 0; j < items.geometry.coordinates[0].length; j++){
+                //     var item_lnglat = items.geometry.coordinates[0][j];
+                //     new_lnglat.push(wgs84togcj02(item_lnglat[0],item_lnglat[1]));
+                // }
             // }else{
             //     for(var j = 0; j < items.geometry.coordinates[0][0].length; j++){
             //         var item_lnglat = items.geometry.coordinates[0][0][j];
@@ -100,8 +100,8 @@
             //     }
             // }
             current_situation_land_data.push({
-                properties:items.properties,
-                lnglat: new_lnglat,
+                name:items.geometry.properties['´óÀà'],
+                lnglat: wgs84togcj02(items.geometry.coordinates[0],items.geometry.coordinates[1]),
             })
         }
 

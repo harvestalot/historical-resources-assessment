@@ -1,18 +1,18 @@
 /*头部*/
 .header{
 	height: 8%;
-	background: #474747;
+	background: #f0b33c;
 }
 .logo{
 	width: 5%;
 	height: 100%;
-	background-color: #3A8281;
+	/*background-color: #f0b33c;*/
 }
 .title_box{
 	display: table;
 	height: 100%;
-	border-left: 1px solid #f5f5f5;
-	background-color: #3A8281;
+	/*border-left: 1px solid #f5f5f5;*/
+	/*background-color: #f0b33c;*/
 }
 .title_box .title{
 	height: 100%;
@@ -21,7 +21,7 @@
 	display: table-cell;
 	text-align: center;
 	font-size: 28px;
-	color: #fff;
+	color: #000;
 }
 .nav{
 	display: table;
@@ -34,15 +34,15 @@
 	padding: 0 30px;
 	vertical-align: middle;
 	font-size: 18px;
-	color: #fff;
+	color: #000;
 }
 .nav a:hover{
-	color: #3A8281;
+	color: #fff;
 }
 .home{
 	width:4%;
 	height: 100%;
-	background-color: #3A8281;
+	/*background-color: #f0b33c;*/
 }
 /*主内容区*/
 .content{
@@ -51,7 +51,10 @@
 	/*侧边导航*/
 .subNavBox{
 	width:15%;
-	background-color: #474747;
+	background-color: #F4F4F0;
+	border-right: 3px solid #f0b33c;
+	box-shadow: 1px 0 5px #fff;
+	box-sizing: border-box;
 }
 .subNav{
 	position: relative;
@@ -59,11 +62,12 @@
 	line-height:48px;
 	padding-left:20px;
 	margin-top: 10px;
-	background-color: #3A8281;
+	/*background-color: #3A8281;*/
+	border-bottom: 1px solid #f0b33c;
 	cursor:pointer;
 	font-weight:bold;
 	font-size:16px;
-	color:#fff;
+	color:#000;
 }
 .subNav:first-child{
 	margin-top: 90px;
@@ -79,10 +83,6 @@
 	background:url(../images/jiantou1.jpg) no-repeat;
 	background-position:95% 50%
 }*/
-.subNavCurrent{
-	color:#fff;
-	background-color:#3BF1F3;
-}
 /*.subNavChild:hover{
 	color:#277fc2;
 }*/
@@ -110,7 +110,14 @@
 }
 .navContent li a:hover{
 	color:#fff;
-	background-color:#3BF1F3;
+	background-color:#f0b33c;
+}
+.subNavCurrent{
+	background-color:#f0b33c;
+	/*border-bottom: 1px solid #f0b33c;*/
+}
+.subNavCurrent .navContent li a{
+	color:#fff;
 }
 	/*街道地图区域*/
 .data_views{
@@ -243,7 +250,7 @@
 	height: 640.5px;
 }
 
-.zoomIn {
+/*.zoomIn {
   -webkit-animation-name: zoomIn;
   animation-name: zoomIn;
 }
@@ -302,14 +309,15 @@
 	    transform: scale3d(0, 0, 0);
 	}
 }
-
+*/
 
 /*排行榜列表*/
 .ranking_title{
 	width: 400px;
 	margin: 0 auto;
 	line-height: 50px;
-	font-size: 16px;
+	font-size: 14px;
+	color: #fff;
 }
 .ranking_list{
 	width: 70%;
@@ -320,11 +328,11 @@
     display: inline-block;
     width: 130px;
 	font-size: 16px;
-	color: #1E5692;
+	color: #fff;
 }
 .ranking_list .name_value{
 	font-size: 22px;
-	color: #00FFFF;
+	color: #f0b33c;
 }
 /*人口信息*/
 .statistics_type{
@@ -366,7 +374,7 @@
 	color: #e3583d;
 }
 .spectaculars_content p.active_checked{
-	background-color: #946402;
+	background-color: #f0b33c;
 }
 .spectaculars_content span{
 	display: inline-block;
@@ -389,7 +397,7 @@
 }
 .industrial_description p:first-child{
 	font-size: 30px;
-	color: #00FCFF;
+	color: #f0b33c;
 }
 .industrial_description p:last-child{
 	line-height: 30px;

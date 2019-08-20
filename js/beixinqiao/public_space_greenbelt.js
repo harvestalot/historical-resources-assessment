@@ -4,9 +4,9 @@ function PublicSpaceGreenbelt() {
     this.community_greenbelt_area = [];
     this.per_capita_greenbelt_area = [];
     this.ranking_list = [
-        { type:"绿地覆盖率", name: "民安", value: 5.2 },
-        { type:"人均绿地面积", name: "民安", value: 44.61 },
-        { type:"社区绿地面积", name: "民安", value: 400000 },
+        { type:"绿地覆盖率", name: "", value: 0 },
+        { type:"人均绿地面积", name: "", value: 0 },
+        { type:"社区绿地面积", name: "", value: 0 },
     ];
 }
 PublicSpaceGreenbelt.prototype.init = function(){
@@ -18,6 +18,14 @@ PublicSpaceGreenbelt.prototype.init = function(){
         _this.get_view_data(result.data.resultKey);
         _this.load_bar_chart();
         _this.load_radar_chart();
+    });
+    serveRequest("get", server_url+ "/Greenland/getRanking",{ },function(result){
+        const data = result.data.resultKey;
+        _this.ranking_list = [
+            { type:"绿地覆盖率", name: data.maxCoverage.NAME, value: data.maxCoverage.GREENLAND_RATE.toFixed(2)+"%" },
+            { type:"人均绿地面积", name: data.maxPersion.NAME, value: data.maxPersion.PRESON_GREENLAND.toFixed(2) },
+            { type:"社区绿地面积", name: data.maxArea.NAME, value: data.maxArea.AREA.toFixed(2) },
+        ]
         _this.load_ranking_list(_this.ranking_list);
     });
 }
@@ -66,6 +74,7 @@ PublicSpaceGreenbelt.prototype.get_view_data = function(result_data){
 PublicSpaceGreenbelt.prototype.load_bar_chart = function(){
     var barChart = echarts.init(document.getElementById("community_greenbelt_bar_content"));
     var bar_option = {
+        color: echarts_color,
         title : {
             text: '各社区绿地面积',
             subtext: '数据来源：中规院',
@@ -144,19 +153,19 @@ PublicSpaceGreenbelt.prototype.load_bar_chart = function(){
                 type: "bar",
                 barWidth: 10,
                 barCategoryGap: '50%',
-                itemStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: "#00FFE3"
-                            },
-                            {
-                                offset: 1,
-                                color: "#4693EC"
-                            }
-                        ])
-                    }
-                },
+                // itemStyle: {
+                //     normal: {
+                //         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                //                 offset: 0,
+                //                 color: "#00FFE3"
+                //             },
+                //             {
+                //                 offset: 1,
+                //                 color: "#4693EC"
+                //             }
+                //         ])
+                //     }
+                // },
                 data: this.community_greenbelt_area
             },
             {
@@ -171,9 +180,9 @@ PublicSpaceGreenbelt.prototype.load_bar_chart = function(){
                     //折线拐点标志的样式
                     color: "#058cff"
                 },
-                lineStyle: {
-                    color: "#058cff"
-                },
+                // lineStyle: {
+                //     color: "#058cff"
+                // },
                 areaStyle:{
                     color: "rgba(5,140,255, 0.2)"
                 },
@@ -196,88 +205,64 @@ PublicSpaceGreenbelt.prototype.load_radar_chart = function(){
                 fontSize: 16
             }
         },
-        // legend: {
-        //     show: true,
-        //     right:"10%",
-        //     bottom:"1%",
-        //     textStyle: {
-        //         "fontSize": 14,
-        //         "color": "#fff"
-        //     },
-        //     "data": this.lenged_data
-        // },
         tooltip: {
             show: true,
             trigger: "item"
         },
-        // radar: {
-        //     center: ["50%", "50%"],
-        //     radius: "70%",
-        //     startAngle: 90,
-        //     splitNumber: 4,
-        //     shape: "circle",
-        //     splitArea: {
-        //         "areaStyle": {
-        //             "color": ["transparent"]
-        //         }
-        //     },
-        //     axisLabel: {
-        //         "show": false,
-        //         "fontSize": 18,
-        //         "color": "#fff",
-        //         "fontStyle": "normal",
-        //         "fontWeight": "normal"
-        //     },
-        //     axisLine: {
-        //         "show": true,
-        //         "lineStyle": {
-        //             "color": "grey"//
-        //         }
-        //     },
-        //     splitLine: {
-        //         "show": true,
-        //         "lineStyle": {
-        //             "color": "grey"//
-        //         }
-        //     },
-        //     indicator: this.radar_chart_indicator_data
-        // },
-        // 
         angleAxis: {
+            interval: 1,
             type: 'category',
-            data: [{
-                value: '一',
-                textStyle: {
-                    fontSize: 25,
-                }
-            }, '二', '三', '四', '五', '六', '日'],
-            z: 10
-        },
-        polar: {
-            center: ['50%', '50%'],
-            // radius: ['20%', '80%'],
-        },
-        radiusAxis: {},
-        "series": [{
-        type: 'bar',
-        data: [3, 4, 5, 8, 2, 9, 10],
-        coordinateSystem: 'polar',
-        name: 'b',
-        stack: 'a',
-        itemStyle: {
-            normal: {
-                borderWidth: 4,
-                borderColor: '#ffffff',
+            data: this.community_name,
+            z: 10,
+            axisLine: {
+                show: true,
+                lineStyle: {
+                    color: "#999",
+                    width: 1,
+                    type: "solid"
+                },
             },
-            emphasis: {
-                borderWidth: 0,
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            axisLabel: {
+                interval: 0,
+                show: true,
+                color: "#fff",
+                margin: 8,
+                fontSize: 14
+            },
+        },
+        radiusAxis: {
+            min: 0,
+            // max: 400000,
+            interval: 50000,
+            axisLine: {
+                show: true,
+                lineStyle: {
+                    color: "#999",
+                    width: 1,
+                    type: "solid"
+                },
+            },
+            axisLabel: {
+                formatter: '{value} %',
+                show: false,
+                padding: [0, 0, 10, 0],
+                color: "#00c7ff",
+                fontSize: 14
+            },
+            splitLine: {
+                lineStyle: {
+                    color: "#999",
+                    width: 1,
+                    type: "solid"
+                }
             }
-        }
-    }
-        ]
+        },
+        polar: {},
+        series: [{
+            type: 'bar',
+            data: this.community_greenbelt_area,
+            coordinateSystem: 'polar',
+        }],
     };
     radarChart.setOption(radar_option, true);
 }
@@ -286,13 +271,17 @@ PublicSpaceGreenbelt.prototype.reset_data = function(){
     this.community_name = [];
     this.community_greenbelt_area = [];
     this.per_capita_greenbelt_area = [];
-    // this.ranking_list = [];
+    this.ranking_list = [
+        { type:"绿地覆盖率", name: "", value: 0 },
+        { type:"人均绿地面积", name: "", value: 0 },
+        { type:"社区绿地面积", name: "", value: 0 },
+    ];
 }
 //加载排行榜统计
 PublicSpaceGreenbelt.prototype.load_ranking_list = function(data){
     for(var i = 0; i < data.length; i++){
         $("#community_greenbelt_list_content").append('<p class="ranking_list"><span class="type_name">'
-            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'%）</span></p>')
+            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'）</span></p>')
     }
 }
 var start_greenbelt_rendering = new PublicSpaceGreenbelt();

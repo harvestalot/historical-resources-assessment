@@ -1,7 +1,8 @@
 // 产业结构--产业聚集度
 function IndustrialStructureConcentration() {
 	this.pio_type = ["餐饮服务", "购物服务", "生活服务", "体育休闲服务",
-		"商务住宅", "科教文化服务", ];
+		"商务住宅", "科教文化服务", "交通设施服务", "金融保险服务", "公共设施"];
+	this.count = [459,3,369,136,476,269,262,47,217];//2238
 }
 IndustrialStructureConcentration.prototype.init = function(){
 	this.load_pio_point();
@@ -43,7 +44,7 @@ IndustrialStructureConcentration.prototype.load_pio_point = function(){
 	        // fillOpacity: 0.35//填充透明度
 	    });
 	    placeSearch.searchInBounds(_this.pio_type.join("|"), polygon, function (status, result){
-	    	console.log(result)
+	    	// console.log(result)
 	    })
 	})
 }
@@ -72,14 +73,14 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	        hoverAnimation: false,
 	        center: ['50%', '20%'],
 	        data: [{
-	            value: 25,
+	            value: 18.1,
 	            label: {
 	                normal: {
 	                    show: true,
 	                    position: 'center',
 	                    rich: {
 	                        a: {
-	                            color: '#3a7ad5',
+	                            color: '#f0b33c',
 	                            align: 'center',
 	                            fontSize: 32,
 	                            fontWeight: "bold",
@@ -98,13 +99,13 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	            },
 	            itemStyle: {
 	                normal: {
-	                    color: '#00FCFF',
-	                    shadowColor: '#00FCFF',
+	                    color: '#f0b33c',
+	                    shadowColor: '#f0b33c',
 	                    shadowBlur: 0
 	                }
 	            }
 	        }, {
-	            value: 75,
+	            value: 81.9,
 	            name: 'invisible',
 	            itemStyle: {
 	                normal: {
@@ -125,14 +126,14 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	        hoverAnimation: false,
 	        center: ['50%', '51%'],
 	        data: [{
-	            value: 45,
+	            value: 20.51,
 	            label: {
 	                normal: {
 	                    show: true,
 	                    position: 'center',
 	                    rich: {
 	                        a: {
-	                            color: '#3a7ad5',
+	                            color: '#f0b33c',
 	                            align: 'center',
 	                            fontSize: 32,
 	                            fontWeight: "bold",
@@ -151,13 +152,13 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	            },
 	            itemStyle: {
 	                normal: {
-	                    color: '#00FCFF',
-	                    shadowColor: '#00FCFF',
+	                    color: '#f0b33c',
+	                    shadowColor: '#f0b33c',
 	                    shadowBlur: 0
 	                }
 	            }
 	        }, {
-	            value: 55,
+	            value: 79.49,
 	            name: 'invisible',
 	            itemStyle: {
 	                normal: {
@@ -178,14 +179,14 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	        hoverAnimation: false,
 	        center: ['50%', '80%'],
 	        data: [{
-	            value: 75,
+	            value: 2.1,
 	            label: {
 	                normal: {
 	                    show: true,
 	                    position: 'center',
 	                    rich: {
 	                        a: {
-	                            color: '#3a7ad5',
+	                            color: '#f0b33c',
 	                            align: 'center',
 	                            fontSize: 32,
 	                            fontWeight: "bold",
@@ -204,13 +205,13 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	            },
 	            itemStyle: {
 	                normal: {
-	                    color: '#00FCFF',
-	                    shadowColor: '#00FCFF',
+	                    color: '#f0b33c',
+	                    shadowColor: '#f0b33c',
 	                    shadowBlur: 0
 	                }
 	            }
 	        }, {
-	            value: 25,
+	            value: 97.9,
 	            name: 'invisible',
 	            itemStyle: {
 	                normal: {

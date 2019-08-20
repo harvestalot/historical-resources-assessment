@@ -28,12 +28,11 @@ const district_history_img_data = {
 //历史资源发展图片
 const resource_history_img_data = {
     img_list:[
-        './images/beixinqiao/h6.jpg',
-        './images/beixinqiao/h5.jpg',
-        './images/beixinqiao/h4.jpg',
-        './images/beixinqiao/h3.jpg',
-        './images/beixinqiao/h2.jpg',
-        './images/beixinqiao/h1.jpg',
+        './images/beixinqiao/resource_history/1.jpg',
+        './images/beixinqiao/resource_history/2.jpg',
+        './images/beixinqiao/resource_history/3.jpg',
+        './images/beixinqiao/resource_history/4.jpg',
+        './images/beixinqiao/resource_history/5.jpg',
     ]
 }
 //现状用地图例
@@ -173,6 +172,14 @@ const industry_legend_data = {
             legend_color:"#C88A78"
         },
     ]
+}
+//
+const echart_title = {
+    left:20,
+    textStyle:{
+        color: '#fff',
+        fontSize: 14
+    }
 }
 // echarts颜色配置
 // const echarts_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#3A8281"];

@@ -90,11 +90,11 @@ PublicServiceMedicalTreatment.prototype.render_point_layer = function(){
 PublicServiceMedicalTreatment.prototype.load_dom = function(){
 	const public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div style="width: 100%; height: 13%;padding-top:20px;box-sizing: border-box;">'+
-		'<p style="padding-left:21%;box-sizing: border-box;">街道医疗设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
+		'<p style="padding-left:21%;box-sizing: border-box;color:#fff;font-size:18px;">街道医疗设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div class="chart_view" style="width: 100%; height: 40%;">'+
-		'<p style="padding:10px 0 10px 21%;font-size:16px;color:#1E78B2;font-weight:700;">医疗设施看板</p>'+
+		'<p style="padding:10px 0 10px 21%;font-size:14px;color:#fff;font-weight:700;">医疗设施看板</p>'+
 		'<div id="spectaculars_content" class="chart_view spectaculars_content" style="width: 100%; height: 40%;">'+
 		'</div>'+
 		'</div>';
@@ -139,14 +139,9 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
 		color: echarts_color,
-		title:{
+		title:{...{
 			text:"各社区养老设施对比图",
-			left:'20%',
-			textStyle:{
-				color: '#1E78B2',
-				fontSize: 16
-			}
-		},
+		}, ...echart_title},
 	    legend: {
 	        show: true,
 	        right:"10%",

@@ -44,7 +44,7 @@ PublicServiceOverview.prototype.get_view_data = function(result_data){
 	        this.community_name.push(key);
 	        this.radar_chart_indicator_data.push({
 	            name: key,
-	            max: 1500,
+	            max: 100,
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
@@ -96,9 +96,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 					this.comprehensive_data[this.lenged_data[0]]
 		        ]
 		    }});
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 1700;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 1700;
+		    // }
 			break;
 		case "教育" :
 			this.current_series_data.push({...rader_color[1], ...{
@@ -108,9 +108,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		        ]
 		    }}
 			);
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 500;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 500;
+		    // }
 			break;
 		case "医疗" :
 			this.current_series_data.push({...rader_color[2], ...{
@@ -120,9 +120,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		        ]
 		    }}
 			);
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 600;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 600;
+		    // }
 			break;
 		case "养老" :
 			this.current_series_data.push({...rader_color[3], ...{
@@ -132,9 +132,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		        ]
 		    }}
 			);
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 1000;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 1000;
+		    // }
 			break;
 		case "文体" :
 			this.current_series_data.push({...rader_color[4], ...{
@@ -144,9 +144,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		        ]
 		    }}
 			);
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 500;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 500;
+		    // }
 			break;
 		case "交通" :
 			this.current_series_data.push({...rader_color[5], ...{
@@ -156,9 +156,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		        ]
 		    }}
 			);
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 1700;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 1700;
+		    // }
 			break;
 		case "街道管理" :
 			this.current_series_data.push({...rader_color[6], ...{
@@ -168,9 +168,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 		        ]
 		    }}
 			);
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 600;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 600;
+		    // }
 			break;
 		case "全部" :
 			for(var i = 0; i < this.lenged_data.length; i++){
@@ -182,9 +182,9 @@ PublicServiceOverview.prototype.load_chart = function(type){
 			    }}
 				);
 			}
-		    for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    	this.radar_chart_indicator_data[i].max = 1700;
-		    }
+		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
+		    // 	this.radar_chart_indicator_data[i].max = 1700;
+		    // }
 			break;
 	}
 	this.load_radar_chart();

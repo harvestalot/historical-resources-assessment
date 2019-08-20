@@ -86,7 +86,7 @@ PublicServiceTrafficFacilities.prototype.render_point_layer = function(){
 PublicServiceTrafficFacilities.prototype.load_dom = function(){
 	const public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div style="width: 100%; height: 13%;padding-top:20px;box-sizing: border-box;">'+
-		'<p style="padding-left:21%;box-sizing: border-box;">街道管理设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
+		'<p style="padding-left:21%;box-sizing: border-box;color:#fff;font-size:18px;">街道管理设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div id="facilities_statistics_content" class="chart_view" style="width: 100%; height: 40%;">'+
@@ -132,14 +132,9 @@ PublicServiceTrafficFacilities.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
 	    color: echarts_color,
-		title:{
-			text:"各社区街道管理设施数量对比图",
-			left:'20%',
-			textStyle:{
-				color: '#1E78B2',
-				fontSize: 16
-			}
-		},
+		title:{...{
+			text:"各社区交通设施数量对比图",
+		}, ...echart_title},
 	    legend: {
 	        show: true,
 	        right:"10%",

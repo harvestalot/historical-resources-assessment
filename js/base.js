@@ -21,8 +21,8 @@ var round_point_layer;//圆点图层
 // icon点标记图片地址
 const point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
 const reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
-const server_url = "http://116.62.222.106:8081";
-// const server_url = "http://192.168.1.43:8081";
+// const server_url = "http://116.62.222.106:8081";
+const server_url = "http://192.168.1.43:8081";
 /**
  *ajax请求通用方法
  *

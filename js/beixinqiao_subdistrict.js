@@ -43,7 +43,7 @@
 		}
 	});
 	//点击内容区关闭遮罩
-	$("#content").click(function(){
+	$("#subNavBox").click(function(){
 		document.getElementById("shade_modal").classList.remove("animated","fadeInLeft","fadeInDown","bounceInRight");
 	});
     //侧边导航控制器
