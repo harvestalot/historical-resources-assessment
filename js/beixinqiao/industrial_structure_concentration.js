@@ -1,13 +1,20 @@
 // 产业结构--产业聚集度
 function IndustrialStructureConcentration() {
-	this.pio_type = ["餐饮服务", "购物服务", "生活服务", "体育休闲服务",
+	this.all_pio_type = ["餐饮服务", "购物服务", "生活服务", "体育休闲服务",
 		"商务住宅", "科教文化服务", "交通设施服务", "金融保险服务", "公共设施"];
+	this.pio_type = "餐饮服务";
 	this.count = [459,3,369,136,476,269,262,47,217];//2238
 }
 IndustrialStructureConcentration.prototype.init = function(){
 	this.load_pio_point();
 	this.load_dom();
 	this.load_pie_chart();
+	var _this = this;
+	$("#selecte").on("change",function(){
+		var index = $(this).children('option:selected').val() * 1;
+		_this.pio_type = _this.all_pio_type[index]
+		_this.load_pio_point();
+	});
 }
 //生产dom元素
 IndustrialStructureConcentration.prototype.load_dom = function(){
@@ -43,7 +50,7 @@ IndustrialStructureConcentration.prototype.load_pio_point = function(){
 	        // fillColor: "#1791fc", //填充色
 	        // fillOpacity: 0.35//填充透明度
 	    });
-	    placeSearch.searchInBounds(_this.pio_type.join("|"), polygon, function (status, result){
+	    placeSearch.searchInBounds(_this.pio_type, polygon, function (status, result){
 	    	// console.log(result)
 	    })
 	})

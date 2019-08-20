@@ -13,6 +13,9 @@ const brief_introduction = {
 		"东西北、罗车、十二条、十四东、十三条、十一条、门楼、大楼、北中街、北小街、民安、东羊管、东手帕、北顺、针线、侨办、勘察院、中研、东直门、"+
 		"住宅合作社、民政局等50个居（家）委会。"
 }
+// echarts颜色配置
+// const echarts_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#3A8281"];
+const echarts_color = ["#d66349",'#768189',"#f0993c",'#a57ec0',"#579dcb","#5cba89","#7758b0"];
 
 //片区历史发展图片
 const district_history_img_data = {
@@ -173,7 +176,32 @@ const industry_legend_data = {
         },
     ]
 }
-//
+//公共空间资源图例
+const available_space_legend_data = {
+    list:[
+        {
+            name:"可统一调配公共服务设施单元",
+            legend_color:echarts_color[0]
+        },
+        {
+            name:"意向腾退文物地",
+            legend_color:echarts_color[4]
+        },
+        {
+            name:"已收回直管公房",
+            legend_color:echarts_color[5]
+        },
+        {
+            name:"产权不明空地",
+            legend_color:echarts_color[3]
+        },
+        {
+            name:"地下空间",
+            legend_color:echarts_color[1]
+        },
+    ]
+}
+//图表title
 const echart_title = {
     left:20,
     textStyle:{
@@ -181,9 +209,6 @@ const echart_title = {
         fontSize: 14
     }
 }
-// echarts颜色配置
-// const echarts_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#3A8281"];
-const echarts_color = ["#d66349",'#768189',"#f0993c",'#a57ec0',"#579dcb","#5cba89","#7758b0"];
 // 雷达图各类型颜色配置
 const rader_color = [
 	{

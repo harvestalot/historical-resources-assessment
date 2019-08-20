@@ -45,6 +45,7 @@
 	}
 	//根据导航触发加载对应模块数据
 	VisualScreen.prototype.init_module = function(current_type){
+		$(".select").hide();
 		$("#year_switcher").hide();
 		$("#pio_point_list").fadeOut(300);
 		this.reset_main_layer();
@@ -82,6 +83,7 @@
 				start_street_management_rendering.init();
 	    		break;
 			case "industry_concentration": //产业结构--产业聚集度
+				$(".select").show();
 				this.reset_community_layer();
 				start_industry_concentration_rendering.init();
 				$("#pio_point_list").fadeIn(300);
@@ -111,12 +113,13 @@
 			case "public_space": //公共空间评估--公共空间共享
 				this.reset_community_layer();
 				start_public_space_share_rendering.init();
-				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "available_space": //公共空间评估--可利用空间资源
 				this.reset_community_layer();
 				start_available_space_rendering.init();
-				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+                map_legend(available_space_legend_data);
+				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "material_cultural_heritage": //文化资源评估--物质文化遗产
 				this.reset_community_layer();

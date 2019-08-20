@@ -460,3 +460,77 @@
 	margin-right: 10px;
 	border-radius: 12px;
 }
+.message{
+	width: 100%;
+	padding-left: 20px;
+	font-size: 14px;
+	line-height: 30px;
+	box-sizing: border-box;
+	color: #fff;
+}
+.message:first-child{
+	margin-top: 30px;
+}
+
+#pio_point_list {
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+    position: absolute;
+    background-color: white;
+    max-height: 100%;
+    overflow-y: auto;
+    top: 13%;
+    left: 15%;
+    width: 280px;
+}
+.select {
+	position: fixed;
+	top: 8%;
+	left: 15%;
+	/*display: inline-block;*/
+	width: 280px;
+	height: 5%;
+	/*position: relative;*/
+	vertical-align: middle;
+	padding: 0;
+	overflow: hidden;
+	background-color: #fff;
+	color: #555;
+	border: 1px solid #aaa;
+	text-shadow: none;
+	border-radius: 4px;	
+	transition: box-shadow 0.25s ease;
+    z-index: 999;
+	display: none;
+}
+
+.select:hover {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.select:before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-top-color: #ccc;
+	top: 45%;
+	right: 10px;
+	cursor: pointer;
+	z-index: -2;
+}
+.select select {
+	cursor: pointer;
+	padding: 4%;
+	width: 100%;
+	border: none;
+	background: transparent;
+	background-image: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.select select:focus {
+	outline: none;
+}
