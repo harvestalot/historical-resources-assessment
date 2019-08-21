@@ -1,8 +1,58 @@
 //文化资源评估--历史建筑
 function HistoricalBuilding() {
+    this.lenged_data = ["健身设施", "室内体育设施", "室外活动场所", "综合文体设施", "街道文化服务中心"];
+    // this.lenged_data = ["故居", "寺庙宫观", "王府", "使馆","官署","古树名木"];
+    this.community_name = [];
+    this.radar_chart_indicator_data = [];
+    this.comprehensive_data = {
+        // "故居":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "寺庙宫观":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "王府":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "使馆":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "官署":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "古树名木":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+    };
 }
 HistoricalBuilding.prototype.init = function(){
 	this.render_point_layer();
+    this.load_dom();
+    const _this = this;
+    serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "stylistic" },function(result){
+        _this.get_view_data(result.data.resultKey);
+        _this.load_radar_chart();
+        _this.load_bar_chart();
+    });
+}
+//生产dom元素
+HistoricalBuilding.prototype.load_dom = function(){
+    const cultural_relic_dom_str = '<div id="cultural_relic_coverage_content" style="width: 100%; height: 50%;"></div>'+
+        '<div id="cultural_relic_bar_content" style="width: 100%; height: 50%;"></div>';
+    $("#visualization_echarts_content").append(cultural_relic_dom_str);
+};
+//分类拆分数据
+HistoricalBuilding.prototype.get_view_data = function(result_data){
+    for(var i = 0; i < result_data.length; i++){
+        for(var key in result_data[i]){
+            this.community_name.push(key);
+            this.radar_chart_indicator_data.push({
+                name: key,
+                max:100,
+                color:'#fff'
+            })
+            if(result_data[i][key].length > 0){
+                for(var j = 0; j < result_data[i][key].length; j++){
+                    console.log(result_data[i][key][j].COVERAGE)
+                    this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = 
+                        result_data[i][key][j].COVERAGE?result_data[i][key][j].COVERAGE.toFixed(2):0;
+                }
+            }
+        }
+    }
 }
 //添加设施点标识图层
 HistoricalBuilding.prototype.render_point_layer = function(){
@@ -30,5 +80,186 @@ HistoricalBuilding.prototype.render_point_layer = function(){
         //渲染信息窗体
         openInfo(properties.name, properties.addres, ev.lnglat);
     });
+}
+//加载设施覆盖率雷达图图表数据
+HistoricalBuilding.prototype.load_radar_chart = function(){
+    var radarChart = echarts.init(document.getElementById("cultural_relic_coverage_content"));
+    var radar_option = {
+        color: echarts_color,
+        title:{...{
+            text:"各社区文保单位占比",
+        }, ...echart_title},
+        legend: {
+            show: true,
+            right:"10%",
+            bottom:"1%",
+            textStyle: {
+                "fontSize": 14,
+                "color": "#fff"
+            },
+            "data": this.lenged_data
+        },
+        tooltip: {
+            show: true,
+            trigger: "item"
+        },
+        radar: {
+            center: ["50%", "50%"],
+            radius: "70%",
+            startAngle: 90,
+            splitNumber: 4,
+            shape: "circle",
+            splitArea: {
+                "areaStyle": {
+                    "color": ["transparent"]
+                }
+            },
+            axisLabel: {
+                "show": false,
+                "fontSize": 18,
+                "color": "#fff",
+                "fontStyle": "normal",
+                "fontWeight": "normal"
+            },
+            axisLine: {
+                "show": true,
+                "lineStyle": {
+                    "color": "grey"//
+                }
+            },
+            splitLine: {
+                "show": true,
+                "lineStyle": {
+                    "color": "grey"//
+                }
+            },
+            indicator: this.radar_chart_indicator_data
+        },
+        "series": [
+            {...rader_color[0], ...{
+                "name": this.lenged_data[0],
+                "data": [
+                    this.comprehensive_data[this.lenged_data[0]]
+                ]
+            }},
+            {...rader_color[1], ...{
+                "name": this.lenged_data[1],
+                "data": [
+                    this.comprehensive_data[this.lenged_data[1]]
+                ]
+            }},
+            {...rader_color[2], ...{
+                "name": this.lenged_data[2],
+                "data": [
+                    this.comprehensive_data[this.lenged_data[2]]
+                ]
+            }},
+            {...rader_color[3], ...{
+                "name": this.lenged_data[3],
+                "data": [
+                    this.comprehensive_data[this.lenged_data[3]]
+                ]
+            }},
+            {...rader_color[4], ...{
+                "name": this.lenged_data[4],
+                "data": [
+                    this.comprehensive_data[this.lenged_data[4]]
+                ]
+            }}
+        ]
+    };
+    radarChart.setOption(radar_option, true);
+}
+//加载柱状统计图
+HistoricalBuilding.prototype.load_bar_chart = function(){
+    const _this = this;
+    var myChart = echarts.init(document.getElementById("cultural_relic_bar_content"));
+    var option = {
+        color: echarts_color,
+        title:{...{
+            text:"各社区文保单位数量对比图",
+        }, ...echart_title},
+        legend: {
+            show:false,
+        },
+        tooltip: {
+            "trigger": "axis"
+        },
+        xAxis: {
+            type: "category",
+            axisLabel: {
+                ...coordinate_axis_style.axisLabel,
+                ...{
+                    formatter:function(val){
+                        return val.split("").join("\n");
+                    }
+            }},
+            axisLine: coordinate_axis_style.axisLine,
+            splitLine: coordinate_axis_style.splitLine,
+            data: this.community_name
+        },
+        yAxis: {
+            type: "value",
+            axisLabel: coordinate_axis_style.axisLabel,
+            axisLine: coordinate_axis_style.axisLine,
+            splitLine: coordinate_axis_style.splitLine,
+        },
+        series: [
+            {
+            name: this.lenged_data[0],
+            type: 'bar',
+            stack: 'a',
+            barWidth: 15,
+            data: this.comprehensive_data[this.lenged_data[0]]
+            },
+            {
+            name: this.lenged_data[1],
+            type: 'bar',
+            stack: 'a',
+            barWidth: 15,
+            data: this.comprehensive_data[this.lenged_data[1]]
+            },
+            {
+            name: this.lenged_data[2],
+            type: 'bar',
+            stack: 'a',
+            barWidth: 15,
+            data: this.comprehensive_data[this.lenged_data[2]]
+            },
+            {
+            name: this.lenged_data[3],
+            type: 'bar',
+            stack: 'a',
+            barWidth: 15,
+            data: this.comprehensive_data[this.lenged_data[3]]
+            },
+            {
+            name: this.lenged_data[4],
+            type: 'bar',
+            stack: 'a',
+            barWidth: 15,
+            data: this.comprehensive_data[this.lenged_data[4]]
+            }
+        ]
+    };
+    myChart.setOption(option, true);
+}
+//重置数据
+HistoricalBuilding.prototype.reset_data = function(){
+    this.community_name = [];
+    this.radar_chart_indicator_data = [];
+    this.comprehensive_data = {
+        // "故居":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "寺庙宫观":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "王府":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "使馆":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "官署":[0,0,0,0,0,0,0,0,0,0,0,0],
+        // "古树名木":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+    };
 }
 var start_historical_building_rendering = new HistoricalBuilding();

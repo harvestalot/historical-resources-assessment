@@ -14,7 +14,7 @@ PublicSpaceAvailableApace.prototype.load_dom = function(){
     '<p class="legend_item message"><span style="background-color: #d66349"></span>已收回直管公房：目前有约800平使用面积公房已回收，可为后期的公共设施配置提供部分合理空间资源。</p>'+
     '<p class="legend_item message"><span style="background-color: #579dcb"></span>意向腾退文物地：目前意向以柏林寺、北新仓为主，建议腾退使用。</p>'+
     '<p class="legend_item message"><span style="background-color: #5cba89"></span>可利用闲置区：后永康胡同16号煤场闲置地。可作为大型集中公共服务用地。</p>'+
-    '<p class="legend_item message"><span style="background-color: #a57ec0"></span>可统一调配公共服务设施单元：以社区居委会，综合服务站点为主，作为可供置换的潜力空间。</p>'+
+    '<p class="legend_item message"><span style="background-color: #a57ec0"></span>可统一调配公共服务设施单元：以社区居委会，综合服务站点为主，作为可功能置换的潜力空间。</p>'+
     '<p class="legend_item message"><span style="background-color: #768189"></span>地下空间：以楼房社区低效使用地下室空间为主体，可作为社区服务配套的备选空间。</p>'+
     '</div>';
     $("#visualization_echarts_content").append(public_service_dom_str);

@@ -133,17 +133,17 @@
 			case "material_cultural_heritage": //文化资源评估--物质文化遗产
 				this.reset_community_layer();
 				start_material_cultural_heritage_rendering.init();
-				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "cultural_relic_protection": //文化资源评估--文物保护单位
 				this.reset_community_layer();
 				start_cultural_relic_protection_rendering.init();
-				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "historical_building": //文化资源评估--历史建筑
 				this.reset_community_layer();
 				start_historical_building_rendering.init();
-				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
         	default:
 				this.map();
