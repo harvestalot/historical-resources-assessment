@@ -121,6 +121,10 @@
                 map_legend(available_space_legend_data);
 				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
+			case "culture_overview": //文化资源评估--概览
+				start_cultural_resources_overview_rendering.init();
+				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+	    		break;
 			case "material_cultural_heritage": //文化资源评估--物质文化遗产
 				this.reset_community_layer();
 				start_material_cultural_heritage_rendering.init();

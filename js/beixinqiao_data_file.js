@@ -42,6 +42,7 @@ document.write('<script src="./js/beixinqiao/block_energy_visitors_flow_rate.js?
 document.write('<script src="./js/beixinqiao/public_space_greenbelt.js?V2019.08.20"></script>');//公共空间评估--绿地资源
 document.write('<script src="./js/beixinqiao/public_space_share.js?V2019.08.20"></script>');//公共空间评估--公共空间共享
 document.write('<script src="./js/beixinqiao/public_space_available_space.js?V2019.08.20"></script>');//公共空间评估--可利用空间资源
+document.write('<script src="./js/beixinqiao/cultural_resources_overview.js?V2019.08.20"></script>');//文化资源评估--概览
 document.write('<script src="./js/beixinqiao/material_cultural_heritage.js?V2019.08.20"></script>');//文化资源评估--物质文化遗产
 document.write('<script src="./js/beixinqiao/cultural_relic_protection.js?V2019.08.20"></script>');//文化资源评估--文物保护单位
 document.write('<script src="./js/beixinqiao/historical_building.js?V2019.08.20"></script>');//文化资源评估--历史建筑
