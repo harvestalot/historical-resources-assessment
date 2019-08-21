@@ -88,6 +88,9 @@
         						<input type='checkbox' name='mapStyle' value='control_unit'  class="toggle">
         						<span class="input-text">社区管控单元</span>
 	        				</div>
+	        				<div class="input-item">
+	        					<button id="traffic_accessibility" class="traffic_accessibility">交通可达性</button>
+	        				</div>
 	        				<!-- <div class="input-item">
         						<input type='checkbox' name='mapStyle' value='real_time_traffic'>
         						<span class="input-text">实时路况</span>
@@ -106,8 +109,10 @@
 	</section>
 	<!-- 遮罩层 -->
 	<section id="shade_modal" class="shade_modal"></section>
-	<!-- PIO点列表 -->
+	<!-- POI点列表 -->
 	<div id="pio_point_list"></div>
+	<!-- 交通可达性搜索 -->
+	<div id="traffic_accessibility"></div>
 	<!-- 人流量监测年份切换 -->
 	<div id="year_switcher" class="clearfix year_switcher">
         <a href="javascript:void(0)" class="checked_active" data_year="2016">2016年</a>

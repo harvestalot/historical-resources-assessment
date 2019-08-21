@@ -26,6 +26,7 @@ document.write('<script src="./json_data/beixinqiao/cultural_relic_protection.js
 document.write('<script src="./json_data/beixinqiao/historical_building.js?V2019.08.20-1"></script>');//文化资源评估--历史建筑
 
 //图表数据可视化文件
+document.write('<script src="./js/beixinqiao/traffic_accessibility.js?V2019.08.20-1"></script>');//交通可达性工具
 document.write('<script src="./js/beixinqiao/population.js?V2019.08.20-1"></script>');//人口信息
 document.write('<script src="./js/beixinqiao/public_service_overview.js?V2019.08.20-1"></script>');//公共服务设施（概览）
 document.write('<script src="./js/beixinqiao/public_service_convenience_people.js?V2019.08.20-1"></script>');//公共服务设施（便民）

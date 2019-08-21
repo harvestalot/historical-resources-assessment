@@ -38,6 +38,11 @@
 	}
 	VisualScreen.prototype.init = function(){
 		this.map();
+		const _this = this;
+		// 交通可达性工具
+		$("#traffic_accessibility").on("click",function(){
+			_this.traffic_accessibility();
+		});
 	}
 	//地图
 	VisualScreen.prototype.map = function(){
@@ -143,6 +148,17 @@
         	default:
 				this.map();
 		}
+	}
+	//加载交通可达性工具
+	VisualScreen.prototype.traffic_accessibility = function(){
+		$(".select").hide();//隐藏产业聚集度搜索框
+		$("#pio_point_list").fadeOut(300);//隐藏产业聚集度PIO列表
+		$("#year_switcher").hide();//隐藏让你流量监测热力图年份切换
+		document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+		map.clearMap();
+		this.reset();
+		this.reset_community_layer();
+		start_traffic_accessibility_rendering.init();
 	}
 	//重置
 	VisualScreen.prototype.reset = function(){

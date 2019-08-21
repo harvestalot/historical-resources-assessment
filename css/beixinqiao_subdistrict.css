@@ -534,3 +534,18 @@
 .select select:focus {
 	outline: none;
 }
+/*交通可达性按钮*/
+.traffic_accessibility{
+	width: 100px;
+	line-height: 30px;
+	margin-top: 30px;
+	/*border: 1px solid #f0b33c;*/
+	border-radius: 15px;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	background-color: #f0b33c;
+}
+.traffic_accessibility:hover{
+	background-color: #FACB70;
+}
