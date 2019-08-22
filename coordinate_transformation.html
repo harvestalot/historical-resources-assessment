@@ -100,7 +100,10 @@
             //     }
             // }
             current_situation_land_data.push({
-                name:items.geometry.properties['´óÀà'],
+                type:'文化资源',
+                name:items.properties.name,
+                address:items.properties.addres,
+                protection:items.properties.protection,
                 lnglat: wgs84togcj02(items.geometry.coordinates[0],items.geometry.coordinates[1]),
             })
         }

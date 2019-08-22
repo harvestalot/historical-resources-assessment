@@ -24,6 +24,7 @@ document.write('<script src="./json_data/beixinqiao/public_space_available_space
 document.write('<script src="./json_data/beixinqiao/material_cultural_heritage.js?V2019.08.20-1"></script>');//文化资源评估--物质文化遗产
 document.write('<script src="./json_data/beixinqiao/cultural_relic_protection.js?V2019.08.20-1"></script>');//文化资源评估--文物保护单位
 document.write('<script src="./json_data/beixinqiao/historical_building.js?V2019.08.20-1"></script>');//文化资源评估--历史建筑
+document.write('<script src="./json_data/beixinqiao/cultural_resources.js?V2019.08.20-1"></script>');//可达性工具类型--文化资源点
 
 //图表数据可视化文件
 document.write('<script src="./js/beixinqiao/traffic_accessibility.js?V2019.08.20-1"></script>');//交通可达性工具
