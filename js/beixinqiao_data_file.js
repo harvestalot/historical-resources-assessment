@@ -48,3 +48,4 @@ document.write('<script src="./js/beixinqiao/cultural_resources_overview.js?V201
 document.write('<script src="./js/beixinqiao/material_cultural_heritage.js?V2019.08.20-1"></script>');//文化资源评估--物质文化遗产
 document.write('<script src="./js/beixinqiao/cultural_relic_protection.js?V2019.08.20-1"></script>');//文化资源评估--文物保护单位
 document.write('<script src="./js/beixinqiao/historical_building.js?V2019.08.20-1"></script>');//文化资源评估--历史建筑
+document.write('<script src="./js/beixinqiao/community_opinion.js?V2019.08.20-1"></script>');//社区舆情

@@ -50,7 +50,8 @@
 	}
 	//根据导航触发加载对应模块数据
 	VisualScreen.prototype.init_module = function(current_type){
-		$(".select").hide();
+		$("#industrial_service").hide();
+		$("#community_opinion").hide();//隐藏社区舆情搜索框
 		$("#year_switcher").hide();
 		$("#pio_point_list").fadeOut(300);
 		this.reset_main_layer();
@@ -88,7 +89,7 @@
 				start_street_management_rendering.init();
 	    		break;
 			case "industry_concentration": //产业结构--产业聚集度
-				$(".select").show();
+				$("#industrial_service").show();
 				this.reset_community_layer();
 				start_industry_concentration_rendering.init();
 				$("#pio_point_list").fadeIn(300);
@@ -145,13 +146,19 @@
 				start_historical_building_rendering.init();
 				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
+			case "community_opinion": //社区舆情
+				$("#community_opinion").show();
+				this.reset_community_layer();
+				start_community_opinion_rendering.init();
+	    		break;
         	default:
 				this.map();
 		}
 	}
 	//加载交通可达性工具
 	VisualScreen.prototype.traffic_accessibility = function(){
-		$(".select").hide();//隐藏产业聚集度搜索框
+		$("#industrial_service").hide();//隐藏产业聚集度搜索框
+		$("#community_opinion").hide();//隐藏社区舆情搜索框
 		$("#pio_point_list").fadeOut(300);//隐藏产业聚集度PIO列表
 		$("#year_switcher").hide();//隐藏让你流量监测热力图年份切换
 		document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");

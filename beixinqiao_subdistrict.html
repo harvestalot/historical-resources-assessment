@@ -50,7 +50,7 @@
                 	<li><a href="javascript:void(0)" data_type="cultural_relic_protection">文物保护单位</a></li>
                 	<li><a href="javascript:void(0)" data_type="historical_building">历史建筑</a></li>
 	            </ul>
-	        	<div class="subNav">社区舆情</div>
+	        	<div class="subNav" data_type="community_opinion">社区舆情</div>
 	        </section>
 	        <section class="fr po_re data_views">
 				<header id="header" class="header clearfix">
@@ -120,8 +120,8 @@
         <a href="javascript:void(0)" data_year="2018">2018年</a>
         <!-- <a href="javascript:void(0)" data_year="traffic">交通路况</a> -->
     </div>
-	<!-- 下拉框 -->
-	<div class="select">
+	<!-- 产业服务下拉框 -->
+	<div id="industrial_service" class="select">
 		<select name="cars" id="selecte">
 		    <option value="0" selected="selected">餐饮服务</option>
 		    <option value="1">购物服务</option>
@@ -132,6 +132,11 @@
 		    <option value="6">交通设施服务</option>
 		    <option value="7">金融保险服务</option>
 		    <option value="8">公共设施</option>
+	 	</select>
+	</div>
+	<!-- 社区舆情下拉框 -->
+	<div id="community_opinion" class="select">
+		<select name="cars" id="community_opinion_select">
 	 	</select>
 	</div>
 	<section id="data"></section>

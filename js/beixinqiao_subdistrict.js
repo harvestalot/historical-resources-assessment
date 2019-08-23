@@ -58,7 +58,8 @@
         	$(this).addClass("subNavCurrent").siblings(".navContent").find("a").removeClass("subNavCurrent");
 			start_init.init_module($(this).attr("data_type"));
 			document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
-			document.getElementById("visualization_content").classList.add("animated","fadeInRight");
+			$(this).attr("data_type") === "population"?
+			document.getElementById("visualization_content").classList.add("animated","fadeInRight"):"";
         }
 
 	});
