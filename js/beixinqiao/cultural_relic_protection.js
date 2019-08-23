@@ -1,19 +1,14 @@
 //文化资源评估--文物保护单位
 function CulturalRelicPtection() {
-    this.lenged_data = ["健身设施", "室内体育设施", "室外活动场所", "综合文体设施", "街道文化服务中心"];
-    // this.lenged_data = ["国家级", "市级", "区级", "其它"];
+    this.lenged_data = ["国家级", "市级", "区级","普查登记", "其它"];
     this.community_name = [];
     this.radar_chart_indicator_data = [];
     this.comprehensive_data = {
-        // "国家级":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "市级":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "区级":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "其它":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "国家级":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "市级":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "区级":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "普查登记":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "其它":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
 }
 CulturalRelicPtection.prototype.init = function(){
@@ -21,7 +16,7 @@ CulturalRelicPtection.prototype.init = function(){
     this.render_point_layer();
     this.load_dom();
     const _this = this;
-    serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "stylistic" },function(result){
+    serveRequest("get", server_url+ "/culturaheritage/getCoverage",{ category: "stylistic" },function(result){
         _this.get_view_data(result.data.resultKey);
         _this.load_radar_chart();
         _this.load_bar_chart();
@@ -40,14 +35,13 @@ CulturalRelicPtection.prototype.get_view_data = function(result_data){
             this.community_name.push(key);
             this.radar_chart_indicator_data.push({
                 name: key,
-                max:100,
+                // max:100,
                 color:'#fff'
             })
             if(result_data[i][key].length > 0){
                 for(var j = 0; j < result_data[i][key].length; j++){
-                    console.log(result_data[i][key][j].COVERAGE)
-                    this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = 
-                        result_data[i][key][j].COVERAGE?result_data[i][key][j].COVERAGE.toFixed(2):0;
+                    // console.log(result_data[i][key][j].COVERAGE)
+                    this.comprehensive_data[result_data[i][key][j].LEVELS][i] = result_data[i][key][j].TOTAL;
                 }
             }
         }
@@ -273,15 +267,11 @@ CulturalRelicPtection.prototype.reset_data = function(){
     this.community_name = [];
     this.radar_chart_indicator_data = [];
     this.comprehensive_data = {
-        // "国家级":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "市级":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "区级":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "其它":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "国家级":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "市级":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "区级":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "普查登记":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "其它":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
 }
 var start_cultural_relic_protection_rendering = new CulturalRelicPtection();
