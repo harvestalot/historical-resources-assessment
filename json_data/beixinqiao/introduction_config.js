@@ -111,6 +111,171 @@ const current_land_legend_data = {
         },
     ]
 }
+//街道公共设施概览图例
+const public_service_overview_legend_data = {
+    list:[
+        {
+            name:"便民设施",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"教育设施",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"医疗设施",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"文体设施",
+            legend_color:echarts_color[3]  
+        },
+        {
+            name:"交通设施",
+            legend_color:echarts_color[4]  
+        },
+        {
+            name:"养老设施",
+            legend_color:echarts_color[5]  
+        },
+        {
+            name:"街道管理设施",
+            legend_color:"#F51B04"  
+        },
+    ]
+}
+//街道公共设施--便民设施图例
+const public_service_convenience_people_legend_data = {
+    list:[
+        {
+            name:"超市",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"便利店",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"菜站",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"综合服务站",
+            legend_color:echarts_color[3]  
+        }
+    ]
+}
+//街道公共设施--教育设施图例
+const public_service_education_legend_data = {
+    list:[
+        {
+            name:"幼儿园",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"小学",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"中学",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"九年一贯制",
+            legend_color:echarts_color[3]  
+        }
+    ]
+}
+//街道公共设施--医疗设施图例
+const public_service_medical_legend_data = {
+    list:[
+        {
+            name:"医院",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"社区卫生服务站",
+            legend_color:echarts_color[1]  
+        },
+    ]
+}
+//街道公共设施--文体设施图例
+const public_service_sports_legend_data = {
+    list:[
+        {
+            name:"健身设施",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"室内体育设施",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"室外活动场所",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"综合文体设施",
+            legend_color:echarts_color[3]  
+        },
+        {
+            name:"街道文化服务中心",
+            legend_color:echarts_color[4]  
+        }
+    ]
+}
+//街道公共设施--交通设施图例
+const public_service_traffic_legend_data = {
+    list:[
+        {
+            name:"公交站",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"地铁站",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"停车场",
+            legend_color:echarts_color[2]  
+        },
+    ]
+}
+//街道公共设施--养老设施图例
+const public_service_provide_legend_data = {
+    list:[
+        {
+            name:"社区机构养老设施",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"社区助残服务中心",
+            legend_color:echarts_color[1]  
+        },
+    ]
+}
+//街道公共设施--养老设施图例
+const public_service_street_legend_data = {
+    list:[
+        {
+            name:"社区服务管理用房",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"社区服务中心",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"街道办事处",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"派出所",
+            legend_color:echarts_color[3]  
+        },
+    ]
+}
+
 //产业发展企业图例
 const industry_legend_data = {
     list:[
@@ -173,6 +338,93 @@ const industry_legend_data = {
         {
             name:"住宿和餐饮业",
             legend_color:"#C88A78"
+        },
+    ]
+}
+//历史建筑图例
+const historical_building_legend_data = {
+    list:[
+        {
+            name:"故居",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"寺庙宫观",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"王府",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"使馆",
+            legend_color:echarts_color[3]  
+        },
+        {
+            name:"官署",
+            legend_color:echarts_color[4]  
+        },
+        {
+            name:"古树名木",
+            legend_color:echarts_color[5]  
+        },
+    ]
+}
+//文化资源概览图例
+const cultural_resources_overview_legend_data = {
+    list:[
+        {
+            name:"故居",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"寺庙宫观",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"王府",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"使馆",
+            legend_color:echarts_color[3]  
+        },
+        {
+            name:"官署",
+            legend_color:echarts_color[4]  
+        },
+        {
+            name:"古树名木",
+            legend_color:echarts_color[5]  
+        },
+        {
+            name:"文化遗产",
+            legend_color:"#F51B04"  
+        },
+    ]
+}
+//文化遗迹
+const cultural_heritage_legend_data = {
+    list:[
+        {
+            name:"其他",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"普查登记",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"国家级",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"区级",
+            legend_color:echarts_color[3]  
+        },
+        {
+            name:"市级",
+            legend_color:echarts_color[4]  
         },
     ]
 }

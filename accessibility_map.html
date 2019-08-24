@@ -16,6 +16,21 @@
 			background-color:rgba(0,0,0,.5);
 			color: #fff;
 		}
+		.beixinqiao_subdistrict_link{
+			display: block;
+			width: 80px;
+			height: 30px;
+			line-height: 30px;
+			margin-left: 10px;
+			text-align: center;
+			font-size: 14px;
+			color: #fff;
+			background-color: #f0b33c;
+			border-radius: 15px;
+		}
+		.beixinqiao_subdistrict_link:hover{
+			background-color: #fed27c;
+		}
 		.accessibility_facilities_type>.item_box {
 			padding:10px 10px 0 10px;
 			overflow:hidden;
@@ -133,6 +148,7 @@
 <body>
 	<div id="accessibility_map" style="width: 100%;height: 100%"></div>
 	<div id="accessibility_facilities_type" class="accessibility_facilities_type">
+		<a href="./beixinqiao_subdistrict.html" class="beixinqiao_subdistrict_link">返回</a>
 		<div class="item_box">
 			<div>医疗</div>
 	        <div class="label_box">
@@ -237,6 +253,15 @@
 	            <label>
                     <input type="radio" name="facilities_type" value="15">
                     <div>15分钟</div>
+	            </label>
+	        </div>
+		</div>
+		<div class="item_box">
+			<div>出行方式</div>
+	        <div class="label_box">
+	            <label>
+                    <input type="radio" name="facilities_type" checked value="">
+                    <div>步行</div>
 	            </label>
 	        </div>
 		</div>

@@ -65,28 +65,36 @@
 	    		population();
 	    		break;
 			case "overview": //公共服务设施--概览
-				start_overview_rendering.init(); 
+				start_overview_rendering.init();
+                map_legend(public_service_overview_legend_data); 
 	    		break;
 			case "convenience": //公共服务设施--便民
 				start_convenience_people_rendering.init();
+                map_legend(public_service_convenience_people_legend_data); 
 	    		break;
 			case "education": //公共服务设施--教育
 				start_education_rendering.init();
+                map_legend(public_service_education_legend_data); 
 	    		break;
 			case "medical": //公共服务设施--医疗
 				start_medical_treatment_rendering.init();
+                map_legend(public_service_medical_legend_data); 
 	    		break;
 			case "recreation_sports": //公共服务设施--文体
 				start_recreation_sports_rendering.init();
+                map_legend(public_service_sports_legend_data); 
 	    		break;
 			case "traffic": //公共服务设施--交通
 				start_traffic_facilities_rendering.init();
+                map_legend(public_service_traffic_legend_data); 
 	    		break;
 			case "provide": //公共服务设施--养老
 				start_provide_rendering.init();
+                map_legend(public_service_provide_legend_data); 
 	    		break;
 			case "street_management": //公共服务设施--街道管理
 				start_street_management_rendering.init();
+                map_legend(public_service_street_legend_data); 
 	    		break;
 			case "industry_concentration": //产业结构--产业聚集度
 				$("#industrial_service").show();
@@ -129,21 +137,24 @@
 	    		break;
 			case "culture_overview": //文化资源评估--概览
 				start_cultural_resources_overview_rendering.init();
+                map_legend(cultural_resources_overview_legend_data);
 				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "material_cultural_heritage": //文化资源评估--物质文化遗产
-				this.reset_community_layer();
+				// this.reset_community_layer();
 				start_material_cultural_heritage_rendering.init();
+                map_legend(cultural_heritage_legend_data);
 				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "cultural_relic_protection": //文化资源评估--文物保护单位
-				this.reset_community_layer();
+				// this.reset_community_layer();
 				start_cultural_relic_protection_rendering.init();
 				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "historical_building": //文化资源评估--历史建筑
-				this.reset_community_layer();
+				// this.reset_community_layer();
 				start_historical_building_rendering.init();
+                map_legend(historical_building_legend_data);
 				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "community_opinion": //社区舆情

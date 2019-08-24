@@ -1,6 +1,7 @@
 // 公共服务设施--概览
 var radarChart;
 function PublicServiceOverview() {
+    this.round_point_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#F51B04"];
 	this.lenged_data = ["便民设施", "教育设施", "医疗设施", "养老设施", "文体设施", "交通设施", "街道管理设施"];
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
@@ -15,11 +16,13 @@ function PublicServiceOverview() {
     };
     this.current_series_data = [];
 	this.ranking_list = [];
+	this.facilities_all_point_data = [];
 }
 PublicServiceOverview.prototype.init = function(){
 	this.reset_data();
 	this.load_dom();
 	this.click_dom();
+	this.render_point_layer();
 	const _this = this;
 	serveRequest("get", server_url+ "/Coverage/getCoverageOverview",{ },function(result){
 		_this.get_view_data(result.data.resultKey);
@@ -36,6 +39,10 @@ PublicServiceOverview.prototype.init = function(){
 		}
 		_this.load_ranking_list(_this.ranking_list);
 	});
+}
+//合并设施所有点
+PublicServiceOverview.prototype.get_facilities_all_point_data = function(){
+
 }
 //分类拆分数据
 PublicServiceOverview.prototype.get_view_data = function(result_data){
@@ -77,6 +84,61 @@ PublicServiceOverview.prototype.load_dom = function(){
 	'</div>';
 	$("#visualization_echarts_content").append(public_service_dom_str);
 };
+//添加所有设施类型的点标识图层_convenient_people
+PublicServiceOverview.prototype.render_point_layer = function(){
+    var round_point_color = this.round_point_color;
+    round_point_layer = new Loca.RoundPointLayer({
+        map: map,
+        zIndex: 100,
+        eventSupport:true,
+    });
+    round_point_layer.setData(convenience_people_facilities_point_data.
+    	concat(educational_facilities_point_data,medical_treatment_facilities_point_data,
+    		recreation_sports_facilities_point_data,traffic_facilities_point_data,
+    		endowment_facilities_point_data,street_management_facilities_point_data), {
+        lnglat: 'lnglat'
+    });
+    round_point_layer.setOptions({
+        style: {
+            radius: 6,
+            color: function (data) {
+                // console.log(data.value.properties)
+                var type = data.value.properties["Ò»¼¶²Ëµ¥"];
+                var color = round_point_color[0];
+                switch (type){
+                    case "便民设施" :
+                        color = round_point_color[0];
+                        break;
+                    case "教育设施" :
+                        color = round_point_color[1];
+                        break;
+                    case "医疗设施" :
+                        color = round_point_color[2];
+                        break;
+                    case "文体设施" :
+                        color = round_point_color[3];
+                        break;
+                    case "交通设施" :
+                        color = round_point_color[4];
+                        break;
+                    case "养老设施" :
+                        color = round_point_color[5];
+                        break;
+                    case "街道管理设施" :
+                        color = round_point_color[6];
+                        break;
+                }
+                return color;
+            }
+        }
+    })
+    round_point_layer.render();
+    round_point_layer.on('click', function (ev) {
+        var properties = ev.rawData.properties;
+        //渲染信息窗体
+        openInfo(properties.hasOwnProperty("name")?properties.name:properties.address, properties.addres, ev.lnglat);
+    });
+}
 //点击类型触发
 PublicServiceOverview.prototype.click_dom = function(){
 	var _this = this;

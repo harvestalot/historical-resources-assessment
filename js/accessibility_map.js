@@ -67,12 +67,14 @@ $(function(){
 			});
 			accessibility_map.add(marker);
     		$("#accessibility_facilities_type input:checked").each(function(i){
-    			if($(this).val() !== "10" && $(this).val() !== "15" && $(this).val() !== "文化资源"){
-    				_this.facilities_type.push($(this).val());
-    			}else if($(this).val() === "文化资源"){
-    				_this.cultural_resources = $(this).val();
-    			}else{
-    				_this.time = $(this).val();
+    			if($(this).val()){
+	    			if($(this).val() !== "10" && $(this).val() !== "15" && $(this).val() !== "文化资源"){
+	    				_this.facilities_type.push($(this).val());
+	    			}else if($(this).val() === "文化资源"){
+	    				_this.cultural_resources = $(this).val();
+	    			}else{
+	    				_this.time = $(this).val();
+	    			}
     			}
     		})
 			_this.accessibility_range(_this.centerpoint);
@@ -160,32 +162,7 @@ $(function(){
 	}
 	//渲染可达性区域内的符合条件的点图层
 	AccessibilityMap.prototype.render_point_layer = function(){
-	    // var _this = this;
-	    // var accessibility_round_point_layer = new Loca.IconLayer({
-	    //     map: accessibility_map,
-	    //     zIndex: 100,
-	    //     eventSupport:true,
-	    // });
-	    // // accessibility_round_point_layer.setData(this.area_cultural_resources_point_data, {
-	    // accessibility_round_point_layer.setData(cultural_resources_point_data, {
-	    //     lnglat: 'lnglat'
-	    // });
-	    // accessibility_round_point_layer.setOptions({
-	    //     style: {
-	    //         size: 24
-	    //     },
-	    //     source: function(res) {
-	    //         var src = point_icon_server_url+ "/accessibility/wenhuaziyaun.png";
-	    //         return src;
-	    //     },
-	    // });
-	    // accessibility_round_point_layer.render();
-	    // accessibility_round_point_layer.on('click', function (ev) {
-	    // 	ev.domEvent.stopPropagation();
-	    //     var properties = ev.rawData;
-	    //     //渲染信息窗体
-	    //     openInfo(properties.name, "", properties.lnglat);
-	    // });
+	    var _this = this;
 	    this.area_cultural_resources_point_data.forEach(function(marker) {
 	        var marker = new AMap.Marker({
 	            map: accessibility_map,

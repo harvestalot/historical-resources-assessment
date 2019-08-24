@@ -1,28 +1,24 @@
 //文化资源评估--历史建筑
 function HistoricalBuilding() {
-    this.lenged_data = ["健身设施", "室内体育设施", "室外活动场所", "综合文体设施", "街道文化服务中心"];
-    // this.lenged_data = ["故居", "寺庙宫观", "王府", "使馆","官署","古树名木"];
+    this.round_point_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA"];
+    this.lenged_data = ["故居", "寺庙宫观", "王府", "使馆","官署","古树名木"];
     this.community_name = [];
     this.radar_chart_indicator_data = [];
     this.comprehensive_data = {
-        // "故居":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "寺庙宫观":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "王府":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "使馆":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "官署":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "古树名木":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "故居":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "寺庙宫观":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "王府":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "使馆":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "官署":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "古树名木":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
 }
 HistoricalBuilding.prototype.init = function(){
+    this.reset_data();
 	this.render_point_layer();
     this.load_dom();
     const _this = this;
-    serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "stylistic" },function(result){
+    serveRequest("get", server_url+ "/architecture/getCoverage",{ },function(result){
         _this.get_view_data(result.data.resultKey);
         _this.load_radar_chart();
         _this.load_bar_chart();
@@ -41,14 +37,12 @@ HistoricalBuilding.prototype.get_view_data = function(result_data){
             this.community_name.push(key);
             this.radar_chart_indicator_data.push({
                 name: key,
-                max:100,
+                // max:100,
                 color:'#fff'
             })
             if(result_data[i][key].length > 0){
                 for(var j = 0; j < result_data[i][key].length; j++){
-                    console.log(result_data[i][key][j].COVERAGE)
-                    this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = 
-                        result_data[i][key][j].COVERAGE?result_data[i][key][j].COVERAGE.toFixed(2):0;
+                    this.comprehensive_data[result_data[i][key][j].TYPE][i] = result_data[i][key][j].TOTAL;
                 }
             }
         }
@@ -56,30 +50,77 @@ HistoricalBuilding.prototype.get_view_data = function(result_data){
 }
 //添加设施点标识图层
 HistoricalBuilding.prototype.render_point_layer = function(){
-    var _this = this;
-    point_layer = new Loca.IconLayer({
+    var round_point_color = this.round_point_color;
+    round_point_layer = new Loca.RoundPointLayer({
         map: map,
         zIndex: 100,
         eventSupport:true,
     });
-    point_layer.setData(historical_building_data, {
+    round_point_layer.setData(historical_building_data, {
         lnglat: 'lnglat'
     });
-    point_layer.setOptions({
-        source: function(res) {
-            var src = point_icon_server_url+ '/beixinqiao/lishijianzhu.png';
-            return src;
-        },
+    round_point_layer.setOptions({
         style: {
-            size: 32
+            radius: 6,
+            color: function (data) {
+                // console.log(data.value.properties)
+                var type = data.value.properties.type;
+                var color = round_point_color[0];
+                switch (type){
+                    case "故居" :
+                        color = round_point_color[0];
+                        break;
+                    case "寺庙宫观" :
+                        color = round_point_color[1];
+                        break;
+                    case "王府" :
+                        color = round_point_color[2];
+                        break;
+                    case "使馆" :
+                        color = round_point_color[3];
+                        break;
+                    case "官署" :
+                        color = round_point_color[4];
+                        break;
+                    case "古树名木" :
+                        color = round_point_color[5];
+                        break;
+                }
+                return color;
+            }
         }
-    });
-    point_layer.render();
-    point_layer.on('click', function (ev) {
+    })
+    round_point_layer.render();
+    round_point_layer.on('click', function (ev) {
         var properties = ev.rawData.properties;
         //渲染信息窗体
         openInfo(properties.name, properties.addres, ev.lnglat);
     });
+
+    // var _this = this;
+    // point_layer = new Loca.IconLayer({
+    //     map: map,
+    //     zIndex: 100,
+    //     eventSupport:true,
+    // });
+    // point_layer.setData(historical_building_data, {
+    //     lnglat: 'lnglat'
+    // });
+    // point_layer.setOptions({
+    //     source: function(res) {
+    //         var src = point_icon_server_url+ '/beixinqiao/lishijianzhu.png';
+    //         return src;
+    //     },
+    //     style: {
+    //         size: 32
+    //     }
+    // });
+    // point_layer.render();
+    // point_layer.on('click', function (ev) {
+    //     var properties = ev.rawData.properties;
+    //     //渲染信息窗体
+    //     openInfo(properties.name, properties.addres, ev.lnglat);
+    // });
 }
 //加载设施覆盖率雷达图图表数据
 HistoricalBuilding.prototype.load_radar_chart = function(){
@@ -249,17 +290,12 @@ HistoricalBuilding.prototype.reset_data = function(){
     this.community_name = [];
     this.radar_chart_indicator_data = [];
     this.comprehensive_data = {
-        // "故居":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "寺庙宫观":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "王府":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "使馆":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "官署":[0,0,0,0,0,0,0,0,0,0,0,0],
-        // "古树名木":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
-        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "故居":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "寺庙宫观":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "王府":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "使馆":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "官署":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "古树名木":[0,0,0,0,0,0,0,0,0,0,0,0],
     };
 }
 var start_historical_building_rendering = new HistoricalBuilding();
