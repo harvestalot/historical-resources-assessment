@@ -1,25 +1,37 @@
 //文化资源--概览
 function CulturalResourcesOverview(){
     this.round_point_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#F51B04"];
-	this.legend_data = ["物质文化遗产","文物保护的那位","历史建筑"];
-	this.cultural_resources_data = [];
-	this.bar_series_data = [];
+	this.legend_data = ["物质文化遗产","文物保护单位","历史建筑"];
+	this.community_name = [];
+	this.bar_series_data = {
+        architecture:[0,0,0,0,0,0,0,0,0,0,0,0],//历史建筑
+        culturalHeritage:[0,0,0,0,0,0,0,0,0,0,0,0],//文化遗产
+        culturalProtection:[0,0,0,0,0,0,0,0,0,0,0,0],//文物保护
+    };
 }
 CulturalResourcesOverview.prototype.init = function(){
 	var _this = this;
+	_this.community_name = [];
 	_this.load_dom();
 	_this.sidebar_polygonLayer();
 	_this.render_point_layer();
 	// _this.render_historical_building_point_layer();
-	serveRequest("get", server_url+ "/PopulationInfo/getPopulationInfo",{},function(result){
+	serveRequest("get", server_url+ "/culture/getCoverage",{},function(result){
 		const population_data = result.data.resultKey;
-		_this.cultural_resources_data = population_data;
+		_this.get_view_data(population_data);
 		_this.load_bar_chart();
 	});
 }
 //分类拆分数据
 CulturalResourcesOverview.prototype.get_view_data = function(result_data){
 	for(var i = 0; i < result_data.length; i++){
+	    for(var key in result_data[i]){
+	        this.community_name.push(key);
+	    	for(var item in result_data[i][key]){
+	    		result_data[i][key][item].length > 0?
+	    		this.bar_series_data[item][i] = result_data[i][key][item][0].TOTAL:"";
+	    	}
+		}
 	}
 }
 //渲染dom元素
@@ -170,35 +182,30 @@ CulturalResourcesOverview.prototype.load_bar_chart = function(){
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
 	        inverse: true,
-	        data: [],
+	        data: this.community_name,
 	    },
-	    series: [
-	        {
-	            name: '户籍人口',
-	            type: 'bar',
-	            // label: seriesLabel,
-	            data: [],
-	        },
-	        {
-	            name: '常驻人口',
-	            type: 'bar',
-	            // label: seriesLabel,
-	            data: []
-	        },
-	        {
-	            name: '流动人口',
-	            type: 'bar',
-	            // label: seriesLabel,
-	            data: []
-	        }
-	    ]
+	    series: []
 	};
-	for(var i = 0; i < this.cultural_resources_data.length; i++){
-		var item = this.cultural_resources_data[i];
-		bar_option.yAxis.data.push(item.NAME); 
-		bar_option.series[0].data.push(item.REGISTER); 
-		bar_option.series[1].data.push(item.RESIDENT); 
-		bar_option.series[2].data.push(item.FLOATING); 
+	for(var i = 0; i < this.legend_data.length; i++){
+		if(this.legend_data[i] === "物质文化遗产"){
+			bar_option.series.push({
+	            name: this.legend_data[i],
+	            type: 'bar',
+	            data: this.bar_series_data.culturalHeritage,
+			})
+		}else if(this.legend_data[i] === "文物保护单位"){
+			bar_option.series.push({
+	            name: this.legend_data[i],
+	            type: 'bar',
+	            data: this.bar_series_data.culturalProtection,
+			})
+		}else{
+			bar_option.series.push({
+	            name: this.legend_data[i],
+	            type: 'bar',
+	            data: this.bar_series_data.architecture,
+			})
+		}
 	}
     cultural_resources_overview_bar_chart.setOption(bar_option, true);
 }

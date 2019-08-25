@@ -41,6 +41,7 @@ $(function(){
     			$(this).prop("checked",false);
     			_this.facilities_type = [];
     		})
+			$("#accessibility_facilities_type input.default_type").prop("checked",true);
 		})
 		//根据条件确定筛选
 		$("#search_accessibility").on("click",function(){

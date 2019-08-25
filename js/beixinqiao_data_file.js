@@ -1,5 +1,7 @@
 //北新桥公共静态数据配置文件
-document.write('<script src="./json_data/beixinqiao/introduction_config.js?V2019.08.20-1"></script>');
+document.write('<script src="./js/beixinqiao/introduction_config.js?V2019.08.20-1"></script>');
+//经纬度wgs84坐标系转化为高德坐标系
+document.write('<script src="./js/lnglat_transformation.js?V2019.08.20-1"></script>');
 
 
 //图层数据文件 
