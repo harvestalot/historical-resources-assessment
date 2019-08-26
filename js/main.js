@@ -50,6 +50,7 @@
 	}
 	//根据导航触发加载对应模块数据
 	VisualScreen.prototype.init_module = function(current_type){
+		$("#real_time_traffic_explain").hide();//交通实况提示
 		$("#industrial_service").hide();
 		$("#community_opinion").hide();//隐藏社区舆情搜索框
 		$("#year_switcher").hide();
@@ -108,6 +109,7 @@
                 map_legend(industry_legend_data);
 	    		break;
 			case "real_time_traffic": //截取活力监测--实时交通路况监测
+				$("#real_time_traffic_explain").fadeIn(300);
 				this.reset_community_layer();
 				start_real_time_traffic_rendering.init();
 				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");

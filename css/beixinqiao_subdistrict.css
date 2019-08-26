@@ -1,11 +1,21 @@
 /*头部*/
 .header{
 	height: 8%;
-	background: #f0b33c;
+	background-color: #f0b33c;
+	background-image: url("../images/bgc_icon.png");
+	background-position: center right;
+	background-repeat: no-repeat;
 }
 .logo{
-	width: 5%;
+	width: 180px;
+	height: 68px;
+	margin: 20px auto 40px;
+	background: url("../images/logo.png");
+}
+.logo_icon{
+	width: 50px;
 	height: 100%;
+	background: url("../images/logo_icon.png") center center no-repeat;
 	/*background-color: #f0b33c;*/
 }
 .title_box{
@@ -533,6 +543,19 @@
 }
 .select select:focus {
 	outline: none;
+}
+/*交通实况提示说明*/
+.real_time_traffic_explain{
+	position: absolute;
+	width: 180px;
+	top: 8%;
+	left: 50%;
+	margin-left: -100px;
+	padding: 10px 10px;
+	background-color: rgba(0,0,0,.5);
+	color: #fff;
+	font-size: 14px;
+	display: none;
 }
 /*交通可达性按钮*/
 .traffic_accessibility{

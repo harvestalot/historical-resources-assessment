@@ -8,7 +8,9 @@ RealTimeTraffic.prototype.init = function(){
 //实时交通路况图层
 RealTimeTraffic.prototype.real_time_traffic_layer = function(){
     trafficLayer = new AMap.TileLayer.Traffic({
-        zIndex: 11
+        zIndex: 11,
+        autoRefresh:true,
+        interval:3600,
     });
     trafficLayer.setMap(map);
     trafficLayer.show();
