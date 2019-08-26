@@ -7,7 +7,7 @@ document.write('<script type="text/javascript" src="./lib/echarts.min.js"></scri
 document.write('<script type="text/javascript" src="//webapi.amap.com/maps?v=1.4.15&key=ecde469412ea3b8c4b8a640687c68c2b&plugin=AMap.PlaceSearch"></script>');
 document.write('<script type="text/javascript" src="//webapi.amap.com/loca?v=1.3.0&key=ecde469412ea3b8c4b8a640687c68c2b"></script>');
 document.write('<script type="text/javascript" src="https://cache.amap.com/lbs/static/PlaceSearchRender.js"></script>');
-// document.write('<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>');
+document.write('<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>');
 // document.write('<script src="//a.amap.com/Loca/static/manual/example/script/demo.js"></script>');//openInfoWin封装
 
 var trafficLayer;//实时路况交通图层

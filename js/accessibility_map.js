@@ -8,12 +8,14 @@ $(function(){
 	    zoom: 12,
 	    zIndex: 10
 	});
-	accessibility_map.on('mapload', function () {
-	    accessibility_map.getMap().plugin(['AMap.ControlBar'], function () {
-	        var controlBar = new AMap.ControlBar();
-	        accessibility_map.getMap().addControl(controlBar);
-	    });
+	accessibility_map.plugin(["AMap.ToolBar"], function() {
+		accessibility_map.addControl(new AMap.ToolBar({
+			position:'RT'
+		}));
 	});
+	if(location.href.indexOf('&guide=1')!==-1){
+		accessibility_map.setStatus({scrollWheel:false})
+	}
         // accessibility_map.setDefaultCursor("url('https://lbs.amap.com/webapi/static/Images//0.png'),pointer");
 
 	function AccessibilityMap(){
