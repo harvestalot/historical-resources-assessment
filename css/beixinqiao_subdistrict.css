@@ -41,13 +41,23 @@
 .nav a{
 	display: table-cell;
 	height: 100%;
-	padding: 0 30px;
+	/*padding: 0 30px;*/
 	vertical-align: middle;
 	font-size: 18px;
 	color: #000;
 }
 .nav a:hover{
 	color: #fff;
+}
+.nav a.flag_bit:before,
+.nav a.flag_bit:after{
+	content:'';
+	display:inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0 30px;
+	background-color: #000;
+	border-radius: 20px;
 }
 .home{
 	width:4%;
