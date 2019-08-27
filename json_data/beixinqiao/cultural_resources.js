@@ -1,4 +1,4 @@
-const cultural_resources_point_data = [{
+var cultural_resources_point_data = [{
 	"type": "文化资源",
 	"name": "义达里门楼",
 	"address": "北京市西城区西长安街街道西四南大街义达里西口",

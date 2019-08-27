@@ -1,4 +1,4 @@
-const current_situation_land_data = [{
+var current_situation_land_data = [{
 	"name": "交通设施用地",
 	"lnglat": [
 		[116.42537001942297, 39.95008316791236],

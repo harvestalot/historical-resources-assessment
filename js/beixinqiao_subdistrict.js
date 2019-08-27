@@ -57,7 +57,8 @@
         	$("#visualization_echarts_content").html("");
         	$(this).addClass("subNavCurrent").siblings(".navContent").find("a").removeClass("subNavCurrent");
 			start_init.init_module($(this).attr("data_type"));
-			document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+			$("#visualization_content").show();
+			// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 			$(this).attr("data_type") === "population"?
 			document.getElementById("visualization_content").classList.add("animated","fadeInRight"):"";
         }
@@ -67,8 +68,9 @@
         $("#visualization_echarts_content").html("");
     	$(this).parents(".subNavBox").find(".subNavCurrent").removeClass("subNavCurrent");
         $(this).addClass("subNavCurrent");
-		document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
-		document.getElementById("visualization_content").classList.add("animated","fadeInRight");
+			$("#visualization_content").show();
+		// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+		// document.getElementById("visualization_content").classList.add("animated","fadeInRight");
 		start_init.init_module($(this).attr("data_type"));
     });
 });

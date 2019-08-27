@@ -7,18 +7,22 @@ Copyright (c) 2014 Daniel Eden
 */
 
 .animated {
+  -ms-animation-duration: 0.6s;
   -webkit-animation-duration: 0.6s;
           animation-duration: 0.6s;
+  -ms-animation-fill-mode: both;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
 }
 
 .animated.infinite {
+  -ms-animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
 }
 
 .animated.hinge {
+  -ms-animation-duration: 2s;
   -webkit-animation-duration: 2s;
           animation-duration: 2s;
 }
@@ -1147,18 +1151,22 @@ Copyright (c) 2014 Daniel Eden
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
+    -ms-animation-name: translate3d(-100%, 0, 0); 
     -webkit-transform: translate3d(-100%, 0, 0);
             transform: translate3d(-100%, 0, 0);
   }
 
   100% {
     opacity: 1;
+    -ms-animation-name: none; 
     -webkit-transform: none;
             transform: none;
   }
 }
 
 .fadeInLeft {
+
+  -ms-animation-name: fadeInLeft; 
   -webkit-animation-name: fadeInLeft;
           animation-name: fadeInLeft;
 }
@@ -1199,12 +1207,14 @@ Copyright (c) 2014 Daniel Eden
 @-webkit-keyframes fadeInRight {
   0% {
     opacity: 0;
+    -ms-transform: translate3d(100%, 0, 0);
     -webkit-transform: translate3d(100%, 0, 0);
             transform: translate3d(100%, 0, 0);
   }
 
   100% {
     opacity: 1;
+    -ms-transform: none;
     -webkit-transform: none;
             transform: none;
   }
@@ -1213,18 +1223,21 @@ Copyright (c) 2014 Daniel Eden
 @keyframes fadeInRight {
   0% {
     opacity: 0;
+    -ms-transform: translate3d(100%, 0, 0);
     -webkit-transform: translate3d(100%, 0, 0);
             transform: translate3d(100%, 0, 0);
   }
 
   100% {
     opacity: 1;
+    -ms-transform: none;
     -webkit-transform: none;
             transform: none;
   }
 }
 
 .fadeInRight {
+  -ms-animation-name: fadeInRight;
   -webkit-animation-name: fadeInRight;
           animation-name: fadeInRight;
 }
@@ -1466,6 +1479,7 @@ Copyright (c) 2014 Daniel Eden
 
   100% {
     opacity: 0;
+    -ms-transform: translate3d(100%, 0, 0);
     -webkit-transform: translate3d(100%, 0, 0);
             transform: translate3d(100%, 0, 0);
   }
@@ -1478,12 +1492,14 @@ Copyright (c) 2014 Daniel Eden
 
   100% {
     opacity: 0;
+    -ms-transform: translate3d(100%, 0, 0);
     -webkit-transform: translate3d(100%, 0, 0);
             transform: translate3d(100%, 0, 0);
   }
 }
 
 .fadeOutRight {
+  -ms-animation-name: fadeOutRight;
   -webkit-animation-name: fadeOutRight;
           animation-name: fadeOutRight;
 }
@@ -1650,8 +1666,10 @@ Copyright (c) 2014 Daniel Eden
 }
 
 .animated.flip {
+  -ms-backface-visibility: visible;
   -webkit-backface-visibility: visible;
           backface-visibility: visible;
+  -ms-animation-name: flip;
   -webkit-animation-name: flip;
           animation-name: flip;
 }

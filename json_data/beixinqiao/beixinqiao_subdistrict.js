@@ -1,4 +1,4 @@
-const beixinqiao_subdistict_data = [{
+var beixinqiao_subdistict_data = [{
 	"name": "北新桥街道",
 	"center": [],
 	"coordinates": [

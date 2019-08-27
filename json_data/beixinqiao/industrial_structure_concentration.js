@@ -1,5 +1,5 @@
 //产业聚集度
-const industrial_structure_concentration_area_data = [{
+var industrial_structure_concentration_area_data = [{
 	"properties": {
 		"Id": 1,
 		"Ãû³Æ": "文化产业"
@@ -41,7 +41,7 @@ const industrial_structure_concentration_area_data = [{
 		[116.43214814230865, 39.94436130240781]
 	]
 }];
-const industrial_structure_concentration_line_data = [{
+var industrial_structure_concentration_line_data = [{
 	"lnglat": [
 		[116.41641784076623, 39.949823768678364],
 		[116.41755296889355, 39.93228120908428]

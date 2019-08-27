@@ -1,4 +1,4 @@
-const beixinqiao_road_data = [{
+var beixinqiao_road_data = [{
 	"name": "安定门东滨河路",
 	"lnglat": [
 		[116.43016960656202, 39.9505005777673],

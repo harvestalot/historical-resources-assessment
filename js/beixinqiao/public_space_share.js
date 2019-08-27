@@ -8,7 +8,7 @@ PublicSpaceShare.prototype.init = function(){
 }
 //生产dom元素
 PublicSpaceShare.prototype.load_dom = function(){
-    const public_service_dom_str = '<div>'+
+    var public_service_dom_str = '<div>'+
     '<p class="message">更新策略：</p>'+
     '<p class="message">在控规中落实功能政策区，明确功能发育的可能区域，提供政策开放期，进行产权功能的变更。</p>'+
     '</div>';

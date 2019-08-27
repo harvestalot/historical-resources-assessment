@@ -1,5 +1,5 @@
 //公共空间共享
-const public_space_share_line_data = [{
+var public_space_share_line_data = [{
 	"id": 1,
 	"lnglat": [
 		[116.4171103895828, 39.937036089231846],
@@ -122,7 +122,7 @@ const public_space_share_line_data = [{
 	]
 }];
 
-const public_space_share_area_data = [{
+var public_space_share_area_data = [{
 	"name": "底层空间公共化区域",
 	"lnglat": [
 		[116.41860128830754, 39.94923605564975],

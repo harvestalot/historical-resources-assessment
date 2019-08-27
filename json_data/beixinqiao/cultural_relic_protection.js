@@ -1,5 +1,5 @@
 //文化遗产评估-文物保护单位
-const cultural_relic_protection_area_data = [{
+var cultural_relic_protection_area_data = [{
 	"properties": {
 		"OBJCODE": "1101010698000005",
 		"OBJNAME": "雍和宫",
@@ -1699,7 +1699,7 @@ const cultural_relic_protection_area_data = [{
 }];
 
 
-const cultural_relic_protection_point_data = [{
+var cultural_relic_protection_point_data = [{
 	"properties": {
 		"OBJCODE": "1101010698000005",
 		"OBJNAME": "雍和宫",

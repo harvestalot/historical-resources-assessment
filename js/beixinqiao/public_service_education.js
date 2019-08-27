@@ -33,7 +33,7 @@ PublicServiceEducation.prototype.init = function(){
 	this.reset_data();
 	this.render_point_layer();
 	this.load_dom();
-	const _this = this;
+	var _this = this;
 	//教育设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "education" },function(result){
 		_this.get_view_data(result.data.resultKey);
@@ -116,8 +116,8 @@ PublicServiceEducation.prototype.render_point_layer = function(){
 }
 // //添加教育设施点标识图层
 // PublicServiceEducation.prototype.render_point_layer = function(){
-// 	const _this = this;
-// 	const icon_url_config = {
+// 	var _this = this;
+// 	var icon_url_config = {
 // 		"幼儿园": "youeryuan",
 // 		"小学": "xiaoxue",
 // 		"中学": "zhongxue",
@@ -162,7 +162,7 @@ PublicServiceEducation.prototype.render_point_layer = function(){
 //生产dom元素
 PublicServiceEducation.prototype.load_dom = function(){
 	//雷达统计图
-	const public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 55%;padding-top:10px;box-sizing: border-box;">'+
+	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 55%;padding-top:10px;box-sizing: border-box;">'+
 	'<div id="public_service_type" class="clearfix statistics_type">'+
 	'<a href="javascript:void(0)" class="active_checked" data_type="">全部</a>'+
 	'<a href="javascript:void(0)" data_type="1">幼儿园</a>'+
@@ -211,7 +211,7 @@ PublicServiceEducation.prototype.load_reachability_layer = function(reachability
 }
 //加载图表数据
 PublicServiceEducation.prototype.load_chart = function(type){
-	const seriesData = [];
+	var seriesData = [];
 	switch (type){
 		case "1" :
 			seriesData.push({
@@ -364,7 +364,7 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 }
 //加载柱状统计图
 PublicServiceEducation.prototype.load_bar_chart = function(){
-	const _this = this;
+	var _this = this;
 	var myChart = echarts.init(document.getElementById("education_bar_content"));
 	var option = {
 	    color: echarts_color,
@@ -376,13 +376,11 @@ PublicServiceEducation.prototype.load_bar_chart = function(){
 	    },
 	    xAxis: {
 	        type: "category",
-	        axisLabel: {
-	        	...coordinate_axis_style.axisLabel,
-	        	...{
-			        formatter:function(val){
-			            return val.split("").join("\n");
-			        }
-    		}},
+	        axisLabel: get_object_assign(coordinate_axis_style.axisLabel,{
+		        formatter:function(val){
+		            return val.split("").join("\n");
+		        }
+    		}),
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
 	        data: this.communityName

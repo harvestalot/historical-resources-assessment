@@ -1,5 +1,5 @@
 //公共空间可利用空间资源
-const public_space_available_space_data = [{
+var public_space_available_space_data = [{
 	"name": "地下空间",
 	"lnglat": [
 		[116.42578788286383, 39.947888363380386],
@@ -42,7 +42,7 @@ const public_space_available_space_data = [{
 	]
 }];
 
-const public_space_available_space_point_data =  [{
+var public_space_available_space_point_data =  [{
 	"name": "可统一调配公共服务设施单元",
 	"lnglat": [116.42856043254329, 39.93570648143362]
 }, {

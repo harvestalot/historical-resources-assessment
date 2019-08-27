@@ -1,4 +1,4 @@
-const traffic_facilities_point_data = [{
+var traffic_facilities_point_data = [{
 	"properties": {
 		"address": "东城区北二环北官厅44内环公交场站",
 		"facility_type": "公交站"

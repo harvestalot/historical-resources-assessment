@@ -1,4 +1,4 @@
-const industrial_structure_development_data = [{
+var industrial_structure_development_data = [{
 	"properties": {
 		"id": 1,
 		"µ¥Î»": "中央单位",

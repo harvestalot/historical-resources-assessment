@@ -57,7 +57,7 @@ CommunityOpinion.prototype.load_heatmap_layer = function(current_year){
     });
     heatmapLayer.setOptions({
         style: {
-            radius: 30,
+            radius: 60,
             color: {
                 0.5: '#2c7bb6',
                 0.65: '#abd9e9',

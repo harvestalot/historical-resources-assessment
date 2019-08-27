@@ -20,7 +20,7 @@ PublicSpaceGreenbelt.prototype.init = function(){
         _this.load_radar_chart();
     });
     serveRequest("get", server_url+ "/Greenland/getRanking",{ },function(result){
-        const data = result.data.resultKey;
+        var data = result.data.resultKey;
         _this.ranking_list = [
             { type:"绿地覆盖率", name: data.maxCoverage.NAME, value: data.maxCoverage.GREENLAND_RATE.toFixed(2)+"%" },
             { type:"人均绿地面积", name: data.maxPersion.NAME, value: data.maxPersion.PRESON_GREENLAND.toFixed(2) },
@@ -56,7 +56,7 @@ PublicSpaceGreenbelt.prototype.sidebar_polygonLayer = function(){
 }
 //渲染dom元素
 PublicSpaceGreenbelt.prototype.load_dom = function(){
-    const public_service_dom_str = '<div id="community_greenbelt_pie_content" class="chart_view" style="width: 100%; height: 50%;"></div>'+
+    var public_service_dom_str = '<div id="community_greenbelt_pie_content" class="chart_view" style="width: 100%; height: 50%;"></div>'+
         '<div id="community_greenbelt_bar_content" class="chart_view" style="width: 100%; height: 30%;"></div>'+
         '<div id="community_greenbelt_list_content" class="chart_view" style="width: 100%; height: 20%;"></div>';
     $("#visualization_echarts_content").append(public_service_dom_str);
@@ -106,13 +106,13 @@ PublicSpaceGreenbelt.prototype.load_bar_chart = function(){
             data:['绿地面积', '人均绿地面积']
         },
         xAxis: {
-            axisLabel: {
-                ...coordinate_axis_style.axisLabel,
-                ...{
+            axisLabel: get_object_assign(
+                coordinate_axis_style.axisLabel,
+                {
                     formatter:function(val){
                         return val.split("").join("\n");
                     }
-            }},
+            }),
             axisLine: coordinate_axis_style.axisLine,
             splitLine: coordinate_axis_style.splitLine,
             data : this.community_name

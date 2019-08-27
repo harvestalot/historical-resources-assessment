@@ -1,4 +1,4 @@
-const control_unit_data = [{
+var control_unit_data = [{
 	"name": "新太仓单元",
 	"coordinates": [
 		[116.42556776380044, 39.94007068201333],

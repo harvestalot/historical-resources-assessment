@@ -51,10 +51,10 @@ var sidebar_polygonLayer;//侧边导航触发的图层
 var line_layer;//线图层
 var round_point_layer;//圆点图层
 // icon点标记图片地址
-const point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
-const reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
-const server_url = "http://116.62.222.106:8081";
-// const server_url = "http://192.168.1.43:8081";
+var point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
+var reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
+var server_url = "http://116.62.222.106:8081";
+// var server_url = "http://192.168.1.43:8081";
 /**
  *ajax请求通用方法
  *
@@ -92,4 +92,15 @@ function map_legend(current_land_legend_data){
     $("#map_legend").fadeIn(300);
     var html = template("map_legend_tmp",current_land_legend_data);
     document.getElementById('map_legend').innerHTML = html;
+}
+// 对象合并
+function get_object_assign(obj1, obj2){
+    var obj3 = {};
+    for(var attr in obj1){
+        obj3[attr] = obj1[attr];
+    }
+    for(var attr in obj2){
+        obj3[attr] = obj2[attr];
+    }
+    return obj3;
 }

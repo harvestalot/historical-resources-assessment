@@ -1,5 +1,5 @@
 //文化遗产评估-物质文化遗产
-const material_cultural_heritage_data =[{
+var material_cultural_heritage_data =[{
 	"properties": {
 		"Id": 1,
 		"Ãû³Æ": "雍和宫",

@@ -17,7 +17,7 @@ HistoricalBuilding.prototype.init = function(){
     this.reset_data();
 	this.render_point_layer();
     this.load_dom();
-    const _this = this;
+    var _this = this;
     serveRequest("get", server_url+ "/architecture/getCoverage",{ },function(result){
         _this.get_view_data(result.data.resultKey);
         _this.load_radar_chart();
@@ -26,7 +26,7 @@ HistoricalBuilding.prototype.init = function(){
 }
 //生产dom元素
 HistoricalBuilding.prototype.load_dom = function(){
-    const cultural_relic_dom_str = '<div id="cultural_relic_coverage_content" style="width: 100%; height: 50%;"></div>'+
+    var cultural_relic_dom_str = '<div id="cultural_relic_coverage_content" style="width: 100%; height: 50%;"></div>'+
         '<div id="cultural_relic_bar_content" style="width: 100%; height: 50%;"></div>';
     $("#visualization_echarts_content").append(cultural_relic_dom_str);
 };
@@ -127,9 +127,9 @@ HistoricalBuilding.prototype.load_radar_chart = function(){
     var radarChart = echarts.init(document.getElementById("cultural_relic_coverage_content"));
     var radar_option = {
         color: echarts_color,
-        title:{...{
+        title:get_object_assign({
             text:"各社区文保单位占比",
-        }, ...echart_title},
+        }, echart_title),
         legend: {
             show: true,
             right:"10%",
@@ -177,49 +177,49 @@ HistoricalBuilding.prototype.load_radar_chart = function(){
             indicator: this.radar_chart_indicator_data
         },
         "series": [
-            {...rader_color[0], ...{
+            get_object_assign(rader_color[0], {
                 "name": this.lenged_data[0],
                 "data": [
                     this.comprehensive_data[this.lenged_data[0]]
                 ]
-            }},
-            {...rader_color[1], ...{
+            }),
+            get_object_assign(rader_color[1], {
                 "name": this.lenged_data[1],
                 "data": [
                     this.comprehensive_data[this.lenged_data[1]]
                 ]
-            }},
-            {...rader_color[2], ...{
+            }),
+            get_object_assign(rader_color[2], {
                 "name": this.lenged_data[2],
                 "data": [
                     this.comprehensive_data[this.lenged_data[2]]
                 ]
-            }},
-            {...rader_color[3], ...{
+            }),
+            get_object_assign(rader_color[3], {
                 "name": this.lenged_data[3],
                 "data": [
                     this.comprehensive_data[this.lenged_data[3]]
                 ]
-            }},
-            {...rader_color[4], ...{
+            }),
+            get_object_assign(rader_color[4], {
                 "name": this.lenged_data[4],
                 "data": [
                     this.comprehensive_data[this.lenged_data[4]]
                 ]
-            }}
+            })
         ]
     };
     radarChart.setOption(radar_option, true);
 }
 //加载柱状统计图
 HistoricalBuilding.prototype.load_bar_chart = function(){
-    const _this = this;
+    var _this = this;
     var myChart = echarts.init(document.getElementById("cultural_relic_bar_content"));
     var option = {
         color: echarts_color,
-        title:{...{
+        title:get_object_assign({
             text:"各社区文保单位数量对比图",
-        }, ...echart_title},
+        }, echart_title),
         legend: {
             show:false,
         },
@@ -228,13 +228,13 @@ HistoricalBuilding.prototype.load_bar_chart = function(){
         },
         xAxis: {
             type: "category",
-            axisLabel: {
-                ...coordinate_axis_style.axisLabel,
-                ...{
+            axisLabel: get_object_assign(
+                coordinate_axis_style.axisLabel,
+                {
                     formatter:function(val){
                         return val.split("").join("\n");
                     }
-            }},
+            }),
             axisLine: coordinate_axis_style.axisLine,
             splitLine: coordinate_axis_style.splitLine,
             data: this.community_name

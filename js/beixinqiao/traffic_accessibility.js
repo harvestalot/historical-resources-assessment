@@ -6,4 +6,4 @@ TrafficAccessibility.prototype.init = function(){
 	
 }
 
-const start_traffic_accessibility_rendering = new TrafficAccessibility();
+var start_traffic_accessibility_rendering = new TrafficAccessibility();

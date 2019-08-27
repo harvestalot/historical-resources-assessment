@@ -13,7 +13,7 @@ PublicServiceProvide.prototype.init = function(){
 	this.reset_data();
 	this.render_point_layer();
 	this.load_dom();
-	const _this = this;
+	var _this = this;
 	//养老设施总覆盖率
 	serveRequest("get", server_url+ "/Coverage/getCoverageTotal",{ categoryCode: "pension" },function(result){
 		$("#total_coverage").html(result.data.resultKey+" %");
@@ -127,7 +127,7 @@ PublicServiceProvide.prototype.render_point_layer = function(){
 // }
 //生产dom元素
 PublicServiceProvide.prototype.load_dom = function(){
-	const public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
+	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div style="width: 100%; height: 13%;padding-top:20px;box-sizing: border-box;">'+
 		'<p style="padding-left:21%;box-sizing: border-box;color:#fff;font-size:18px;">街道养老设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
 		'</div>'+
@@ -178,9 +178,9 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
 		color: echarts_color,
-		title:{...{
+		title:get_object_assign({
 			text:"各社区养老设施对比图",
-		}, ...echart_title},
+		}, echart_title),
 	    legend: {
 	        show: true,
 	        right:"10%",
@@ -228,18 +228,18 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [
-	    	{...rader_color[0], ...{
+	    	get_object_assign(rader_color[0], {
 		        "name": this.lenged_data[0],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[0]]
 		        ]
-		    }},
-	    	{...rader_color[1], ...{
+		    }),
+	    	get_object_assign(rader_color[1], {
 		        "name": this.lenged_data[1],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[1]]
 		        ]
-		    }}
+		    })
 		]
 	};
     radarChart.setOption(radar_option, true);

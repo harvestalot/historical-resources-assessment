@@ -18,7 +18,7 @@ IndustrialStructureConcentration.prototype.init = function(){
 }
 //生产dom元素
 IndustrialStructureConcentration.prototype.load_dom = function(){
-	const industrial_structure_dom_str = '<div class="clearfix chart_view" style="width: 100%; height: 100%;">'+
+	var industrial_structure_dom_str = '<div class="clearfix chart_view" style="width: 100%; height: 100%;">'+
 		'<div id="industrial_structure_pie_content" class="fl" style="width: 40%; height:100%;"></div>'+
 		'<div id="industrial_structure_description" class="fl po_re" style="width: 60%; height:100%;">'+
 		'<div class="industrial_description po_ab"><p>文化产业</p><p>办公租金较高，低成本办公空间不足，缺少小企业孵化场所。</p></div>'+

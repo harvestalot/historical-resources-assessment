@@ -14,7 +14,7 @@ VisitorsFlowRate.prototype.init = function(){
 }
 //生产dom元素
 // VisitorsFlowRate.prototype.load_dom = function(){
-//     const visitors_dom_str = '<div id="year_switcher" class="clearfix year_switcher" style="width: 100%; height: 100%;">'+
+//     var visitors_dom_str = '<div id="year_switcher" class="clearfix year_switcher" style="width: 100%; height: 100%;">'+
 //         '<a href="javascript:void(0)" class="checked_active" data_year="2016">2016年</a>'+
 //         '<a href="javascript:void(0)" data_year="2017">2017年</a>'+
 //         '<a href="javascript:void(0)" data_year="2018">2018年</a>'+

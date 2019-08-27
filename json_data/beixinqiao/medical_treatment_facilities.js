@@ -1,4 +1,4 @@
-const medical_treatment_facilities_point_data = [{
+var medical_treatment_facilities_point_data = [{
 	"properties": {
 		"Id": 1,
 		"½ÖµÀ": "北新桥街道",

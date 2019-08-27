@@ -1,4 +1,4 @@
-const convenience_people_facilities_point_data =  [{
+var convenience_people_facilities_point_data =  [{
 	"properties": {
 		"name": "民安超市",
 		"¾­ÓªµØ": "东羊管胡同2-1-3",

@@ -10,7 +10,7 @@ MaterialCulturalHeritage.prototype.init = function(){
 	this.sidebar_polygonLayer();
     this.render_point_layer();
     this.load_dom();
-    const _this = this;
+    var _this = this;
     serveRequest("get", server_url+ "/culturaheritage/getCoverageByLevels",{ },function(result){
         _this.get_view_data(result.data.resultKey);
         _this.pie_chart();
@@ -22,7 +22,7 @@ MaterialCulturalHeritage.prototype.init = function(){
 }
 //生产dom元素
 MaterialCulturalHeritage.prototype.load_dom = function(){
-    const cultural_relic_dom_str = '<div id="cultural_relic_coverage_content" style="width: 100%; height: 50%;"></div>'+
+    var cultural_relic_dom_str = '<div id="cultural_relic_coverage_content" style="width: 100%; height: 50%;"></div>'+
         '<div id="cultural_relic_ring_content" style="width: 100%; height: 50%;"></div>';
     $("#visualization_echarts_content").append(cultural_relic_dom_str);
 };
@@ -136,7 +136,7 @@ MaterialCulturalHeritage.prototype.render_point_layer = function(){
 // }
 //加载3/4饼状图
 MaterialCulturalHeritage.prototype.pie_chart = function(){
-    const data = this.level_data;
+    var data = this.level_data;
     var myChart = echarts.init(document.getElementById("cultural_relic_coverage_content"));
     arrName = getArrayValue(data, "name");
     arrValue = getArrayValue(data, "value");
@@ -255,9 +255,9 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
 
     var option = {
         color: echarts_color,
-        title:{...{
+        title:get_object_assign({
             text:"物质文化遗产等级占比",
-        }, ...echart_title},
+        }, echart_title),
         legend: {
             show: true,
             icon:"circle",

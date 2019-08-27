@@ -1,5 +1,5 @@
 // 教育设施
-const educational_facilities_point_data = [{
+var educational_facilities_point_data = [{
 	"properties": {
 		"½ÖµÀ": "北新桥街道",
 		"ÇøÏØ": "东城",

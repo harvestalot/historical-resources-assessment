@@ -23,7 +23,7 @@ PublicServiceOverview.prototype.init = function(){
 	this.load_dom();
 	this.click_dom();
 	this.render_point_layer();
-	const _this = this;
+	var _this = this;
 	serveRequest("get", server_url+ "/Coverage/getCoverageOverview",{ },function(result){
 		_this.get_view_data(result.data.resultKey);
 		_this.load_chart("全部");
@@ -64,7 +64,7 @@ PublicServiceOverview.prototype.get_view_data = function(result_data){
 //生产dom元素
 PublicServiceOverview.prototype.load_dom = function(){
 	//雷达统计图
-	const public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 50%;padding-top:10px;box-sizing: border-box;">'+
+	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 50%;padding-top:10px;box-sizing: border-box;">'+
 	'<div id="public_service_type" class="clearfix statistics_type public_service_type">'+
 	'<a href="javascript:void(0)" class="active_checked">全部</a>'+
 	'<a href="javascript:void(0)">便民</a>'+
@@ -152,101 +152,70 @@ PublicServiceOverview.prototype.load_chart = function(type){
 	this.current_series_data = [];
 	switch (type){
 		case "便民" :
-			this.current_series_data.push({...rader_color[0], ...{
+			this.current_series_data.push(get_object_assign(rader_color[0],{
 		        "name": this.lenged_data[0],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[0]]
 		        ]
-		    }});
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 1700;
-		    // }
+		    }));
 			break;
 		case "教育" :
-			this.current_series_data.push({...rader_color[1], ...{
+			this.current_series_data.push(get_object_assign(rader_color[1],{
 		        "name": this.lenged_data[1],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[1]]
 		        ]
-		    }}
-			);
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 500;
-		    // }
+		    }));
 			break;
 		case "医疗" :
-			this.current_series_data.push({...rader_color[2], ...{
+			this.current_series_data.push(get_object_assign(rader_color[2],{
 		        "name": this.lenged_data[2],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[2]]
 		        ]
-		    }}
-			);
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 600;
-		    // }
+		    }));
 			break;
 		case "养老" :
-			this.current_series_data.push({...rader_color[3], ...{
+			this.current_series_data.push(get_object_assign(rader_color[3],{
 		        "name": this.lenged_data[3],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[3]]
 		        ]
-		    }}
-			);
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 1000;
-		    // }
+		    }));
 			break;
 		case "文体" :
-			this.current_series_data.push({...rader_color[4], ...{
+			this.current_series_data.push(get_object_assign(rader_color[4],{
 		        "name": this.lenged_data[4],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[4]]
 		        ]
-		    }}
-			);
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 500;
-		    // }
+		    }));
 			break;
 		case "交通" :
-			this.current_series_data.push({...rader_color[5], ...{
+			this.current_series_data.push(get_object_assign(rader_color[5],{
 		        "name": this.lenged_data[5],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[5]]
 		        ]
-		    }}
-			);
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 1700;
-		    // }
+		    }));
 			break;
 		case "街道管理" :
-			this.current_series_data.push({...rader_color[6], ...{
+			this.current_series_data.push(get_object_assign(rader_color[6],{
 		        "name": this.lenged_data[6],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[6]]
 		        ]
-		    }}
-			);
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 600;
-		    // }
+		    }));
 			break;
 		case "全部" :
 			for(var i = 0; i < this.lenged_data.length; i++){
-				this.current_series_data.push({...rader_color[i], ...{
+				this.current_series_data.push(get_object_assign(rader_color[i],{
 			        "name": this.lenged_data[i],
 			        "data": [
 						this.comprehensive_data[this.lenged_data[i]]
 			        ]
-			    }}
-				);
+			    }));
 			}
-		    // for(var i = 0; i < this.radar_chart_indicator_data.length; i++){
-		    // 	this.radar_chart_indicator_data[i].max = 1700;
-		    // }
 			break;
 	}
 	this.load_radar_chart();

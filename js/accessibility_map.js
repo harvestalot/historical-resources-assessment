@@ -28,7 +28,7 @@ $(function(){
 
 	}
 	AccessibilityMap.prototype.init = function(){
-		const _this = this; 
+		var _this = this; 
 		_this.reset_data();
 		//点击地图区域
 		accessibility_map.on('click', function(event){
@@ -84,7 +84,7 @@ $(function(){
 	}
 	//获取可达性范围
 	AccessibilityMap.prototype.accessibility_range = function(centerpoint){
-		const _this = this;
+		var _this = this;
 		$.get(reachability_url+"?centerpoint="+centerpoint+"&time="+_this.time,function(result){
 			var reachability_data = [];
 			for(var i = 0; i < JSON.parse(result).result.split(";").length; i++){
@@ -192,6 +192,6 @@ $(function(){
 		this.facilities_type = [];
 		this.area_cultural_resources_point_data = [];//可达性区域内的文化资源点
 	}
-	const start_accessibility_poi_rending = new AccessibilityMap(); 
+	var start_accessibility_poi_rending = new AccessibilityMap(); 
 	start_accessibility_poi_rending.init();
 });

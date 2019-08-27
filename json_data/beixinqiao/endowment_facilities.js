@@ -1,5 +1,5 @@
 // 养老设施
-const endowment_facilities_point_data = [{
+var endowment_facilities_point_data = [{
 	"properties": {
 		"Id": 1,
 		"½ÖµÀ": "北新桥街道",

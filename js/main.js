@@ -1,6 +1,6 @@
 
 	//折线、柱状x、y轴样式配置
-	const coordinate_axis_style = {
+	var coordinate_axis_style = {
 	    axisLine: {
 	        show: true,
 	        lineStyle: {
@@ -38,7 +38,7 @@
 	}
 	VisualScreen.prototype.init = function(){
 		this.map();
-		const _this = this;
+		var _this = this;
 		// 交通可达性工具
 		$("#traffic_accessibility").on("click",function(){
 			_this.traffic_accessibility();

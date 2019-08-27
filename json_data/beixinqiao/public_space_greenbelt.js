@@ -1,5 +1,5 @@
 //公共空间绿地资源
-const actuality_greenbelt_data = [{
+var actuality_greenbelt_data = [{
 	"community_name": "北宫厅",
 	"lnglat": [
 		[116.42544868206123, 39.94839650205018],

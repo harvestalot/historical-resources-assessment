@@ -57,7 +57,7 @@ IndustrialDevelopmentConcentration.prototype.get_view_data = function(result_dat
 }
 //生产dom元素
 IndustrialDevelopmentConcentration.prototype.load_dom = function(){
-	const industrial_structure_dom_str = '<div id="industrial_development_pie_content" style="width: 100%; height:50%;"></div>'+
+	var industrial_structure_dom_str = '<div id="industrial_development_pie_content" style="width: 100%; height:50%;"></div>'+
 		'<div id="industrial_development_radar_content" style="width: 100%; height:50%;"></div>';
 	$("#visualization_echarts_content").append(industrial_structure_dom_str);
 };
@@ -312,12 +312,12 @@ IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [
-	    	{...rader_color[0], ...{
+	    	get_object_assign(rader_color[0], {
 		        "name": this.current_enterprise_type,
 		        "data": [
 					this.series_data
 		        ]
-		    }}]
+		    })]
 	};
     radarChart.setOption(radar_option, true);
 }

@@ -1,4 +1,4 @@
-const visitors_flow_rate_data = [{
+var visitors_flow_rate_data = [{
 	"count_2016": "1108",
 	"count_2017": "966",
 	"count_2018": "917",

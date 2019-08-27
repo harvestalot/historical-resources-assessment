@@ -17,7 +17,7 @@ CulturalResourcesOverview.prototype.init = function(){
 	_this.render_point_layer();
 	// _this.render_historical_building_point_layer();
 	serveRequest("get", server_url+ "/culture/getCoverage",{},function(result){
-		const population_data = result.data.resultKey;
+		var population_data = result.data.resultKey;
 		_this.get_view_data(population_data);
 		_this.load_bar_chart();
 	});
@@ -36,7 +36,7 @@ CulturalResourcesOverview.prototype.get_view_data = function(result_data){
 }
 //渲染dom元素
 CulturalResourcesOverview.prototype.load_dom = function(){
-    const cultural_resources_dom_str = '<div id="cultural_resources_overview_bar_content" style="width: 100%; height: 100%;"></div>';
+    var cultural_resources_dom_str = '<div id="cultural_resources_overview_bar_content" style="width: 100%; height: 100%;"></div>';
     $("#visualization_echarts_content").append(cultural_resources_dom_str);
 };
 //添加图层

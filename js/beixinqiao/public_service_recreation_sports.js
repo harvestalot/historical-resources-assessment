@@ -15,7 +15,7 @@ PublicServiceRecreationSports.prototype.init = function(){
 	this.reset_data();
 	this.render_point_layer();
 	this.load_dom();
-	const _this = this;
+	var _this = this;
 	//文体设施总覆盖率
 	serveRequest("get", server_url+ "/Coverage/getCoverageTotal",{ categoryCode: "stylistic" },function(result){
 		$("#total_coverage").html(result.data.resultKey+" %");
@@ -131,7 +131,7 @@ PublicServiceRecreationSports.prototype.render_point_layer = function(){
 // }
 //生产dom元素
 PublicServiceRecreationSports.prototype.load_dom = function(){
-	const public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
+	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div style="width: 100%; height: 13%;padding-top:20px;box-sizing: border-box;">'+
 		'<p style="padding-left:21%;box-sizing: border-box;color:#fff;font-size:18px;">街道文体设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
 		'</div>'+
@@ -179,9 +179,9 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	var radarChart = echarts.init(document.getElementById("fraction_coverage_content"));
 	var radar_option = {
 	    color: echarts_color,
-		title:{...{
+		title:get_object_assign({
 			text:"各社区文体设施覆盖率对比图",
-		}, ...echart_title},
+		},echart_title),
 	    legend: {
 	        show: true,
 	        right:"10%",
@@ -229,43 +229,43 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	        indicator: this.radar_chart_indicator_data
 	    },
 	    "series": [
-	    	{...rader_color[0], ...{
+	    	get_object_assign(rader_color[0],{
 		        "name": this.lenged_data[0],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[0]]
 		        ]
-		    }},
-	    	{...rader_color[1], ...{
+		    }),
+	    	get_object_assign(rader_color[1],{
 		        "name": this.lenged_data[1],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[1]]
 		        ]
-		    }},
-	    	{...rader_color[2], ...{
+		    }),
+	    	get_object_assign(rader_color[2],{
 		        "name": this.lenged_data[2],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[2]]
 		        ]
-		    }},
-	    	{...rader_color[3], ...{
+		    }),
+	    	get_object_assign(rader_color[3],{
 		        "name": this.lenged_data[3],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[3]]
 		        ]
-		    }},
-	    	{...rader_color[4], ...{
+		    }),
+	    	get_object_assign(rader_color[4],{
 		        "name": this.lenged_data[4],
 		        "data": [
 					this.comprehensive_data[this.lenged_data[4]]
 		        ]
-		    }}
+		    }),
 		]
 	};
     radarChart.setOption(radar_option, true);
 }
 //加载柱状统计图
 PublicServiceRecreationSports.prototype.load_bar_chart = function(){
-	const _this = this;
+	var _this = this;
 	var myChart = echarts.init(document.getElementById("facilities_statistics_content"));
 	var option = {
 	    color: echarts_color,
@@ -277,13 +277,12 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
 	    },
 	    xAxis: {
 	        type: "category",
-	        axisLabel: {
-	        	...coordinate_axis_style.axisLabel,
-	        	...{
-			        formatter:function(val){
-			            return val.split("").join("\n");
-			        }
-    		}},
+	        axisLabel: 
+	    	get_object_assign(coordinate_axis_style.axisLabel,{
+		        formatter:function(val){
+		            return val.split("").join("\n");
+		        }
+    		}),
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
 	        data: this.community_name

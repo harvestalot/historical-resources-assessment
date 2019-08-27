@@ -1,4 +1,4 @@
-const beixinqiao_community_data = [{
+var beixinqiao_community_data = [{
 	"name": "北宫厅",
 	"coordinates": [
 		[116.42545060739025, 39.944951613603926],

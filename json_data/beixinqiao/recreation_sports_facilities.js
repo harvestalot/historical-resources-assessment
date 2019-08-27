@@ -1,4 +1,4 @@
-const recreation_sports_facilities_point_data = [{
+var recreation_sports_facilities_point_data = [{
 	"properties": {
 		"Ò»¼¶²Ëµ¥": "文体设施",
 		"¶þ¼¶²Ëµ¥": "综合文体设施",

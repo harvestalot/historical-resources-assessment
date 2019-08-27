@@ -1,4 +1,4 @@
-const street_management_facilities_point_data = [{
+var street_management_facilities_point_data = [{
 	"properties": {
 		"Ò»¼¶²Ëµ¥": "街道管理设施",
 		"¶þ¼¶²Ëµ¥": "街道办事处",

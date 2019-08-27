@@ -1,12 +1,12 @@
 //人口
 var population_bar_chart;
 function population(){
-	const population_statistics_dom_str = '<div class="chart_view clearfix" style="width: 100%; height: 70%; ">'+
+	var population_statistics_dom_str = '<div class="chart_view clearfix" style="width: 100%; height: 70%; ">'+
 		'<div id="population_statistics_content" class="fl" style="width: 70%; height: 100%;"></div>'+
 		'<div id="population_graphic_content" class="fl" style="width: 30%; height: 100%;padding:50px 0;box-sizing: border-box;">'+
 		'</div>'+
 		'</div>';
-	const population_size_dom_str = '<div class="chart_view" style="width: 100%; height: 30%;">'+
+	var population_size_dom_str = '<div class="chart_view" style="width: 100%; height: 30%;">'+
 		'<div id="population_type" class="clearfix statistics_type">'+
 		'<a href="javascript:void(0)" class="active_checked">60岁以上</a>'+
 		'<a href="javascript:void(0)">失业下岗</a>'+
@@ -20,7 +20,7 @@ function population(){
 	$("#visualization_echarts_content").append(population_size_dom_str);
 	//人口信息请求
 	serveRequest("get", server_url+ "/PopulationInfo/getPopulationInfo",{},function(result){
-		const population_data = result.data.resultKey;
+		var population_data = result.data.resultKey;
 		load_population_statistics("population_statistics_content", population_data);//人口统计
 		for(var i = 0; i < population_data.length; i++){
 			var item = population_data[i];

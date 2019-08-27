@@ -1,9 +1,9 @@
 //各个社区名称
-const community_name = ["北宫厅", "北新仓", "藏经馆", "草园", "海运仓", "九道湾",
+var community_name = ["北宫厅", "北新仓", "藏经馆", "草园", "海运仓", "九道湾",
 	"门楼", "民安", "前永康", "青龙", "十三条", "小菊"];
 
 //简介
-const brief_introduction = {
+var brief_introduction = {
 	title:"北新桥街道简介",
 	img_url:"./images/1.png",
 	content: "北新桥街道（Beixinqiao Jiedao）位于北京市东城区东北部。辖区面积2.62平方千米，常住人口82273人（2010年）。"+
@@ -14,11 +14,11 @@ const brief_introduction = {
 		"住宅合作社、民政局等50个居（家）委会。"
 }
 // echarts颜色配置
-// const echarts_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#3A8281"];
-const echarts_color = ["#d66349",'#768189',"#f0993c",'#a57ec0',"#579dcb","#5cba89","#7758b0"];
+// var echarts_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#3A8281"];
+var echarts_color = ["#d66349",'#768189',"#f0993c",'#a57ec0',"#579dcb","#5cba89","#7758b0"];
 
 //片区历史发展图片
-const district_history_img_data = {
+var district_history_img_data = {
     img_list:[
         './images/beixinqiao/h1.jpg',
         './images/beixinqiao/h2.jpg',
@@ -29,7 +29,7 @@ const district_history_img_data = {
     ]
 }
 //历史资源发展图片
-const resource_history_img_data = {
+var resource_history_img_data = {
     img_list:[
         './images/beixinqiao/resource_history/1.jpg',
         './images/beixinqiao/resource_history/2.jpg',
@@ -39,7 +39,7 @@ const resource_history_img_data = {
     ]
 }
 //现状用地图例
-const current_land_legend_data = {
+var current_land_legend_data = {
     list:[
         {
             name:"宗教",
@@ -112,7 +112,7 @@ const current_land_legend_data = {
     ]
 }
 //街道公共设施概览图例
-const public_service_overview_legend_data = {
+var public_service_overview_legend_data = {
     list:[
         {
             name:"便民设施",
@@ -145,7 +145,7 @@ const public_service_overview_legend_data = {
     ]
 }
 //街道公共设施--便民设施图例
-const public_service_convenience_people_legend_data = {
+var public_service_convenience_people_legend_data = {
     list:[
         {
             name:"超市",
@@ -166,7 +166,7 @@ const public_service_convenience_people_legend_data = {
     ]
 }
 //街道公共设施--教育设施图例
-const public_service_education_legend_data = {
+var public_service_education_legend_data = {
     list:[
         {
             name:"幼儿园",
@@ -187,7 +187,7 @@ const public_service_education_legend_data = {
     ]
 }
 //街道公共设施--医疗设施图例
-const public_service_medical_legend_data = {
+var public_service_medical_legend_data = {
     list:[
         {
             name:"医院",
@@ -200,7 +200,7 @@ const public_service_medical_legend_data = {
     ]
 }
 //街道公共设施--文体设施图例
-const public_service_sports_legend_data = {
+var public_service_sports_legend_data = {
     list:[
         {
             name:"健身设施",
@@ -225,7 +225,7 @@ const public_service_sports_legend_data = {
     ]
 }
 //街道公共设施--交通设施图例
-const public_service_traffic_legend_data = {
+var public_service_traffic_legend_data = {
     list:[
         {
             name:"公交站",
@@ -242,7 +242,7 @@ const public_service_traffic_legend_data = {
     ]
 }
 //街道公共设施--养老设施图例
-const public_service_provide_legend_data = {
+var public_service_provide_legend_data = {
     list:[
         {
             name:"社区机构养老设施",
@@ -255,7 +255,7 @@ const public_service_provide_legend_data = {
     ]
 }
 //街道公共设施--养老设施图例
-const public_service_street_legend_data = {
+var public_service_street_legend_data = {
     list:[
         {
             name:"社区服务管理用房",
@@ -277,7 +277,7 @@ const public_service_street_legend_data = {
 }
 
 //产业发展企业图例
-const industry_legend_data = {
+var industry_legend_data = {
     list:[
         {
             name:"租赁和商务服务业",
@@ -342,7 +342,7 @@ const industry_legend_data = {
     ]
 }
 //历史建筑图例
-const historical_building_legend_data = {
+var historical_building_legend_data = {
     list:[
         {
             name:"故居",
@@ -371,7 +371,7 @@ const historical_building_legend_data = {
     ]
 }
 //文化资源概览图例
-const cultural_resources_overview_legend_data = {
+var cultural_resources_overview_legend_data = {
     list:[
         {
             name:"故居",
@@ -404,7 +404,7 @@ const cultural_resources_overview_legend_data = {
     ]
 }
 //文化遗迹
-const cultural_heritage_legend_data = {
+var cultural_heritage_legend_data = {
     list:[
         {
             name:"其他",
@@ -429,7 +429,7 @@ const cultural_heritage_legend_data = {
     ]
 }
 //公共空间资源图例
-const available_space_legend_data = {
+var available_space_legend_data = {
     list:[
         {
             name:"可统一调配公共服务设施单元",
@@ -454,7 +454,7 @@ const available_space_legend_data = {
     ]
 }
 //图表title
-const echart_title = {
+var echart_title = {
     left:20,
     textStyle:{
         color: '#fff',
@@ -462,7 +462,7 @@ const echart_title = {
     }
 }
 // 雷达图各类型颜色配置
-const rader_color = [
+var rader_color = [
 	{
         type: "radar",
         symbol: "circle",

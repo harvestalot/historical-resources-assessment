@@ -8,7 +8,7 @@ PublicSpaceAvailableApace.prototype.init = function(){
 }
 //生产dom元素
 PublicSpaceAvailableApace.prototype.load_dom = function(){
-    const public_service_dom_str = '<div>'+
+    var public_service_dom_str = '<div>'+
     '<p class="message">梳理可利用空间资源：</p>'+
     '<p class="message">将单元内的可利用空间资源按类别梳理明确，为将来公共设施的合理配置打好空间基础。</p>'+
     '<p class="legend_item message"><span style="background-color: #d66349"></span>已收回直管公房：目前有约800平使用面积公房已回收，可为后期的公共设施配置提供部分合理空间资源。</p>'+
