@@ -155,13 +155,14 @@
 	top:0;
 }*/
 .visualization_content{
-	width: 30%;
+	/*width: 30%;*/
+	width: 0;
 	height: 92%;
 	right: 0;
 	top:8%;
 	/*background-color: rgba(0,0,0,.5);*/
 	background-color:#0e2f41;
-	display: none;
+	/*display: none;*/
 	/*-ms-transform:translate3d(100%,0,0); 	
 	-moz-transform:translate3d(100%,0,0); 	 
 	-webkit-transform:translate3d(100%,0,0); 
@@ -203,12 +204,9 @@
 	position: fixed;
 	top:8%;
 	left: 15%;
-	right: 0;
-	bottom: 0;
+	width: 100%;
     background:rgba(0, 0, 0, .7);
     z-index: 2;
-	transform:scale3d(0,0,0);
-	-webkit-transform:scale3d(0,0,0); /* Safari 和 Chrome */
 }
 .shade_item {
 	padding: 80px 50px;
@@ -504,14 +502,65 @@
     left: 15%;
     width: 280px;
 }
+		.nice-select{
+
+	width: 245px;
+
+	padding: 0 10px;
+
+	height: 38px;
+
+	border: 1px solid #999;
+
+	position: relative;
+
+	box-shadow: 0 0 5px #999;
+
+	background: #fff url(images/a2.jpg) no-repeat right center;
+
+}
+
+		.nice-select input{display: block;width: 100%;height: 38px;line-height: 38px \9;border: 0;outline: 0;background: none;}
+
+		.nice-select ul{
+
+	width: 100%;
+
+	display: none;
+
+	position: absolute;
+
+	left: -1px;
+
+	top: 38px;
+
+	overflow: hidden;
+
+	background-color: #fff;
+
+	max-height: 150px;
+
+	overflow-y: auto;
+
+	border: 1px solid #999;
+
+	border-top: 0;
+
+	box-shadow: 0 3px 5px #999;
+
+	z-index: 9999;
+
+}
+
+		.nice-select ul li{height: 30px;line-height: 30px;overflow: hidden;padding: 0 10px;cursor: pointer;}
+
+		.nice-select ul li.on{background-color: #e0e0e0;}
 .select {
 	position: fixed;
 	top: 8%;
 	left: 15%;
-	/*display: inline-block;*/
 	width: 280px;
 	height: 5%;
-	/*position: relative;*/
 	vertical-align: middle;
 	padding: 0;
 	overflow: hidden;
@@ -550,6 +599,7 @@
 	background-image: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
+	-ms-appearance: none;
 }
 .select select:focus {
 	outline: none;

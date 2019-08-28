@@ -31,11 +31,28 @@ IndustrialDevelopmentConcentration.prototype.init = function(){
 }
 //分类拆分数据
 IndustrialDevelopmentConcentration.prototype.get_view_data = function(result_data){
-	var new_data = [];
+	var new_data = [
+		{九道湾: []},
+		{小菊: []},
+ 		{藏经馆: []},
+ 		{草园: []},
+ 		{青龙: []},
+ 		{民安: []},
+ 		{门楼: []},
+	 	{海运仓: []},
+	 	{北官厅: []},
+	 	{十三条: []},,
+	 	{北新仓: []},
+	 	{前永康: []}
+	];
 	for(var key in result_data){
-		new_data.push({
-			[key]:result_data[key]
-		})
+		for(var i = 0; i < new_data.length; i++){
+			for(var item in new_data[i]){
+				if(item === key){
+					new_data[i][key] = result_data[key];
+				}
+			}
+		}
 	}
 	for(var i = 0; i < new_data.length; i++){
 	    for(var key in new_data[i]){

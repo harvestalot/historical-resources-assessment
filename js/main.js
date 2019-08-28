@@ -41,7 +41,8 @@
 		var _this = this;
 		// 交通可达性工具
 		$("#traffic_accessibility").on("click",function(){
-			_this.traffic_accessibility();
+			window.location.href = './accessibility_map.html';
+			// _this.traffic_accessibility();
 		});
 	}
 	//地图
@@ -112,14 +113,14 @@
 				$("#real_time_traffic_explain").fadeIn(300);
 				this.reset_community_layer();
 				start_real_time_traffic_rendering.init();
-				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+				$("#visualization_content").animate({width:0},300);
 	    		break;
 			case "visitors_flow_rate": //截取活力监测--人流量监测
 				this.reset_community_layer();
 				$("#year_switcher").show();
 				start_visitors_flow_rate_rendering.init();
 				map.setZoomAndCenter(13,[116.397737, 39.907573]);
-				document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+				$("#visualization_content").animate({width:0},300);
 	    		break;
 			case "greenbelt": //公共空间评估--绿地资源
 				this.reset_community_layer();
@@ -174,7 +175,8 @@
 		$("#community_opinion").hide();//隐藏社区舆情搜索框
 		$("#pio_point_list").fadeOut(300);//隐藏产业聚集度PIO列表
 		$("#year_switcher").hide();//隐藏让你流量监测热力图年份切换
-		document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
+		$("#visualization_content").animate({width:0},300);
+		// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 		map.clearMap();
 		this.reset();
 		this.reset_community_layer();

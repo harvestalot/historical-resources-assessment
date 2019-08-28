@@ -17,7 +17,10 @@ $(function(){
 		accessibility_map.setStatus({scrollWheel:false})
 	}
         // accessibility_map.setDefaultCursor("url('https://lbs.amap.com/webapi/static/Images//0.png'),pointer");
-
+	//返回
+	$("#beixinqiao_subdistrict_link").on("click",function(){
+		window.location.href = './beixinqiao_subdistrict.html';
+	});
 	function AccessibilityMap(){
 		this.centerpoint = "";
 		this.cultural_resources = "";//文化资源选中、不选 
@@ -157,9 +160,9 @@ $(function(){
 		for(var i = 0; i < cultural_resources_point_data.length; i++){
 			var items = cultural_resources_point_data[i];
         	var isPointInRing = AMap.GeometryUtil.isPointInRing(items.lnglat, this.reachability_data);
-			isPointInRing? this.area_cultural_resources_point_data.push({...items,...{
+			isPointInRing? this.area_cultural_resources_point_data.push(get_object_assign(items,{
 			 icon: point_icon_server_url+ "/accessibility/wenhuaziyaun.png",
-			}}): "";
+			})): "";
 		}
 		this.render_point_layer();
 	}
