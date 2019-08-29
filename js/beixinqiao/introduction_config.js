@@ -276,6 +276,27 @@ var public_service_street_legend_data = {
     ]
 }
 
+//公共空间评估--公共空间共享图例
+var public_space_share_legend_data = {
+    list:[
+        {
+            name:"底层空间公共化区域",
+            legend_color:echarts_color[0]  
+        },
+        {
+            name:"公共空间共享",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"文创产业鼓励区域",
+            legend_color:echarts_color[2]  
+        },
+        {
+            name:"社区服务共享区域",
+            legend_color:echarts_color[3]  
+        },
+    ]
+}
 //产业发展企业图例
 var industry_legend_data = {
     list:[

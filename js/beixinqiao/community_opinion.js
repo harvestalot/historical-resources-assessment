@@ -20,15 +20,55 @@ CommunityOpinion.prototype.init = function(){
             _this.get_view_data(result.data.resultKey);
         });
     });
+     $('[name="nice-select"]').click(function(e){
+
+            $('[name="nice-select"]').find('ul').hide();
+
+            $(this).find('ul').show();
+
+            e.stopPropagation();
+
+        });
+
+        $('[name="nice-select"] li').hover(function(e){
+
+            $(this).toggleClass('on');
+
+            e.stopPropagation();
+
+        });
+
+        $('[name="nice-select"] li').click(function(e){
+
+            var val = $(this).text();
+
+            $(this).parents('[name="nice-select"]').find('input').val(val);
+
+            $('[name="nice-select"] ul').hide();
+
+            e.stopPropagation();
+
+            var type_name = $(this).attr("data-value");
+            serveRequest("get", server_url+ "/lawCase/getListByBigType",{ bigType: type_name },function(result){
+                _this.get_view_data(result.data.resultKey);
+            });
+
+        });
+
+        $(document).click(function(){
+
+            $('[name="nice-select"] ul').hide();
+
+        });
 }
 //生产dom元素
 CommunityOpinion.prototype.load_dom = function(){
     var community_opinion_select_str = "";
     for(var i = 0; i < this.community_opinion_type.length; i++){
         if(i === 0){
-            community_opinion_select_str += '<option value='+this.community_opinion_type[i]+' selected="selected">'+this.community_opinion_type[i]+'</option>';
+            community_opinion_select_str += '<li data-value='+this.community_opinion_type[i]+'>'+this.community_opinion_type[i]+'</li>';
         }else{
-            community_opinion_select_str += '<option value='+this.community_opinion_type[i]+'>'+this.community_opinion_type[i]+'</option>';
+            community_opinion_select_str += '<li data-value='+this.community_opinion_type[i]+'>'+this.community_opinion_type[i]+'</li>';
         }
     }
     $("#community_opinion_select").html(community_opinion_select_str);

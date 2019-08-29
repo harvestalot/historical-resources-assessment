@@ -17,7 +17,9 @@ MaterialCulturalHeritage.prototype.init = function(){
     });
     serveRequest("get", server_url+ "/culturaheritage/getCoverageByYears",{ },function(result){
         _this.years_ring_data = result.data.resultKey.list;
-        _this.years_ring_chart();
+        setTimeout(function(){
+            _this.years_ring_chart();
+        },100)
     });
 }
 //生产dom元素
@@ -174,7 +176,7 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
                 type: 'pie',
                 clockWise: false, //顺时加载
                 hoverAnimation: false, //鼠标移入变大
-                radius: [73 - i * 15 + '%', 68 - i * 15 + '%'],
+                radius: [68 - i * 15 + '%', 63 - i * 15 + '%'],
                 center: ["30%", "55%"],
                 label: {
                     show: false
@@ -211,7 +213,7 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
                 z: 1,
                 clockWise: false, //顺时加载
                 hoverAnimation: false, //鼠标移入变大
-                radius: [73 - i * 15 + '%', 68 - i * 15 + '%'],
+                radius: [68 - i * 15 + '%', 63 - i * 15 + '%'],
                 center: ["30%", "55%"],
                 label: {
                     show: false
@@ -256,7 +258,7 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
     var option = {
         color: echarts_color,
         title:get_object_assign({
-            text:"物质文化遗产等级占比",
+            text:"物质文化遗产(按保护等级)",
         }, echart_title),
         legend: {
             show: true,
@@ -265,8 +267,8 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
             left: '70%',
             data: arrName,
             width:50,
-            padding: [0, 5],
-            itemGap: 25,
+            // padding: [0, 2],
+            itemGap: 10,
             formatter: function(name) {
                 return "{title|" + name + "}\n{value|" + (objData[name].value) +"}  {title|个}"
             },
@@ -291,8 +293,8 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
             formatter: "{a}<br>{b}:{c}({d}%)"
         },
         grid: {
-            top: '15%',
-            bottom: '48%',
+            top: '19%',
+            bottom: '46%',
             left: "30%",
             containLabel: false
         },
@@ -339,6 +341,9 @@ MaterialCulturalHeritage.prototype.years_ring_chart = function(){
         }
     };
     var option = {
+        title:get_object_assign({
+            text:"物质文化遗产(按年代)",
+        }, echart_title),
         series: []
     };
     for(var i = 0; i < this.years_ring_data.length; i++){
@@ -347,12 +352,12 @@ MaterialCulturalHeritage.prototype.years_ring_chart = function(){
             name: item.YEARS,
             type: 'pie',
             clockWise: false,
-            radius: [70, 80],
+            radius: [60, 70],
             itemStyle: dataStyle,
             hoverAnimation: false,
-            center: ( i === 0? ['25%', '30%']:
-                (i === 1? ['75%', '30%']:
-                (i === 2? ['25%', '75%']:['75%', '75%']))),
+            center: ( i === 0? ['75%', '75%']:
+                (i === 1? ['25%', '75%']:
+                (i === 2? ['25%', '30%']:['75%', '30%']))),
             data: [
             {
                 value: item.TOTAL,
@@ -414,239 +419,6 @@ MaterialCulturalHeritage.prototype.years_ring_chart = function(){
             }]
         });
     }
-    // var option = {
-    //     series: [{
-    //         name: '第一个圆环',
-    //         type: 'pie',
-    //         clockWise: false,
-    //         radius: [70, 80],
-    //         itemStyle: dataStyle,
-    //         hoverAnimation: false,
-    //         center: ['25%', '30%'],
-    //         // center: ['15%', '50%'],
-    //         data: [
-    //         {
-    //             value: 25,
-    //             label: {
-    //                 normal: {
-    //                     rich: {
-    //                         a: {
-    //                             color: '#3a7ad5',
-    //                             align: 'center',
-    //                             fontSize: 20,
-    //                             fontWeight: "bold"
-    //                         },
-    //                         b: {
-    //                             color: '#fff',
-    //                             align: 'center',
-    //                             fontSize: 16
-    //                         }
-    //                     },
-    //                     formatter: function(params){
-    //                         return "{b|明朝}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
-    //                     },
-    //                     position: 'center',
-    //                     show: true,
-    //                     textStyle: {
-    //                         fontSize: '14',
-    //                         fontWeight: 'normal',
-    //                         color: '#fff'
-    //                     }
-    //                 }
-    //             },
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#2c6cc4',
-    //                     shadowColor: '#2c6cc4',
-    //                     shadowBlur: 0
-    //                 }
-    //             }
-    //         }, {
-    //             value: 75,
-    //             name: 'invisible',
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#24375c'
-    //                 },
-    //                 emphasis: {
-    //                     color: '#24375c'
-    //                 }
-    //             }
-    //         }]
-    //     }, {
-    //         name: '第二个圆环',
-    //         type: 'pie',
-    //         clockWise: false,
-    //         radius: [70, 80],
-    //         itemStyle: dataStyle,
-    //         hoverAnimation: false,
-    //         // center: ['25%', '30%'],
-    //         center: ['75%', '30%'],
-    //         data: [
-    //         {
-    //             value: 25,
-    //             label: {
-    //                 normal: {
-    //                     rich: {
-    //                         a: {
-    //                             color: '#3a7ad5',
-    //                             align: 'center',
-    //                             fontSize: 20,
-    //                             fontWeight: "bold"
-    //                         },
-    //                         b: {
-    //                             color: '#fff',
-    //                             align: 'center',
-    //                             fontSize: 16
-    //                         }
-    //                     },
-    //                     formatter: function(params){
-    //                         return "{b|明朝}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
-    //                     },
-    //                     position: 'center',
-    //                     show: true,
-    //                     textStyle: {
-    //                         fontSize: '14',
-    //                         fontWeight: 'normal',
-    //                         color: '#fff'
-    //                     }
-    //                 }
-    //             },
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#2c6cc4',
-    //                     shadowColor: '#2c6cc4',
-    //                     shadowBlur: 0
-    //                 }
-    //             }
-    //         }, {
-    //             value: 75,
-    //             name: 'invisible',
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#24375c'
-    //                 },
-    //                 emphasis: {
-    //                     color: '#24375c'
-    //                 }
-    //             }
-    //         }]
-    //     },
-    //     {
-    //         name: '第三个圆环',
-    //         type: 'pie',
-    //         clockWise: false,
-    //         radius: [70, 80],
-    //         itemStyle: dataStyle,
-    //         hoverAnimation: false,
-    //         center: ['25%', '75%'],
-    //         data: [{
-    //             value: 75,
-    //             label: {
-    //                 normal: {
-    //                     rich: {
-    //                         a: {
-    //                             color: '#603dd0',
-    //                             align: 'center',
-    //                             fontSize: 20,
-    //                             fontWeight: "bold"
-    //                         },
-    //                         b: {
-    //                             color: '#fff',
-    //                             align: 'center',
-    //                             fontSize: 16
-    //                         }
-    //                     },
-    //                     formatter: function(params){
-    //                         return "{b|民国}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
-    //                     },
-    //                     position: 'center',
-    //                     show: true,
-    //                     textStyle: {
-    //                         fontSize: '14',
-    //                         fontWeight: 'normal',
-    //                         color: '#fff'
-    //                     }
-    //                 }
-    //             },
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#613fd1',
-    //                     shadowColor: '#613fd1',
-    //                     shadowBlur: 0
-    //                 }
-    //             }
-    //         }, {
-    //             value: 25,
-    //             name: 'invisible',
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#453284'
-    //                 },
-    //                 emphasis: {
-    //                     color: '#453284'
-    //                 }
-    //             }
-    //         }]
-    //     },
-    //     {
-    //         name: '第四个圆环',
-    //         type: 'pie',
-    //         clockWise: false,
-    //         radius: [70, 80],
-    //         itemStyle: dataStyle,
-    //         hoverAnimation: false,
-    //         center: ['75%', '75%'],
-    //         data: [{
-    //             value: 75,
-    //             label: {
-    //                 normal: {
-    //                     rich: {
-    //                         a: {
-    //                             color: '#603dd0',
-    //                             align: 'center',
-    //                             fontSize: 20,
-    //                             fontWeight: "bold"
-    //                         },
-    //                         b: {
-    //                             color: '#fff',
-    //                             align: 'center',
-    //                             fontSize: 16
-    //                         }
-    //                     },
-    //                     formatter: function(params){
-    //                         return "{b|民国}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
-    //                     },
-    //                     position: 'center',
-    //                     show: true,
-    //                     textStyle: {
-    //                         fontSize: '14',
-    //                         fontWeight: 'normal',
-    //                         color: '#fff'
-    //                     }
-    //                 }
-    //             },
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#613fd1',
-    //                     shadowColor: '#613fd1',
-    //                     shadowBlur: 0
-    //                 }
-    //             }
-    //         }, {
-    //             value: 25,
-    //             name: 'invisible',
-    //             itemStyle: {
-    //                 normal: {
-    //                     color: '#453284'
-    //                 },
-    //                 emphasis: {
-    //                     color: '#453284'
-    //                 }
-    //             }
-    //         }]
-    //     }]
-    // }
     myChart.setOption(option, true);
 
 }

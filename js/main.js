@@ -130,6 +130,7 @@
 			case "public_space": //公共空间评估--公共空间共享
 				this.reset_community_layer();
 				start_public_space_share_rendering.init();
+                map_legend(public_space_share_legend_data);
 				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "available_space": //公共空间评估--可利用空间资源

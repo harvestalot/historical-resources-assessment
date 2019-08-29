@@ -42,6 +42,7 @@ PublicSpaceShare.prototype.load_line_layer = function(){
 //添加图层
 PublicSpaceShare.prototype.sidebar_polygonLayer = function(){
     var _this = this;
+    var round_point_color = echarts_color;
     sidebar_polygonLayer = new Loca.PolygonLayer({
         map: map,
         zIndex: 20,
@@ -55,7 +56,26 @@ PublicSpaceShare.prototype.sidebar_polygonLayer = function(){
     sidebar_polygonLayer.setOptions({
         style: {
             // opacity: 0.5,
-            color: "#FF7F7F",
+            // color: "#FF7F7F",
+            color: function (data) {
+                var type = data.value.name;
+                var color = round_point_color[0];
+                switch (type){
+                    case "底层空间公共化区域" :
+                        color = round_point_color[0];
+                        break;
+                    case "公共空间共享" :
+                        color = round_point_color[1];
+                        break;
+                    case "文创产业鼓励区域" :
+                        color = round_point_color[2];
+                        break;
+                    case "社区服务共享区域" :
+                        color = round_point_color[3];
+                        break;
+                }
+                return color;
+            },
             height: function () {
                 return Math.random() * 500 + 100;
             }
