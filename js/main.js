@@ -61,6 +61,7 @@
 		this.reset();
 		this.default_community_layer();
 		map.clearMap();
+		$("#data_origin").html("数据来源："+data_origin[this.current_type]);
 		// map.setZoomAndCenter(15,[116.433969, 39.94105]);
 		switch (this.current_type) {
 			case "population": //人口信息

@@ -2,6 +2,30 @@
 var community_name = ["北宫厅", "北新仓", "藏经馆", "草园", "海运仓", "九道湾",
 	"门楼", "民安", "前永康", "青龙", "十三条", "小菊"];
 
+// 数据源
+var data_origin = {
+    home:"北新桥街道街区更新项目组",
+    population: "北新桥街道办事处",
+    overview:"北新桥街道办事处",
+    convenience:"北新桥街道办事处",
+    education:"北新桥街道办事处",
+    medical:"北新桥街道办事处",
+    recreation_sports:"北新桥街道办事处",
+    traffic:"北新桥街道办事处",
+    provide:"北新桥街道办事处",
+    street_management:"北新桥街道办事处",
+    industry_concentration:"高德地图",
+    industry_development:"北新桥街道办事处",
+    real_time_traffic:"高德地图",
+    visitors_flow_rate:"百度",
+    greenbelt:"中规院",
+    public_space:"北新桥街道街区更新项目组",
+    available_space:"北新桥街道街区更新项目组",
+    culture_overview:"中规院",
+    material_cultural_heritage:"中规院",
+    historical_building:"中规院",
+    community_opinion:"北新桥街道办事处",
+}
 //简介
 var brief_introduction = {
 	title:"北新桥街道简介",

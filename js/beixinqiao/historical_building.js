@@ -128,7 +128,7 @@ HistoricalBuilding.prototype.load_radar_chart = function(){
     var radar_option = {
         color: echarts_color,
         title:get_object_assign({
-            text:"各社区文保单位占比",
+            text:"各社区历史建筑数量对比图",
         }, echart_title),
         legend: {
             show: true,
@@ -218,7 +218,7 @@ HistoricalBuilding.prototype.load_bar_chart = function(){
     var option = {
         color: echarts_color,
         title:get_object_assign({
-            text:"各社区文保单位数量对比图",
+            text:"各社区历史建筑数量对比图",
         }, echart_title),
         legend: {
             show:false,

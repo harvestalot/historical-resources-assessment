@@ -1,5 +1,6 @@
  $(function(){
 	start_init.init("overview");
+	$("#data_origin").html("数据来源："+data_origin.home);
 	// 点击主导航
 	$("#nav a").click(function(){
 		event.stopPropagation();
@@ -9,15 +10,18 @@
 		infoWindow? map.remove(infoWindow):"";//清除信息窗体
 		map.setZoomAndCenter(15,[116.425768,39.940966]);
 		$("#visualization_content").animate({width:0},300);//移除数据图表层
-		$("#shade_modal").animate({height:"100%"},300);
+		$("#shade_modal").slideToggle(300);
 		$("#shade_modal .shade_item").show(200);
 		if($(this).index() === 0){
+			// $("#shade_modal").height() === 0? $("#shade_modal").animate({height:"100%"},300): $("#shade_modal").animate({height:0},300);
 			var html = template("introduction_tmp",brief_introduction);
 			document.getElementById('shade_modal').innerHTML = html;
 		}else if($(this).index() === 1){
+			// $("#shade_modal").height() === 0? $("#shade_modal").animate({height:"100%"},300): $("#shade_modal").animate({height:0},300);
 			var html = template("introduction_tmp",brief_introduction);
 			document.getElementById('shade_modal').innerHTML = html;
 		}else if($(this).index() === 2){
+			// $("#shade_modal").height() === 0? $("#shade_modal").animate({height:"100%"},300): $("#shade_modal").animate({height:0},300);
 			var html = template("historical_development_tmp",district_history_img_data);
 			document.getElementById('shade_modal').innerHTML = html;
 			$("#history_tab span").on("click",function(){

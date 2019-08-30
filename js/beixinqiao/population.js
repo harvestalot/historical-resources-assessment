@@ -20,7 +20,7 @@ function population(){
 	$("#visualization_echarts_content").append(population_size_dom_str);
 	//人口信息请求
 	serveRequest("get", server_url+ "/PopulationInfo/getPopulationInfo",{},function(result){
-		var population_data = result.data.resultKey;
+		var population_data = JSON.parse(Decrypt(result.data.resultKey));
 		load_population_statistics("population_statistics_content", population_data);//人口统计
 		for(var i = 0; i < population_data.length; i++){
 			var item = population_data[i];

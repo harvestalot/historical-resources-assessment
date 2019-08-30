@@ -89,42 +89,9 @@ PublicServiceProvide.prototype.render_point_layer = function(){
         var properties = ev.rawData.properties;
         //渲染信息窗体
         openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
-		_this.click_dom(ev.lnglat.join(), 15);
+		// _this.click_dom(ev.lnglat.join(), 15);
     });
 }
-// //添加养老设施点标识图层
-// PublicServiceProvide.prototype.render_point_layer = function(){
-// 	var _this = this;
-// 	point_layer = new Loca.IconLayer({
-// 	    map: map,
-// 	    zIndex: 100,
-//         eventSupport:true,
-// 	});
-//     point_layer.setData(endowment_facilities_point_data, {
-//         lnglat: 'lnglat'
-//     });
-//     point_layer.setOptions({
-//         source: function(res) {
-//             var value = res.value;
-//             var typecode = value.typecode;
-//             // 这里需要写上 http 协议，不能忽略
-//             // var src = 'http://webapi.amap.com/theme/v1.3/markers/n/mid.png';
-//             var src = point_icon_server_url+ '/beixinqiao/yanglao.svg';
-//             return src;
-//         },
-//         style: {
-//             size: 32
-//         }
-//     });
-//     point_layer.render();
-//     point_layer.on('click', function (ev) {
-//     	$("#spectaculars_content p").removeClass("active_checked");
-//         var properties = ev.rawData.properties;
-//         //渲染信息窗体
-//         openInfo(properties.name, properties["Î»ÖÃ"], ev.lnglat);
-// 		_this.click_dom(ev.lnglat.join(), 15);
-//     });
-// }
 //生产dom元素
 PublicServiceProvide.prototype.load_dom = function(){
 	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+

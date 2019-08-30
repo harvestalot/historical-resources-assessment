@@ -83,48 +83,9 @@ PublicServiceTrafficFacilities.prototype.render_point_layer = function(){
         var properties = ev.rawData.properties;
         //渲染信息窗体
         openInfo(properties.address, properties['¾­ÓªµØ'], ev.lnglat);
-		_this.click_dom(ev.lnglat.join(), 15);
+		// _this.click_dom(ev.lnglat.join(), 15);
     });
 }
-// //添加设施点标识图层
-// PublicServiceTrafficFacilities.prototype.render_point_layer = function(){
-// 	var _this = this;
-// 	point_layer = new Loca.IconLayer({
-// 	    map: map,
-// 	    zIndex: 100,
-//         eventSupport:true,
-// 	});
-//     point_layer.setData(traffic_facilities_point_data, {
-//         lnglat: 'lnglat'
-//     });
-//     point_layer.setOptions({
-//         source: function(res) {
-//             var value = res.value;
-//             var typecode = value.typecode;
-//             // 这里需要写上 http 协议，不能忽略
-//             // var src = 'http://webapi.amap.com/theme/v1.3/markers/n/mid.png';
-//             var src = point_icon_server_url+ '/beixinqiao/jiaotong.svg';
-//             return src;
-//         },
-//         style: {
-//             size: 32
-//         }
-//     });
-//     point_layer.render();
-//     point_layer.on('click', function (ev) {
-//     	$("#spectaculars_content p").removeClass("active_checked");
-//     	// console.log(ev)
-//         // // 事件类型
-//         // var type = ev.type;
-//         // // 当前元素的原始数据
-//         var properties = ev.rawData.properties;
-//         // // 原始鼠标事件
-//         // var originalEvent = ev.originalEvent;
-//         //渲染信息窗体
-//         openInfo(properties.facility_type, properties.address,ev.lnglat);
-// 		_this.click_dom(ev.lnglat.join(), 15);
-//     });
-// }
 //生产dom元素
 PublicServiceTrafficFacilities.prototype.load_dom = function(){
 	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+

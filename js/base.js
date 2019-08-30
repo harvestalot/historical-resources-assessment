@@ -36,6 +36,9 @@ document.write('<link rel="stylesheet" href="https://cache.amap.com/lbs/static/m
 document.write('<script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>');
 document.write('<script type="text/javascript" src="./lib/template.js"></script>');
 document.write('<script type="text/javascript" src="./lib/echarts.min.js"></script>');
+document.write('<script type="text/javascript" src= "./lib/aes.js"></script>');
+document.write('<script type="text/javascript" src= "./lib/pad-zeropadding.js"></script>');
+document.write('<script type="text/javascript" src= "./lib/security.js"></script>');
 document.write('<script type="text/javascript" src="//webapi.amap.com/maps?v=1.4.15&key=ecde469412ea3b8c4b8a640687c68c2b&plugin=AMap.PlaceSearch"></script>');
 document.write('<script type="text/javascript" src="//webapi.amap.com/loca?v=1.3.0&key=ecde469412ea3b8c4b8a640687c68c2b"></script>');
 document.write('<script type="text/javascript" src="https://cache.amap.com/lbs/static/PlaceSearchRender.js"></script>');
@@ -53,8 +56,11 @@ var round_point_layer;//圆点图层
 // icon点标记图片地址
 var point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
 var reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
-var server_url = "http://116.62.222.106:8081";
-// var server_url = "http://192.168.1.43:8081";
+// var server_url = "http://116.62.222.106:8081";
+// var server_url = "127.0.0.1";
+// var server_url = "127.0.0.1:8089/";
+var file_server_url = "http://116.62.222.106:8089/";
+var server_url = "http://192.168.1.43:8081";
 /**
  *ajax请求通用方法
  *
@@ -67,6 +73,7 @@ function serveRequest(type,url,arguments,callBack){
     $.ajax({
         type:type,
         url:url,
+        // data: Encrypt(JSON.stringify(arguments)),
         data: arguments,
         success: function (result) {
         	if(result.resultCode === "10000"){

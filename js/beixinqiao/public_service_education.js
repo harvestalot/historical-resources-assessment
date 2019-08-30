@@ -104,61 +104,16 @@ PublicServiceEducation.prototype.render_point_layer = function(){
         var properties = ev.rawData.properties;
         //渲染信息窗体
         openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
-		$.get(reachability_url+"?centerpoint="+ev.lnglat.join()+"&time="+15,function(result){
-			var reachability_data = [];
-			for(var i = 0; i < JSON.parse(result).result.split(";").length; i++){
-				var item = JSON.parse(result).result.split(";")[i];
-				reachability_data.push([item.split(",")[0],item.split(",")[1]])
-			};
-			_this.load_reachability_layer(reachability_data);
-		});
+		// $.get(reachability_url+"?centerpoint="+ev.lnglat.join()+"&time="+15,function(result){
+		// 	var reachability_data = [];
+		// 	for(var i = 0; i < JSON.parse(result).result.split(";").length; i++){
+		// 		var item = JSON.parse(result).result.split(";")[i];
+		// 		reachability_data.push([item.split(",")[0],item.split(",")[1]])
+		// 	};
+		// 	_this.load_reachability_layer(reachability_data);
+		// });
     });
 }
-// //添加教育设施点标识图层
-// PublicServiceEducation.prototype.render_point_layer = function(){
-// 	var _this = this;
-// 	var icon_url_config = {
-// 		"幼儿园": "youeryuan",
-// 		"小学": "xiaoxue",
-// 		"中学": "zhongxue",
-// 		"九年一贯制": "zhongxue",
-// 	};
-//     point_layer = new Loca.IconLayer({
-//         map: map,
-//         eventSupport:true,
-// 	    // zIndex: 100
-//     });
-//     point_layer.setData(educational_facilities_point_data, {
-//         lnglat: 'lnglat'
-//     });
-
-//     point_layer.setOptions({
-//         source: function(res) {
-//             var education_type = res.value.properties["¶þ¼¶²Ëµ¥"];
-//             // 这里需要写上 http 协议，不能忽略
-//             // var src = 'http://webapi.amap.com/theme/v1.3/markers/n/mid.png';
-//             var src = point_icon_server_url+ '/beixinqiao/'+icon_url_config[education_type]+'.svg';
-//             return src;
-//         },
-//         style: {
-//             size: 32
-//         }
-//     });
-//     point_layer.render();
-//     point_layer.on('click', function (ev) {
-//         var properties = ev.rawData.properties;
-//         //渲染信息窗体
-//         openInfo(properties.name, properties["µØÖ·"], ev.lnglat);
-// 		$.get(reachability_url+"?centerpoint="+ev.lnglat.join()+"&time="+15,function(result){
-// 			var reachability_data = [];
-// 			for(var i = 0; i < JSON.parse(result).result.split(";").length; i++){
-// 				var item = JSON.parse(result).result.split(";")[i];
-// 				reachability_data.push([item.split(",")[0],item.split(",")[1]])
-// 			};
-// 			_this.load_reachability_layer(reachability_data);
-// 		});
-//     });
-// }
 //生产dom元素
 PublicServiceEducation.prototype.load_dom = function(){
 	//雷达统计图

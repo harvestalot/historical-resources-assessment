@@ -109,20 +109,7 @@ function load_map(mapId){
 // 街道区域边界图层
 function street_boundary (map,layer){
     // var colors = ['#13EFDC', '#73D9E3', '#0FF5E1', '#C7EEE3'];
-    $.get('https://a.amap.com/Loca/static/mock/bj_district_wkt.json', function (data) {
-        // layer.on('click', function (ev) {
-        //     // 事件类型
-        //     var type = ev.type;
-        //     // 当前元素的原始数据
-        //     var rawData = ev.rawData;
-        //     // 原始鼠标事件
-        //     var originalEvent = ev.originalEvent;
-
-        //     openInfoWin(map, originalEvent, {
-        //         '名称': rawData.name,
-        //         '位置': rawData.center
-        //     });
-        // });
+    $.get(file_server_url+'beixinqiao_subdistrict.js', function (beixinqiao_subdistict_data) {
         layer.setData(beixinqiao_subdistict_data, {
             lnglat: 'coordinates'
         });
@@ -150,7 +137,7 @@ function street_boundary (map,layer){
 function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLabels){//
     var colors = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#DE61FA",
         "#3A8281","#00FF59","#EA376F","#BFEA37","#EAB437","#EA6F37","#37EA37"];
-    $.get('https://a.amap.com/Loca/static/mock/bj_district_wkt.json', function (data) {
+    $.get(file_server_url+'beixinqiao_community.js', function (beixinqiao_community_data) {
         var datas = [
             {
                 name:"北宫厅",
@@ -280,7 +267,7 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
 // 街道管控单元边界图层
 function street_control_unit_boundary (map,layer,layerLabels){
     var colors = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#DE61FA"];
-    $.get('https://a.amap.com/Loca/static/mock/bj_district_wkt.json', function (data) {
+    $.get(file_server_url+ 'control_unit.js', function (control_unit_data) {
         var datas = [
             {
                 name:"簋街单元",
@@ -348,96 +335,101 @@ function street_current_situation_land(map,layer){
     var colors = ["#A900E6", "#FF0000", "#0084A8", "#FFFF00", "#730000", "#9C9C9C","#FFAA00", 
         "#FF73DF", "#FF7F7F", "#004C73", '#00FFFF', "#00A884", "#4E4E4E", "#005CE6", "#73DFFF",
         "#4C0073", "#fff"];
-    layer.setData(current_situation_land_data, {
-        lnglat: 'lnglat'
-    });
+    $.get(file_server_url+ 'current_situation_land.js', function (current_situation_land_data) {
+        layer.setData(current_situation_land_data, {
+            lnglat: 'lnglat'
+        });
 
-    layer.setOptions({
-        style: {
-            // opacity: 0.5,
-            color: function (res) {
-                var land_name = res.value.name;
-                var color = colors[0];
-                switch (land_name){
-                    case "宗教用地" :
-                        color = colors[0];
-                        break;
-                    case "商业用地" :
-                        color = colors[1];
-                        break;
-                    case "科研用地" :
-                        color = colors[2];
-                        break;
-                    case "居住用地" :
-                        color = colors[3];
-                        break;
-                    case "商务用地" :
-                        color = colors[4];
-                        break;
-                    case "交通设施用地" :
-                        color = colors[5];
-                        break;
-                    case "行政办公用地" :
-                        color = colors[6];
-                        break;
-                    case "社区服务用地" :
-                        color = colors[7];
-                        break;
-                    case "基础教育用地" :
-                        color = colors[8];
-                        break;
-                    case "公用设施用地" :
-                        color = colors[9];
-                        break;
-                    case "公建混合用地" :
-                        color = colors[10];
-                        break;
-                    case "社会福利用地" :
-                        color = colors[11];
-                        break;
-                    case "外事用地" :
-                        color = colors[12];
-                        break;
-                    case "医疗卫生用地" :
-                        color = colors[13];
-                        break;
-                    case "高等院校用地" :
-                        color = colors[14];
-                        break;
-                    case "文物古迹用地" :
-                        color = colors[15];
-                        break;
-                    case "待研究用地" :
-                        color = colors[16];
-                        break;
-                    default:
-                        color = colors[0];
+        layer.setOptions({
+            style: {
+                // opacity: 0.5,
+                color: function (res) {
+                    var land_name = res.value.name;
+                    var color = colors[0];
+                    switch (land_name){
+                        case "宗教用地" :
+                            color = colors[0];
+                            break;
+                        case "商业用地" :
+                            color = colors[1];
+                            break;
+                        case "科研用地" :
+                            color = colors[2];
+                            break;
+                        case "居住用地" :
+                            color = colors[3];
+                            break;
+                        case "商务用地" :
+                            color = colors[4];
+                            break;
+                        case "交通设施用地" :
+                            color = colors[5];
+                            break;
+                        case "行政办公用地" :
+                            color = colors[6];
+                            break;
+                        case "社区服务用地" :
+                            color = colors[7];
+                            break;
+                        case "基础教育用地" :
+                            color = colors[8];
+                            break;
+                        case "公用设施用地" :
+                            color = colors[9];
+                            break;
+                        case "公建混合用地" :
+                            color = colors[10];
+                            break;
+                        case "社会福利用地" :
+                            color = colors[11];
+                            break;
+                        case "外事用地" :
+                            color = colors[12];
+                            break;
+                        case "医疗卫生用地" :
+                            color = colors[13];
+                            break;
+                        case "高等院校用地" :
+                            color = colors[14];
+                            break;
+                        case "文物古迹用地" :
+                            color = colors[15];
+                            break;
+                        case "待研究用地" :
+                            color = colors[16];
+                            break;
+                        default:
+                            color = colors[0];
+                    }
+                    return color;
+                },
+                height: function () {
+                    return Math.random() * 500 + 100;
                 }
-                return color;
-            },
-            height: function () {
-                return Math.random() * 500 + 100;
             }
-        }
-    });
+        });
 
-    layer.render();
-    layer.show();
+        layer.render();
+        layer.show();
+
+    })
 }
 //街道道路图层
 function street_road(map,layer){
-    layer.setData(beixinqiao_road_data, {
-        lnglat: 'lnglat'
-    });
-    layer.setOptions({
-        style: {
-            color: "#F8F735",
-            height: function () {
-                return Math.random() * 500 + 100;
+    $.get(file_server_url+ 'road.js', function (beixinqiao_road_data) {
+        layer.setData(beixinqiao_road_data, {
+            lnglat: 'lnglat'
+        });
+        layer.setOptions({
+            style: {
+                color: "#F8F735",
+                height: function () {
+                    return Math.random() * 500 + 100;
+                }
             }
-        }
-    });
+        });
 
-    layer.render();
-    layer.show();
+        layer.render();
+        layer.show();
+    })
 }
