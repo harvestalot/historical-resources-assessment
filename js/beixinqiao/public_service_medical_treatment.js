@@ -16,16 +16,16 @@ PublicServiceMedicalTreatment.prototype.init = function(){
 	var _this = this;
 	//医疗设施总覆盖率
 	serveRequest("get", server_url+ "/Coverage/getCoverageTotal",{ categoryCode: "medical_care" },function(result){
-		$("#total_coverage").html(result.data.resultKey+" %");
+		$("#total_coverage").html(JSON.parse(Decrypt(result.data.resultKey))+" %");
 	});
 	//医疗设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "medical_care",},function(result){
-		_this.get_view_data(result.data.resultKey);
+		_this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
 		_this.load_radar_chart();
 	});
 	//看板请求
 	serveRequest("get", server_url+ "/MedicalFacility/getMedicalFacility",{ },function(result){
-		_this.render_spectaculars_list(result.data.resultKey);
+		_this.render_spectaculars_list(JSON.parse(Decrypt(result.data.resultKey)));
 		$("#spectaculars_content p").click(function(){
 			$(this).addClass("active_checked").siblings("p").removeClass("active_checked");
 			_this.click_dom($(this).attr("data_lnglat"), 15);
@@ -57,85 +57,54 @@ PublicServiceMedicalTreatment.prototype.get_view_data = function(result_data){
 PublicServiceMedicalTreatment.prototype.render_point_layer = function(){
 	var _this = this;
     var round_point_color = echarts_color;
-    round_point_layer = new Loca.RoundPointLayer({
-        map: map,
-        zIndex: 100,
-        eventSupport:true,
-    });
-    round_point_layer.setData(medical_treatment_facilities_point_data, {
-        lnglat: 'lnglat'
-    });
-    round_point_layer.setOptions({
-        style: {
-            radius: 6,
-            color: function (data) {
-                // console.log(data.value.properties)
-                var type = data.value.properties["¶þ¼¶²Ëµ¥"];
-                var color = round_point_color[0];
-                switch (type){
-                    case "医院" :
-                        color = round_point_color[0];
-                        break;
-                    case "社区卫生服务站" :
-                        color = round_point_color[1];
-                        break;
-                }
-                return color;
-            }
-        }
-    })
-    round_point_layer.render();
-    round_point_layer.on('click', function (ev) {
-    	$("#spectaculars_content p").removeClass("active_checked");
-        var properties = ev.rawData.properties;
-        //渲染信息窗体
-        openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
-		_this.click_dom(ev.lnglat.join(), 15);
-    });
+    $.get(file_server_url+'medical_treatment_facilities.js', function (medical_treatment_facilities_point_data) {
+	    round_point_layer = new Loca.RoundPointLayer({
+	        map: map,
+	        zIndex: 100,
+	        eventSupport:true,
+	    });
+	    round_point_layer.setData(medical_treatment_facilities_point_data, {
+	        lnglat: 'lnglat'
+	    });
+	    round_point_layer.setOptions({
+	        style: {
+	            radius: 6,
+	            color: function (data) {
+	                // console.log(data.value.properties)
+	                var type = data.value.properties["¶þ¼¶²Ëµ¥"];
+	                var color = round_point_color[0];
+	                switch (type){
+	                    case "医院" :
+	                        color = round_point_color[0];
+	                        break;
+	                    case "社区卫生服务站" :
+	                        color = round_point_color[1];
+	                        break;
+	                }
+	                return color;
+	            }
+	        }
+	    })
+	    round_point_layer.render();
+	    round_point_layer.on('click', function (ev) {
+	    	$("#spectaculars_content p").removeClass("active_checked");
+	        var properties = ev.rawData.properties;
+	        //渲染信息窗体
+	        openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
+			_this.click_dom(ev.lnglat.join(), 15);
+	    });
+	})
 }
-// //添加养老设施点标识图层
-// PublicServiceMedicalTreatment.prototype.render_point_layer = function(){
-// 	var _this = this;
-// 	point_layer = new Loca.IconLayer({
-// 	    map: map,
-// 	    zIndex: 100,
-//         eventSupport:true,
-// 	});
-//     point_layer.setData(medical_treatment_facilities_point_data, {
-//         lnglat: 'lnglat'
-//     });
-//     point_layer.setOptions({
-//         source: function(res) {
-//             var value = res.value;
-//             var typecode = value.typecode;
-//             // 这里需要写上 http 协议，不能忽略
-//             // var src = 'http://webapi.amap.com/theme/v1.3/markers/n/mid.png';
-//             var src = point_icon_server_url+ '/beixinqiao/yiliao.svg';
-//             return src;
-//         },
-//         style: {
-//             size: 32
-//         }
-//     });
-//     point_layer.render();
-//     point_layer.on('click', function (ev) {
-//     	$("#spectaculars_content p").removeClass("active_checked");
-//         var properties = ev.rawData.properties;
-//         //渲染信息窗体
-//         openInfo(properties.name, properties["Î»ÖÃ"], ev.lnglat);
-// 		_this.click_dom(ev.lnglat.join(), 15);
-//     });
-// }
 //生产dom元素
 PublicServiceMedicalTreatment.prototype.load_dom = function(){
-	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
-		'<div style="width: 100%; height: 13%;padding-top:20px;box-sizing: border-box;">'+
-		'<p style="padding-left:21%;box-sizing: border-box;color:#fff;font-size:18px;">街道医疗设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
+	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 55%;">'+
+		'<div class="public_service_total_coverage">'+
+		'<p >街道医疗设施覆盖率：<span id="total_coverage">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div class="chart_view" style="width: 100%; height: 40%;">'+
-		'<p style="padding:10px 0 10px 21%;font-size:14px;color:#fff;font-weight:700;">医疗设施看板</p>'+
-		'<div id="spectaculars_content" class="chart_view spectaculars_content" style="width: 100%; height: 40%;">'+
+		'<p style="padding:10px 0 10px 12px;font-size:14px;color:#fff;font-weight:700;">医疗设施看板</p>'+
+		'<div id="spectaculars_content" class="chart_view spectaculars_content" style="width: 100%; height: 45%;">'+
 		'</div>'+
 		'</div>';
 	$("#visualization_echarts_content").append(public_service_dom_str);
@@ -244,6 +213,9 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 		]
 	};
     radarChart.setOption(radar_option, true);
+	window.onresize = function(){
+	    radarChart.resize();
+	}
 }
 //渲染看板列表DOM元素
 PublicServiceMedicalTreatment.prototype.render_spectaculars_list = function(data){

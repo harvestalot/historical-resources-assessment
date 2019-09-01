@@ -70,28 +70,30 @@ IndustrialStructureConcentration.prototype.load_dom = function(){
 //渲染九种服务类型pio点
 IndustrialStructureConcentration.prototype.load_poi_point = function(){
 	var _this = this;
-	var placeSearch = new AMap.PlaceSearch({});
-    AMap.service(["AMap.PlaceSearch"], function() {
-        var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
-            pageSize: 5, // 单页显示结果条数
-            pageIndex: 1, // 页码
-            city: "010", // 兴趣点城市
-            citylimit: true,  //是否强制限制在设置的城市内搜索
-            map: map, // 展现结果的地图实例
-            panel: "pio_point_list", // 结果列表将在此容器中进行展示。
-            autoFitView: true // 是否自动调整地图视野使绘制的 Marker点都处于视口的可见范围
-        });
-	    var polygon = new AMap.Polygon({
-	        path: beixinqiao_subdistict_data[0].coordinates,//设置多边形边界路径
-	        // strokeColor: "#FF33FF", //线颜色
-	        // strokeOpacity: 0.2, //线透明度
-	        // strokeWeight: 3,    //线宽
-	        // fillColor: "#1791fc", //填充色
-	        // fillOpacity: 0.35//填充透明度
-	    });
-	    placeSearch.searchInBounds(_this.pio_type, polygon, function (status, result){
-	    	// console.log(result)
-	    })
+    $.get(file_server_url+'beixinqiao_subdistrict.js', function (beixinqiao_subdistict_data) {
+		var placeSearch = new AMap.PlaceSearch({});
+	    AMap.service(["AMap.PlaceSearch"], function() {
+	        var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+	            pageSize: 5, // 单页显示结果条数
+	            pageIndex: 1, // 页码
+	            city: "010", // 兴趣点城市
+	            citylimit: true,  //是否强制限制在设置的城市内搜索
+	            map: map, // 展现结果的地图实例
+	            panel: "pio_point_list", // 结果列表将在此容器中进行展示。
+	            autoFitView: true // 是否自动调整地图视野使绘制的 Marker点都处于视口的可见范围
+	        });
+		    var polygon = new AMap.Polygon({
+		        path: beixinqiao_subdistict_data[0].coordinates,//设置多边形边界路径
+		        // strokeColor: "#FF33FF", //线颜色
+		        // strokeOpacity: 0.2, //线透明度
+		        // strokeWeight: 3,    //线宽
+		        // fillColor: "#1791fc", //填充色
+		        // fillOpacity: 0.35//填充透明度
+		    });
+		    placeSearch.searchInBounds(_this.pio_type, polygon, function (status, result){
+		    	// console.log(result)
+		    })
+		})
 	})
 }
 //加载饼状圆环图表
@@ -114,7 +116,7 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	        name: '文化产业',
 	        type: 'pie',
 	        clockWise: false,
-	        radius: [70, 80],
+	        radius: [60, 70],
 	        itemStyle: dataStyle,
 	        hoverAnimation: false,
 	        center: ['50%', '20%'],
@@ -167,7 +169,7 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	        name: '特色餐饮',
 	        type: 'pie',
 	        clockWise: false,
-	        radius: [70, 80],
+	        radius: [60, 70],
 	        itemStyle: dataStyle,
 	        hoverAnimation: false,
 	        center: ['50%', '51%'],
@@ -220,7 +222,7 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	        name: '商务办公',
 	        type: 'pie',
 	        clockWise: false,
-	        radius: [70, 80],
+	        radius: [60, 70],
 	        itemStyle: dataStyle,
 	        hoverAnimation: false,
 	        center: ['50%', '80%'],
@@ -271,6 +273,9 @@ IndustrialStructureConcentration.prototype.load_pie_chart = function(){
 	    }]
 	}
     pieChart.setOption(pie_option, true);
+	window.onresize = function(){
+	    pieChart.resize();
+	}
 }
 
 var start_industry_concentration_rendering = new IndustrialStructureConcentration();

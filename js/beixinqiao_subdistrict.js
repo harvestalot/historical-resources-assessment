@@ -8,6 +8,7 @@
 		heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
 		reachabilityLayer? map.remove(reachabilityLayer):"";//清除可达性覆盖范围图层
 		infoWindow? map.remove(infoWindow):"";//清除信息窗体
+		// $("#shade_modal").height() === 0? $("#shade_modal").animate({height:"100%"},300): $("#shade_modal").animate({height:0},300);
 		map.setZoomAndCenter(15,[116.425768,39.940966]);
 		$("#visualization_content").animate({width:0},300);//移除数据图表层
 		$("#shade_modal").slideToggle(300);
@@ -44,13 +45,14 @@
 	$("#subNavBox").click(function(){
 		event.stopPropagation();
 		$("#visualization_content").animate({width:0},300);
-		$("#shade_modal").animate({height:0},300);
+		// $("#shade_modal").animate({height:0},300);
 	});
     //侧边导航控制器
  	$(".subNav").next(".navContent").length === 0? $(".subNav").css({"background":"none"}):"";
     $(".subNav").click(function(){
     	event.stopPropagation();
-		$("#shade_modal").animate({height:0},300);
+		// $("#shade_modal").animate({height:0},300);
+		$("#shade_modal").slideUp(300);
 		$("#shade_modal .shade_item").hide(200);
         if($(this).next(".navContent").length > 0) {
 	        $(this).toggleClass("currentDd").siblings(".subNav").removeClass("currentDd");
@@ -70,7 +72,8 @@
 	});
     $(".navContent a").click(function(){
     	event.stopPropagation();
-		$("#shade_modal").animate({height:0},300);
+		// $("#shade_modal").animate({height:0},300);
+		$("#shade_modal").slideUp(300);
 		$("#shade_modal .shade_item").hide(200);
 		$("#visualization_content").animate({width:"30%"},300);
         $("#visualization_echarts_content").html("");

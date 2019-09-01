@@ -28,7 +28,7 @@ function load_map(mapId){
     streetCommunityLayer = new Loca.LineLayer({
         map: map,
         zIndex: 13,
-        fitView: true,
+        // fitView: true,
         eventSupport:true,
     });
     //街道各个社区区域面图层
@@ -42,26 +42,26 @@ function load_map(mapId){
     streetControlUnitLayer = new Loca.PolygonLayer({
         map: map,
         zIndex: 14,
-        fitView: true,
+        // fitView: true,
         eventSupport:true,
     });
     //街道现状用地图层
     streetCurrentSituationLandLayer = new Loca.PolygonLayer({
         map: map,
         zIndex: 15,
-        fitView: true,
+        // fitView: true,
         eventSupport:true,
     });
     //街道道路图层
     streetRoadLandLayer = new Loca.LineLayer({
         map: map,
         zIndex: 16,
-        fitView: true,
+        // fitView: true,
         eventSupport:true,
     });
     //社区名字文字图层
     layerLabels = new Loca.LabelsLayer({
-        fitView: true,
+        // fitView: true,
         map: map,
         collision: true
     });

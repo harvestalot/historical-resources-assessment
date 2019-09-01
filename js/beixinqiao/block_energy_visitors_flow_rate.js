@@ -23,6 +23,7 @@ VisitorsFlowRate.prototype.init = function(){
 // };
 //加载热力图图层
 VisitorsFlowRate.prototype.load_heatmap_layer = function(current_year){
+    $.get(file_server_url+'visitors_flow_rate.js', function (visitors_flow_rate_data) {
         heatmapLayer = new Loca.HeatmapLayer({
             map: map,
         });
@@ -49,6 +50,7 @@ VisitorsFlowRate.prototype.load_heatmap_layer = function(current_year){
 
         heatmapLayer.render();
         heatmapLayer.show();
+    })
 }
 
 var start_visitors_flow_rate_rendering = new VisitorsFlowRate();

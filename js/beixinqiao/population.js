@@ -11,8 +11,8 @@ function population(){
 		'<a href="javascript:void(0)" class="active_checked">60岁以上</a>'+
 		'<a href="javascript:void(0)">失业下岗</a>'+
 		'<a href="javascript:void(0)">学龄前</a>'+
-		'<a href="javascript:void(0)">在校小学生</a>'+
-		'<a href="javascript:void(0)">在校中学生</a>'+
+		'<a href="javascript:void(0)" class="w_21">在校小学生</a>'+
+		'<a href="javascript:void(0)" class="w_21">在校中学生</a>'+
 		'</div>'+
 		'<div id="population_size_content" style="width: 100%; height: 88%;"></div>'+
 		'</div>';
@@ -107,6 +107,9 @@ function load_population_statistics(eleId, population_data){
 		bar_option.series[2].data.push(item.FLOATING); 
 	}
     population_bar_chart.setOption(bar_option, true);
+	window.onresize = function(){
+	    population_bar_chart.resize();
+	}
 };
 //各区人口统计情况(特殊图形展示)
 function load_graphic_statistics(eleId, male, female, total){
@@ -301,6 +304,9 @@ function load_graphic_statistics(eleId, male, female, total){
 	    ]
 	}
     graphicChart.setOption(graphic_option, true);
+	window.onresize = function(){
+	    graphicChart.resize();
+	}
 }
 //不同类型人口统计(雷达图)
 function load_population_radar(eleId, type_name, population_data){
@@ -396,4 +402,7 @@ function load_population_radar(eleId, type_name, population_data){
 		}
 	}
     radarChart.setOption(radar_option, true);
+	window.onresize = function(){
+	    radarChart.resize();
+	}
 }

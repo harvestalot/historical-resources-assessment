@@ -15,12 +15,12 @@ PublicSpaceGreenbelt.prototype.init = function(){
 	this.sidebar_polygonLayer();
     var _this = this;
     serveRequest("get", server_url+ "/Greenland/getCoverage",{ },function(result){
-        _this.get_view_data(result.data.resultKey);
+        _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
         _this.load_bar_chart();
         _this.load_radar_chart();
     });
     serveRequest("get", server_url+ "/Greenland/getRanking",{ },function(result){
-        var data = result.data.resultKey;
+        var data = JSON.parse(Decrypt(result.data.resultKey));
         _this.ranking_list = [
             { type:"绿地覆盖率", name: data.maxCoverage.NAME, value: data.maxCoverage.GREENLAND_RATE.toFixed(2)+"%" },
             { type:"人均绿地面积", name: data.maxPersion.NAME, value: data.maxPersion.PRESON_GREENLAND.toFixed(2) },
@@ -32,27 +32,29 @@ PublicSpaceGreenbelt.prototype.init = function(){
 //添加图层
 PublicSpaceGreenbelt.prototype.sidebar_polygonLayer = function(){
 	var _this = this;
-	sidebar_polygonLayer = new Loca.PolygonLayer({
-        map: map,
-        // zIndex: 15,
-        fitView: true,
-        // eventSupport:true,
-    });
-    sidebar_polygonLayer.setData(actuality_greenbelt_data, {
-        lnglat: 'lnglat'
-    });
+    $.get(file_server_url+'public_space_greenbelt.js', function (actuality_greenbelt_data) {
+    	sidebar_polygonLayer = new Loca.PolygonLayer({
+            map: map,
+            // zIndex: 15,
+            fitView: true,
+            // eventSupport:true,
+        });
+        sidebar_polygonLayer.setData(actuality_greenbelt_data, {
+            lnglat: 'lnglat'
+        });
 
-    sidebar_polygonLayer.setOptions({
-        style: {
-            // opacity: 0.5,
-            color: "#0BF319",
-            height: function () {
-                return Math.random() * 500 + 100;
+        sidebar_polygonLayer.setOptions({
+            style: {
+                // opacity: 0.5,
+                color: "#0BF319",
+                height: function () {
+                    return Math.random() * 500 + 100;
+                }
             }
-        }
-    });
-    sidebar_polygonLayer.render();
-    sidebar_polygonLayer.show();
+        });
+        sidebar_polygonLayer.render();
+        sidebar_polygonLayer.show();
+    })
 }
 //渲染dom元素
 PublicSpaceGreenbelt.prototype.load_dom = function(){

@@ -22,69 +22,73 @@ PublicSpaceAvailableApace.prototype.load_dom = function(){
 //添加图层
 PublicSpaceAvailableApace.prototype.sidebar_polygonLayer = function(){
 	var _this = this;
-	sidebar_polygonLayer = new Loca.PolygonLayer({
-        map: map,
-        zIndex: 20,
-        fitView: true,
-        // eventSupport:true,
-    });
-    sidebar_polygonLayer.setData(public_space_available_space_data, {
-        lnglat: 'lnglat'
-    });
+    $.get(file_server_url+'public_space_available_space.js', function (public_space_available_data) {
+    	sidebar_polygonLayer = new Loca.PolygonLayer({
+            map: map,
+            zIndex: 20,
+            fitView: true,
+            // eventSupport:true,
+        });
+        sidebar_polygonLayer.setData(public_space_available_data.public_space_available_space_data, {
+            lnglat: 'lnglat'
+        });
 
-    sidebar_polygonLayer.setOptions({
-        style: {
-            // opacity: 0.5,
-            color: "#768189",
-            height: function () {
-                return Math.random() * 500 + 100;
+        sidebar_polygonLayer.setOptions({
+            style: {
+                // opacity: 0.5,
+                color: "#768189",
+                height: function () {
+                    return Math.random() * 500 + 100;
+                }
             }
-        }
-    });
-    sidebar_polygonLayer.render();
-    sidebar_polygonLayer.show();
+        });
+        sidebar_polygonLayer.render();
+        sidebar_polygonLayer.show();
+    })
 }
 //添加图层
 PublicSpaceAvailableApace.prototype.render_point_layer = function(){
     var _this = this;
     // var round_point_color = this.round_point_color;
-    round_point_layer = new Loca.RoundPointLayer({
-        map: map,
-        zIndex: 100,
-        eventSupport:true,
-    });
-    round_point_layer.setData(public_space_available_space_point_data, {
-        lnglat: 'lnglat'
-    });
-    round_point_layer.setOptions({
-        style: {
-            radius: 6,
-            color: function (data) {
-                var type = data.value.name;
-                var color = echarts_color[0];
-                switch (type){
-                    case "可统一调配公共服务设施单元" :
-                        color = echarts_color[0];
-                        break;
-                    case "意向腾退文物地" :
-                        color = echarts_color[4];
-                        break;
-                    case "已收回直管公房" :
-                        color = echarts_color[5];
-                        break;
-                    case "产权不明空地" :
-                        color = echarts_color[3];
-                        break;
+    $.get(file_server_url+'public_space_available_space.js', function (public_space_available_data) {
+        round_point_layer = new Loca.RoundPointLayer({
+            map: map,
+            zIndex: 100,
+            eventSupport:true,
+        });
+        round_point_layer.setData(public_space_available_data.public_space_available_space_point_data, {
+            lnglat: 'lnglat'
+        });
+        round_point_layer.setOptions({
+            style: {
+                radius: 6,
+                color: function (data) {
+                    var type = data.value.name;
+                    var color = echarts_color[0];
+                    switch (type){
+                        case "可统一调配公共服务设施单元" :
+                            color = echarts_color[0];
+                            break;
+                        case "意向腾退文物地" :
+                            color = echarts_color[4];
+                            break;
+                        case "已收回直管公房" :
+                            color = echarts_color[5];
+                            break;
+                        case "产权不明空地" :
+                            color = echarts_color[3];
+                            break;
+                    }
+                    return color;
                 }
-                return color;
             }
-        }
-    });
-    round_point_layer.render();
-    round_point_layer.on('click', function (ev) {
-        var properties = ev.rawData;
-        //渲染信息窗体
-        openInfo(properties.name, "", properties.lnglat);
-    });
+        });
+        round_point_layer.render();
+        round_point_layer.on('click', function (ev) {
+            var properties = ev.rawData;
+            //渲染信息窗体
+            openInfo(properties.name, "", properties.lnglat);
+        });
+    })
 }
 var start_available_space_rendering = new PublicSpaceAvailableApace();

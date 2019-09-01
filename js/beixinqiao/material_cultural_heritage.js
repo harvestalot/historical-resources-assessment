@@ -12,11 +12,11 @@ MaterialCulturalHeritage.prototype.init = function(){
     this.load_dom();
     var _this = this;
     serveRequest("get", server_url+ "/culturaheritage/getCoverageByLevels",{ },function(result){
-        _this.get_view_data(result.data.resultKey);
+        _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
         _this.pie_chart();
     });
     serveRequest("get", server_url+ "/culturaheritage/getCoverageByYears",{ },function(result){
-        _this.years_ring_data = result.data.resultKey.list;
+        _this.years_ring_data = JSON.parse(Decrypt(result.data.resultKey)).list;
         setTimeout(function(){
             _this.years_ring_chart();
         },100)
@@ -41,101 +41,78 @@ MaterialCulturalHeritage.prototype.get_view_data = function(result_data){
 //添加图层
 MaterialCulturalHeritage.prototype.sidebar_polygonLayer = function(){
 	var _this = this;
-	sidebar_polygonLayer = new Loca.PolygonLayer({
-        map: map,
-        zIndex: 20,
-        fitView: true,
-        // eventSupport:true,
-    });
-    sidebar_polygonLayer.setData(material_cultural_heritage_data, {
-        lnglat: 'lnglat'
-    });
+    $.get(file_server_url+'material_cultural_heritage.js', function (material_cultural_heritage_data) {
+    	sidebar_polygonLayer = new Loca.PolygonLayer({
+            map: map,
+            zIndex: 20,
+            fitView: true,
+            // eventSupport:true,
+        });
+        sidebar_polygonLayer.setData(material_cultural_heritage_data, {
+            lnglat: 'lnglat'
+        });
 
-    sidebar_polygonLayer.setOptions({
-        style: {
-            // opacity: 0.5,
-            color: "#f0b33c",
-            height: function () {
-                return Math.random() * 500 + 100;
+        sidebar_polygonLayer.setOptions({
+            style: {
+                // opacity: 0.5,
+                color: "#f0b33c",
+                height: function () {
+                    return Math.random() * 500 + 100;
+                }
             }
-        }
-    });
-    sidebar_polygonLayer.render();
-    sidebar_polygonLayer.show();
+        });
+        sidebar_polygonLayer.render();
+        sidebar_polygonLayer.show();
+    })
 }
 //添加设施点标识图层
 MaterialCulturalHeritage.prototype.render_point_layer = function(){
     var round_point_color = echarts_color;
-    round_point_layer = new Loca.RoundPointLayer({
-        map: map,
-        zIndex: 100,
-        eventSupport:true,
-    });
-    round_point_layer.setData(cultural_relic_protection_point_data, {
-        lnglat: 'lnglat'
-    });
-    round_point_layer.setOptions({
-        style: {
-            radius: 6,
-            color: function (data) {
-                // console.log(data.value.properties)
-                var type = data.value.properties['±£»¤µÈ¼¶'];
-                var color = round_point_color[0];
-                switch (type){
-                    case "其他" :
-                        color = round_point_color[0];
-                        break;
-                    case "普查登记" :
-                        color = round_point_color[1];
-                        break;
-                    case "国家级" :
-                        color = round_point_color[2];
-                        break;
-                    case "区级" :
-                        color = round_point_color[3];
-                        break;
-                    case "市级" :
-                        color = round_point_color[4];
-                        break;
+    $.get(file_server_url+'cultural_relic_protection.js', function (cultural_relic_protection_data) {
+        round_point_layer = new Loca.RoundPointLayer({
+            map: map,
+            zIndex: 100,
+            eventSupport:true,
+        });
+        round_point_layer.setData(cultural_relic_protection_data.cultural_relic_protection_point_data, {
+            lnglat: 'lnglat'
+        });
+        round_point_layer.setOptions({
+            style: {
+                radius: 6,
+                color: function (data) {
+                    // console.log(data.value.properties)
+                    var type = data.value.properties['±£»¤µÈ¼¶'];
+                    var color = round_point_color[0];
+                    switch (type){
+                        case "其他" :
+                            color = round_point_color[0];
+                            break;
+                        case "普查登记" :
+                            color = round_point_color[1];
+                            break;
+                        case "国家级" :
+                            color = round_point_color[2];
+                            break;
+                        case "区级" :
+                            color = round_point_color[3];
+                            break;
+                        case "市级" :
+                            color = round_point_color[4];
+                            break;
+                    }
+                    return color;
                 }
-                return color;
             }
-        }
+        })
+        round_point_layer.render();
+        round_point_layer.on('click', function (ev) {
+            var properties = ev.rawData.properties;
+            //渲染信息窗体
+            openInfo(properties.OBJNAME, properties.addres, ev.lnglat);
+        });
     })
-    round_point_layer.render();
-    round_point_layer.on('click', function (ev) {
-        var properties = ev.rawData.properties;
-        //渲染信息窗体
-        openInfo(properties.OBJNAME, properties.addres, ev.lnglat);
-    });
 }
-// //添加设施点标识图层
-// MaterialCulturalHeritage.prototype.render_point_layer = function(){
-//     var _this = this;
-//     point_layer = new Loca.IconLayer({
-//         map: map,
-//         zIndex: 100,
-//         eventSupport:true,
-//     });
-//     point_layer.setData(cultural_relic_protection_point_data, {
-//         lnglat: 'lnglat'
-//     });
-//     point_layer.setOptions({
-//         source: function(res) {
-//             var src = point_icon_server_url+ '/beixinqiao/baohudanwei.png';
-//             return src;
-//         },
-//         style: {
-//             size: 32
-//         }
-//     });
-//     point_layer.render();
-//     point_layer.on('click', function (ev) {
-//         var properties = ev.rawData.properties;
-//         //渲染信息窗体
-//         openInfo(properties.OBJNAME, "", ev.lnglat);
-//     });
-// }
 //加载3/4饼状图
 MaterialCulturalHeritage.prototype.pie_chart = function(){
     var data = this.level_data;

@@ -12,14 +12,14 @@ CommunityOpinion.prototype.init = function(){
     // serveRequest("get", server_url+ "/lawCase/getBigType",{ },function(result){
     // });
     serveRequest("get", server_url+ "/lawCase/getListByBigType",{ bigType:"道路交通" },function(result){
-        _this.get_view_data(result.data.resultKey);
+        _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
     });
-    $("#community_opinion_select").on("change",function(){
-        var type_name = $(this).children('option:selected').val();
-        serveRequest("get", server_url+ "/lawCase/getListByBigType",{ bigType: type_name },function(result){
-            _this.get_view_data(result.data.resultKey);
-        });
-    });
+    // $("#community_opinion_select").on("change",function(){
+    //     var type_name = $(this).children('option:selected').val();
+    //     serveRequest("get", server_url+ "/lawCase/getListByBigType",{ bigType: type_name },function(result){
+    //         _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
+    //     });
+    // });
      $('[name="nice-select"]').click(function(e){
 
             $('[name="nice-select"]').find('ul').hide();
@@ -50,7 +50,7 @@ CommunityOpinion.prototype.init = function(){
 
             var type_name = $(this).attr("data-value");
             serveRequest("get", server_url+ "/lawCase/getListByBigType",{ bigType: type_name },function(result){
-                _this.get_view_data(result.data.resultKey);
+                _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
             });
 
         });
@@ -101,7 +101,7 @@ CommunityOpinion.prototype.load_heatmap_layer = function(current_year){
             color: {
                 0.5: '#2c7bb6',
                 0.65: '#abd9e9',
-                0.7: '#ffffbf',
+                0.8: '#abd9e9',
                 0.9: '#fde468',
                 1.0: '#d7191c',
                 // 0.8: '#2c7bb6',

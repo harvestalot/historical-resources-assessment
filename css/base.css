@@ -6,9 +6,10 @@
 html,body{
     width: 100%;
     height: 100%;
+    font-size: 12px;
     box-sizing: border-box;
     background-color:#fff;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 /*清除浏览器默认样式�*/
 fieldset,
@@ -141,6 +142,9 @@ a {
 }
 .ds_n{
     display: none;
+}
+.c_fff{
+    color: #fff;
 }
 .ft_14{
     font-size: 14px;

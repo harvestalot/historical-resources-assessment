@@ -25,12 +25,12 @@ PublicServiceOverview.prototype.init = function(){
 	this.render_point_layer();
 	var _this = this;
 	serveRequest("get", server_url+ "/Coverage/getCoverageOverview",{ },function(result){
-		_this.get_view_data(result.data.resultKey);
+		_this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
 		_this.load_chart("全部");
 	});
 	//设施排行榜no.1
 	serveRequest("get", server_url+ "/Coverage/getCoverageOrder",{ },function(result){
-		var ranking_list = result.data.resultKey;
+		var ranking_list = JSON.parse(Decrypt(result.data.resultKey));
 		for(var i = 0; i < ranking_list.length; i++){
 			var item = ranking_list[i];
 			_this.ranking_list.push(
@@ -86,58 +86,63 @@ PublicServiceOverview.prototype.load_dom = function(){
 };
 //添加所有设施类型的点标识图层_convenient_people
 PublicServiceOverview.prototype.render_point_layer = function(){
-    var round_point_color = this.round_point_color;
-    round_point_layer = new Loca.RoundPointLayer({
-        map: map,
-        zIndex: 100,
-        eventSupport:true,
-    });
-    round_point_layer.setData(convenience_people_facilities_point_data.
-    	concat(educational_facilities_point_data,medical_treatment_facilities_point_data,
-    		recreation_sports_facilities_point_data,traffic_facilities_point_data,
-    		endowment_facilities_point_data,street_management_facilities_point_data), {
-        lnglat: 'lnglat'
-    });
-    round_point_layer.setOptions({
-        style: {
-            radius: 6,
-            color: function (data) {
-                // console.log(data.value.properties)
-                var type = data.value.properties["Ò»¼¶²Ëµ¥"];
-                var color = round_point_color[0];
-                switch (type){
-                    case "便民设施" :
-                        color = round_point_color[0];
-                        break;
-                    case "教育设施" :
-                        color = round_point_color[1];
-                        break;
-                    case "医疗设施" :
-                        color = round_point_color[2];
-                        break;
-                    case "文体设施" :
-                        color = round_point_color[3];
-                        break;
-                    case "交通设施" :
-                        color = round_point_color[4];
-                        break;
-                    case "养老设施" :
-                        color = round_point_color[5];
-                        break;
-                    case "街道管理设施" :
-                        color = round_point_color[6];
-                        break;
-                }
-                return color;
-            }
-        }
-    })
-    round_point_layer.render();
-    round_point_layer.on('click', function (ev) {
-        var properties = ev.rawData.properties;
-        //渲染信息窗体
-        openInfo(properties.hasOwnProperty("name")?properties.name:properties.address, properties.addres, ev.lnglat);
-    });
+    var round_point_color = echarts_color;
+    $.get(file_server_url+'public_service_all_facilities.js', function (result) {
+    	var public_service_all_facilities_data = [];
+		for(var i = 0; i < result.length; i++){
+			for(var j = 0; j < result[i].length; j++){
+				public_service_all_facilities_data.push(result[i][j]);
+			}
+		}
+	    round_point_layer = new Loca.RoundPointLayer({
+	        map: map,
+	        zIndex: 100,
+	        eventSupport:true,
+	    });
+	    round_point_layer.setData(public_service_all_facilities_data, {
+	        lnglat: 'lnglat'
+	    });
+	    round_point_layer.setOptions({
+	        style: {
+	            radius: 6,
+	            color: function (data) {
+	                // console.log(data.value.properties)
+	                var type = data.value.properties["Ò»¼¶²Ëµ¥"];
+	                var color = round_point_color[0];
+	                switch (type){
+	                    case "便民设施" :
+	                        color = round_point_color[0];
+	                        break;
+	                    case "教育设施" :
+	                        color = round_point_color[1];
+	                        break;
+	                    case "医疗设施" :
+	                        color = round_point_color[2];
+	                        break;
+	                    case "文体设施" :
+	                        color = round_point_color[3];
+	                        break;
+	                    case "交通设施" :
+	                        color = round_point_color[4];
+	                        break;
+	                    case "养老设施" :
+	                        color = round_point_color[5];
+	                        break;
+	                    case "街道管理设施" :
+	                        color = round_point_color[6];
+	                        break;
+	                }
+	                return color;
+	            }
+	        }
+	    })
+	    round_point_layer.render();
+	    round_point_layer.on('click', function (ev) {
+	        var properties = ev.rawData.properties;
+	        //渲染信息窗体
+	        openInfo(properties.hasOwnProperty("name")?properties.name:properties.address, properties.addres, ev.lnglat);
+	    });
+	})
 }
 //点击类型触发
 PublicServiceOverview.prototype.click_dom = function(){
@@ -264,6 +269,9 @@ PublicServiceOverview.prototype.load_radar_chart = function(type_name){
 	    "series": this.current_series_data
 	};
     radarChart.setOption(radar_option, true);
+	window.onresize = function(){
+	    radarChart.resize();
+	}
 }
 //重置数据
 PublicServiceOverview.prototype.reset_data = function(){

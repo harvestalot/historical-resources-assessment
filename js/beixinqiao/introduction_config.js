@@ -164,7 +164,7 @@ var public_service_overview_legend_data = {
         },
         {
             name:"街道管理设施",
-            legend_color:"#F51B04"  
+            legend_color:echarts_color[6]  
         },
     ]
 }
@@ -500,10 +500,11 @@ var available_space_legend_data = {
 }
 //图表title
 var echart_title = {
-    left:20,
+    left:10,
+    top:10,
     textStyle:{
         color: '#fff',
-        fontSize: 14
+        fontSize: 15
     }
 }
 // 雷达图各类型颜色配置

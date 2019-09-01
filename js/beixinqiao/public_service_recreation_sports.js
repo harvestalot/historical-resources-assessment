@@ -18,11 +18,11 @@ PublicServiceRecreationSports.prototype.init = function(){
 	var _this = this;
 	//文体设施总覆盖率
 	serveRequest("get", server_url+ "/Coverage/getCoverageTotal",{ categoryCode: "stylistic" },function(result){
-		$("#total_coverage").html(result.data.resultKey+" %");
+		$("#total_coverage").html(JSON.parse(Decrypt(result.data.resultKey))+" %");
 	});
 	//文体设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "stylistic" },function(result){
-		_this.get_view_data(result.data.resultKey);
+		_this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
 		_this.load_radar_chart();
 		_this.load_bar_chart();
 	});
@@ -39,7 +39,7 @@ PublicServiceRecreationSports.prototype.get_view_data = function(result_data){
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
-	            	console.log(result_data[i][key][j].COVERAGE)
+	            	// console.log(result_data[i][key][j].COVERAGE)
 	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = 
 	                	result_data[i][key][j].COVERAGE?result_data[i][key][j].COVERAGE.toFixed(2):0;
 	            }
@@ -51,56 +51,58 @@ PublicServiceRecreationSports.prototype.get_view_data = function(result_data){
 PublicServiceRecreationSports.prototype.render_point_layer = function(){
 	var _this = this;
     var round_point_color = echarts_color;
-    round_point_layer = new Loca.RoundPointLayer({
-        map: map,
-        zIndex: 100,
-        eventSupport:true,
-    });
-    round_point_layer.setData(recreation_sports_facilities_point_data, {
-        lnglat: 'lnglat'
-    });
-    round_point_layer.setOptions({
-        style: {
-            radius: 6,
-            color: function (data) {
-                // console.log(data.value.properties)
-                var type = data.value.properties["¶þ¼¶²Ëµ¥"];
-                var color = round_point_color[0];
-                switch (type){
-                    case "健身设施" :
-                        color = round_point_color[0];
-                        break;
-                    case "室内体育设施" :
-                        color = round_point_color[1];
-                        break;
-                    case "室外活动场所" :
-                        color = round_point_color[2];
-                        break;
-                    case "综合文体设施" :
-                        color = round_point_color[3];
-                        break;
-                    case "街道文化服务中心" :
-                        color = round_point_color[4];
-                        break;
-                }
-                return color;
-            }
-        }
-    })
-    round_point_layer.render();
-    round_point_layer.on('click', function (ev) {
-    	$("#spectaculars_content p").removeClass("active_checked");
-        var properties = ev.rawData.properties;
-        //渲染信息窗体
-        openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
-		// _this.click_dom(ev.lnglat.join(), 15);
-    });
+    $.get(file_server_url+'recreation_sports_facilities.js', function (recreation_sports_facilities_point_data) {
+	    round_point_layer = new Loca.RoundPointLayer({
+	        map: map,
+	        zIndex: 100,
+	        eventSupport:true,
+	    });
+	    round_point_layer.setData(recreation_sports_facilities_point_data, {
+	        lnglat: 'lnglat'
+	    });
+	    round_point_layer.setOptions({
+	        style: {
+	            radius: 6,
+	            color: function (data) {
+	                // console.log(data.value.properties)
+	                var type = data.value.properties["¶þ¼¶²Ëµ¥"];
+	                var color = round_point_color[0];
+	                switch (type){
+	                    case "健身设施" :
+	                        color = round_point_color[0];
+	                        break;
+	                    case "室内体育设施" :
+	                        color = round_point_color[1];
+	                        break;
+	                    case "室外活动场所" :
+	                        color = round_point_color[2];
+	                        break;
+	                    case "综合文体设施" :
+	                        color = round_point_color[3];
+	                        break;
+	                    case "街道文化服务中心" :
+	                        color = round_point_color[4];
+	                        break;
+	                }
+	                return color;
+	            }
+	        }
+	    })
+	    round_point_layer.render();
+	    round_point_layer.on('click', function (ev) {
+	    	$("#spectaculars_content p").removeClass("active_checked");
+	        var properties = ev.rawData.properties;
+	        //渲染信息窗体
+	        openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
+			// _this.click_dom(ev.lnglat.join(), 15);
+	    });
+	})
 }
 //生产dom元素
 PublicServiceRecreationSports.prototype.load_dom = function(){
 	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
-		'<div style="width: 100%; height: 13%;padding-top:20px;box-sizing: border-box;">'+
-		'<p style="padding-left:21%;box-sizing: border-box;color:#fff;font-size:18px;">街道文体设施覆盖率：<span id="total_coverage" style="font-size:36px;color:#F7C370;">0%</span></p>'+
+		'<div class="public_service_total_coverage">'+
+		'<p>街道文体设施覆盖率：<span id="total_coverage" >0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div id="facilities_statistics_content" class="chart_view" style="width: 100%; height: 40%;">'+
@@ -229,6 +231,9 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 		]
 	};
     radarChart.setOption(radar_option, true);
+	window.onresize = function(){
+	    radarChart.resize();
+	}
 }
 //加载柱状统计图
 PublicServiceRecreationSports.prototype.load_bar_chart = function(){
@@ -299,6 +304,9 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
         ]
 	};
     myChart.setOption(option, true);
+	window.onresize = function(){
+	    myChart.resize();
+	}
 }
 //重置数据
 PublicServiceRecreationSports.prototype.reset_data = function(){

@@ -36,7 +36,7 @@ PublicServiceEducation.prototype.init = function(){
 	var _this = this;
 	//教育设施请求
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "education" },function(result){
-		_this.get_view_data(result.data.resultKey);
+		_this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
 		_this.load_chart("");
 		_this.click_dom();
 		// _this.load_radar_chart()
@@ -66,53 +66,55 @@ PublicServiceEducation.prototype.get_view_data = function(result_data){
 PublicServiceEducation.prototype.render_point_layer = function(){
 	var _this = this;
     var round_point_color = echarts_color;
-    round_point_layer = new Loca.RoundPointLayer({
-        map: map,
-        zIndex: 100,
-        eventSupport:true,
-    });
-    round_point_layer.setData(educational_facilities_point_data, {
-        lnglat: 'lnglat'
-    });
-    round_point_layer.setOptions({
-        style: {
-            radius: 6,
-            color: function (data) {
-                // console.log(data.value.properties)
-                var type = data.value.properties["¶þ¼¶²Ëµ¥"];
-                var color = round_point_color[0];
-                switch (type){
-                    case "幼儿园" :
-                        color = round_point_color[0];
-                        break;
-                    case "小学" :
-                        color = round_point_color[1];
-                        break;
-                    case "中学" :
-                        color = round_point_color[2];
-                        break;
-                    case "九年一贯制" :
-                        color = round_point_color[3];
-                        break;
-                }
-                return color;
-            }
-        }
-    })
-    round_point_layer.render();
-    round_point_layer.on('click', function (ev) {
-        var properties = ev.rawData.properties;
-        //渲染信息窗体
-        openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
-		// $.get(reachability_url+"?centerpoint="+ev.lnglat.join()+"&time="+15,function(result){
-		// 	var reachability_data = [];
-		// 	for(var i = 0; i < JSON.parse(result).result.split(";").length; i++){
-		// 		var item = JSON.parse(result).result.split(";")[i];
-		// 		reachability_data.push([item.split(",")[0],item.split(",")[1]])
-		// 	};
-		// 	_this.load_reachability_layer(reachability_data);
-		// });
-    });
+    $.get(file_server_url+'educational_facilities.js', function (educational_facilities_point_data) {
+	    round_point_layer = new Loca.RoundPointLayer({
+	        map: map,
+	        zIndex: 100,
+	        eventSupport:true,
+	    });
+	    round_point_layer.setData(educational_facilities_point_data, {
+	        lnglat: 'lnglat'
+	    });
+	    round_point_layer.setOptions({
+	        style: {
+	            radius: 6,
+	            color: function (data) {
+	                // console.log(data.value.properties)
+	                var type = data.value.properties["¶þ¼¶²Ëµ¥"];
+	                var color = round_point_color[0];
+	                switch (type){
+	                    case "幼儿园" :
+	                        color = round_point_color[0];
+	                        break;
+	                    case "小学" :
+	                        color = round_point_color[1];
+	                        break;
+	                    case "中学" :
+	                        color = round_point_color[2];
+	                        break;
+	                    case "九年一贯制" :
+	                        color = round_point_color[3];
+	                        break;
+	                }
+	                return color;
+	            }
+	        }
+	    })
+	    round_point_layer.render();
+	    round_point_layer.on('click', function (ev) {
+	        var properties = ev.rawData.properties;
+	        //渲染信息窗体
+	        openInfo(properties.name, properties['¾­ÓªµØ'], ev.lnglat);
+			// $.get(reachability_url+"?centerpoint="+ev.lnglat.join()+"&time="+15,function(result){
+			// 	var reachability_data = [];
+			// 	for(var i = 0; i < JSON.parse(result).result.split(";").length; i++){
+			// 		var item = JSON.parse(result).result.split(";")[i];
+			// 		reachability_data.push([item.split(",")[0],item.split(",")[1]])
+			// 	};
+			// 	_this.load_reachability_layer(reachability_data);
+			// });
+	    });
+	})
 }
 //生产dom元素
 PublicServiceEducation.prototype.load_dom = function(){
@@ -316,6 +318,9 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	    series: seriesData
 	}
     radarChart.setOption(option, true);
+	window.onresize = function(){
+	    radarChart.resize();
+	}
 }
 //加载柱状统计图
 PublicServiceEducation.prototype.load_bar_chart = function(){
@@ -379,177 +384,11 @@ PublicServiceEducation.prototype.load_bar_chart = function(){
 	    ]
 	};
     myChart.setOption(option, true);
+	window.onresize = function(){
+	    myChart.resize();
+	}
 }
 
-// //加载养老设施覆盖率雷达图图表数据
-// PublicServiceEducation.prototype.load_radar_chart = function(){
-// 	var radarChart = echarts.init(document.getElementById("public_service_radar_content"));
-// 	var radar_option = {
-// 	    color: ["#00FFFF","#3ba0f3",'#ff9921','#E0F319'],
-// 		// title:{
-// 		// 	text:"各社区养老设施对比图",
-// 		// 	left:'20%',
-// 		// 	textStyle:{
-// 		// 		color: '#1E78B2',
-// 		// 		fontSize: 16
-// 		// 	}
-// 		// },
-// 	    legend: {
-// 	        show: true,
-// 	        right:"10%",
-// 	        bottom:"1%",
-// 	        textStyle: {
-// 	            "fontSize": 14,
-// 	            "color": "#fff"
-// 	        },
-// 	        "data": this.legendData
-// 	    },
-// 	    tooltip: {
-// 	        show: true,
-// 	        trigger: "item"
-// 	    },
-// 	    radar: {
-// 	        center: ["50%", "50%"],
-// 	        radius: "70%",
-// 	        startAngle: 90,
-// 	        splitNumber: 4,
-// 	        shape: "circle",
-// 	        splitArea: {
-// 	            "areaStyle": {
-// 	                "color": ["transparent"]
-// 	            }
-// 	        },
-// 	        axisLabel: {
-// 	            "show": false,
-// 	            "fontSize": 18,
-// 	            "color": "#fff",
-// 	            "fontStyle": "normal",
-// 	            "fontWeight": "normal"
-// 	        },
-// 	        axisLine: {
-// 	            "show": true,
-// 	            "lineStyle": {
-// 	                "color": "grey"//
-// 	            }
-// 	        },
-// 	        splitLine: {
-// 	            "show": true,
-// 	            "lineStyle": {
-// 	                "color": "grey"//
-// 	            }
-// 	        },
-// 	        indicator: this.radar_chart_indicator_data
-// 	    },
-// 	    "series": [{
-// 	        "name": this.legendData[0],
-// 	        "type": "radar",
-// 	        "symbol": "circle",
-// 	        "symbolSize": 3,
-// 	        "areaStyle": {
-// 	            "normal": {
-// 	                "color": "rgba(0,255,255, 0.4)"
-// 	            }
-// 	        },
-// 	        itemStyle:{
-// 	            color:'rgba(0,255,255, 1)',
-// 	            borderColor:'rgba(0,255,255, 0.3)',
-// 	            borderWidth:5,
-// 	        },
-// 	        "lineStyle": {
-// 	            "normal": {
-// 	                "type": "dashed",
-// 	                "color": "rgba(0,255,255, 1)",
-// 	                "width": 1
-// 	            }
-// 	        },
-// 	        "data": [
-// 				this.bar_comprehensive_data[this.legendData[0]]
-// 	        ]
-// 	    }, {
-// 	        "name": this.legendData[1],
-// 	        "type": "radar",
-// 	        "symbol": "circle",
-// 	        "symbolSize": 3,
-// 	        "itemStyle": {
-// 	            "normal": {
-// 	                color:'rgba(59,160,243, 1)',
-// 	                "borderColor": "rgba(59,160,243, 0.4)",
-// 	                "borderWidth": 5
-// 	            }
-// 	        },
-// 	        "areaStyle": {
-// 	            "normal": {
-// 	                "color": "rgba(59,160,243, 0.5)"
-// 	            }
-// 	        },
-// 	        "lineStyle": {
-// 	            "normal": {
-// 	                "color": "rgba(59,160,243, 1)",
-// 	                "width": 1,
-// 	                "type": "dashed"
-// 	            }
-// 	        },
-// 	        "data": [
-// 				this.bar_comprehensive_data[this.legendData[1]]
-// 	        ]
-// 	    },{
-// 	        "name": this.legendData[2],
-// 	        "type": "radar",
-// 	        "symbol": "circle",
-// 	        "symbolSize": 3,
-// 	        "itemStyle": {
-// 	            "normal": {
-// 	                color:'rgba(255,153,33, 1)',
-// 	                "borderColor": "rgba(255,153,33, 0.4)",
-// 	                "borderWidth": 5
-// 	            }
-// 	        },
-// 	        "areaStyle": {
-// 	            "normal": {
-// 	                "color": "rgba(255,153,33, 0.5)"
-// 	            }
-// 	        },
-// 	        "lineStyle": {
-// 	            "normal": {
-// 	                "color": "rgba(255,153,33, 1)",
-// 	                "width": 1,
-// 	                "type": "dashed"
-// 	            }
-// 	        },
-// 	        "data": [
-// 				this.bar_comprehensive_data[this.legendData[2]]
-// 	        ]
-// 	    },{
-// 	        "name": this.legendData[3],
-// 	        "type": "radar",
-// 	        "symbol": "circle",
-// 	        "symbolSize": 3,
-// 	        "itemStyle": {
-// 	            "normal": {
-// 	                color:'rgba(224,243,25, 1)',
-// 	                "borderColor": "rgba(224,243,25, 0.4)",
-// 	                "borderWidth": 5
-// 	            }
-// 	        },
-// 	        "areaStyle": {
-// 	            "normal": {
-// 	                "color": "rgba(224,243,25, 0.5)"
-// 	            }
-// 	        },
-// 	        "lineStyle": {
-// 	            "normal": {
-// 	                "color": "rgba(224,243,25, 1)",
-// 	                "width": 1,
-// 	                "type": "dashed"
-// 	            }
-// 	        },
-// 	        "data": [
-// 				this.bar_comprehensive_data[this.legendData[3]]
-// 	        ]
-// 	    }]
-// 	};
-//     radarChart.setOption(radar_option, true);
-// }
 //加载排行榜统计
 PublicServiceEducation.prototype.load_ranking_list = function(data){
 	for(var i = 0; i < data.length; i++){
