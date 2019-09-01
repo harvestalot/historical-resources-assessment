@@ -157,21 +157,22 @@ $(function(){
 	}
 	//如类型选择文化资源，则判断文化资源点是否在可达性范围之内
 	AccessibilityMap.prototype.accessibility_resources = function(){
+		var _this = this;
     	$.get(file_server_url+'cultural_resources.js', function (cultural_resources_point_data) {
-			for(var i = 0; i < cultural_resources_point_data.length; i++){
-				var items = cultural_resources_point_data[i];
-	        	var isPointInRing = AMap.GeometryUtil.isPointInRing(items.lnglat, this.reachability_data);
-				isPointInRing? this.area_cultural_resources_point_data.push(get_object_assign(items,{
+			for(var i = 0; i < JSON.parse(Decrypt(cultural_resources_point_data)).length; i++){
+				var items = JSON.parse(Decrypt(cultural_resources_point_data))[i];
+	        	var isPointInRing = AMap.GeometryUtil.isPointInRing(items.lnglat, _this.reachability_data);
+				isPointInRing? _this.area_cultural_resources_point_data.push(get_object_assign(items,{
 				 icon: point_icon_server_url+ "/accessibility/wenhuaziyaun.png",
 				})): "";
 			}
-			this.render_point_layer();
+			_this.render_point_layer();
 		})
 	}
 	//渲染可达性区域内的符合条件的点图层
 	AccessibilityMap.prototype.render_point_layer = function(){
 	    var _this = this;
-	    this.area_cultural_resources_point_data.forEach(function(marker) {
+	    _this.area_cultural_resources_point_data.forEach(function(marker) {
 	        var marker = new AMap.Marker({
 	            map: accessibility_map,
 	            icon: marker.icon,

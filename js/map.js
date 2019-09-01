@@ -110,7 +110,7 @@ function load_map(mapId){
 function street_boundary (map,layer){
     // var colors = ['#13EFDC', '#73D9E3', '#0FF5E1', '#C7EEE3'];
     $.get(file_server_url+'beixinqiao_subdistrict.js', function (beixinqiao_subdistict_data) {
-        layer.setData(beixinqiao_subdistict_data, {
+        layer.setData(JSON.parse(Decrypt(beixinqiao_subdistict_data)), {
             lnglat: 'coordinates'
         });
 
@@ -188,7 +188,7 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
                 lnglat:[116.4234, 39.940235]
             },
         ] 
-        layer.setData(beixinqiao_community_data, {
+        layer.setData(JSON.parse(Decrypt(beixinqiao_community_data)), {
             lnglat: 'coordinates'
         });
 
@@ -212,7 +212,7 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
         layer.render();
         layer.show();
         //社区区域面图层
-        streetCommunityAreaLayer.setData(beixinqiao_community_data, {
+        streetCommunityAreaLayer.setData(JSON.parse(Decrypt(beixinqiao_community_data)), {
             lnglat: 'coordinates'
         });
         streetCommunityAreaLayer.setOptions({
@@ -290,7 +290,7 @@ function street_control_unit_boundary (map,layer,layerLabels){
                 lnglat:[116.418891, 39.937131]
             },
         ] 
-        layer.setData(control_unit_data, {
+        layer.setData(JSON.parse(Decrypt(control_unit_data)), {
             lnglat: 'coordinates'
         });
 
@@ -336,7 +336,7 @@ function street_current_situation_land(map,layer){
         "#FF73DF", "#FF7F7F", "#004C73", '#00FFFF', "#00A884", "#4E4E4E", "#005CE6", "#73DFFF",
         "#4C0073", "#fff"];
     $.get(file_server_url+ 'current_situation_land.js', function (current_situation_land_data) {
-        layer.setData(current_situation_land_data, {
+        layer.setData(JSON.parse(Decrypt(current_situation_land_data)), {
             lnglat: 'lnglat'
         });
 
@@ -417,7 +417,7 @@ function street_current_situation_land(map,layer){
 //街道道路图层
 function street_road(map,layer){
     $.get(file_server_url+ 'road.js', function (beixinqiao_road_data) {
-        layer.setData(beixinqiao_road_data, {
+        layer.setData(JSON.parse(Decrypt(beixinqiao_road_data)), {
             lnglat: 'lnglat'
         });
         layer.setOptions({

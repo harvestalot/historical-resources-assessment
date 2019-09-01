@@ -27,7 +27,7 @@ VisitorsFlowRate.prototype.load_heatmap_layer = function(current_year){
         heatmapLayer = new Loca.HeatmapLayer({
             map: map,
         });
-        heatmapLayer.setData(visitors_flow_rate_data, {
+        heatmapLayer.setData(JSON.parse(Decrypt(visitors_flow_rate_data)), {
             lnglat: 'lnglat',
             value: current_year === "2016"?'count_2016':( current_year === "2017"?'count_2017':'count_2018')
         });

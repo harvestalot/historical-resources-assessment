@@ -24,7 +24,7 @@ PublicSpaceShare.prototype.load_line_layer = function(){
             fitView: true,
             // eventSupport:true,
         });
-        line_layer.setData(public_space_share_data.public_space_share_line_data, {
+        line_layer.setData(JSON.parse(Decrypt(public_space_share_data)).public_space_share_line_data, {
             lnglat: 'lnglat'
         });
 
@@ -52,7 +52,7 @@ PublicSpaceShare.prototype.sidebar_polygonLayer = function(){
             fitView: true,
             // eventSupport:true,
         });
-        sidebar_polygonLayer.setData(public_space_share_data.public_space_share_area_data, {
+        sidebar_polygonLayer.setData(JSON.parse(Decrypt(public_space_share_data)).public_space_share_area_data, {
             lnglat: 'lnglat'
         });
 

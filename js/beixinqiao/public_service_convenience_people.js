@@ -56,7 +56,7 @@ PublicServiceConveniencePeople.prototype.render_point_layer = function(){
 	        zIndex: 100,
 	        eventSupport:true,
 	    });
-	    round_point_layer.setData(convenience_people_facilities_point_data, {
+	    round_point_layer.setData(JSON.parse(Decrypt(convenience_people_facilities_point_data)), {
 	        lnglat: 'lnglat'
 	    });
 	    round_point_layer.setOptions({

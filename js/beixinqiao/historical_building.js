@@ -57,7 +57,7 @@ HistoricalBuilding.prototype.render_point_layer = function(){
             zIndex: 100,
             eventSupport:true,
         });
-        round_point_layer.setData(historical_building_data, {
+        round_point_layer.setData(JSON.parse(Decrypt(historical_building_data)), {
             lnglat: 'lnglat'
         });
         round_point_layer.setOptions({

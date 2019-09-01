@@ -39,7 +39,7 @@ PublicSpaceGreenbelt.prototype.sidebar_polygonLayer = function(){
             fitView: true,
             // eventSupport:true,
         });
-        sidebar_polygonLayer.setData(actuality_greenbelt_data, {
+        sidebar_polygonLayer.setData(JSON.parse(Decrypt(actuality_greenbelt_data)), {
             lnglat: 'lnglat'
         });
 

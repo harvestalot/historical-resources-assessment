@@ -72,7 +72,7 @@ PublicServiceEducation.prototype.render_point_layer = function(){
 	        zIndex: 100,
 	        eventSupport:true,
 	    });
-	    round_point_layer.setData(educational_facilities_point_data, {
+	    round_point_layer.setData(JSON.parse(Decrypt(educational_facilities_point_data)), {
 	        lnglat: 'lnglat'
 	    });
 	    round_point_layer.setOptions({

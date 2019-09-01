@@ -29,7 +29,7 @@ PublicSpaceAvailableApace.prototype.sidebar_polygonLayer = function(){
             fitView: true,
             // eventSupport:true,
         });
-        sidebar_polygonLayer.setData(public_space_available_data.public_space_available_space_data, {
+        sidebar_polygonLayer.setData(JSON.parse(Decrypt(public_space_available_data)).public_space_available_space_data, {
             lnglat: 'lnglat'
         });
 
@@ -56,7 +56,7 @@ PublicSpaceAvailableApace.prototype.render_point_layer = function(){
             zIndex: 100,
             eventSupport:true,
         });
-        round_point_layer.setData(public_space_available_data.public_space_available_space_point_data, {
+        round_point_layer.setData(JSON.parse(Decrypt(public_space_available_data)).public_space_available_space_point_data, {
             lnglat: 'lnglat'
         });
         round_point_layer.setOptions({

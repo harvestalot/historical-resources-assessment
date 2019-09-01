@@ -57,7 +57,7 @@ PublicServiceRecreationSports.prototype.render_point_layer = function(){
 	        zIndex: 100,
 	        eventSupport:true,
 	    });
-	    round_point_layer.setData(recreation_sports_facilities_point_data, {
+	    round_point_layer.setData(JSON.parse(Decrypt(recreation_sports_facilities_point_data)), {
 	        lnglat: 'lnglat'
 	    });
 	    round_point_layer.setOptions({

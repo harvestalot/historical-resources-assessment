@@ -57,7 +57,7 @@ CulturalRelicPtection.prototype.sidebar_polygonLayer = function(){
             fitView: true,
             // eventSupport:true,
         });
-        sidebar_polygonLayer.setData(cultural_relic_protection_data.cultural_relic_protection_area_data, {
+        sidebar_polygonLayer.setData(JSON.parse(Decrypt(cultural_relic_protection_data)).cultural_relic_protection_area_data, {
             lnglat: 'lnglat'
         });
 
@@ -83,7 +83,7 @@ CulturalRelicPtection.prototype.render_point_layer = function(){
             zIndex: 100,
             eventSupport:true,
         });
-        point_layer.setData(cultural_relic_protection_data.cultural_relic_protection_point_data, {
+        point_layer.setData(JSON.parse(Decrypt(cultural_relic_protection_data)).cultural_relic_protection_point_data, {
             lnglat: 'lnglat'
         });
         point_layer.setOptions({

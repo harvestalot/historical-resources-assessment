@@ -49,7 +49,7 @@ CulturalResourcesOverview.prototype.sidebar_polygonLayer = function(){
 	        fitView: true,
 	        // eventSupport:true,
 	    });
-	    sidebar_polygonLayer.setData(cultural_relic_protection_data.cultural_relic_protection_area_data, {
+	    sidebar_polygonLayer.setData(JSON.parse(Decrypt(cultural_relic_protection_data)).cultural_relic_protection_area_data, {
 	        lnglat: 'lnglat'
 	    });
 
@@ -76,7 +76,7 @@ CulturalResourcesOverview.prototype.render_point_layer = function(){
 		        zIndex: 100,
 		        eventSupport:true,
 		    });
-		    round_point_layer.setData(historical_building_data.concat(cultural_relic_protection_data.cultural_relic_protection_point_data), {
+		    round_point_layer.setData(JSON.parse(Decrypt(historical_building_data)).concat(JSON.parse(Decrypt(cultural_relic_protection_data)).cultural_relic_protection_point_data), {
 		        lnglat: 'lnglat'
 		    });
 		    round_point_layer.setOptions({
