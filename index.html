@@ -8,5 +8,157 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
+	<script>
+// 创建Base64对象
+var Base64 = {
+	 _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+	 encode: function(e) {
+	  var t = "";
+	  var n, r, i, s, o, u, a;
+	  var f = 0;
+	  e = Base64._utf8_encode(e);
+	  while (f < e.length) {
+	   n = e.charCodeAt(f++);
+	   r = e.charCodeAt(f++);
+	   i = e.charCodeAt(f++);
+	   s = n >> 2;
+	   o = (n & 3) << 4 | r >> 4;
+	   u = (r & 15) << 2 | i >> 6;
+	   a = i & 63;
+	   if (isNaN(r)) {
+	    u = a = 64
+	   } else if (isNaN(i)) {
+	    a = 64
+	   }
+	   t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+	  }
+	  return t
+	 },
+	 decode: function(e) {
+	  var t = "";
+	  var n, r, i;
+	  var s, o, u, a;
+	  var f = 0;
+	  e=e.replace(/[^A-Za-z0-9+/=]/g,"");
+	  while (f < e.length) {
+	   s = this._keyStr.indexOf(e.charAt(f++));
+	   o = this._keyStr.indexOf(e.charAt(f++));
+	   u = this._keyStr.indexOf(e.charAt(f++));
+	   a = this._keyStr.indexOf(e.charAt(f++));
+	   n = s << 2 | o >> 4;
+	   r = (o & 15) << 4 | u >> 2;
+	   i = (u & 3) << 6 | a;
+	   t = t + String.fromCharCode(n);
+	   if (u != 64) {
+	    t = t + String.fromCharCode(r)
+	   }
+	   if (a != 64) {
+	    t = t + String.fromCharCode(i)
+	   }
+	  }
+	  t = Base64._utf8_decode(t);
+	  return t
+	 },
+	 _utf8_encode: function(e) {
+	  e = e.replace(/rn/g, "n");
+	  var t = "";
+	  for (var n = 0; n < e.length; n++) {
+	   var r = e.charCodeAt(n);
+	   if (r < 128) {
+	    t += String.fromCharCode(r)
+	   } else if (r > 127 && r < 2048) {
+	    t += String.fromCharCode(r >> 6 | 192);
+	    t += String.fromCharCode(r & 63 | 128)
+	   } else {
+	    t += String.fromCharCode(r >> 12 | 224);
+	    t += String.fromCharCode(r >> 6 & 63 | 128);
+	    t += String.fromCharCode(r & 63 | 128)
+	   }
+	  }
+	  return t
+	 },
+	 _utf8_decode: function(e) {
+	  var t = "";
+	  var n = 0;
+	  var r = c1 = c2 = 0;
+	  while (n < e.length) {
+	   r = e.charCodeAt(n);
+	   if (r < 128) {
+	    t += String.fromCharCode(r);
+	    n++
+	   } else if (r > 191 && r < 224) {
+	    c2 = e.charCodeAt(n + 1);
+	    t += String.fromCharCode((r & 31) << 6 | c2 & 63);
+	    n += 2
+	   } else {
+	    c2 = e.charCodeAt(n + 1);
+	    c3 = e.charCodeAt(n + 2);
+	    t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+	    n += 3
+	   }
+	  }
+	  return t
+	}
+}
+// 定义字符串
+var string = 'Hello World!';
+var public_space_available_space_data = [{
+		"name": "地下空间",
+		"lnglat": [
+			[116.42578788286383, 39.947888363380386],
+			[116.42828599132254, 39.947897624508165],
+			[116.42813717037464, 39.94662994569928],
+			[116.42582341533168, 39.94659164983237],
+			[116.42578788286383, 39.947888363380386]
+		]
+	}, {
+		"name": "地下空间",
+		"lnglat": [
+			[116.42886423192691, 39.944671184372254],
+			[116.43220523393947, 39.94459872124852],
+			[116.43220860320947, 39.94418869601253],
+			[116.43223632094333, 39.943826444811805],
+			[116.43196856548205, 39.943291392798216],
+			[116.43199802260474, 39.941212707974856],
+			[116.42879387012495, 39.94120940897784],
+			[116.42886423192691, 39.944671184372254]
+		]
+	}, {
+		"name": "地下空间",
+		"lnglat": [
+			[116.42642306163509, 39.9408716893887],
+			[116.43154159794297, 39.94093181238735],
+			[116.43156382573586, 39.94010943860653],
+			[116.42643732672998, 39.940085047423636],
+			[116.42642306163509, 39.9408716893887]
+		]
+	}, {
+		"name": "地下空间",
+		"lnglat": [
+			[116.42602677425644, 39.936348163668754],
+			[116.42992299086542, 39.93647154846881],
+			[116.42992030461888, 39.93454769082929],
+			[116.42851939810673, 39.93453484046343],
+			[116.428542804027, 39.93394848492969],
+			[116.426065472984, 39.93392385167227],
+			[116.42602677425644, 39.936348163668754]
+		]
+	}];
+// 加密
+var encodedString = Base64.encode(JSON.stringify(public_space_available_space_data));
+console.log(encodedString); // 输出: "SGVsbG8gV29ybGQh"
+// 解密
+var decodedString = eval(Base64.decode(encodedString));
+console.log(decodedString); // 输出: "Hello World!"
+
+function excludeSpecial(s) {  
+    // 去掉转义字符  
+    s = s.replace(/[\'\"\\\/\b\f\n\r\t]/g, '');  
+    // 去掉特殊字符  
+    // s = s.replace(/[\@\#\$\%\^\&\*\{\}\:\"\L\<\>\?]/);  
+    return s;  
+};  
+
+</script>
 </body>
 </html>
