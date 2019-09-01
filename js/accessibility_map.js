@@ -157,14 +157,16 @@ $(function(){
 	}
 	//如类型选择文化资源，则判断文化资源点是否在可达性范围之内
 	AccessibilityMap.prototype.accessibility_resources = function(){
-		for(var i = 0; i < cultural_resources_point_data.length; i++){
-			var items = cultural_resources_point_data[i];
-        	var isPointInRing = AMap.GeometryUtil.isPointInRing(items.lnglat, this.reachability_data);
-			isPointInRing? this.area_cultural_resources_point_data.push(get_object_assign(items,{
-			 icon: point_icon_server_url+ "/accessibility/wenhuaziyaun.png",
-			})): "";
-		}
-		this.render_point_layer();
+    	$.get(file_server_url+'cultural_resources.js', function (cultural_resources_point_data) {
+			for(var i = 0; i < cultural_resources_point_data.length; i++){
+				var items = cultural_resources_point_data[i];
+	        	var isPointInRing = AMap.GeometryUtil.isPointInRing(items.lnglat, this.reachability_data);
+				isPointInRing? this.area_cultural_resources_point_data.push(get_object_assign(items,{
+				 icon: point_icon_server_url+ "/accessibility/wenhuaziyaun.png",
+				})): "";
+			}
+			this.render_point_layer();
+		})
 	}
 	//渲染可达性区域内的符合条件的点图层
 	AccessibilityMap.prototype.render_point_layer = function(){
