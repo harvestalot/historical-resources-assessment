@@ -49,6 +49,9 @@
 .nav a:hover{
 	color: #fff;
 }
+.nav a.is_active{
+	color: #fff;
+}
 .nav a.flag_bit:before,
 .nav a.flag_bit:after{
 	content:'';
@@ -221,6 +224,7 @@
     background:rgba(0, 0, 0, .7);
     z-index: 999999;
     display: none;
+    overflow-y: auto;
 }
 .shade_item {
 	padding: 80px 50px;

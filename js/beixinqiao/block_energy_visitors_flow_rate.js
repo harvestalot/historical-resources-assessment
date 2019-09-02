@@ -4,10 +4,11 @@ function VisitorsFlowRate(){
 }
 VisitorsFlowRate.prototype.init = function(){
     // this.load_dom();
+    $("#year_switcher a").first().addClass("checked_active").siblings("a").removeClass("checked_active");
 	this.load_heatmap_layer("2016");
     var _this = this;
-    $("#year_switcher a").on("click",function(){
-        heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
+    $("#year_switcher a").unbind("click").on("click",function(){
+        event.stopPropagation();
         $(this).addClass("checked_active").siblings("a").removeClass("checked_active");
         _this.load_heatmap_layer($(this).attr("data_year"));
     });
@@ -23,6 +24,7 @@ VisitorsFlowRate.prototype.init = function(){
 // };
 //加载热力图图层
 VisitorsFlowRate.prototype.load_heatmap_layer = function(current_year){
+    heatmapLayer? map.remove(heatmapLayer):"";//清除热力图图层
     $.get(file_server_url+'visitors_flow_rate.js', function (visitors_flow_rate_data) {
         heatmapLayer = new Loca.HeatmapLayer({
             map: map,
