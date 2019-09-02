@@ -219,7 +219,7 @@
 	width: 85%;
 	height: 92%;
     background:rgba(0, 0, 0, .7);
-    z-index: 2;
+    z-index: 999999;
     display: none;
 }
 .shade_item {

@@ -45,7 +45,7 @@ MaterialCulturalHeritage.prototype.sidebar_polygonLayer = function(){
     	sidebar_polygonLayer = new Loca.PolygonLayer({
             map: map,
             zIndex: 20,
-            fitView: true,
+            // fitView: true,
             // eventSupport:true,
         });
         sidebar_polygonLayer.setData(JSON.parse(Decrypt(material_cultural_heritage_data)), {
@@ -154,7 +154,7 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
                 clockWise: false, //顺时加载
                 hoverAnimation: false, //鼠标移入变大
                 radius: [68 - i * 15 + '%', 63 - i * 15 + '%'],
-                center: ["30%", "55%"],
+                center: ["35%", "55%"],
                 label: {
                     show: false
                 },
@@ -191,7 +191,7 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
                 clockWise: false, //顺时加载
                 hoverAnimation: false, //鼠标移入变大
                 radius: [68 - i * 15 + '%', 63 - i * 15 + '%'],
-                center: ["30%", "55%"],
+                center: ["35%", "55%"],
                 label: {
                     show: false
                 },
@@ -272,7 +272,7 @@ MaterialCulturalHeritage.prototype.pie_chart = function(){
         grid: {
             top: '19%',
             bottom: '46%',
-            left: "30%",
+            left: "35%",
             containLabel: false
         },
         yAxis: [{

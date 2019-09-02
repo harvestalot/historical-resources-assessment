@@ -1,6 +1,5 @@
 //文化资源--概览
 function CulturalResourcesOverview(){
-    this.round_point_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA","#F51B04"];
 	this.legend_data = ["物质文化遗产","文物保护单位","历史建筑"];
 	this.community_name = [];
 	this.bar_series_data = {
@@ -46,7 +45,7 @@ CulturalResourcesOverview.prototype.sidebar_polygonLayer = function(){
 		sidebar_polygonLayer = new Loca.PolygonLayer({
 	        map: map,
 	        zIndex: 20,
-	        fitView: true,
+	        // fitView: true,
 	        // eventSupport:true,
 	    });
 	    sidebar_polygonLayer.setData(JSON.parse(Decrypt(cultural_relic_protection_data)).cultural_relic_protection_area_data, {
@@ -68,7 +67,7 @@ CulturalResourcesOverview.prototype.sidebar_polygonLayer = function(){
 }
 //添加历史建筑点标识图层
 CulturalResourcesOverview.prototype.render_point_layer = function(){
-		    var round_point_color = this.round_point_color;
+		    var round_point_color = echarts_color;
     $.get(file_server_url+'cultural_relic_protection.js', function (cultural_relic_protection_data) {
 	    $.get(file_server_url+'historical_building.js', function (historical_building_data) {
 		    round_point_layer = new Loca.RoundPointLayer({

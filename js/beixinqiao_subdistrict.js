@@ -19,7 +19,7 @@
 			document.getElementById('shade_modal').innerHTML = html;
 		}else if($(this).index() === 1){
 			// $("#shade_modal").height() === 0? $("#shade_modal").animate({height:"100%"},300): $("#shade_modal").animate({height:0},300);
-			var html = template("introduction_tmp",brief_introduction);
+			var html = template("introduction_tmp",planning_target);
 			document.getElementById('shade_modal').innerHTML = html;
 		}else if($(this).index() === 2){
 			// $("#shade_modal").height() === 0? $("#shade_modal").animate({height:"100%"},300): $("#shade_modal").animate({height:0},300);

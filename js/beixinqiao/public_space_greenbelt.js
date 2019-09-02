@@ -36,7 +36,7 @@ PublicSpaceGreenbelt.prototype.sidebar_polygonLayer = function(){
     	sidebar_polygonLayer = new Loca.PolygonLayer({
             map: map,
             // zIndex: 15,
-            fitView: true,
+            // fitView: true,
             // eventSupport:true,
         });
         sidebar_polygonLayer.setData(JSON.parse(Decrypt(actuality_greenbelt_data)), {

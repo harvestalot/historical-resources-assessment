@@ -172,7 +172,7 @@ function load_graphic_statistics(eleId, male, female, total){
 	    tooltip: {
 	        show: true, //鼠标放上去显示悬浮数据
 	        formatter: function(param) {
-	            return (param.seriesName +": "+param.value)+ '人';
+	            return (param.dataIndex!==1?(param.seriesName +": "+param.value)+ '人':"");
 	        },
 	    },
 	    // legend: {

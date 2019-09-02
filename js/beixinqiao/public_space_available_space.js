@@ -25,8 +25,8 @@ PublicSpaceAvailableApace.prototype.sidebar_polygonLayer = function(){
     $.get(file_server_url+'public_space_available_space.js', function (public_space_available_data) {
     	sidebar_polygonLayer = new Loca.PolygonLayer({
             map: map,
-            zIndex: 20,
-            fitView: true,
+            zIndex: 15,
+            // fitView: true,
             // eventSupport:true,
         });
         sidebar_polygonLayer.setData(JSON.parse(Decrypt(public_space_available_data)).public_space_available_space_data, {

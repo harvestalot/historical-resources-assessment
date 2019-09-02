@@ -83,7 +83,7 @@ IndustrialStructureConcentration.prototype.load_poi_point = function(){
 	            autoFitView: true // 是否自动调整地图视野使绘制的 Marker点都处于视口的可见范围
 	        });
 		    var polygon = new AMap.Polygon({
-		        path: beixinqiao_subdistict_data[0].coordinates,//设置多边形边界路径
+		        path: JSON.parse(Decrypt(beixinqiao_subdistict_data))[0].coordinates,//设置多边形边界路径
 		        // strokeColor: "#FF33FF", //线颜色
 		        // strokeOpacity: 0.2, //线透明度
 		        // strokeWeight: 3,    //线宽

@@ -8,6 +8,7 @@ function IndustrialDevelopmentConcentration() {
 	this.radar_chart_indicator_data = [];
 	this.series_data = [0,0,0,0,0,0,0,0,0,0,0,0];
 	this.current_enterprise_type = "";
+	this.company_tatol = 0;
 
 }
 IndustrialDevelopmentConcentration.prototype.init = function(){
@@ -19,6 +20,7 @@ IndustrialDevelopmentConcentration.prototype.init = function(){
 		var data = JSON.parse(Decrypt(result.data.resultKey));
 		for(var i = 0; i < data.length; i++){
 			var item = data[i];
+			_this.company_tatol += item.TOTAL_NYUMBER;
 			_this.pie_chart_data.push({
 				name: item.TYPE,
 				value: item.TOTAL_NYUMBER,
@@ -84,7 +86,7 @@ IndustrialDevelopmentConcentration.prototype.render_point_layer = function(){
 	$.get(file_server_url+'industrial_structure_development.js', function (industrial_structure_development_data) {
 		round_point_layer = new Loca.RoundPointLayer({
 		    map: map,
-		    zIndex: 100,
+		    // zIndex: 100,
 	        eventSupport:true,
 		});
 	    round_point_layer.setData(JSON.parse(Decrypt(industrial_structure_development_data)), {
@@ -126,22 +128,22 @@ IndustrialDevelopmentConcentration.prototype.render_point_layer = function(){
 	                		color = round_point_color[8];
 	                		break;
 	                	case "N 水利、环境和公共设施管理业" :
-	                		color = round_point_color[10];
+	                		color = round_point_color[9];
 	                		break;
 	                	case "G 交通运输、仓储和邮政业 " :
-	                		color = round_point_color[11];
+	                		color = round_point_color[10];
 	                		break;
 	                	case "I 信息传输、软件和信息技术服务业" :
-	                		color = round_point_color[12];
+	                		color = round_point_color[11];
 	                		break;
 	                	case "E 建筑业" :
-	                		color = round_point_color[13];
+	                		color = round_point_color[12];
 	                		break;
 	                	case "S 公共管理、社会保障和社会组织" :
-	                		color = round_point_color[14];
+	                		color = round_point_color[13];
 	                		break;
 	                	case "H 住宿和餐饮业" :
-	                		color = round_point_color[15];
+	                		color = round_point_color[14];
 	                		break;
 	                }
 	                return color;
@@ -171,9 +173,9 @@ IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	        }, echart_title),   
 	    {
 	        text: '企业共计',
-	        subtext: 12312+'个',
+	        subtext: this.company_tatol+'个',
 	        textStyle:{
-	            fontSize:28,
+	            fontSize:24,
 	            color:"#287EB7"
 	        },
 	        subtextStyle: {
@@ -213,7 +215,7 @@ IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	            name:'企业',
 	            type:'pie',
 	            center: ['35%', '50%'],
-	            radius: ['35%', '60%'],
+	            radius: ['30%', '45%'],
 	            clockwise: false, //饼图的扇区是否是顺时针排布
 	            avoidLabelOverlap: false,
 	            label: {
@@ -342,5 +344,6 @@ IndustrialDevelopmentConcentration.prototype.reset_data = function(){
 	this.radar_chart_indicator_data = [];
 	this.series_data = [0,0,0,0,0,0,0,0,0,0,0,0];
 	this.current_enterprise_type = "";
+	this.company_tatol = 0;
 }
 var start_industry_development_rendering = new IndustrialDevelopmentConcentration();

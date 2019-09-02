@@ -1,6 +1,5 @@
 //文化资源评估--历史建筑
 function HistoricalBuilding() {
-    this.round_point_color = ["#3ba0f3",'#ff9921',"#00FFFF",'#E0F319',"#00FF59","#DE61FA"];
     this.lenged_data = ["故居", "寺庙宫观", "王府", "使馆","官署","古树名木"];
     this.community_name = [];
     this.radar_chart_indicator_data = [];
@@ -50,7 +49,7 @@ HistoricalBuilding.prototype.get_view_data = function(result_data){
 }
 //添加设施点标识图层
 HistoricalBuilding.prototype.render_point_layer = function(){
-        var round_point_color = this.round_point_color;
+        var round_point_color = echarts_color;
     $.get(file_server_url+'historical_building.js', function (historical_building_data) {
         round_point_layer = new Loca.RoundPointLayer({
             map: map,
@@ -105,7 +104,7 @@ HistoricalBuilding.prototype.load_radar_chart = function(){
     var radar_option = {
         color: echarts_color,
         title:get_object_assign({
-            text:"各社区历史建筑数量对比图",
+            text:"各社区历史建筑数量占比图",
         }, echart_title),
         legend: {
             show: true,

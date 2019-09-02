@@ -74,7 +74,7 @@ PublicServiceRecreationSports.prototype.render_point_layer = function(){
 	                    case "室内体育设施" :
 	                        color = round_point_color[1];
 	                        break;
-	                    case "室外活动场所" :
+	                    case "室外活动场地" :
 	                        color = round_point_color[2];
 	                        break;
 	                    case "综合文体设施" :
@@ -153,8 +153,8 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 		},echart_title),
 	    legend: {
 	        show: true,
-	        right:"10%",
-	        bottom:"1%",
+	        left:20,
+	        bottom:"0%",
 	        textStyle: {
 	            "fontSize": 14,
 	            "color": "#fff"

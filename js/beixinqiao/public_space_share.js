@@ -20,8 +20,8 @@ PublicSpaceShare.prototype.load_line_layer = function(){
     $.get(file_server_url+'public_space_share.js', function (public_space_share_data) {
     	line_layer = new Loca.LineLayer({
             map: map,
-            zIndex: 20,
-            fitView: true,
+            zIndex: 15,
+            // fitView: true,
             // eventSupport:true,
         });
         line_layer.setData(JSON.parse(Decrypt(public_space_share_data)).public_space_share_line_data, {
