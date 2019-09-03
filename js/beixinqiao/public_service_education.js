@@ -1,4 +1,4 @@
-// 公共设施--便民设施
+// 公共设施--教育设施
 function PublicServiceEducation() {
 	this.communityName = [];
 	this.seriesData = [];//玫瑰饼状图图表加载的数据
@@ -176,7 +176,7 @@ PublicServiceEducation.prototype.load_chart = function(type){
 		        name:"幼儿园",
 		        type: 'pie',
 			    center:["50%","54%"],
-		        radius: ["0", "80%"],
+		        radius: ["0", "70%"],
 		        roseType: 'area',
 		        label: {
 		            normal: {
@@ -195,7 +195,7 @@ PublicServiceEducation.prototype.load_chart = function(type){
 		        name:"小学",
 		        type: 'pie',
 			    center:["50%","54%"],
-		        radius: ["0", "80%"],
+		        radius: ["0", "70%"],
 		        roseType: 'area',
 		        label: {
 		            normal: {
@@ -214,7 +214,7 @@ PublicServiceEducation.prototype.load_chart = function(type){
 		        name:"中学",
 		        type: 'pie',
 			    center:["50%","54%"],
-		        radius: ["0", "80%"],
+		        radius: ["0", "70%"],
 		        roseType: 'area',
 		        label: {
 		            normal: {
@@ -233,7 +233,7 @@ PublicServiceEducation.prototype.load_chart = function(type){
 		        name:"九年一贯制",
 		        type: 'pie',
 			    center:["50%","54%"],
-		        radius: ["0", "80%"],
+		        radius: ["0", "70%"],
 		        roseType: 'area',
 		        label: {
 		            normal: {
@@ -252,7 +252,7 @@ PublicServiceEducation.prototype.load_chart = function(type){
 			        stack: 'a',
 			        type: 'pie',
 			        center:["50%","54%"],
-			        radius: ["0", "80%"],
+			        radius: ["0", "70%"],
 			        roseType: 'area',
 			        label: {
 			            normal: {
@@ -277,7 +277,8 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 				(type_name === "3"?echarts_color[1]:
 				((type_name === "4"?echarts_color[0]: echarts_color)))),
 	    polar: {
-	    	center:["50%","54%"]
+	    	center:["50%","54%"],
+	    	radius:"70%",
 	    },
 	    angleAxis: {
 	        type: 'category',
@@ -286,20 +287,38 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	        },
 	        axisLabel: {
 	            // fontSize: 15,
+	            interval:0,
 	            color:'#fff',
 		        formatter:function(val){
-		            return val.split("").join("\n");
+		            return val;
+		            // .split("").join("\n");
 		        }
 	        },
+	        // axisLine:{
+		       //  lineStyle:{
+		       //  	color:"#fff",
+		       //  },
+	        // },
+	        // axisTick:{
+		       //  lineStyle:{
+		       //  	color:"#fff",
+		       //  },
+	        // },
 	        data: this.communityName,
 	    },
 	    radiusAxis: {
 	        min: 0,
 	        max: 1000,
-	        interval: 200
-	        // axisLine:{
-	        // 	show:false,
-	        // }
+	        interval: 200,
+	        axisLine:{
+	        	show:true,
+		        lineStyle:{
+		        	color:"#999",
+		        },
+	        },
+	        axisLabel: {
+	            color:'#999',
+	        },
 	    },
 	    tooltip: {
 	        trigger: 'item',
@@ -350,7 +369,7 @@ PublicServiceEducation.prototype.load_bar_chart = function(){
 	        axisLabel: coordinate_axis_style.axisLabel,
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
-	        name: "人数"
+	        name: "数量",
 	    },
 	    series: [
 	    	{

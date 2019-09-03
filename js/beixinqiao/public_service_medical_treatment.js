@@ -149,7 +149,7 @@ PublicServiceMedicalTreatment.prototype.load_radar_chart = function(){
 	var radar_option = {
 		color: echarts_color,
 		title:get_object_assign(echart_title,{
-			text:"各社区养老设施对比图",
+			text:"各社区医疗设施覆盖率对比图",
 		}),
 	    legend: {
 	        show: true,

@@ -77,7 +77,8 @@ IndustrialDevelopmentConcentration.prototype.get_view_data = function(result_dat
 //生产dom元素
 IndustrialDevelopmentConcentration.prototype.load_dom = function(){
 	var industrial_structure_dom_str = '<div id="industrial_development_pie_content" style="width: 100%; height:50%;"></div>'+
-		'<div id="industrial_development_radar_content" style="width: 100%; height:50%;"></div>';
+		'<div id="industrial_development_radar_content" style="width: 100%; height:45%;"></div>'+
+		'<div style="margin:0 30px; height:5%;color:#999;">说明：本页两图表可互动，点击上图表的某一类型，则下图表显示该类型的企业数量占比情况。</div>';
 	$("#visualization_echarts_content").append(industrial_structure_dom_str);
 };
 //添加产业发展点标识图层
@@ -172,15 +173,15 @@ IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	            text:"街道各类企业占比数",
 	        }, echart_title),   
 	    {
-	        text: '企业共计',
-	        subtext: this.company_tatol+'个',
+	        text: this.company_tatol,
+	        subtext: '企业数量',
 	        textStyle:{
-	            fontSize:24,
-	            color:"#287EB7"
+	            fontSize:28,
+	            color:"#f0b33c"
 	        },
 	        subtextStyle: {
-	            fontSize: 20,
-	            color: '#287EB7'
+	            fontSize: 16,
+	            color: '#fff'
 	        },
 	        textAlign:"center",
 	        x: '34.5%',
@@ -206,6 +207,8 @@ IndustrialDevelopmentConcentration.prototype.load_pie_chart = function(){
 	            color:'#8C8C8C'
 	        },
 	        height:200,
+	        pageIconColor:"#f0b33c",
+	        pageIconInactiveColor:"#2f4554",
 			formatter: function (name) {
 			    return name.split(" ")[1].slice(0, 3)+"...";
 			}
@@ -286,7 +289,7 @@ IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(){
 	var radar_option = {
 	    color: echarts_color,
 		title: get_object_assign({
-	            text:"各社区中对应该类型的企业占比图",
+	        text:"各社区企业数量占比图（按类型）",
 	    }, echart_title),
 	    tooltip: {
 	        show: true,
@@ -294,7 +297,7 @@ IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(){
 	    },
 	    radar: {
 	        center: ["50%", "50%"],
-	        radius: "70%",
+	        radius: "65%",
 	        startAngle: 90,
 	        splitNumber: 4,
 	        shape: "circle",

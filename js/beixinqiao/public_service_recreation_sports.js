@@ -167,7 +167,7 @@ PublicServiceRecreationSports.prototype.load_radar_chart = function(){
 	    },
 	    radar: {
 	        center: ["50%", "50%"],
-	        radius: "70%",
+	        radius: "60%",
 	        startAngle: 90,
 	        splitNumber: 4,
 	        shape: "circle",
@@ -264,6 +264,7 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
 	        axisLabel: coordinate_axis_style.axisLabel,
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
+	        name: "数量",
 	    },
 	    series: [
 	        {

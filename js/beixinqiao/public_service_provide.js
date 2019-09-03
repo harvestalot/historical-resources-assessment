@@ -148,7 +148,7 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	var radar_option = {
 		color: echarts_color,
 		title:get_object_assign({
-			text:"各社区养老设施对比图",
+			text:"各社区养老设施覆盖率对比图",
 		}, echart_title),
 	    legend: {
 	        show: true,

@@ -247,6 +247,7 @@ PublicServiceConveniencePeople.prototype.load_bar_chart = function(){
 	        axisLabel: coordinate_axis_style.axisLabel,
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
+	        name: "数量",
 	    },
 	    series: [
 	        {

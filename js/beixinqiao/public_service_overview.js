@@ -230,6 +230,9 @@ PublicServiceOverview.prototype.load_radar_chart = function(type_name){
 	radarChart = echarts.init(document.getElementById("public_service_radar_content"));
 	var radar_option = {
 		color: echarts_color,
+		title:get_object_assign(echart_title,{
+			text:"各社区公共设施设施覆盖率对比图",
+		}),
 	    "tooltip": {
 	        "show": true,
 	        "trigger": "item"

@@ -142,7 +142,7 @@ PublicServiceStreetManagement.prototype.load_radar_chart = function(){
 	var radar_option = {
 	    color: echarts_color,
 		title:get_object_assign({
-			text:"各社区街道管理设施数量对比图",
+			text:"各社区街道管理设施覆盖率对比图",
 		}, echart_title),
 	    legend: {
 	        show: true,
@@ -246,6 +246,7 @@ PublicServiceStreetManagement.prototype.load_bar_chart = function(){
 	        axisLabel: coordinate_axis_style.axisLabel,
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
+	        name: "数量",
 	    },
 	    series: [
 	        {

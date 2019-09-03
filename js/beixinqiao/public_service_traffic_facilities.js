@@ -92,7 +92,7 @@ PublicServiceTrafficFacilities.prototype.render_point_layer = function(){
 PublicServiceTrafficFacilities.prototype.load_dom = function(){
 	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div class="public_service_total_coverage">'+
-		'<p >街道管理设施覆盖率：<span id="total_coverage">0%</span></p>'+
+		'<p >交通设施覆盖率：<span id="total_coverage">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div id="facilities_statistics_content" class="chart_view" style="width: 100%; height: 40%;">'+
@@ -139,7 +139,7 @@ PublicServiceTrafficFacilities.prototype.load_radar_chart = function(){
 	var radar_option = {
 	    color: echarts_color,
 		title:get_object_assign({
-			text:"各社区交通设施数量对比图",
+			text:"各社区交通设施覆盖率对比图",
 		}, echart_title),
 	    legend: {
 	        show: true,
@@ -243,6 +243,7 @@ PublicServiceTrafficFacilities.prototype.load_bar_chart = function(){
 	        axisLabel: coordinate_axis_style.axisLabel,
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
+	        name: "数量",
 	    },
 	    series: [
 	        {

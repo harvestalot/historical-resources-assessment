@@ -126,7 +126,7 @@ PublicSpaceGreenbelt.prototype.load_bar_chart = function(){
                 splitLine: coordinate_axis_style.splitLine,
                 splitLine:{
                     show: false,
-                }
+                },
             },
             {
                 type: "value",
@@ -200,7 +200,7 @@ PublicSpaceGreenbelt.prototype.load_radar_chart = function(){
     var radar_option = {
         color: echarts_color,
         title:{
-            text:"各社区绿地覆盖率",
+            text:"各社区绿地覆盖率对比图",
             top:10,
             textStyle:{
                 color: '#FFF',
@@ -283,7 +283,7 @@ PublicSpaceGreenbelt.prototype.reset_data = function(){
 PublicSpaceGreenbelt.prototype.load_ranking_list = function(data){
     for(var i = 0; i < data.length; i++){
         $("#community_greenbelt_list_content").append('<p class="ranking_list"><span class="type_name">'
-            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'）</span></p>')
+            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'）</span><span class="type_name">&nbsp;平方米</span></p>')
     }
 }
 var start_greenbelt_rendering = new PublicSpaceGreenbelt();
