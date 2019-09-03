@@ -236,6 +236,8 @@
 }
 .shade_item .img{
 	display: block;
+	width: 42.85rem;
+	height: 32.14rem;
 	margin: 30px auto;
 }
 /*朝代介绍*/
