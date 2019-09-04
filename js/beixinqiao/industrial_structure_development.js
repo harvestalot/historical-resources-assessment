@@ -9,6 +9,20 @@ function IndustrialDevelopmentConcentration() {
 	this.series_data = [0,0,0,0,0,0,0,0,0,0,0,0];
 	this.current_enterprise_type = "";
 	this.company_tatol = 0;
+	this.spectaculars_list_data = {
+		九道湾: 0,
+		小菊: 0,
+ 		藏经馆: 0,
+ 		草园: 0,
+ 		青龙: 0,
+ 		民安: 0,
+ 		门楼: 0,
+	 	海运仓: 0,
+	 	北官厅: 0,
+	 	十三条: 0,
+	 	北新仓: 0,
+	 	前永康: 0
+	};
 
 }
 IndustrialDevelopmentConcentration.prototype.init = function(){
@@ -33,52 +47,71 @@ IndustrialDevelopmentConcentration.prototype.init = function(){
 }
 //分类拆分数据
 IndustrialDevelopmentConcentration.prototype.get_view_data = function(result_data){
-	var new_data = [
-		{九道湾: []},
-		{小菊: []},
- 		{藏经馆: []},
- 		{草园: []},
- 		{青龙: []},
- 		{民安: []},
- 		{门楼: []},
-	 	{海运仓: []},
-	 	{北官厅: []},
-	 	{十三条: []},,
-	 	{北新仓: []},
-	 	{前永康: []}
-	];
-	for(var key in result_data){
-		for(var i = 0; i < new_data.length; i++){
-			for(var item in new_data[i]){
-				if(item === key){
-					new_data[i][key] = result_data[key];
-				}
-			}
-		}
+	var new_data = {
+		九道湾: 0,
+		小菊: 0,
+ 		藏经馆: 0,
+ 		草园: 0,
+ 		青龙: 0,
+ 		民安: 0,
+ 		门楼: 0,
+	 	海运仓: 0,
+	 	北官厅: 0,
+	 	十三条: 0,
+	 	北新仓: 0,
+	 	前永康: 0
+	};
+	for(var i = 0; i < result_data["九道湾"].length; i++){
+		var item = result_data["九道湾"][i];
+		this.spectaculars_list_data[item.COMMUNITY_NAME] = item.TOTAL_NUMBER;
 	}
-	for(var i = 0; i < new_data.length; i++){
-	    for(var key in new_data[i]){
-	        this.community_name.push(key);
-			this.radar_chart_indicator_data.push({
-				name: key,
-				max:60,
-			});
-	        if(new_data[i][key].length > 0){
-	            for(var j = 0; j < new_data[i][key].length; j++){
-	            	if(new_data[i][key][j].COMMUNITY_NAME === key){
-						this.series_data[i] = new_data[i][key][j].TOTAL_NUMBER;
-						break;
-	            	}
-	            }
-	        }
-	    }
-	}
+
+	// var new_data = [
+	// 	{九道湾: []},
+	// 	{小菊: []},
+ // 		{藏经馆: []},
+ // 		{草园: []},
+ // 		{青龙: []},
+ // 		{民安: []},
+ // 		{门楼: []},
+	//  	{海运仓: []},
+	//  	{北官厅: []},
+	//  	{十三条: []},,
+	//  	{北新仓: []},
+	//  	{前永康: []}
+	// ];
+	// for(var key in result_data){
+	// 	for(var i = 0; i < new_data.length; i++){
+	// 		for(var item in new_data[i]){
+	// 			if(item === key){
+	// 				new_data[i][key] = result_data[key];
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// for(var i = 0; i < new_data.length; i++){
+	//     for(var key in new_data[i]){
+	//         this.community_name.push(key);
+	// 		this.radar_chart_indicator_data.push({
+	// 			name: key,
+	// 			max:60,
+	// 		});
+	//         if(new_data[i][key].length > 0){
+	//             for(var j = 0; j < new_data[i][key].length; j++){
+	//             	if(new_data[i][key][j].COMMUNITY_NAME === key){
+	// 					this.series_data[i] = new_data[i][key][j].TOTAL_NUMBER;
+	// 					break;
+	//             	}
+	//             }
+	//         }
+	//     }
+	// }
 }
 //生产dom元素
 IndustrialDevelopmentConcentration.prototype.load_dom = function(){
-	var industrial_structure_dom_str = '<div id="industrial_development_pie_content" style="width: 100%; height:50%;"></div>'+
-		'<div id="industrial_development_radar_content" style="width: 100%; height:45%;"></div>'+
-		'<div style="margin:0 30px; height:5%;color:#999;">说明：本页两图表可互动，点击上图表的某一类型，则下图表显示该类型的企业数量占比情况。</div>';
+	var industrial_structure_dom_str = '<div id="industrial_development_pie_content" style="width: 100%; height:43%;"></div>'+
+		'<div id="industrial_development_radar_content" class="development_bulletin_board" style="width: 100%; height:52%;"></div>'+
+		'<div style="margin:0 30px; height:5%;color:#999;">说明：本页两图表是互动的，点击上图表的某一类型，则看板上显示该类型的企业数量。</div>';
 	$("#visualization_echarts_content").append(industrial_structure_dom_str);
 };
 //添加产业发展点标识图层
@@ -280,7 +313,9 @@ IndustrialDevelopmentConcentration.prototype.get_community_enterprise = function
 	serveRequest("get", server_url+ "/Enterprise/getCommunityNumberByType",
 		{ type: _this.current_enterprise_type },function(result){
 		_this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
-		_this.load_radar_chart();
+		console.log(JSON.parse(Decrypt(result.data.resultKey)))
+		_this.render_spectaculars_list();
+		// _this.load_radar_chart();
 	});
 }
 //加载设施覆盖率雷达图图表数据
@@ -340,6 +375,13 @@ IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(){
 	    radarChart.resize();
 	}
 }
+//渲染看板列表DOM元素
+IndustrialDevelopmentConcentration.prototype.render_spectaculars_list = function(){
+	$("#industrial_development_radar_content").html("")
+	for(var key in this.spectaculars_list_data){
+		$("#industrial_development_radar_content").append('<p><span>'+key+'</span><span class="second_level_color">'+this.spectaculars_list_data[key]+'</span></p>')
+	}
+}
 //重置数据
 IndustrialDevelopmentConcentration.prototype.reset_data = function(){
 	this.community_name = [];
@@ -348,5 +390,19 @@ IndustrialDevelopmentConcentration.prototype.reset_data = function(){
 	this.series_data = [0,0,0,0,0,0,0,0,0,0,0,0];
 	this.current_enterprise_type = "";
 	this.company_tatol = 0;
+	this.spectaculars_list_data = {
+		九道湾: 0,
+		小菊: 0,
+ 		藏经馆: 0,
+ 		草园: 0,
+ 		青龙: 0,
+ 		民安: 0,
+ 		门楼: 0,
+	 	海运仓: 0,
+	 	北官厅: 0,
+	 	十三条: 0,
+	 	北新仓: 0,
+	 	前永康: 0
+	};
 }
 var start_industry_development_rendering = new IndustrialDevelopmentConcentration();

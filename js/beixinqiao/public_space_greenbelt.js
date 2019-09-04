@@ -1,6 +1,7 @@
 //公共空间评估--绿地资源
 function PublicSpaceGreenbelt() {
     this.community_name = [];
+    this.community_greenbelt_coverage = [];
     this.community_greenbelt_area = [];
     this.per_capita_greenbelt_area = [];
     this.ranking_list = [
@@ -15,9 +16,10 @@ PublicSpaceGreenbelt.prototype.init = function(){
 	this.sidebar_polygonLayer();
     var _this = this;
     serveRequest("get", server_url+ "/Greenland/getCoverage",{ },function(result){
+        console.log(JSON.parse(Decrypt(result.data.resultKey)))
         _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
-        _this.load_bar_chart();
         _this.load_radar_chart();
+        _this.load_bar_chart();
     });
     serveRequest("get", server_url+ "/Greenland/getRanking",{ },function(result){
         var data = JSON.parse(Decrypt(result.data.resultKey));
@@ -68,7 +70,8 @@ PublicSpaceGreenbelt.prototype.get_view_data = function(result_data){
     for(var i = 0; i < result_data.length; i++){
         var item = result_data[i];
         this.community_name.push(item.NAME);
-        this.community_greenbelt_area.push(item.AREA);
+        this.community_greenbelt_coverage.push(item.GREENLAND_RATE.toFixed(2));
+        this.community_greenbelt_area.push(item.AREA.toFixed(2));
         this.per_capita_greenbelt_area.push(item.PRESON_GREENLAND.toFixed(2));
     }
 }
@@ -78,7 +81,7 @@ PublicSpaceGreenbelt.prototype.load_bar_chart = function(){
     var bar_option = {
         color: echarts_color,
         title : {
-            text: '各社区绿地面积',
+            text: '各社区绿地情况',
             subtext: '数据来源：中规院',
             textStyle:{
                 color:"#FFF",
@@ -259,10 +262,13 @@ PublicSpaceGreenbelt.prototype.load_radar_chart = function(){
                 }
             }
         },
-        polar: {},
+        polar: {
+            center:["50%", "50%"],
+            radius:"60%"
+        },
         series: [{
             type: 'bar',
-            data: this.community_greenbelt_area,
+            data: this.community_greenbelt_coverage,
             coordinateSystem: 'polar',
         }],
     };
@@ -271,6 +277,7 @@ PublicSpaceGreenbelt.prototype.load_radar_chart = function(){
 //重置数据
 PublicSpaceGreenbelt.prototype.reset_data = function(){
     this.community_name = [];
+    this.community_greenbelt_coverage = [];
     this.community_greenbelt_area = [];
     this.per_capita_greenbelt_area = [];
     this.ranking_list = [
@@ -282,8 +289,13 @@ PublicSpaceGreenbelt.prototype.reset_data = function(){
 //加载排行榜统计
 PublicSpaceGreenbelt.prototype.load_ranking_list = function(data){
     for(var i = 0; i < data.length; i++){
+        if(i !== 0){
         $("#community_greenbelt_list_content").append('<p class="ranking_list"><span class="type_name">'
-            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'）</span><span class="type_name">&nbsp;平方米</span></p>')
+            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+' '+data[i].value+'</span><span class="c_fff"> 平方米</span></p>');
+        }else{
+        $("#community_greenbelt_list_content").append('<p class="ranking_list"><span class="type_name">'
+            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+' '+data[i].value+'</span></p>');   
+        }
     }
 }
 var start_greenbelt_rendering = new PublicSpaceGreenbelt();

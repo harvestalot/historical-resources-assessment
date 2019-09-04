@@ -358,7 +358,8 @@
 	color:#F7C370;
 }
 /*看板样式*/
-.spectaculars_content p{
+.spectaculars_content p,
+.development_bulletin_board p{
 	margin: 0 7%;
 	padding-left:3%;
 	margin-bottom: 5px;
@@ -367,8 +368,10 @@
 	color: #fff;
 	cursor: pointer;
 } 
-.spectaculars_content p .second_level_color{
+.spectaculars_content p .second_level_color,
+.development_bulletin_board p .second_level_color{
 	color: #e3583d;
+	font-size: 1.1rem;
 }
 .spectaculars_content p.active_checked{
 	background-color: #f0b33c;
@@ -381,6 +384,36 @@
 }
 .spectaculars_content span:first-child{
 	width: 70%;
+}
+.development_bulletin_board span{
+	display: inline-block;
+	width: 30%;
+	line-height: 1.8rem;
+	font-size: 1rem;
+}
+.development_bulletin_board p:nth-child(odd){
+	background-color: #f0b33c;
+}
+.ranking_list_content p{
+	/*margin: 0 7%;*/
+	padding-left:3%;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+	background-color: #1A5574;
+	color: #fff;
+	cursor: pointer;
+}
+.ranking_list_content p span{
+	display: inline-block;
+	width: 26%;
+	line-height: 1.8rem;
+	font-size: 1rem;
+}
+.ranking_list_content p span:first-child{
+	width: 20%;
+}
+.ranking_list_content p:nth-child(even){
+	background-color: #f0b33c;
 }
 /*产业类型描述*/
 .industrial_description:nth-child(1){

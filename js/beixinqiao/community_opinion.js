@@ -4,15 +4,19 @@ function CommunityOpinion(){
     "垃圾分类","劳动与社会保障","矛盾纠纷","社会安全类","社会面防控","社会事业","社会治安","施工管理","市容环境",
     "市容设施","事故灾难类","特殊行业监管","特种行业","突发事件","宣传广告","园林绿化","自然灾害类"];
     this.type_heatmap_data = [];
+    this.ranking_list_data = {};
 	
 }
 CommunityOpinion.prototype.init = function(){
     this.load_dom();
     var _this = this;
-    // serveRequest("get", server_url+ "/lawCase/getBigType",{ },function(result){
-    // });
     serveRequest("get", server_url+ "/lawCase/getListByBigType",{ bigType:"道路交通" },function(result){
         _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
+    });
+    serveRequest("get", server_url+ "/lawCase/getTopByType",{ },function(result){
+        console.log(JSON.parse(Decrypt(result.data.resultKey)))
+        _this.ranking_list_data = JSON.parse(Decrypt(result.data.resultKey));
+        _this.render_spectaculars_list();
     });
     // $("#community_opinion_select").on("change",function(){
     //     var type_name = $(this).children('option:selected').val();
@@ -72,6 +76,10 @@ CommunityOpinion.prototype.load_dom = function(){
         }
     }
     $("#community_opinion_select").html(community_opinion_select_str);
+    var public_service_dom_str = '<p style="padding:10px 0 10px 12px;font-size:14px;color:#fff;font-weight:700;">各类型的案件看板</p>'+
+    '<div id="ranking_list_content" class="chart_view ranking_list_content" style="width: 100%; height: 90%;overflow-y: auto;"></div>'+
+    '<p  class="c_fff" style="padding-left:12px">说明：仅列出同类案件类型中，数量前三的社区。</p>';
+    $("#visualization_echarts_content").append(public_service_dom_str);
 };
 //分类拆分数据
 CommunityOpinion.prototype.get_view_data = function(result_data){
@@ -116,4 +124,17 @@ CommunityOpinion.prototype.load_heatmap_layer = function(current_year){
     heatmapLayer.show();
 }
 
+//渲染看板列表DOM元素
+CommunityOpinion.prototype.render_spectaculars_list = function(){
+    var str = '';
+    for(var key in this.ranking_list_data){
+        var item = this.ranking_list_data[key];
+        str += '<p><span title='+key+'>'+key.slice(0,4)+'</span>';
+        for(var i = 0; i < item.length; i++){
+            str += '<span>'+item[i].COMMUNITY_NAME+'&nbsp;&nbsp;'+(item[i]["COUNT_NUMBER/TOTAL"]*100).toFixed(2)+'%</span>';
+        }
+        str += '</p>';
+    }    
+    $("#ranking_list_content").html(str);
+}
 var start_community_opinion_rendering = new CommunityOpinion();

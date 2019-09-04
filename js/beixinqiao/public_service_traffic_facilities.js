@@ -8,6 +8,11 @@ function PublicServiceTrafficFacilities() {
         "地铁站":[0,0,0,0,0,0,0,0,0,0,0,0],
         "停车场":[0,0,0,0,0,0,0,0,0,0,0,0],
     }
+	this.number_data = {
+        "公交站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "地铁站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "停车场":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 }
 PublicServiceTrafficFacilities.prototype.init = function(){
 	this.reset_data();
@@ -38,6 +43,7 @@ PublicServiceTrafficFacilities.prototype.get_view_data = function(result_data){
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
 	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE.toFixed(2);
+	                this.number_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].QUANTITY;
 	            }
 	        }
 	    }
@@ -92,7 +98,7 @@ PublicServiceTrafficFacilities.prototype.render_point_layer = function(){
 PublicServiceTrafficFacilities.prototype.load_dom = function(){
 	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div class="public_service_total_coverage">'+
-		'<p >交通设施覆盖率：<span id="total_coverage">0%</span></p>'+
+		'<p >街道交通设施覆盖率：<span id="total_coverage">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div id="facilities_statistics_content" class="chart_view" style="width: 100%; height: 40%;">'+
@@ -157,7 +163,7 @@ PublicServiceTrafficFacilities.prototype.load_radar_chart = function(){
 	    },
 	    radar: {
 	        center: ["50%", "50%"],
-	        radius: "70%",
+	        radius: "60%",
 	        startAngle: 90,
 	        splitNumber: 4,
 	        shape: "circle",
@@ -236,7 +242,7 @@ PublicServiceTrafficFacilities.prototype.load_bar_chart = function(){
     		}),
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
-	        data: community_name
+	        data: this.community_name
 	    },
 	    yAxis: {
 	        type: "value",
@@ -251,21 +257,21 @@ PublicServiceTrafficFacilities.prototype.load_bar_chart = function(){
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[0]]
+	        data: this.number_data[this.lenged_data[0]]
 	        },
 	        {
 	        name: this.lenged_data[1],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[1]]
+	        data: this.number_data[this.lenged_data[1]]
 	        },
 	        {
 	        name: this.lenged_data[2],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[2]]
+	        data: this.number_data[this.lenged_data[2]]
 	        }
         ]
 	};
@@ -279,6 +285,11 @@ PublicServiceTrafficFacilities.prototype.reset_data = function(){
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
 	this.comprehensive_data = {
+        "公交站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "地铁站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "停车场":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
+	this.number_data = {
         "公交站":[0,0,0,0,0,0,0,0,0,0,0,0],
         "地铁站":[0,0,0,0,0,0,0,0,0,0,0,0],
         "停车场":[0,0,0,0,0,0,0,0,0,0,0,0],

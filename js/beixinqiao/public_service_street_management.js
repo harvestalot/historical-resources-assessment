@@ -9,6 +9,12 @@ function PublicServiceStreetManagement() {
         "街道办事处":[0,0,0,0,0,0,0,0,0,0,0,0],
         "派出所":[0,0,0,0,0,0,0,0,0,0,0,0],
     }
+	this.number_data = {
+        "社区服务管理用房":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "社区服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道办事处":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "派出所":[0,0,0,0,0,0,0,0,0,0,0,0],
+	};
 }
 PublicServiceStreetManagement.prototype.init = function(){
 	this.reset_data();
@@ -39,6 +45,7 @@ PublicServiceStreetManagement.prototype.get_view_data = function(result_data){
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
 	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE.toFixed(2);
+	                this.number_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].QUANTITY;
 	            }
 	        }
 	    }
@@ -160,7 +167,7 @@ PublicServiceStreetManagement.prototype.load_radar_chart = function(){
 	    },
 	    radar: {
 	        center: ["50%", "50%"],
-	        radius: "70%",
+	        radius: "60%",
 	        startAngle: 90,
 	        splitNumber: 4,
 	        shape: "circle",
@@ -239,7 +246,7 @@ PublicServiceStreetManagement.prototype.load_bar_chart = function(){
     		}),
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
-	        data: community_name
+	        data: this.community_name
 	    },
 	    yAxis: {
 	        type: "value",
@@ -254,21 +261,28 @@ PublicServiceStreetManagement.prototype.load_bar_chart = function(){
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[0]]
+	        data: this.number_data[this.lenged_data[0]]
 	        },
 	        {
 	        name: this.lenged_data[1],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[1]]
+	        data: this.number_data[this.lenged_data[1]]
 	        },
 	        {
 	        name: this.lenged_data[2],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[2]]
+	        data: this.number_data[this.lenged_data[2]]
+	        },
+	        {
+	        name: this.lenged_data[3],
+	        type: 'bar',
+	        stack: 'a',
+	        barWidth: 15,
+	        data: this.number_data[this.lenged_data[3]]
 	        }
         ]
 	};
@@ -287,5 +301,11 @@ PublicServiceStreetManagement.prototype.reset_data = function(){
         "街道办事处":[0,0,0,0,0,0,0,0,0,0,0,0],
         "派出所":[0,0,0,0,0,0,0,0,0,0,0,0],
     }
+	this.number_data = {
+        "社区服务管理用房":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "社区服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道办事处":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "派出所":[0,0,0,0,0,0,0,0,0,0,0,0],
+	};
 }
 var start_street_management_rendering = new PublicServiceStreetManagement();

@@ -166,7 +166,7 @@ PublicServiceProvide.prototype.load_radar_chart = function(){
 	    },
 	    radar: {
 	        center: ["50%", "50%"],
-	        radius: "70%",
+	        radius: "60%",
 	        startAngle: 90,
 	        splitNumber: 4,
 	        shape: "circle",

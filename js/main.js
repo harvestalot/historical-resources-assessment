@@ -126,41 +126,34 @@
 			case "greenbelt": //公共空间评估--绿地资源
 				this.reset_community_layer();
 				start_greenbelt_rendering.init();
-				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "public_space": //公共空间评估--公共空间共享
 				this.reset_community_layer();
 				start_public_space_share_rendering.init();
                 map_legend(public_space_share_legend_data);
-				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "available_space": //公共空间评估--可利用空间资源
 				this.reset_community_layer();
 				start_available_space_rendering.init();
                 map_legend(available_space_legend_data);
-				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "culture_overview": //文化资源评估--概览
 				start_cultural_resources_overview_rendering.init();
                 map_legend(cultural_resources_overview_legend_data);
-				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "material_cultural_heritage": //文化资源评估--物质文化遗产
 				// this.reset_community_layer();
 				start_material_cultural_heritage_rendering.init();
                 map_legend(cultural_heritage_legend_data);
-				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "cultural_relic_protection": //文化资源评估--文物保护单位
 				// this.reset_community_layer();
 				start_cultural_relic_protection_rendering.init();
-				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "historical_building": //文化资源评估--历史建筑
 				// this.reset_community_layer();
 				start_historical_building_rendering.init();
                 map_legend(historical_building_legend_data);
-				// document.getElementById("visualization_content").classList.remove("animated","fadeInRight","fadeOutRight");
 	    		break;
 			case "community_opinion": //社区舆情
 				$("#community_opinion").show();

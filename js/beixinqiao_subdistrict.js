@@ -61,7 +61,7 @@
 	});
     //侧边导航控制器
  	$(".subNav").next(".navContent").length === 0? $(".subNav").css({"background":"none"}):"";
-    $(".subNav").click(function(){
+    $(".subNav").unbind("click").click(function(){
     	event.stopPropagation();
 		$("#nav a").removeClass("is_active");
 		$("#shade_modal").slideUp(300);
@@ -73,9 +73,7 @@
 	        $(this).toggleClass("currentDt").siblings(".subNav").removeClass("currentDt");
 	        $(this).next(".navContent").slideToggle(300).siblings(".navContent").slideUp(500);
         }else{
-			$(this).attr("data_type") === "population"?
-				$("#visualization_content").animate({width:"30%"},300):
-				$("#visualization_content").animate({width:0},300);;
+			$("#visualization_content").animate({width:"30%"},300)
         	$("#visualization_echarts_content").html("");
         	$(this).addClass("subNavCurrent").siblings(".navContent").find("a").removeClass("subNavCurrent");var _this = this;
 			setTimeout(function(){
@@ -84,7 +82,7 @@
         }
 
 	});
-    $(".navContent a").click(function(){
+    $(".navContent a").unbind("click").click(function(){
     	event.stopPropagation();
 		$("#nav a").removeClass("is_active");
 		$("#shade_modal").slideUp(300);

@@ -9,6 +9,12 @@ function PublicServiceConveniencePeople() {
         "菜站":[0,0,0,0,0,0,0,0,0,0,0,0],
         "综合服务站":[0,0,0,0,0,0,0,0,0,0,0,0],
     }
+	this.number_data = {
+        "超市":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "便利店":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "菜站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合服务站":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
 
 }
 PublicServiceConveniencePeople.prototype.init = function(){
@@ -41,6 +47,7 @@ PublicServiceConveniencePeople.prototype.get_view_data = function(result_data){
 	            for(var j = 0; j < result_data[i][key].length; j++){
 	            	// this.lenged_data.indexOf(result_data[i][key][j].CATEGORY_NAME) === -1? this.lenged_data.push(result_data[i][key][j].CATEGORY_NAME):"";
 	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE.toFixed(2);
+	                this.number_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].QUANTITY;
 	            }
 	        }
 	    }
@@ -164,7 +171,7 @@ PublicServiceConveniencePeople.prototype.load_radar_chart = function(){
 	    },
 	    radar: {
 	        center: ["50%", "50%"],
-	        radius: "70%",
+	        radius: "60%",
 	        startAngle: 90,
 	        splitNumber: 4,
 	        shape: "circle",
@@ -240,7 +247,7 @@ PublicServiceConveniencePeople.prototype.load_bar_chart = function(){
     		}),
 	        axisLine: coordinate_axis_style.axisLine,
 	        splitLine: coordinate_axis_style.splitLine,
-	        data: community_name
+	        data: this.community_name
 	    },
 	    yAxis: {
 	        type: "value",
@@ -255,28 +262,28 @@ PublicServiceConveniencePeople.prototype.load_bar_chart = function(){
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[0]]
+	        data: this.number_data[this.lenged_data[0]]
 	        },
 	        {
 	        name: this.lenged_data[1],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[1]]
+	        data: this.number_data[this.lenged_data[1]]
 	        },
 	        {
 	        name: this.lenged_data[2],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[2]]
+	        data: this.number_data[this.lenged_data[2]]
 	        },
 	        {
 	        name: this.lenged_data[3],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[3]]
+	        data: this.number_data[this.lenged_data[3]]
 	        }
         ]
 	};
@@ -290,6 +297,12 @@ PublicServiceConveniencePeople.prototype.reset_data = function(){
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
 	this.comprehensive_data = {
+        "超市":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "便利店":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "菜站":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合服务站":[0,0,0,0,0,0,0,0,0,0,0,0],
+    }
+	this.number_data = {
         "超市":[0,0,0,0,0,0,0,0,0,0,0,0],
         "便利店":[0,0,0,0,0,0,0,0,0,0,0,0],
         "菜站":[0,0,0,0,0,0,0,0,0,0,0,0],

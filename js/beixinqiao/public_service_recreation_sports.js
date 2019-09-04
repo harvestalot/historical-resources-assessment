@@ -10,6 +10,13 @@ function PublicServiceRecreationSports() {
         "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
 	};
+	this.number_data = {
+        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+	};
 }
 PublicServiceRecreationSports.prototype.init = function(){
 	this.reset_data();
@@ -42,6 +49,7 @@ PublicServiceRecreationSports.prototype.get_view_data = function(result_data){
 	            	// console.log(result_data[i][key][j].COVERAGE)
 	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = 
 	                	result_data[i][key][j].COVERAGE?result_data[i][key][j].COVERAGE.toFixed(2):0;
+	                this.number_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].QUANTITY;
 	            }
 	        }
 	    }
@@ -272,35 +280,35 @@ PublicServiceRecreationSports.prototype.load_bar_chart = function(){
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[0]]
+	        data: this.number_data[this.lenged_data[0]]
 	        },
 	        {
 	        name: this.lenged_data[1],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[1]]
+	        data: this.number_data[this.lenged_data[1]]
 	        },
 	        {
 	        name: this.lenged_data[2],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[2]]
+	        data: this.number_data[this.lenged_data[2]]
 	        },
 	        {
 	        name: this.lenged_data[3],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[3]]
+	        data: this.number_data[this.lenged_data[3]]
 	        },
 	        {
 	        name: this.lenged_data[4],
 	        type: 'bar',
 	        stack: 'a',
 	        barWidth: 15,
-	        data: this.comprehensive_data[this.lenged_data[4]]
+	        data: this.number_data[this.lenged_data[4]]
 	        }
         ]
 	};
@@ -314,6 +322,13 @@ PublicServiceRecreationSports.prototype.reset_data = function(){
 	this.community_name = [];
 	this.radar_chart_indicator_data = [];
 	this.comprehensive_data = {
+        "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "综合文体设施":[0,0,0,0,0,0,0,0,0,0,0,0],
+        "街道文化服务中心":[0,0,0,0,0,0,0,0,0,0,0,0],
+	};
+	this.number_data = {
         "健身设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "室内体育设施":[0,0,0,0,0,0,0,0,0,0,0,0],
         "室外活动场所":[0,0,0,0,0,0,0,0,0,0,0,0],

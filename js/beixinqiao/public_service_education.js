@@ -56,7 +56,7 @@ PublicServiceEducation.prototype.get_view_data = function(result_data){
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
 	                this.pie_comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i].value = result_data[i][key][j].COVERAGE.toFixed(2);
-	                this.bar_comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].COVERAGE.toFixed(2);
+	                this.bar_comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].QUANTITY;
 	            }
 	        }
 	    }
@@ -287,6 +287,7 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	        },
 	        axisLabel: {
 	            // fontSize: 15,
+	            margin:15,
 	            interval:0,
 	            color:'#fff',
 		        formatter:function(val){
@@ -308,8 +309,8 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	    },
 	    radiusAxis: {
 	        min: 0,
-	        max: 1000,
-	        interval: 200,
+	        max: 100,
+	        interval: 20,
 	        axisLine:{
 	        	show:true,
 		        lineStyle:{
@@ -322,7 +323,7 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	    },
 	    tooltip: {
 	        trigger: 'item',
-	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	        formatter: "{b} : {c}%"
 	    },
 	    legend: {
 	        x: 'center',
@@ -377,28 +378,28 @@ PublicServiceEducation.prototype.load_bar_chart = function(){
 		        "stack": "one",
 		        "type": "bar",
 	        	barWidth: 15,
-		        data:this.pie_comprehensive_data[this.legendData[0]],
+		        data:this.bar_comprehensive_data[this.legendData[0]],
 			},
 	    	{
 		        "name":  this.legendData[1],
 		        "stack": "one",
 		        "type": "bar",
 	        	barWidth: 15,
-		        data:this.pie_comprehensive_data[this.legendData[1]],
+		        data:this.bar_comprehensive_data[this.legendData[1]],
 			},
 	    	{
 		        "name":  this.legendData[2],
 		        "stack": "one",
 		        "type": "bar",
 	        	barWidth: 15,
-		        data:this.pie_comprehensive_data[this.legendData[2]],
+		        data:this.bar_comprehensive_data[this.legendData[2]],
 			},
 	    	{
 		        "name":  this.legendData[3],
 		        "stack": "one",
 		        "type": "bar",
 	        	barWidth: 15,
-		        data:this.pie_comprehensive_data[this.legendData[3]],
+		        data:this.bar_comprehensive_data[this.legendData[3]],
 			},
 	    ]
 	};
