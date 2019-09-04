@@ -323,7 +323,7 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	    },
 	    tooltip: {
 	        trigger: 'item',
-	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	        formatter: "{a} <br/>{b} : {c}%"
 	    },
 	    legend: {
 	        x: 'center',

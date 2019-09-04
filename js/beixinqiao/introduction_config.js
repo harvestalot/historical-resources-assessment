@@ -503,24 +503,24 @@ var cultural_resources_overview_legend_data = {
 var cultural_heritage_legend_data = {
     list:[
         {
-            name:"其他",
-            legend_color:echarts_color[0]  
-        },
-        {
-            name:"普查登记",
-            legend_color:echarts_color[1]  
-        },
-        {
             name:"国家级",
             legend_color:echarts_color[2]  
+        },
+        {
+            name:"市级",
+            legend_color:echarts_color[4]  
         },
         {
             name:"区级",
             legend_color:echarts_color[3]  
         },
         {
-            name:"市级",
-            legend_color:echarts_color[4]  
+            name:"普查登记",
+            legend_color:echarts_color[1]  
+        },
+        {
+            name:"其他",
+            legend_color:echarts_color[0]  
         },
     ]
 }

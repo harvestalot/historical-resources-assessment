@@ -30,13 +30,34 @@ MaterialCulturalHeritage.prototype.load_dom = function(){
 };
 //分类拆分数据
 MaterialCulturalHeritage.prototype.get_view_data = function(result_data){
+        console.log(result_data)
     this.level_data_total = result_data.totalNumber;
-    for(var i = 0; i < result_data.list.length; i++){
-        this.level_data.push({
-            name:result_data.list[i].LEVELS,
-            value:result_data.list[i].TOTAL
-        })
-    }
+    this.level_data.push({
+        name:result_data.list[2].LEVELS,
+        value:result_data.list[2].TOTAL
+    });
+    this.level_data.push({
+        name:result_data.list[4].LEVELS,
+        value:result_data.list[4].TOTAL
+    });
+    this.level_data.push({
+        name:result_data.list[3].LEVELS,
+        value:result_data.list[3].TOTAL
+    });
+    this.level_data.push({
+        name:result_data.list[1].LEVELS,
+        value:result_data.list[1].TOTAL
+    });
+    this.level_data.push({
+        name:result_data.list[0].LEVELS,
+        value:result_data.list[0].TOTAL
+    });
+    // for(var i = 0; i < result_data.list.length; i++){
+    //     this.level_data.push({
+    //         name:result_data.list[i].LEVELS,
+    //         value:result_data.list[i].TOTAL
+    //     })
+    // }
 }
 //添加图层
 MaterialCulturalHeritage.prototype.sidebar_polygonLayer = function(){
