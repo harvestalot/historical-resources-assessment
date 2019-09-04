@@ -287,6 +287,7 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	        },
 	        axisLabel: {
 	            // fontSize: 15,
+	            margin:15,
 	            interval:0,
 	            color:'#fff',
 		        formatter:function(val){
@@ -308,8 +309,8 @@ PublicServiceEducation.prototype.load_pie_chart = function(type_name, seriesData
 	    },
 	    radiusAxis: {
 	        min: 0,
-	        max: 1000,
-	        interval: 200,
+	        max: 100,
+	        interval: 20,
 	        axisLine:{
 	        	show:true,
 		        lineStyle:{

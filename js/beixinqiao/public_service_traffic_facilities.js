@@ -92,7 +92,7 @@ PublicServiceTrafficFacilities.prototype.render_point_layer = function(){
 PublicServiceTrafficFacilities.prototype.load_dom = function(){
 	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 60%;">'+
 		'<div class="public_service_total_coverage">'+
-		'<p >交通设施覆盖率：<span id="total_coverage">0%</span></p>'+
+		'<p >街道交通设施覆盖率：<span id="total_coverage">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
 		'<div id="facilities_statistics_content" class="chart_view" style="width: 100%; height: 40%;">'+
@@ -157,7 +157,7 @@ PublicServiceTrafficFacilities.prototype.load_radar_chart = function(){
 	    },
 	    radar: {
 	        center: ["50%", "50%"],
-	        radius: "70%",
+	        radius: "60%",
 	        startAngle: 90,
 	        splitNumber: 4,
 	        shape: "circle",

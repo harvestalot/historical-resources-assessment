@@ -52,6 +52,7 @@ PublicServiceOverview.prototype.get_view_data = function(result_data){
 	        this.radar_chart_indicator_data.push({
 	            name: key,
 	            max: 100,
+	            color:"#fff"
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
@@ -64,7 +65,7 @@ PublicServiceOverview.prototype.get_view_data = function(result_data){
 //生产dom元素
 PublicServiceOverview.prototype.load_dom = function(){
 	//雷达统计图
-	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 50%;padding-top:10px;box-sizing: border-box;">'+
+	var public_service_dom_str = '<div class="chart_view" style="width: 100%; height: 55%;padding-top:10px;box-sizing: border-box;">'+
 	'<div id="public_service_type" class="clearfix statistics_type public_service_type">'+
 	'<a href="javascript:void(0)" class="active_checked">全部</a>'+
 	'<a href="javascript:void(0)">便民</a>'+
@@ -77,7 +78,7 @@ PublicServiceOverview.prototype.load_dom = function(){
 	'</div>'+
 	'<div id="public_service_radar_content" style="width: 100%; height: 88%;"></div>'+
 	'</div>'+
-	'<div class="chart_view" style="width: 100%; height: 50%;">'+
+	'<div class="chart_view" style="width: 100%; height: 45%;">'+
 	'<div class="ranking_title">各项设施评估No.1表</div>'+
 	'<div id="public_service_ranking_content">'+
 	'</div>'+
@@ -239,7 +240,7 @@ PublicServiceOverview.prototype.load_radar_chart = function(type_name){
 	    },
 	    "radar": {
 	        "center": ["50%", "50%"],
-	        "radius": "70%",
+	        "radius": "60%",
 	        "startAngle": 90,
 	        "splitNumber": 4,
 	        "shape": "circle",
@@ -248,13 +249,13 @@ PublicServiceOverview.prototype.load_radar_chart = function(type_name){
 	                "color": ["transparent"]
 	            }
 	        },
-	        "axisLabel": {
-	            "show": false,
-	            "fontSize": 18,
-	            "color": "#fff",
-	            "fontStyle": "normal",
-	            "fontWeight": "normal"
-	        },
+	        // "axisLabel": {
+	        //     "show": false,
+	        //     "fontSize": 18,
+	        //     "color": "#fff",
+	        //     "fontStyle": "normal",
+	        //     "fontWeight": "normal"
+	        // },
 	        "axisLine": {
 	            "show": true,
 	            "lineStyle": {

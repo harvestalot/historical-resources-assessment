@@ -259,7 +259,10 @@ PublicSpaceGreenbelt.prototype.load_radar_chart = function(){
                 }
             }
         },
-        polar: {},
+        polar: {
+            center:["50%", "50%"],
+            radius:"60%"
+        },
         series: [{
             type: 'bar',
             data: this.community_greenbelt_area,
@@ -282,8 +285,13 @@ PublicSpaceGreenbelt.prototype.reset_data = function(){
 //加载排行榜统计
 PublicSpaceGreenbelt.prototype.load_ranking_list = function(data){
     for(var i = 0; i < data.length; i++){
+        if(i !== 0){
         $("#community_greenbelt_list_content").append('<p class="ranking_list"><span class="type_name">'
-            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'）</span><span class="type_name">&nbsp;平方米</span></p>')
+            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'）</span><span class="c_fff">平方米</span></p>');
+        }else{
+        $("#community_greenbelt_list_content").append('<p class="ranking_list"><span class="type_name">'
+            +data[i].type+'：&nbsp;&nbsp;</span><span class="name_value">'+data[i].name+'（'+data[i].value+'）</span></p>');   
+        }
     }
 }
 var start_greenbelt_rendering = new PublicSpaceGreenbelt();
