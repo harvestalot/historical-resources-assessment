@@ -35,7 +35,7 @@ function load_map(mapId){
     streetCommunityAreaLayer = new Loca.PolygonLayer({
         map: map,
         zIndex: 14,
-        fitView: true,
+        // fitView: true,
         eventSupport:true,
     });
     //街道管控单元边界图层
@@ -228,9 +228,11 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
         streetCommunityAreaLayer.render();
         streetCommunityAreaLayer.show();
         streetCommunityAreaLayer.on('click', function (ev) {
-            // console.log(ev)
+            console.log(ev)
             // console.log(population_bar_chart)
             // console.log(radarChart.getOption().radar)
+            //渲染信息窗体
+            openInfo(community_introduction[ev.rawData.name].info, "", community_introduction[ev.rawData.name].lnglat);
             if(population_bar_chart){
                 var population_bar_yAxis_data = population_bar_chart.getOption().yAxis[0].data;
                 var dataIndex = 0;

@@ -61,7 +61,7 @@
 	});
     //侧边导航控制器
  	$(".subNav").next(".navContent").length === 0? $(".subNav").css({"background":"none"}):"";
-    $(".subNav").click(function(){
+    $(".subNav").unbind("click").click(function(){
     	event.stopPropagation();
 		$("#nav a").removeClass("is_active");
 		$("#shade_modal").slideUp(300);
@@ -84,7 +84,7 @@
         }
 
 	});
-    $(".navContent a").click(function(){
+    $(".navContent a").unbind("click").click(function(){
     	event.stopPropagation();
 		$("#nav a").removeClass("is_active");
 		$("#shade_modal").slideUp(300);
