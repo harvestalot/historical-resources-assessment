@@ -23,6 +23,7 @@ PublicSpaceGreenbelt.prototype.init = function(){
     });
     serveRequest("get", server_url+ "/Greenland/getRanking",{ },function(result){
         var data = JSON.parse(Decrypt(result.data.resultKey));
+        console.log(data)
         _this.ranking_list = [
             { type:"绿地覆盖率", name: data.maxCoverage.NAME, value: data.maxCoverage.GREENLAND_RATE.toFixed(2)+"%" },
             { type:"人均绿地面积", name: data.maxPersion.NAME, value: data.maxPersion.PRESON_GREENLAND.toFixed(2) },
