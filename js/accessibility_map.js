@@ -35,7 +35,7 @@ $(function(){
 		_this.reset_data();
 		//点击地图区域
 		accessibility_map.on('click', function(event){
-			// console.log(event)
+			_this.reset_data();
 			_this.centerpoint = event.lnglat.lng + "," + event.lnglat.lat;
 			_this.accessibility_initialize();
 		});
@@ -65,7 +65,7 @@ $(function(){
 	AccessibilityMap.prototype.accessibility_initialize = function(){
 		var _this = this;
 			accessibility_map.clearMap();
-			reachabilityLayer? accessibility_map.remove(reachabilityLayer):"";//清除可达性覆盖范围图层
+			reachabilityLayer? accessibility_map.remove(reachabilityLayer):"";//清除文化资源点图层
 			var marker = new AMap.Marker({
 			    position: new AMap.LngLat(_this.centerpoint.split(",")[0], _this.centerpoint.split(",")[1]),
 			    offset: new AMap.Pixel(0, 0),
