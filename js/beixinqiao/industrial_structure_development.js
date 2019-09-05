@@ -110,7 +110,7 @@ IndustrialDevelopmentConcentration.prototype.get_view_data = function(result_dat
 //生产dom元素
 IndustrialDevelopmentConcentration.prototype.load_dom = function(){
 	var industrial_structure_dom_str = '<div id="industrial_development_pie_content" style="width: 100%; height:43%;"></div>'+
-		'<div id="industrial_development_radar_content" class="development_bulletin_board" style="width: 100%; height:52%;"></div>'+
+		'<div id="industrial_development_radar_content" class="development_bulletin_board" style="width: 100%; height:52%;overflow-y: auto;"></div>'+
 		'<div style="margin:0 30px; height:5%;color:#999;">说明：本页两图表是互动的，点击上图表的某一类型，则看板上显示该类型的企业数量。</div>';
 	$("#visualization_echarts_content").append(industrial_structure_dom_str);
 };
@@ -377,10 +377,11 @@ IndustrialDevelopmentConcentration.prototype.load_radar_chart = function(){
 }
 //渲染看板列表DOM元素
 IndustrialDevelopmentConcentration.prototype.render_spectaculars_list = function(){
-	$("#industrial_development_radar_content").html("")
+	var str = '<div class="development_title"><span>[ '+this.current_enterprise_type.split(" ")[1]+' ]</span> 的企业数量看板</div>';
 	for(var key in this.spectaculars_list_data){
-		$("#industrial_development_radar_content").append('<p><span>'+key+'</span><span class="second_level_color">'+this.spectaculars_list_data[key]+'</span></p>')
+		str += '<p><span>'+key+'</span><span class="second_level_color">'+this.spectaculars_list_data[key]+'</span></p>';
 	}
+	$("#industrial_development_radar_content").html(str)
 }
 //重置数据
 IndustrialDevelopmentConcentration.prototype.reset_data = function(){

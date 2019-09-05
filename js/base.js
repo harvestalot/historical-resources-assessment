@@ -52,10 +52,10 @@ var round_point_layer;//圆点图层
 // icon点标记图片地址
 var point_icon_server_url = "http://localhost:8080/historical-resources-assessment/images";
 var reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
-var server_url = "http://116.62.222.106:8081";
+var server_url = "http://peking.caupdcloud.com:8081";
 // var server_url = "127.0.0.1";
 // var server_url = "127.0.0.1:8089/";
-var file_server_url = "http://116.62.222.106:8089/";
+var file_server_url = "http://peking.caupdcloud.com:8089/";
 // var server_url = "http://192.168.1.43:8081";
 /**
  *ajax请求通用方法

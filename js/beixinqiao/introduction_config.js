@@ -79,13 +79,13 @@ var community_introduction = {
 }
 //简介
 var brief_introduction = {
-	title:"简介",
+	title:"街道简介",
 	img_url:[],
 	content: "北新桥街道位于东城区东北部，东起东二环路，西至崇雍大街，南起平安大街，北至北二环路。辖区面积2.62平方公里，有5条主要大街，79条胡同。现有户籍人口28751户77593人，常住人口31293户86860人，其中流动人口21469人。辖12个社区，其中楼房社区4个、平房社区8个。有7处国家市区级文保单位（国家级的雍和宫，市级的柏林寺、通教寺、北新仓、四合院，区级的当铺旧址、慧照寺修建碑）、一条国际知名的餐饮特色街——簋街。辖区内现有4900平方米自管绿地及4349株自管树木（其中包括44株古树）。北护城河从雍和宫至东直门流过，全长1.57公里；辖区东北处有南馆公园一处，水域面积约5000平方米。"
 }
 //规划和目标
 var planning_target = {
-    title:"平台规划目标",
+    title:"规划目标",
     img_url:["./images/beixinqiao/goal_programming_1.jpg", "./images/beixinqiao/goal_programming_2.jpg", "./images/beixinqiao/goal_programming_3.jpg", "./images/beixinqiao/goal_programming_4.jpg"],
     content: ""
 }

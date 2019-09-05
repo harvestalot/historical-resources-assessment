@@ -394,6 +394,17 @@
 .development_bulletin_board p:nth-child(odd){
 	background-color: #f0b33c;
 }
+.development_bulletin_board .development_title{
+	font-weight:700;
+	font-size: 14px;
+	color: #fff;
+}
+.development_bulletin_board .development_title span{
+	display: inline-block;
+	width: auto;
+	padding-left: 7%;
+	color: #f0b33c;
+}
 .ranking_list_content p{
 	/*margin: 0 7%;*/
 	padding-left:3%;

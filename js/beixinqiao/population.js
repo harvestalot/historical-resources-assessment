@@ -9,7 +9,7 @@ function population(){
 	var population_size_dom_str = '<div class="chart_view" style="width: 100%; height: 30%;">'+
 		'<div id="population_type" class="clearfix statistics_type">'+
 		'<a href="javascript:void(0)" class="active_checked">60岁以上</a>'+
-		'<a href="javascript:void(0)">失业下岗</a>'+
+		'<a href="javascript:void(0)">下岗失业</a>'+
 		'<a href="javascript:void(0)">学龄前</a>'+
 		'<a href="javascript:void(0)" class="w_21">在校小学生</a>'+
 		'<a href="javascript:void(0)" class="w_21">在校中学生</a>'+
@@ -58,7 +58,7 @@ function load_population_statistics(eleId, population_data){
 	    	textStyle:{
 	    		color:"#FFF",
 	    	},
-	        data: ['户籍人口', '常驻人口', '流动人口']
+	        data: ['户籍人口', '常住人口', '流动人口']
 	    },
 	    grid: {
 	        left: 50
@@ -86,7 +86,7 @@ function load_population_statistics(eleId, population_data){
 	            data: [],
 	        },
 	        {
-	            name: '常驻人口',
+	            name: '常住人口',
 	            type: 'bar',
 	            // label: seriesLabel,
 	            data: []
@@ -379,7 +379,7 @@ function load_population_radar(eleId, type_name, population_data){
 		var item = population_data[i];
 		radar_option.radar.indicator.push({ name: item.NAME, 
 			max:(type_name === "60岁以上"?3000: 
-				(type_name === "失业下岗"?300:
+				(type_name === "下岗失业"?300:
 				(type_name === "学龄前"?700:
 				(type_name === "在校小学生"?500:350))))
 		});
@@ -387,7 +387,7 @@ function load_population_radar(eleId, type_name, population_data){
 			case "60岁以上": //60岁以上
 				radar_option.series[0].data[0].push(item.OLDER_OVER_60);
 	    		break;
-			case "失业下岗": //失业下岗
+			case "下岗失业": //下岗失业
 				radar_option.series[0].data[0].push(item.UNEMPLOYED);
 	    		break;
 			case "学龄前": //学龄前

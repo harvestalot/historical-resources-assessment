@@ -215,6 +215,12 @@ PublicServiceStreetManagement.prototype.load_radar_chart = function(){
 		        "data": [
 					this.comprehensive_data[this.lenged_data[2]]
 		        ]
+		    }),
+	    	get_object_assign(rader_color[3], {
+		        "name": this.lenged_data[3],
+		        "data": [
+					this.comprehensive_data[this.lenged_data[3]]
+		        ]
 		    })
 		]
 	};
