@@ -16,14 +16,12 @@ PublicSpaceGreenbelt.prototype.init = function(){
 	this.sidebar_polygonLayer();
     var _this = this;
     serveRequest("get", server_url+ "/Greenland/getCoverage",{ },function(result){
-        console.log(JSON.parse(Decrypt(result.data.resultKey)))
         _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
         _this.load_radar_chart();
         _this.load_bar_chart();
     });
     serveRequest("get", server_url+ "/Greenland/getRanking",{ },function(result){
         var data = JSON.parse(Decrypt(result.data.resultKey));
-        console.log(data)
         _this.ranking_list = [
             { type:"绿地覆盖率", name: data.maxCoverage.NAME, value: data.maxCoverage.GREENLAND_RATE.toFixed(2)+"%" },
             { type:"人均绿地面积", name: data.maxPersion.NAME, value: data.maxPersion.PRESON_GREENLAND.toFixed(2) },
@@ -36,13 +34,14 @@ PublicSpaceGreenbelt.prototype.init = function(){
 PublicSpaceGreenbelt.prototype.sidebar_polygonLayer = function(){
 	var _this = this;
     $.get(file_server_url+'public_space_greenbelt.js', function (actuality_greenbelt_data) {
+        var data = JSON.parse(Decrypt(actuality_greenbelt_data));
     	sidebar_polygonLayer = new Loca.PolygonLayer({
             map: map,
             // zIndex: 15,
             // fitView: true,
             // eventSupport:true,
         });
-        sidebar_polygonLayer.setData(JSON.parse(Decrypt(actuality_greenbelt_data)), {
+        sidebar_polygonLayer.setData(data, {
             lnglat: 'lnglat'
         });
 

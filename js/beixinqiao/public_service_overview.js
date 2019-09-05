@@ -89,10 +89,11 @@ PublicServiceOverview.prototype.load_dom = function(){
 PublicServiceOverview.prototype.render_point_layer = function(){
     var round_point_color = echarts_color;
     $.get(file_server_url+'public_service_all_facilities.js', function (result) {
+    	var data = JSON.parse(Decrypt(result));
     	var public_service_all_facilities_data = [];
-		for(var i = 0; i < JSON.parse(Decrypt(result)).length; i++){
-			for(var j = 0; j < JSON.parse(Decrypt(result))[i].length; j++){
-				public_service_all_facilities_data.push(JSON.parse(Decrypt(result))[i][j]);
+		for(var i = 0; i < data.length; i++){
+			for(var j = 0; j < data.length; j++){
+				public_service_all_facilities_data.push(data[i][j]);
 			}
 		}
 	    round_point_layer = new Loca.RoundPointLayer({

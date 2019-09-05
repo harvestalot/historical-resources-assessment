@@ -159,8 +159,9 @@ $(function(){
 	AccessibilityMap.prototype.accessibility_resources = function(){
 		var _this = this;
     	$.get(file_server_url+'cultural_resources.js', function (cultural_resources_point_data) {
-			for(var i = 0; i < JSON.parse(Decrypt(cultural_resources_point_data)).length; i++){
-				var items = JSON.parse(Decrypt(cultural_resources_point_data))[i];
+			var data = JSON.parse(Decrypt(cultural_resources_point_data));
+			for(var i = 0; i < data.length; i++){
+				var items = data[i];
 	        	var isPointInRing = AMap.GeometryUtil.isPointInRing(items.lnglat, _this.reachability_data);
 				isPointInRing? _this.area_cultural_resources_point_data.push(get_object_assign(items,{
 				 icon: point_icon_server_url+ "/accessibility/wenhuaziyaun.png",
