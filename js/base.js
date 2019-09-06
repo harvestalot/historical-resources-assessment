@@ -60,15 +60,15 @@ var file_server_url = "http://peking.caupdcloud.com:8089/";
  *
  * @param type           请求类型
  * @param url            请求服务的地址
- * @param arguments      传递的参数对象
+ * @param params_arguments      传递的参数对象
  * @param callBack       请求成功的回调函数
  */
-function serveRequest(type,url,arguments,callBack){
+function serveRequest(type,url,params_arguments,callBack){
     $.ajax({
         type:type,
         url:url,
-        // data: Encrypt(JSON.stringify(arguments)),
-        data: arguments,
+        // data: Encrypt(JSON.stringify(params_arguments)),
+        data: params_arguments,
         success: function (result) {
         	if(result.resultCode === "10000"){
             	callBack(result);
