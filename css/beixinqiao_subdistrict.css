@@ -71,13 +71,37 @@
 .content{
 	height: 100%;
 }
-	/*侧边导航*/
+.footer{
+	position: relative;
+	height: 8%;
+	border-top: 3px solid #f0b33c;
+	background: url("../images/logo-bottom.png") 20px center no-repeat;
+}
+.about_us{
+	position: absolute;
+	right: 50px;
+	top: 50%;
+	width: 120px;
+	height: 26px;
+	line-height: 26px;
+	margin-top: -13px;
+	text-align: center;
+	font-size: 14px;
+	border: 1px solid #666;
+	color: #666;
+}
+.about_us:hover{
+	border: 1px solid #f0b33c;
+	color: #f0b33c;
+}
+/*侧边导航*/
 .subNavBox{
 	width:15%;
 	background-color: #F4F4F0;
 	border-right: 3px solid #f0b33c;
 	box-shadow: 1px 0 5px #fff;
 	box-sizing: border-box;
+	overflow-y:auto; 
 }
 .subNav{
 	position: relative;
@@ -233,6 +257,7 @@
 	line-height: 30px;
 	margin-top: 20px;
 	color: #fff;
+	text-indent: 2em;
 }
 .shade_item .img{
 	display: block;
@@ -299,8 +324,8 @@
 .ranking_list{
 	/*width: 70%;*/
 	margin-left:20px;
-	height: 3rem;
-	line-height: 3rem;
+	height: 2.23rem;
+	line-height: 2.23rem;
 }
 .ranking_list .type_name{
     display: inline-block;
@@ -449,7 +474,7 @@
 .year_switcher{
 	position: fixed;
 	left: 50%;
-	bottom: 0;
+	bottom: 8%;
 	width: 400px;
 	background-color:rgba(0,0,0,.0);
 	display: none;
@@ -480,7 +505,7 @@
 .legend_content{
 	position: fixed;
 	left: 15%;
-	bottom: 0;
+	bottom: 8%;
 	width: 260px;
 	padding: 10px 10px;
 	box-sizing: border-box;

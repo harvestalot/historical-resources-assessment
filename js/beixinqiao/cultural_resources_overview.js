@@ -1,15 +1,15 @@
 //文化资源--概览
 function CulturalResourcesOverview(){
-	this.legend_data = ["物质文化遗产","文物保护单位","历史建筑"];
+	this.legend_data = ["物质文化遗产","历史建筑"];
 	this.community_name = [];
 	this.bar_series_data = {
         architecture:[0,0,0,0,0,0,0,0,0,0,0,0],//历史建筑
         culturalHeritage:[0,0,0,0,0,0,0,0,0,0,0,0],//文化遗产
-        culturalProtection:[0,0,0,0,0,0,0,0,0,0,0,0],//文物保护
     };
 }
 CulturalResourcesOverview.prototype.init = function(){
 	var _this = this;
+    _this.reset_data();
 	_this.community_name = [];
 	_this.load_dom();
 	_this.sidebar_polygonLayer();
@@ -172,12 +172,6 @@ CulturalResourcesOverview.prototype.load_bar_chart = function(){
 	            type: 'bar',
 	            data: this.bar_series_data.culturalHeritage,
 			})
-		}else if(this.legend_data[i] === "文物保护单位"){
-			bar_option.series.push({
-	            name: this.legend_data[i],
-	            type: 'bar',
-	            data: this.bar_series_data.culturalProtection,
-			})
 		}else{
 			bar_option.series.push({
 	            name: this.legend_data[i],
@@ -189,4 +183,12 @@ CulturalResourcesOverview.prototype.load_bar_chart = function(){
     cultural_resources_overview_bar_chart.setOption(bar_option, true);
 }
 
+//重置数据
+CulturalResourcesOverview.prototype.reset_data = function(){
+	this.community_name = [];
+	this.bar_series_data = {
+        architecture:[0,0,0,0,0,0,0,0,0,0,0,0],//历史建筑
+        culturalHeritage:[0,0,0,0,0,0,0,0,0,0,0,0],//文化遗产
+    };
+}
 var start_cultural_resources_overview_rendering = new CulturalResourcesOverview();

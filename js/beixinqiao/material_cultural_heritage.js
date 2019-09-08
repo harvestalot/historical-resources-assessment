@@ -350,12 +350,11 @@ MaterialCulturalHeritage.prototype.years_ring_chart = function(){
             name: item.YEARS,
             type: 'pie',
             clockWise: false,
-            radius: [60, 70],
+            radius: [50, 60],
             itemStyle: dataStyle,
             hoverAnimation: false,
-            center: ( i === 0? ['75%', '75%']:
-                (i === 1? ['25%', '75%']:
-                (i === 2? ['25%', '30%']:['75%', '30%']))),
+            center: ( i === 0? ['25%', '75%']:
+                (i === 2? ['25%', '30%']:['75%', '30%'])),
             data: [
             {
                 value: item.TOTAL,

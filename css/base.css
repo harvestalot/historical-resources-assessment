@@ -92,8 +92,15 @@ a {
     line-height: 0;
     overflow: hidden;
 }
+.content_layout{
+    width: 1200px;
+    margin:0 auto;
+}
 .h100{
 	height: 100%;
+}
+.h_92{
+    height: 92%;
 }
 .w50{
     width: 50%;

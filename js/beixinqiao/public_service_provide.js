@@ -101,7 +101,7 @@ PublicServiceProvide.prototype.load_dom = function(){
 		'<p >街道养老设施覆盖率：<span id="total_coverage">0%</span></p>'+
 		'</div>'+
 		'<div id="fraction_coverage_content" style="width: 100%; height: 87%;"></div></div>'+
-		'<div class="chart_view" style="width: 100%; height: 40%;">'+
+		'<div class="chart_view" style="width: 100%; height: 40%;overflow-y: auto;">'+
 		'<p style="padding:10px 0 10px 12px;font-size:14px;color:#fff;font-weight:700;">养老设施看板</p>'+
 		'<div id="spectaculars_content" class="chart_view spectaculars_content" style="width: 100%; height: 40%;">'+
 		'</div>'+

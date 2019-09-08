@@ -195,6 +195,7 @@ $(function(){
 	}
 	//重置数据
 	AccessibilityMap.prototype.reset_data = function(){
+		this.cultural_resources = "";//文化资源选中、不选 
 		this.reachability_data = [];
 		this.facilities_type = [];
 		this.area_cultural_resources_point_data = [];//可达性区域内的文化资源点

@@ -2,6 +2,7 @@
 var streetLayer;
 var streetCommunityLayer;
 var streetCommunityAreaLayer;
+var handle_community_introduction;
 var streetControlUnitLayer;
 var streetCurrentSituationLandLayer;
 var streetRoadLandLayer;
@@ -88,19 +89,27 @@ function load_map(mapId){
                 }
             }else{
                 if($(this).val() === "boundary"){
+                    // streetCommunityLayer?map.remove(streetCommunityLayer):"";
+                    // streetCommunityAreaLayer?map.remove(streetCommunityAreaLayer):"";
+                    // layerLabels?map.remove(layerLabels):"";
                     streetCommunityLayer.hide();
                     streetCommunityAreaLayer.hide();
+                    streetCommunityAreaLayer.off("click",handle_community_introduction);
                     layerLabels.hide();
                 }else if($(this).val() === "real_time_traffic"){
                     // trafficLayer.hide();
                 }else if($(this).val() === "land"){
-                    streetCurrentSituationLandLayer.hide()
+                    streetCurrentSituationLandLayer?map.remove(streetCurrentSituationLandLayer):"";
+                    // streetCurrentSituationLandLayer.hide();
                     $("#map_legend").fadeOut(300);
                 }else if($(this).val() === "control_unit"){
-                    streetControlUnitLayer.hide();
-                    layerLabels.hide();
+                    streetControlUnitLayer?map.remove(streetControlUnitLayer):"";
+                    layerLabels?map.remove(layerLabels):"";
+                    // streetControlUnitLayer.hide();
+                    // layerLabels.hide();
                 }else if($(this).val() === "road"){
-                    streetRoadLandLayer.hide();
+                    streetCommunityLayer?map.remove(streetCommunityLayer):"";
+                    // streetRoadLandLayer.hide();
                 }
             }
         })
@@ -227,10 +236,7 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
         });
         streetCommunityAreaLayer.render();
         streetCommunityAreaLayer.show();
-        streetCommunityAreaLayer.on('click', function (ev) {
-            console.log(ev)
-            // console.log(population_bar_chart)
-            // console.log(radarChart.getOption().radar)
+        handle_community_introduction = function(ev){
             //渲染信息窗体
             openInfo(community_introduction[ev.rawData.name].info, "", community_introduction[ev.rawData.name].lnglat);
             if(population_bar_chart){
@@ -245,7 +251,24 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
                     dataIndex: dataIndex
                 }); 
             }
-        });
+        }
+        streetCommunityAreaLayer.on('click',handle_community_introduction);
+        // streetCommunityAreaLayer.on('click', function (ev) {
+        //     //渲染信息窗体
+        //     openInfo(community_introduction[ev.rawData.name].info, "", community_introduction[ev.rawData.name].lnglat);
+        //     if(population_bar_chart){
+        //         var population_bar_yAxis_data = population_bar_chart.getOption().yAxis[0].data;
+        //         var dataIndex = 0;
+        //         for(var i = 0; i < population_bar_yAxis_data.length; i++){
+        //             population_bar_yAxis_data[i] === ev.rawData.name? (dataIndex = i):"";
+        //         }
+        //         population_bar_chart.dispatchAction({
+        //             type: 'showTip',
+        //             seriesIndex:0,
+        //             dataIndex: dataIndex
+        //         }); 
+        //     }
+        // });
         //添加文字标记图层
         layerLabels.setData(datas, {
             lnglat: 'lnglat'
