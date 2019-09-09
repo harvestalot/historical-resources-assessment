@@ -65,7 +65,7 @@ PublicServiceOverview.prototype.get_view_data = function(result_data){
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
-	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].TOTAL_COVERAGE*100;
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = (result_data[i][key][j].TOTAL_COVERAGE*100).toFixed(2);
 	            }
 	        }
 	    }
