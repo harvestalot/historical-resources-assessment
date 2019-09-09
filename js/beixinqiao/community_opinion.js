@@ -131,7 +131,7 @@ CommunityOpinion.prototype.render_spectaculars_list = function(){
         var item = this.ranking_list_data[key];
         str += '<p><span title='+key+'>'+key.slice(0,4)+'</span>';
         for(var i = 0; i < item.length; i++){
-            str += '<span>'+item[i].COMMUNITY_NAME+'&nbsp;&nbsp;'+(item[i]["COUNT_NUMBER/TOTAL"]*100).toFixed(2)+'%</span>';
+            str += '<span>'+item[i].COMMUNITY_NAME+'</span><span>'+(item[i]["COUNT_NUMBER/TOTAL"]< 1?(item[i]["COUNT_NUMBER/TOTAL"]*100).toFixed(1):item[i]["COUNT_NUMBER/TOTAL"]*100)+'%</span>';
         }
         str += '</p>';
     }    

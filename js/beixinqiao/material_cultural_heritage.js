@@ -354,7 +354,7 @@ MaterialCulturalHeritage.prototype.years_ring_chart = function(){
             itemStyle: dataStyle,
             hoverAnimation: false,
             center: ( i === 0? ['25%', '75%']:
-                (i === 2? ['25%', '30%']:['75%', '30%'])),
+                (i === 1? ['25%', '30%']:['75%', '30%'])),
             data: [
             {
                 value: item.TOTAL,

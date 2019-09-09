@@ -43,7 +43,7 @@ PublicServiceOverview.prototype.init = function(){
 		for(var i = 0; i < ranking_list.length; i++){
 			var item = ranking_list[i];
 			_this.ranking_list.push(
-				{ type: _this.type_transform[item.TYPE], name: item.COMMUNITY_NAME, value: item.COVERAGE*100 }
+				{ type: _this.type_transform[item.TYPE], name: item.COMMUNITY_NAME, value: (item.COVERAGE).toFixed(2) }
 			);
 		}
 		_this.load_ranking_list(_this.ranking_list);
@@ -65,7 +65,7 @@ PublicServiceOverview.prototype.get_view_data = function(result_data){
 	        })
 	        if(result_data[i][key].length > 0){
 	            for(var j = 0; j < result_data[i][key].length; j++){
-	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = (result_data[i][key][j].TOTAL_COVERAGE*100).toFixed(2);
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = (result_data[i][key][j].TOTAL_COVERAGE).toFixed(2);
 	            }
 	        }
 	    }
