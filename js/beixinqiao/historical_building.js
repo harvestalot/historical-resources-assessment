@@ -182,6 +182,12 @@ HistoricalBuilding.prototype.load_radar_chart = function(){
                 "data": [
                     this.comprehensive_data[this.lenged_data[4]]
                 ]
+            }),
+            get_object_assign(rader_color[5], {
+                "name": this.lenged_data[5],
+                "data": [
+                    this.comprehensive_data[this.lenged_data[5]]
+                ]
             })
         ]
     };
@@ -257,6 +263,13 @@ HistoricalBuilding.prototype.load_bar_chart = function(){
             stack: 'a',
             barWidth: 15,
             data: this.comprehensive_data[this.lenged_data[4]]
+            },
+            {
+            name: this.lenged_data[5],
+            type: 'bar',
+            stack: 'a',
+            barWidth: 15,
+            data: this.comprehensive_data[this.lenged_data[5]]
             }
         ]
     };

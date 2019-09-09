@@ -149,7 +149,7 @@ function street_community_boundary (map,layer, streetCommunityAreaLayer, layerLa
     $.get(file_server_url+'beixinqiao_community.js', function (beixinqiao_community_data) {
         var datas = [
             {
-                name:"北宫厅",
+                name:"北官厅",
                 lnglat:[116.426256, 39.949192]
             },
             {

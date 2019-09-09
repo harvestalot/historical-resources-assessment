@@ -25,59 +25,72 @@ PublicServiceStreetManagement.prototype.init = function(){
 	serveRequest("get", server_url+ "/Coverage/getCoverageTotal",{ categoryCode: "street_manager" },function(result){
 		$("#total_coverage").html(JSON.parse(Decrypt(result.data.resultKey))+" %");
 	});
-	//街道管理覆盖率请求
-	serveRequest("get", server_url+ "/Coverage/v2/getCoverageByCategory",{ category: "street_manager" },function(result){
-		// _this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
-		var result_data = JSON.parse(Decrypt(result.data.resultKey));
-		for(var i = 0; i < result_data.length; i++){
-			var item = result_data[i];
-		    _this.community_name.push(item.COMMUNITY_NAME);
-	        _this.radar_chart_indicator_data.push({
-	            name: item.COMMUNITY_NAME,
-	            max:100,
-	            color:'#fff'
-        	});
-		    for(var key in _this.comprehensive_data){
-		    	if(key === "社区服务管理用房"){
-		    		_this.comprehensive_data[key][i] = (item.COMMUNITY_SERVICE_HOUSE*100).toFixed(2);
-		    	}else if(key === "社区服务中心"){
-		    		_this.comprehensive_data[key][i] = (item.COMMUNITY_SERVICE_CENTER*100).toFixed(2);
-		    	}else if(key === "街道办事处"){
-		    		_this.comprehensive_data[key][i] = (item.STREET_OFFICE*100).toFixed(2);
-		    	}else if(key === "派出所"){
-		    		_this.comprehensive_data[key][i] = (item.POLICE_TATION*100).toFixed(2);
-		    	}
-		    }
-		}
-		_this.load_radar_chart();
-	});
+	// //街道管理覆盖率请求
+	// serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "street_manager" },function(result){
+	// 	_this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
+	// 	// var result_data = JSON.parse(Decrypt(result.data.resultKey));
+	// 	// for(var i = 0; i < result_data.length; i++){
+	// 	// 	var item = result_data[i];
+	// 	//     _this.community_name.push(item.COMMUNITY_NAME);
+	//  //        _this.radar_chart_indicator_data.push({
+	//  //            name: item.COMMUNITY_NAME,
+	//  //            max:100,
+	//  //            color:'#fff'
+ //  //       	});
+	// 	//     for(var key in _this.comprehensive_data){
+	// 	//     	if(key === "社区服务管理用房"){
+	// 	//     		_this.comprehensive_data[key][i] = (item.COMMUNITY_SERVICE_HOUSE*100).toFixed(2);
+	// 	//     	}else if(key === "社区服务中心"){
+	// 	//     		_this.comprehensive_data[key][i] = (item.COMMUNITY_SERVICE_CENTER*100).toFixed(2);
+	// 	//     	}else if(key === "街道办事处"){
+	// 	//     		_this.comprehensive_data[key][i] = (item.STREET_OFFICE*100).toFixed(2);
+	// 	//     	}else if(key === "派出所"){
+	// 	//     		_this.comprehensive_data[key][i] = (item.POLICE_TATION*100).toFixed(2);
+	// 	//     	}
+	// 	//     }
+	// 	// }
+	// 	_this.load_radar_chart();
+	// });
 	//街道管理设施统计数量
 	serveRequest("get", server_url+ "/Coverage/getCoverageByCategory",{ category: "street_manager" },function(result){
 		_this.get_view_data(JSON.parse(Decrypt(result.data.resultKey)));
+		_this.load_radar_chart();
 		_this.load_bar_chart();
 	});
 }
 //分类拆分数据
 PublicServiceStreetManagement.prototype.get_view_data = function(result_data){
 	for(var i = 0; i < result_data.length; i++){
-	        // this.community_name.push(key);
-	        // this.radar_chart_indicator_data.push({
-	        //     name: key,
-	        //     max:100,
-	        //     color:'#fff'
-	        // })
 	    for(var key in result_data[i]){
-			for(var j = 0; j < this.community_name.length; j++){
-				if(this.community_name[j] === key){
-			        if(result_data[i][key].length > 0){
-			            for(var n = 0; n < result_data[i][key].length; n++){
-			                this.number_data[result_data[i][key][n].CATEGORY_NAME][j] = result_data[i][key][n].QUANTITY;
-			            }
-			        }
-				}
-			}
+	        this.community_name.push(key);
+	        this.radar_chart_indicator_data.push({
+	            name: key,
+	            max:100,
+	            color:'#fff'
+	        })
+	        if(result_data[i][key].length > 0){
+	            for(var j = 0; j < result_data[i][key].length; j++){
+	            	// console.log(result_data[i][key][j].COVERAGE)
+	                this.comprehensive_data[result_data[i][key][j].CATEGORY_NAME][i] = 
+	                	result_data[i][key][j].COVERAGE?result_data[i][key][j].COVERAGE.toFixed(2):0;
+	                this.number_data[result_data[i][key][j].CATEGORY_NAME][i] = result_data[i][key][j].QUANTITY;
+	            }
+	        }
 	    }
 	}
+	// for(var i = 0; i < result_data.length; i++){
+	//     for(var key in result_data[i]){
+	// 		for(var j = 0; j < this.community_name.length; j++){
+	// 			if(this.community_name[j] === key){
+	// 		        if(result_data[i][key].length > 0){
+	// 		            for(var n = 0; n < result_data[i][key].length; n++){
+	// 		                this.number_data[result_data[i][key][n].CATEGORY_NAME][j] = result_data[i][key][n].QUANTITY;
+	// 		            }
+	// 		        }
+	// 			}
+	// 		}
+	//     }
+	// }
 }
 //添加设施类型的点标识图层
 PublicServiceStreetManagement.prototype.render_point_layer = function(){

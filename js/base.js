@@ -51,7 +51,7 @@ var line_layer;//线图层
 var round_point_layer;//圆点图层
 // icon点标记图片地址
 var reachability_url = "http://114.64.228.103/reachcircle/walkServlet";//可达性覆盖范围服务地址
-// var point_icon_server_url = "http://peking.caupdcloud.com/historical-resources-assessment/images";
+// var point_icon_server_url = "http://peking.caupdcloud.com/images";
 // var server_url = "http://peking.caupdcloud.com:8081";
 // var file_server_url = "http://peking.caupdcloud.com:8089/";
 var point_icon_server_url = "http://116.62.222.106:8080/images";
