@@ -154,7 +154,7 @@
 	var visits = getCookie("counter")
 	var IP = getCookie("IP")
 	if(!visits){
-	 	visits=1;
+	 	visits= $("#user_access").html();
 	}else{
 		if(IP === returnCitySN["cip"]){
 	 		visits=parseInt(visits);
@@ -164,5 +164,5 @@
 	}
 	setCookie("counter", visits, now);
 	setCookie("IP", returnCitySN["cip"], now);
-	$("#user_access").html("第"+visits+"位用户到访！")
+	$("#user_access").html(visits);
 });
