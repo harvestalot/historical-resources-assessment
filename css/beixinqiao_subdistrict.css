@@ -79,7 +79,7 @@
 }
 .about_us{
 	position: absolute;
-	right: 50px;
+	right: 150px;
 	top: 50%;
 	width: 120px;
 	height: 26px;
@@ -93,6 +93,13 @@
 .about_us:hover{
 	border: 1px solid #f0b33c;
 	color: #f0b33c;
+}
+.user_access{
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	color: #666;
+	font-size: 14px;
 }
 /*侧边导航*/
 .subNavBox{
