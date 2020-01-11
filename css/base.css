@@ -150,6 +150,9 @@ a {
 .ds_n{
     display: none;
 }
+.main_c{
+    color: #f0b33c;
+}
 .c_fff{
     color: #fff;
 }
